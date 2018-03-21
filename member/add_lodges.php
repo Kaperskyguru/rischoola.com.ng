@@ -4,8 +4,13 @@ require 'dashboard-header.php';
 
 if(isset($_POST['add_facility']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
   if(!$lodgeController->is_facility_exist($_POST['val'])){
-    echo "string";
     $lodgeController->add_lodge_facility($_POST['val']);
+  }
+}
+
+if(isset($_POST['add_rule']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+  if(!$lodgeController->is_rule_exist($_POST['val'])){
+    $lodgeController->add_lodge_rule($_POST['val']);
   }
 }
 
@@ -193,7 +198,15 @@ $(document).ready(function() {
 
   $('#lodge_rules').change(function() {
       var val = this.value;
-      alert(val);
+      $.ajax({
+        method:"POST",
+        url:'add_lodges.php',
+        data:{add_rule:1, val:val},
+        success:function(data) {
+          //$('#err').html(data);
+
+        }
+      });
   });
 
   $('#lodge_facilities').change(function() {

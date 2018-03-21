@@ -18,6 +18,20 @@ class Lodges extends dbmodel {
           return FALSE;
         }
     }
+
+    public function add_lodge_rule($name) {
+        $lodge_rule_name = $name;
+        $sql = "INSERT INTO lodge_rules(lodge_rule_name) VALUES (:lodge_rule_name)";
+        $this->query($sql);
+        $this->bind(":lodge_rule_name", $lodge_rule_name);
+        $this->executer();
+        if ($this->lastIdinsert()) {
+          return TRUE;
+        }else {
+          return FALSE;
+        }
+    }
+
     public function add_lodge(LodgeModel $LodgeModel) {
         $lodge_name = $LodgeModel->get_lodge_name();
         $lodge_address = $LodgeModel->get_lodge_address();
@@ -82,6 +96,19 @@ class Lodges extends dbmodel {
       $sql = "SELECT 1 FROM lodge_facilities WHERE lodge_facility_name = :lodge_facility_name";
       $this->query($sql);
       $this->bind(':lodge_facility_name', $name);
+      $row = $this->resultset();
+      if($row){
+        return TRUE;
+      }else {
+        return FALSE;
+      }
+    }
+
+    public function is_rule_exist($name)
+    {
+      $sql = "SELECT 1 FROM lodge_rules WHERE lodge_rule_name = :lodge_rule_name";
+      $this->query($sql);
+      $this->bind(':lodge_rule_name', $name);
       $row = $this->resultset();
       if($row){
         return TRUE;
