@@ -1,0 +1,101 @@
+<?php
+require '../init.php';
+include 'header.php';
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	if (isset($_POST['name']) && isset($_POST['last_name'])) {
+		$name = $_POST['name']. " ". $_POST['last_name'];
+		$userModel->set_user_name($name);
+	}
+	if (isset($_POST['user_name'])) {
+		$userModel->set_user_user_name($_POST['user_name']);
+	}
+	if (isset($_POST['email'])) {
+		$userModel->set_user_email($_POST['email']);
+	}
+
+	if (isset($_POST['password']) && isset($_POST['confirm_password'])) {
+		if ($_POST['password'] === $_POST['confirm_password']) {
+			$userModel->set_user_password($_POST['password']);
+		}else {
+			// log error
+		}
+	}
+	if (isset($_POST['school_id'])) {
+		$userModel->set_user_school_id($_POST['school_id']);
+	}
+	if (isset($_POST['phone_number'])) {
+		$userModel->set_user_phone_number($_POST['phone_number']);
+	}
+
+	if($userController->add_account($userModel)){
+		echo "successful";
+	}else {
+		echo "failed";
+	}
+
+}
+?>
+	<div class="container pad-up-50">
+		<div class="col-md-8 col-md-offset-2 pad-up-50 pad-bottom-50" >
+
+			<form class="" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" style="border: 1px solid #ccc; padding: 20px;">
+				<h1 style="color: #B70C01">Create a MySchool Account</h1>
+				<div>
+					<div class="col-md-6">
+						<div class="form-group">
+						    <label for="name">First Name :</label>
+						    <input type="text" class="form-control" id="name" name="name" placeholder="First Name">
+
+						</div>
+						<div class="form-group">
+						    <label for="school_id">School :</label>
+								<select class="form-control" name="school_id" id="school_id">
+									<option value="1">Uniport</option>
+									<option value="2">RSUST</option>
+								</select>
+						</div>
+						<div class="form-group">
+						    <label for="user_name">User Name :</label>
+						    <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Username">
+
+						</div>
+						<div class="form-group">
+						    <label for="password">Password :</label>
+						    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+						    <label for="last_name">Last Name :</label>
+						   	<input type="text" name="last_name" class="form-control" id="last_name" placeholder="Last Name">
+
+						</div>
+						<div class="form-group">
+						    <label for="phone_number">Mobile Number :</label>
+						   	<input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="phone number">
+
+						</div>
+						<div class="form-group">
+						    <label for="email">Email Address :</label>
+
+						    	<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+
+						</div>
+						<div class="form-group">
+						    <label for="confirm_email">Confirm Password :</label>
+						    	<input type="password" class="form-control" id="confirm_email" name="confirm_email" placeholder="Confirm Password">
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn  btn-primary" style="margin-left: 15px;">Create Account</button>
+				<div>
+				  	<h4>Already have an Account? <small><a href="login.php">Click here to Login</a></small></h4>
+				</div>
+			</form>
+
+		</div>
+
+	</div>
+<?php include 'footer.php'; ?>

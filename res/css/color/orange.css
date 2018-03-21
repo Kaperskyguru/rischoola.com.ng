@@ -1,0 +1,38 @@
+/*** Background ***/
+.btn-big, .decorative-icons, .decorative-icons:before, .decorative-icons:after, .decorative-bars:before, .decorative-bars:after, .selector-dropdown li:hover a, .selector-dropdown li.current a, .main-header, .block-minicart > a, .owl-dot.active, .header-slider .owl-dot.active, .attr-group .sale, .product-btn a:hover, .tooltip, .to-cart:hover, .reduction, .call-to-action-1, .category-banner:hover, .post-date, .subscribe-form *[type=submit], .footer-head, .widget-title:after, .pagination:hover a, .pagination.current a, .share-to-social:hover, .order-form .list_mode_btns .product-btn button:hover, .navbar-collapse{
+    background-color: #fe7140;
+}
+
+/*** Color ***/
+a:hover, .btn:hover, .menu-title > a, .menu-items li a:hover, .top-block .selected:hover, .top-menu li a:hover, .cart-info .product-name a:hover, .cart-info .product-attributes a:hover, .remove-link a:hover, .product-name a:hover, .price, .custom-menu li:hover a, .recent-post-date, .contact-info a, .style-3 .navbar-default .navbar-nav>.active>a, .style-3 .navbar-default .navbar-nav>.active>a:focus, .style-3 .navbar-default .navbar-nav>.active>a:hover, .breadcrumb-item a:hover, .sidebar-menu > li:hover > a, .sidebar-menu li:hover > a, .grower.opened:before, .view-mode.active, .product-desc-link, .breadcrumb-area .breadcrumb-item a:hover, .to-read-review a:hover, .to-write-review a:hover, .value-cell, .share-to-friend a:hover, .product-information .nav-tabs>li.active>a, .product-information .nav-tabs>li.active>a:focus, .product-information .nav-tabs>li.active>a:hover, .sidebar-widget .recent-post-title a:hover, .post-title a:hover, .post-meta a, .style-3 .navbar-default .navbar-nav>li>a:focus, .style-3 .navbar-default .navbar-nav>li>a:hover{
+    color: #fe7140;
+}
+
+/*** Border ***/
+.btn-readmore, .pagination:hover a, .pagination.current a, .product-information .nav-tabs>li.active>a, .product-information .nav-tabs>li.active>a:focus, .product-information .nav-tabs>li.active>a:hover, .product-information .nav>li>a:focus, .product-information .nav>li>a:hover{
+    border-color: #fe7140;
+}
+
+/*** Fixing ***/
+.tooltip:after{
+    border-top-color: #fe7140;
+}
+.category-1{
+    background-color: #b03308;
+}
+.category-2{
+    background-color: #fe7140;
+}
+.category-3{
+    background-color: #fc8d66;
+}
+.category-4{
+    background-color: #a74e2e;
+}
+.share-to-twitter:hover{background-color: #55acee}
+.share-to-facebook:hover{background-color: #3b5999}
+.share-to-googleplus:hover{background-color: #dd4b39}
+.share-to-pinterest:hover{background-color: #bd081c}
+.btn-category:hover, .product-btn a:hover, .product-btn button:hover {
+    color: #ffffff;
+}
