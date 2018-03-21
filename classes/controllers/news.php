@@ -28,6 +28,25 @@ class News extends dbmodel {
         $row = $this->resultset();
         extract($row);
         return $user_id;
+
+    }
+
+    public function get_post_status_by_id($id) {
+        $query = "SELECT status_body FROM statuses WHERE status_id = :id";
+        $this->query($query);
+        $this->bind(':id', $id);
+        $row = $this->resultset();
+        extract($row);
+        return $status_body;
+    }
+
+    public function get_post_category_by_id($id) {
+        $query = "SELECT post_category_name FROM post_category WHERE post_category_id = :id";
+        $this->query($query);
+        $this->bind(':id', $id);
+        $row = $this->resultset();
+        extract($row);
+        return $post_category_name;
     }
 
     public function get_news_by_id( $id)
@@ -52,8 +71,8 @@ class News extends dbmodel {
     {
       $query = "SELECT * FROM posts WHERE post_user_id = $user_id";
       $this->query($query);
-      $row = $this->resultset();
-      return $row;
+      $stmt = $this->executer();
+      return $stmt;
     }
 
     public function get_post_category()
@@ -109,14 +128,16 @@ class News extends dbmodel {
         $post_school_id = $newsModel->get_post_school_id();
         $post_featured_image_id = $newsModel->get_post_featured_image_id();
         $post_status_id = $newsModel->get_post_status_id();
+        $post_category_id = $newsModel->get_post_category_id();
 
-        $query = "INSERT INTO posts(post_title,post_content,post_user_id,post_school_id,post_featured_image_id,post_status_id)"
-                . "VALUES(:post_title, :post_content, :post_user_id, :post_school_id, :post_featured_image_id,:post_status_id);";
+        $query = "INSERT INTO posts(post_title,post_content,post_user_id,post_school_id, post_category_id,post_featured_image_id,post_status_id)"
+                . "VALUES(:post_title, :post_content, :post_user_id, :post_school_id, :post_category_id, :post_featured_image_id,:post_status_id);";
         $this->query($query);
         $this->bind(':post_title',$post_title);
         $this->bind(':post_content',$post_content);
         $this->bind(':post_user_id',$post_user_id);
         $this->bind(':post_school_id',$post_school_id);
+        $this->bind(':post_category_id', $post_category_id);
         $this->bind(':post_featured_image_id',$post_featured_image_id);
         $this->bind(':post_status_id',$post_status_id);
         $this->executer();

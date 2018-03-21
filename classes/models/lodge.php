@@ -1,7 +1,7 @@
 <?php
 
 class LodgeModel {
-  private $lodge_title	;
+  private $lodge_name	;
   private $lodge_address	;
   private $lodge_desc	;
   private $lodge_status_id;
@@ -26,8 +26,8 @@ class LodgeModel {
   public function get_lodge_desc() {
     return $this->lodge_desc;
   }
-  public function get_lodge_title () {
-    return $this->lodge_title;
+  public function get_lodge_name () {
+    return $this->lodge_name;
   }
   public function get_lodge_status_id() {
     return $this->lodge_status_id;
@@ -67,8 +67,8 @@ class LodgeModel {
   public function set_lodge_desc($lodge_desc) {
     $this->lodge_desc = $lodge_desc;
   }
-  public function set_lodge_title ($lodge_title) {
-    $this->lodge_title = $lodge_title;
+  public function set_lodge_name ($lodge_name) {
+    $this->lodge_name = $lodge_name;
   }
   public function set_lodge_status_id(  $lodge_status_id  ) {
     $this->lodge_status_id = $lodge_status_id;
