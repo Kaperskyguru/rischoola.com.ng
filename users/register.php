@@ -45,19 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 					<div class="col-md-6">
 						<div class="form-group">
 						    <label for="name">First Name :</label>
-						    <input type="text" class="form-control" id="name" name="name" placeholder="First Name">
+						    <input type="text" required class="form-control" id="name" name="name" placeholder="First Name">
 
 						</div>
 						<div class="form-group">
 						    <label for="school_id">School :</label>
-								<select class="form-control" name="school_id" id="school_id">
+								<select required class="form-control" name="school_id" id="school_id">
 									<option value="1">Uniport</option>
 									<option value="2">RSUST</option>
 								</select>
 						</div>
 						<div class="form-group">
 						    <label for="user_name">User Name :</label>
-						    <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Username">
+						    <input type="text" required class="form-control" name="user_name" id="user_name" placeholder="Username">
 
 						</div>
 						<div class="form-group">
@@ -69,23 +69,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 					<div class="col-md-6">
 						<div class="form-group">
 						    <label for="last_name">Last Name :</label>
-						   	<input type="text" name="last_name" class="form-control" id="last_name" placeholder="Last Name">
+						   	<input type="text"  required name="last_name" class="form-control" id="last_name" placeholder="Last Name">
 
 						</div>
 						<div class="form-group">
 						    <label for="phone_number">Mobile Number :</label>
-						   	<input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="phone number">
+						   	<input type="tel" required class="form-control" id="phone_number" name="phone_number" placeholder="phone number">
 
 						</div>
 						<div class="form-group">
 						    <label for="email">Email Address :</label>
 
-						    	<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+						    	<input type="email" required class="form-control" id="email" name="email" placeholder="Email">
 
 						</div>
 						<div class="form-group">
 						    <label for="confirm_email">Confirm Password :</label>
-						    	<input type="password" class="form-control" id="confirm_email" name="confirm_email" placeholder="Confirm Password">
+						    	<input type="password" required class="form-control" id="confirm_email" name="confirm_email" placeholder="Confirm Password">
 						</div>
 					</div>
 				</div>

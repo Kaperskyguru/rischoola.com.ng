@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 	$userModel->set_user_password($_POST['password']);
 	$userController->login($userModel);
 	if($userController->is_authenticated()){
-		header("Location: ../members/index.php");
+		header("Location: ../member/index.php");
 	}else{
 		//log message here
 		echo "Account Not Found";

@@ -1,4 +1,4 @@
-user<?php
+<?php
 
 class Users extends dbmodel {
 

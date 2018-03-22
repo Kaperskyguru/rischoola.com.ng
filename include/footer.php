@@ -19,7 +19,7 @@
                 <li><a href="index.php">Home</a></li>
                 <li><a href="news/news.php">Latest News</a></li>
 								<li><a href="lodges/lodges.php">Hostels</a></li>
-                <li><a href="roommates/roomates.php">Roommates</a></li>
+                <li><a href="roommates/roommate.php">Roommates</a></li>
                 <li><a href="news/news.php">Scholarships</a></li>
 								<li><a href="marketplace/store.php">Store</a></li>
                 <li><a href="events/events.php">Events</a></li>

@@ -1,7 +1,9 @@
-<?php include 'dashboard-header.php' ?>
+<?php
+require '../init.php';
+include 'dashboard-header.php'
+ ?>
         <div id="page-wrapper">
             <div class="container-fluid">
-
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -26,55 +28,39 @@
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
+                                        <th>S/N</th>
                                         <th>Name</th>
-                                        <th>Location</th>
-                                        <th>Rooms Available</th>
-                                        <th>Contact</th>
+                                        <th>School</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Date Created</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="active">
-                                        <td>Absu Hostel G</td>
-                                        <td>Abia state university uturu abia state</td>
-                                        <td>39</td>
-                                        <td>09939309399</td>
-                                    </tr>
-                                    <tr class="success">
-                                        <td>Absu Hostel G</td>
-                                        <td>Abia state university uturu abia state</td>
-                                        <td>39</td>
-                                        <td>09939309399</td>
-                                    </tr>
-                                    <tr class="warning">
-                                        <td>Absu Hostel G</td>
-                                        <td>Abia state university uturu abia state</td>
-                                        <td>39</td>
-                                        <td>09939309399</td>
-                                    </tr>
-                                    <tr class="danger">
-                                        <td>Absu Hostel G</td>
-                                        <td>Abia state university uturu abia state</td>
-                                        <td>39</td>
-                                        <td>09939309399</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Absu Hostel G</td>
-                                        <td>Abia state university uturu abia state</td>
-                                        <td>39</td>
-                                        <td>09939309399</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Absu Hostel G</td>
-                                        <td>Abia state university uturu abia state</td>
-                                        <td>39</td>
-                                        <td>09939309399</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Absu Hostel G</td>
-                                        <td>Abia state university uturu abia state</td>
-                                        <td>39</td>
-                                        <td>09939309399</td>
-                                    </tr>
+
+                                  <?php
+                                  $stmt = $lodgeController->get_lodge_by_user_id($lodgeController->get_user_id_by_username('kapersky'));
+                                  if($stmt->rowCount()>0){
+                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                      extract($row);
+                                      ?>
+                                      <tr>
+                                        <td><?php echo $lodge_id ?></td>
+                                        <td><?php echo $lodge_name ?></td>
+                                        <td><?php echo $lodgeController->get_lodge_school_by_id($lodge_school_id); ?></td>
+                                        <td># <?php echo $lodge_price ?></td>
+                                        <td><?php echo $lodgeController->get_lodge_status_by_id($lodge_status_id); ?></td>
+                                        <td><?php echo $lodge_date_created ?></td>
+                                        <td>
+                                          <a href="#" pid = "<?php echo $lodge_id ?>" class="btn btn-primary">View</a>
+                                          <a href="#" pid = "<?php echo $lodge_id ?>" class="btn btn-danger">Delete</a>
+                                        </td>
+                                      </tr>
+                                  <?php
+                                    }
+                                  }
+                                  ?>
                                 </tbody>
                             </table>
                         </div>

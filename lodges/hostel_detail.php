@@ -51,7 +51,7 @@ if ($id == 0) {
 
                                 <div class="col-md-6">
                                     <div class="product-info">
-                                        <h5 class="product-name"><a><?php echo $lodge_title; ?></a></h5>
+                                        <h5 class="product-name"><a><?php echo $lodge_name; ?></a></h5>
                                         <div class="product-review-wrap">
                                             <div class="rating to-review-item" itemtype="http://schema.org/Offer" itemscope>
                                                 <div class="star_rating" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">

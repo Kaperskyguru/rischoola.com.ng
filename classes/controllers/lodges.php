@@ -25,12 +25,48 @@ class Lodges extends dbmodel {
         $this->query($sql);
         $this->bind(":lodge_rule_name", $lodge_rule_name);
         $this->executer();
-        if ($this->lastIdinsert()) {
+        if ($id = $this->lastIdinsert()) {
+
           return TRUE;
         }else {
           return FALSE;
         }
     }
+    public function get_lodge_rule_id_by_name($name){
+      $query = "SELECT lodge_rule_id FROM lodge_rules WHERE lodge_rule_name = :name";
+      $this->query($query);
+      $this->bind(':name', $name);
+      $row = $this->resultset();
+      extract($row);
+      return $lodge_rule_id;
+    }
+
+    public function get_lodge_facility_id_by_name($name){
+      $query = "SELECT lodge_facility_id FROM lodge_facilities WHERE lodge_facility_name = :name";
+      $this->query($query);
+      $this->bind(':name', $name);
+      $row = $this->resultset();
+      extract($row);
+      return $lodge_facility_id;
+    }
+
+    public function add_rule($rule){
+      $id = $this->get_lodge_rule_id_by_name($rule);
+      $sql = "INSERT INTO lodge_rules_meta(lodge_rules_meta_lodge_rule_id, lodge_rules_meta_user_id) VALUES (:lodge_rule_meta_lodge_rule_id, :lodge_rule_meta_user_id)";
+      $this->query($sql);
+      $this->bind(":lodge_rule_meta_lodge_rule_id", $id);
+      $this->bind(":lodge_rule_meta_user_id", $id);
+      $this->executer();
+  }
+
+  public function add_facility($facility){
+    $id = $this->get_lodge_facility_id_by_name($facility);
+    $sql = "INSERT INTO lodge_facilities_meta(lodge_facilities_meta_facility_id, lodge_facilities_meta_user_id) VALUES (:lodge_facilities_meta_facility_id, :lodge_facility_meta_user_id)";
+    $this->query($sql);
+    $this->bind(":lodge_facilities_meta_facility_id", $id);
+    $this->bind(":lodge_facility_meta_user_id", $id);
+    $this->executer();
+}
 
     public function add_lodge(LodgeModel $LodgeModel) {
         $lodge_name = $LodgeModel->get_lodge_name();
@@ -66,15 +102,15 @@ class Lodges extends dbmodel {
         }
     }
 
-    public function get_user_id_by_username($name) {
-        $query = "SELECT user_id FROM users WHERE user_user_name = :name";
-        $this->query($query);
-        $this->bind(':name', $name);
-        $row = $this->resultset();
-        extract($row);
-        return $user_id;
 
-    }
+    // public function get_lodge_category_by_id($id) {
+    //     $query = "SELECT post_category_name FROM post_category WHERE post_category_id = :id";
+    //     $this->query($query);
+    //     $this->bind(':id', $id);
+    //     $row = $this->resultset();
+    //     extract($row);
+    //     return $post_category_name;
+    // }
 
     public function get_schools()
     {
@@ -89,6 +125,25 @@ class Lodges extends dbmodel {
             <?php
         }
       }
+    }
+
+
+    public function get_user_id_by_username($name) {
+        $query = "SELECT user_id FROM users WHERE user_user_name = :name";
+        $this->query($query);
+        $this->bind(':name', $name);
+        $row = $this->resultset();
+        extract($row);
+        return $user_id;
+
+    }
+
+    public function get_lodge_by_user_id($user_id)
+    {
+      $query = "SELECT * FROM lodges WHERE lodge_user_id = $user_id";
+      $this->query($query);
+      $stmt = $this->executer();
+      return $stmt;
     }
 
     public function is_facility_exist($name)
@@ -205,6 +260,7 @@ class Lodges extends dbmodel {
         extract($row);
         return $school_abbr;
     }
+
 
     public function get_user_username_by_id($id) {
         $query = "SELECT user_user_name FROM users WHERE user_id = $id";

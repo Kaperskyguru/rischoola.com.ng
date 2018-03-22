@@ -3,12 +3,14 @@ require '../init.php';
 require 'dashboard-header.php';
 
 if(isset($_POST['add_facility']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+  $lodgeController->add_facility($_POST['val']);
   if(!$lodgeController->is_facility_exist($_POST['val'])){
     $lodgeController->add_lodge_facility($_POST['val']);
   }
 }
 
 if(isset($_POST['add_rule']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+  $lodgeController->add_rule($_POST['val']);
   if(!$lodgeController->is_rule_exist($_POST['val'])){
     $lodgeController->add_lodge_rule($_POST['val']);
   }
@@ -85,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
                 <div class="form-group">
                     <label for="lodge_image">Choose Featured image: </label>
-                    <input multiple type="lodge_image" id="lodge_image" name="lodge_image" class="form-control" />
+                    <input multiple type="file" id="lodge_image" name="lodge_image" class="form-control" />
                 </div>
         </div>
         <div class="col-md-5">
@@ -148,7 +150,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 function uploadFiles(){
   $error_status = 1;
-  $image_to_upload = $_FILES['file'];
+  $image_to_upload = $_FILES['lodge_image'];
   $target_dir = "../res/imgs/post/";
   $image_name = $image_to_upload['name'];
   $target_file = $target_dir . basename($image_to_upload['name']);
@@ -204,7 +206,6 @@ $(document).ready(function() {
         data:{add_rule:1, val:val},
         success:function(data) {
           //$('#err').html(data);
-
         }
       });
   });
@@ -217,7 +218,6 @@ $(document).ready(function() {
         data:{add_facility:1, val:val},
         success:function(data) {
           //$('#err').html(data);
-
         }
       });
   });

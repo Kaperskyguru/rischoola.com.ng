@@ -1,4 +1,6 @@
-<?php session_start();
+<?php
+//session_name('rs');
+//session_start();
 require 'init.php';
 require 'include/header.php';
 
