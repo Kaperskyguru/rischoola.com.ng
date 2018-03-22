@@ -13,6 +13,6 @@ function display_error(){
 
   if ($error !== 0){
 
-    echo '<ul class="red-text text-darken-4">'. $error_text. '</ul>';
+    echo '<div class="alert alert-danger">'. $error_text. '</div>';
   }
 }

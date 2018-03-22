@@ -7,9 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 	$userController->login($userModel);
 	if($userController->is_authenticated()){
 		header("Location: ../member/index.php");
+		exit;
 	}else{
 		//log message here
-		echo "Account Not Found";
+		$error_text = "Account Not Found";
 	}
 }
 
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 ?>
 	<div class="container pad-up-50">
 		<div class="loginForm col-md-6 col-md-offset-3 pad-up-50 pad-bottom-50" >
-
+			<?php display_error(); ?>
 			<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" class="" style="border: 1px solid #ccc; padding: 20px;">
 				<h1 style="color: #B70C01">Member Login</h1>
 				 <div class="form-group">

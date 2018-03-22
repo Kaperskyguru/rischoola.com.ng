@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'classes/controllers/dbmodel.php';
 require_once "classes/controllers/news.php";
 require_once "classes/controllers/lodges.php";

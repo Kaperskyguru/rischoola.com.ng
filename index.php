@@ -1,12 +1,10 @@
 <?php
-//session_name('rs');
-//session_start();
 require 'init.php';
 require 'include/header.php';
 
 $userController->cookie_login();
 if($userController->is_authenticated()){
-  header("Location: members/index.php");
+  header("Location: member/index.php");
   exit;
 }
 ?>

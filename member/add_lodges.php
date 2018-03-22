@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <h2>Add a new Lodge<hr /></h2>
         </div>
         <div class="col-md-5">
-          <div id="err" class="alert alert-danger"><?php display_error(); ?></div>
+          <div id="err"><?php display_error(); ?></div>
             <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
                 <div class="form-group">
                     <label for="lodge_name">Lodge Name:</label>

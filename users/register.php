@@ -1,39 +1,60 @@
 <?php
 require '../init.php';
 include 'header.php';
-
+$error = 0;
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	if (isset($_POST['name']) && isset($_POST['last_name'])) {
 		$name = $_POST['name']. " ". $_POST['last_name'];
 		$userModel->set_user_name($name);
+	}else {
+		$error_text = "Fist name and last name are required";
+		$error = 1;
 	}
 	if (isset($_POST['user_name'])) {
 		$userModel->set_user_user_name($_POST['user_name']);
+	}else {
+		$error_text = "Username is required";
+		$error = 1;
 	}
 	if (isset($_POST['email'])) {
 		$userModel->set_user_email($_POST['email']);
+	}else {
+		$error_text = "A valid Email address required";
+		$error = 1;
 	}
 
 	if (isset($_POST['password']) && isset($_POST['confirm_password'])) {
 		if ($_POST['password'] === $_POST['confirm_password']) {
 			$userModel->set_user_password($_POST['password']);
 		}else {
-			// log error
+			$error_text = "Password do not match";
+			$error = 1;
 		}
+	}else {
+		$error_text = "Password is required";
+		$error = 1;
 	}
 	if (isset($_POST['school_id'])) {
 		$userModel->set_user_school_id($_POST['school_id']);
+	}else {
+		$error_text = "School is required";
+		$error = 1;
 	}
+
 	if (isset($_POST['phone_number'])) {
 		$userModel->set_user_phone_number($_POST['phone_number']);
-	}
-
-	if($userController->add_account($userModel)){
-		echo "successful";
 	}else {
-		echo "failed";
+		$error_text = "Phone Number is required";
+		$error = 1;
 	}
-
+	if ($error !== 1) {
+		if($userController->add_user($userModel)){
+			$error_text =  "Registered successfully, please verify your account";
+		}else {
+			$error_text  = "Sorry, We could not register you, please try again";
+			$error = 1;
+		}
+	}
 }
 ?>
 	<div class="container pad-up-50">
@@ -42,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			<form class="" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" style="border: 1px solid #ccc; padding: 20px;">
 				<h1 style="color: #B70C01">Create a MySchool Account</h1>
 				<div>
+					<?php display_error(); ?>
 					<div class="col-md-6">
 						<div class="form-group">
 						    <label for="name">First Name :</label>

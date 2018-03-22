@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   <div class="row">
   <div class="col-md-10">
     <h2>Create a new post<hr /></h2>
-    <div class="alert alert-danger"><?php display_error(); ?></div>
+    <?php display_error(); ?>
     <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="title">Title:</label>
