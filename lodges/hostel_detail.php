@@ -1,6 +1,12 @@
 <?php
 require '../init.php';
-include 'header.php';
+$userController->cookie_login();
+if($userController->is_authenticated()){
+  require 'member_header.php';
+}else {
+  require 'header.php';
+}
+?>
 
 $id1 = $_GET['id']; //sanitizer($_GET["id"]);
 $id = intval($id1);

@@ -29,6 +29,14 @@ public function __construct()
       return $user_user_name;
   }
 
+  public function get_user_display_name_by_id($id) {
+      $query = "SELECT user_name FROM users WHERE user_id = $id";
+      $this->query($query);
+      $row = $this->resultset();
+      extract($row);
+      return $user_name;
+  }
+
   public function login(UserModel $userModel)
   {
     try{
@@ -68,6 +76,13 @@ public function __construct()
   public function is_authenticated()
   {
     return $this->is_authenticated;
+  }
+
+  public function is_user_logged_in(){
+      if($this->is_authenticated){
+        return TRUE;
+      }
+      return FALSE;
   }
 
   public function create_session()

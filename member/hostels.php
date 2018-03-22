@@ -1,6 +1,4 @@
-<?php
-require '../init.php';
-include 'dashboard-header.php'
+<?php include 'dashboard-header.php'
  ?>
         <div id="page-wrapper">
             <div class="container-fluid">
@@ -40,7 +38,7 @@ include 'dashboard-header.php'
                                 <tbody>
 
                                   <?php
-                                  $stmt = $lodgeController->get_lodge_by_user_id($lodgeController->get_user_id_by_username('kapersky'));
+                                  $stmt = $lodgeController->get_lodge_by_user_id($_SESSION['user_id']);
                                   if($stmt->rowCount()>0){
                                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                       extract($row);

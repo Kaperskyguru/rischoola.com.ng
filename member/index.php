@@ -1,9 +1,6 @@
-    <?php include 'dashboard-header.php' ?>
-
+    <?php include 'dashboard-header.php';?>
         <div id="page-wrapper">
-
             <div class="container-fluid">
-
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -18,7 +15,6 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
@@ -29,7 +25,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">26</div>
-                                        <div>New Comments!</div>
+                                        <div>Total Post!</div>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +40,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">12</div>
-                                        <div>New Tasks!</div>
+                                        <div>Total Lodges!</div>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +55,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">124</div>
-                                        <div>New Notifications</div>
+                                        <div>Total Store Item</div>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +70,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">13</div>
-                                        <div>Connected Friends</div>
+                                        <div>Messages</div>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,12 @@
 <?php
 require '../init.php';
-include 'header.php';
+$userController->cookie_login();
+if($userController->is_authenticated()){
+  require 'member_header.php';
+}else {
+  require 'header.php';
+}
+?>
 ?>
 <section id="view-scholarship">
 	<div class="container pad-up-50">

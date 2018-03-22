@@ -1,6 +1,13 @@
 <?php
 include '../init.php';
-include 'header.php';
+
+$userController->cookie_login();
+if($userController->is_authenticated()){
+  require 'member_header.php';
+}else {
+  require 'header.php';
+}
+?>
 
 ?>
 <section id="index-news">

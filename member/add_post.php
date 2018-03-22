@@ -1,10 +1,8 @@
-<?php
-require '../init.php';
-  require 'dashboard-header.php';
+<?php require 'dashboard-header.php';
 
 $error=array();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $id = $newsControler->get_user_id_by_username('kaperskyguru');
+  $id = $newsControler->get_user_id_by_username($userController->get_user_username_by_id($_SESSION['user_id']));
   if(empty($_FILES['file']['name']) || empty($_FILES['file']['tmp_name']) || empty($_POST['file'])){
     //$error_text = "Image is required";
     $newsModel->set_post_featured_image_id(NULL);
@@ -48,7 +46,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
  ?>
-
 <div class="container">
   <div class="row">
   <div class="col-md-10">

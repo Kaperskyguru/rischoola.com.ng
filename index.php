@@ -1,11 +1,10 @@
 <?php
 require 'init.php';
-require 'include/header.php';
-
 $userController->cookie_login();
 if($userController->is_authenticated()){
-  header("Location: member/index.php");
-  exit;
+  require 'member_header.php';
+}else {
+  require 'header.php';
 }
 ?>
 
@@ -82,4 +81,4 @@ if($userController->is_authenticated()){
     <?php require_once 'include/listOfEvents.php'; ?>
 </section>
 
-<?php include 'include/footer.php'; ?>
+<?php include 'footer.php'; ?>

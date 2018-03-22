@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 	$userModel->set_user_password($_POST['password']);
 	$userController->login($userModel);
 	if($userController->is_authenticated()){
+		//$_SESSION['user_uid'] = $userController->get_user_uid_by_user_user_name();
 		header("Location: ../member/index.php");
 		exit;
 	}else{
@@ -13,8 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 		$error_text = "Account Not Found";
 	}
 }
-
-
 
 ?>
 	<div class="container pad-up-50">

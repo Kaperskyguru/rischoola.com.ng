@@ -1,5 +1,4 @@
 <?php
-require '../init.php';
 require 'dashboard-header.php'; ?>
 <div class="container">
   <div class="row">
@@ -23,7 +22,7 @@ require 'dashboard-header.php'; ?>
         </thead>
         <tbody>
           <?php
-          $stmt = $newsControler->get_post_by_user_id($newsControler->get_user_id_by_username('kapersky'));
+          $stmt = $newsControler->get_post_by_user_id($_SESSION['user_id']);
           if($stmt->rowCount()>0){
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               extract($row);

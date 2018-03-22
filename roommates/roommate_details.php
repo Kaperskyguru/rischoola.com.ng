@@ -1,5 +1,11 @@
 <?php
-require 'header.php';
+$userController->cookie_login();
+if($userController->is_authenticated()){
+  require 'member_header.php';
+}else {
+  require 'header.php';
+}
+?>
 ?>
 <div class="instructor-wrapper">
     <div class="jumbotron jumbotron-header-bar bg-secondary-force">

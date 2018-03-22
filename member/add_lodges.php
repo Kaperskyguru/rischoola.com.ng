@@ -1,5 +1,4 @@
 <?php
-require '../init.php';
 require 'dashboard-header.php';
 
 if(isset($_POST['add_facility']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -17,7 +16,7 @@ if(isset($_POST['add_rule']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $id = $lodgeController->get_user_id_by_username('kaperskyguru');
+  $id = $lodgeController->get_user_id_by_username($userController->get_user_username_by_id($_SESSION['user_id']));
   if(empty($_FILES['lodge_image']['name']) || empty($_FILES['lodge_image']['tmp_name']) || empty($_POST['lodge_image'])){
     $lodgeModel->set_lodge_featured_image_id(NULL);
   }else {
