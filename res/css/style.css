@@ -30,6 +30,9 @@ li.message-preview {
     width: 275px;
     border-bottom: 1px solid rgba(0,0,0,.15);
 }
+.replies{
+  margin-top: 10px;
+}
 
 li.message-preview>a {
     padding-top: 15px;
@@ -83,8 +86,25 @@ li.message-footer {
     text-shadow: 0 1px 1px #FFF;
     font-size: 11px;
 }
-
-        .commentlist li {
+.commentlist .like a {
+  position:absolute;
+  bottom: 0;
+  right:  160px;
+  background: #ddd;
+  padding: 3px 10px;
+  text-shadow: 0 1px 1px #FFF;
+  font-size: 11px;
+}
+.commentlist .dislike a {
+  position: absolute;
+  bottom: 0;
+  right: 68px;
+  background: #ddd;
+  padding: 3px 8px;
+  text-shadow: 0 1px 1px #FFF;
+  font-size: 11px;
+}
+  .commentlist li {
             margin-bottom: 20px;
             clear: both;
             position: relative;
@@ -101,7 +121,7 @@ li.message-footer {
 
         .comment-content p {
             line-height: 17px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
          .comment-avatar {
             overflow: hidden;

@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../res/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="../res/css/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" type="text/css" href="../res/css/style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
 

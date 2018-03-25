@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$name = $_POST['name']. " ". $_POST['last_name'];
 		$userModel->set_user_name($name);
 	}else {
-		$error_text = "Fist name and last name are required";
+		$error_text = "First name and last name are required";
 		$error = 1;
 	}
 	if (isset($_POST['user_name'])) {
@@ -106,8 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 						</div>
 						<div class="form-group">
-						    <label for="confirm_email">Confirm Password :</label>
-						    	<input type="password" required class="form-control" id="confirm_email" name="confirm_email" placeholder="Confirm Password">
+						    <label for="confirm_password">Confirm Password :</label>
+						    	<input type="password" required class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
 						</div>
 					</div>
 				</div>

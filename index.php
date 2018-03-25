@@ -22,7 +22,7 @@ if($userController->is_authenticated()){
                 </div>
                 <?php echo $newsControler->get_last_inserted_post("res/imgs/1.jpg", "news/"); ?>
                 <div class="col-md-12" id="displayNews">
-                    <?php $newsControler->display_latest_news(9, "news/"); ?>
+                    <?php $newsControler->display_latest_post(9, "news/"); ?>
                 </div>
                 <div>
                     <a href="news/news.php"class="btn btn-success">See more latest news</a>

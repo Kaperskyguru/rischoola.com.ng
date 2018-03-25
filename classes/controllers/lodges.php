@@ -19,6 +19,15 @@ class Lodges extends dbmodel {
         }
     }
 
+    public function get_total_number_of_lodges_by_id($id)
+    {
+      $sql = "SELECT lodge_id FROM lodges WHERE lodge_user_id = :id";
+      $this->query($sql);
+      $this->bind(':id', $id);
+      $row = $this->executer();
+      return $row->rowCount();
+    }
+
     public function add_lodge_rule($name) {
         $lodge_rule_name = $name;
         $sql = "INSERT INTO lodge_rules(lodge_rule_name) VALUES (:lodge_rule_name)";

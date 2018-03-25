@@ -41,20 +41,21 @@ public function __construct()
   {
     try{
       $name = $userModel->get_user_user_name();
-      $password = $userModel->get_user_password();
+      $password = trim($userModel->get_user_password());
 
       $query = "SELECT * FROM users WHERE (user_user_name = :user_user_name) AND (user_status_id = 5) AND ((date_expiry > NOW()) OR (date_expiry < :date_expiry))";
       $stmt = $this->query($query);
-
       $this->bind(":user_user_name", $name);
       $this->bind(":date_expiry", '2000-01-01');
       $stmt = $this->executer();
-      //$stmt->execute($name,'2000-01-01');
+
       $res = $stmt->fetch(PDO::FETCH_ASSOC);
-      //$stmt = $this->query($query);
         //echo $password." string";
-        $hash_pass = $res["user_password"];
-      if(password_verify($password, $hash_pass)){
+        $p = $res["user_password"];
+        var_dump(password_verify($password, $res["user_password"]));
+        echo $p. " hahahah";
+        
+      if(password_verify($password, $res["user_password"])){
         $_SESSION['user_id'] = $res['user_id'];
          $this->user_id = $res["user_id"];
          $this->user_name = $res['user_name'];
@@ -180,8 +181,7 @@ public function __construct()
       $email = $userModel->get_user_email();
       $school_id = $userModel->get_user_school_id();
 
-     echo $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
-     echo '<br />';
+      $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
      var_dump($hash_pass);
       $sql = "INSERT INTO users (user_name, user_user_name, user_password, user_phone_number, user_email, user_school_id) VALUES
       (:user_name, :user_user_name, :user_password, :user_phone_number, :user_email, :user_school_id)";

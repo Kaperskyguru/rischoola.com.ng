@@ -6,12 +6,21 @@ class News extends dbmodel {
 
     }
 
-    public function get_all_news($limit )
+    public function get_all_post($limit )
     {
       $query = "SELECT * FROM posts WHERE post_status_id != 2 ORDER BY post_id DESC LIMIT $limit";
       $this->query($query);
       $stmt = $this->executer();
       return $stmt;
+    }
+
+    public function get_total_number_of_post_by_id($id)
+    {
+      $sql = "SELECT post_id FROM posts WHERE post_user_id = :id";
+      $this->query($sql);
+      $this->bind(':id', $id);
+      $row = $this->executer();
+      return $row->rowCount();
     }
 
     public function get_user_username_by_id($id) {
@@ -49,20 +58,23 @@ class News extends dbmodel {
         return $post_category_name;
     }
 
-    public function get_news_by_id( $id)
+    public function get_post_by_id( $id)
     {
-      $query = "SELECT * FROM posts WHERE post_status_id != 2 AND post_id = $id";
+      $query = "SELECT * FROM posts WHERE post_status_id != 2 AND post_id = :id";
       $this->query($query);
+      $this->bind('id', $id);
       $stmt = $this->resultset();
       return $stmt;
     }
 
-    public function get_news_comments_by_id($context, $id)
+    public function get_post_comments_by_id($context, $id)
     {
       //echo $id;
-      $query = "SELECT * FROM comments WHERE comment_context = '$context' AND comment_context_id = $id";
+      $query = "SELECT * FROM comments WHERE comment_context = :context AND comment_context_id = :id";
       //echo $query;
       $this->query($query);
+      $this->bind(':context', $context);
+      $this->bind(':id', $id);
       $stmt = $this->executer();
       return $stmt;
     }
@@ -105,6 +117,19 @@ class News extends dbmodel {
       }
     }
 
+    public function get_replies_by_comment_id($comment_id)
+    {
+      $query = "SELECT * FROM replies WHERE reply_comment_id = :comment_id";
+      $this->query($query);
+      $this->bind('comment_id', $comment_id);
+      return $this->executer();
+    }
+
+    public function display_reply_box($id)
+    {
+
+    }
+
     public function add_images_and_get_last_inserted_id($image, $user_id, $item_id) {
       //echo "string". $user_id;
       $query = "INSERT INTO resources(resource_url, resource_user_id, resource_item_id, resource_table_name, resource_type)
@@ -121,14 +146,14 @@ class News extends dbmodel {
       }
     }
 
-    public function addNews(NewsModel $newsModel) {
-        $post_title = $newsModel->get_post_title();
-        $post_content = $newsModel->get_post_content();
-        $post_user_id = $newsModel->get_post_user_id();
-        $post_school_id = $newsModel->get_post_school_id();
-        $post_featured_image_id = $newsModel->get_post_featured_image_id();
-        $post_status_id = $newsModel->get_post_status_id();
-        $post_category_id = $newsModel->get_post_category_id();
+    public function addNews(NewsModel $postModel) {
+        $post_title = $postModel->get_post_title();
+        $post_content = $postModel->get_post_content();
+        $post_user_id = $postModel->get_post_user_id();
+        $post_school_id = $postModel->get_post_school_id();
+        $post_featured_image_id = $postModel->get_post_featured_image_id();
+        $post_status_id = $postModel->get_post_status_id();
+        $post_category_id = $postModel->get_post_category_id();
 
         $query = "INSERT INTO posts(post_title,post_content,post_user_id,post_school_id, post_category_id,post_featured_image_id,post_status_id)"
                 . "VALUES(:post_title, :post_content, :post_user_id, :post_school_id, :post_category_id, :post_featured_image_id,:post_status_id);";
@@ -149,19 +174,19 @@ class News extends dbmodel {
 
     }
 
-    public function incrementLikes(news $newsModel) {
+    public function incrementLikes(news $postModel) {
 
     }
 
-    public function incrementDislikes(news $newsModel) {
+    public function incrementDislikes(news $postModel) {
 
     }
 
-    public function getNewsDateById(news $newsModel) {
+    public function getNewsDateById(news $postModel) {
 
     }
 
-    public function getNewsCommentCount(news $newsModel) {
+    public function getNewsCommentCount(news $postModel) {
 
     }
 
@@ -183,7 +208,7 @@ class News extends dbmodel {
     {
       // Will be activated when i start inserting [post]
         //$id = $this->get_last_inserted_id();
-        $row = $this->get_news_by_id(23);
+        $row = $this->get_post_by_id(23);
                 extract($row);
                 ?>
                 <div>
@@ -195,9 +220,9 @@ class News extends dbmodel {
                 <?php
       }
 
-      public function display_latest_news($limit, $src)
+      public function display_latest_post($limit, $src)
       {
-        $stmt = $this->get_all_news($limit);
+        $stmt = $this->get_all_post($limit);
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);

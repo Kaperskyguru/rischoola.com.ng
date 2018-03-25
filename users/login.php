@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 		header("Location: ../member/index.php");
 		exit;
 	}else{
+		  //var_dump(password_verify($password, $hash_pass));
 		//log message here
 		$error_text = "Account Not Found";
 	}

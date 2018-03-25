@@ -11,12 +11,12 @@
         <title>Dashboard</title>
 
         <link rel="stylesheet" type="text/css" href="res/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="res/css/font-awesome/css/font-awesome.css">
+        <!-- <link rel="stylesheet" type="text/css" href="res/css/font-awesome/css/font-awesome.css"> -->
         <link rel="stylesheet" type="text/css" href="res/css/style.css">
         <link rel="stylesheet" type="text/css" href="res/css/responsive.css">
 
         <!-- Bootstrap Core CSS -->
-        <!-- <link href="res/css/bootstrap.min.css" type="text/css" rel="stylesheet"> -->
+        <link href="res/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <!-- <link href="res/css/sb-admin.css" type="text/css" rel="stylesheet"> -->
@@ -25,7 +25,7 @@
         <!-- <link href="res/css/plugins/morris.css" type="text/css" rel="stylesheet"> -->
 
         <!-- Custom Fonts -->
-        <!-- <link href="res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+        <link href="res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>

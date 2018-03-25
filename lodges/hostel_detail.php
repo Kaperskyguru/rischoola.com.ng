@@ -6,7 +6,7 @@ if($userController->is_authenticated()){
 }else {
   require 'header.php';
 }
-?>
+
 
 $id1 = $_GET['id']; //sanitizer($_GET["id"]);
 $id = intval($id1);

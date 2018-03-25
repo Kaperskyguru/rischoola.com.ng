@@ -53,6 +53,15 @@ class Marketplace extends dbmodel {
         return $stmt;
     }
 
+    public function get_total_number_of_products_by_id($id)
+    {
+      $sql = "SELECT product_id FROM products WHERE product_user_id = :id";
+      $this->query($sql);
+      $this->bind(':id', $id);
+      $stmt = $this->executer();
+      return $stmt->rowCount();
+    }
+
     public function get_product_by_id($id) {
         $query = "SELECT * FROM products WHERE product_status_id != 2 AND product_id = $id";
         $this->query($query);

@@ -24,7 +24,7 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
+                                        <div class="huge"><?php echo $newsControler->get_total_number_of_post_by_id($_SESSION['user_id']); ?></div>
                                         <div>Total Post!</div>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
+                                        <div class="huge"><?php echo $lodgeController->get_total_number_of_lodges_by_id($_SESSION['user_id']);?></div>
                                         <div>Total Lodges!</div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
+                                        <div class="huge"><?php echo $storeController->get_total_number_of_products_by_id($_SESSION['user_id']);?></div>
                                         <div>Total Store Item</div>
                                     </div>
                                 </div>
