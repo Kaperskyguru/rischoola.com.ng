@@ -46,6 +46,14 @@ class Marketplace extends dbmodel {
         return $stmt;
     }
 
+    public function get_products_by_category_id($id, $length) {
+        $query = "SELECT * FROM products WHERE product_status_id != 2 AND product_category_id = :id LIMIT $length";
+        $this->query($query);
+        $this->bind(':id', $id);
+        $stmt = $this->executer();
+        return $stmt;
+    }
+
     public function get_product_categories() {
         $query = "SELECT * FROM category ORDER BY RAND()";
         $this->query($query);
@@ -131,14 +139,18 @@ class Marketplace extends dbmodel {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               extract($row);
               ?>
-                <a href='#' class='list-group-item category' ><?php echo $category_name; ?></a>
+                <a href='#' cid = "<?php echo $category_id;?>" class='list-group-item category' ><?php echo $category_name; ?></a>
               <?php
             }
           }
         }
 
-    public function display_availabe_products($length, $src) {
+    public function display_availabe_products($length, $src, $category_id) {
+      if($category_id == 0){
         $stmt = $this->get_products($length);
+      }else{
+        $stmt = $this->get_products_by_category_id($category_id, $length);
+      }
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
@@ -152,15 +164,7 @@ class Marketplace extends dbmodel {
                             <p><?php echo getExcerpt($product_desc, 40); ?></p>
                             <button pid='$product_id' id='product' class='btn btn-danger pull-right'>AddToCart</button>
                         </div>
-                        <!-- <div class='ratings'>
-                            <p>
-                                <span class='glyphicon glyphicon-star'></span>
-                                <span class='glyphicon glyphicon-star'></span>
-                                <span class='glyphicon glyphicon-star'></span>
-                                <span class='glyphicon glyphicon-star'></span>
-                                <span class='glyphicon glyphicon-star'></span>
-                            </p>
-                        </div> -->
+
 
                         <div class="clearfix" style="position:relative; clear:both">
                             <span class="label label-danger"><?php echo $this->get_product_school_by_id($product_school_id); ?></span>
@@ -172,6 +176,8 @@ class Marketplace extends dbmodel {
                 </div>
                 <?php
             }
+        }else{
+          echo "No Item added on this category yet... Add yours";
         }
     }
 

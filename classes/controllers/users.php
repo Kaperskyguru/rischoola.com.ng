@@ -30,11 +30,13 @@ public function __construct()
   }
 
   public function get_user_display_name_by_id($id) {
-      $query = "SELECT user_name FROM users WHERE user_id = $id";
+      $query = "SELECT usermeta_value FROM usermeta WHERE usermeta_key = :usermeta_key AND usermeta_user_id = :id";
       $this->query($query);
+      $this->bind(':usermeta_key', 'display_name');
+      $this->bind(':id', $id);
       $row = $this->resultset();
       extract($row);
-      return $user_name;
+      return $usermeta_value;
   }
 
   public function login(UserModel $userModel)
@@ -54,7 +56,7 @@ public function __construct()
         $p = $res["user_password"];
         var_dump(password_verify($password, $res["user_password"]));
         echo $p. " hahahah";
-        
+
       if(password_verify($password, $res["user_password"])){
         $_SESSION['user_id'] = $res['user_id'];
          $this->user_id = $res["user_id"];

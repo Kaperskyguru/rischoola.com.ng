@@ -24,8 +24,9 @@ class News extends dbmodel {
     }
 
     public function get_user_username_by_id($id) {
-        $query = "SELECT user_user_name FROM users WHERE user_id = $id";
+        $query = "SELECT user_user_name FROM users WHERE user_id = :id";
         $this->query($query);
+        $this->bind(':id', $id);
         $row = $this->resultset();
         extract($row);
         return $user_user_name;

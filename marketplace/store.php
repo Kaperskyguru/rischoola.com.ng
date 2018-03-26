@@ -6,7 +6,9 @@ if($userController->is_authenticated()){
 }else {
   require 'header.php';
 }
-?>
+
+
+
 ?>
 <section id="store">
 	<div class="container pad-up-50">
@@ -16,14 +18,18 @@ if($userController->is_authenticated()){
 			    <div id="get_category">
 			        <div class='list-group'>
 								<a href='#' class='list-group-item category active'>Category</a>
-                <a href='#' class='list-group-item category' >All Categories</a>
-									<?php $storeController->display_category(); ?>
+                <a href='#' cid = "0" class='list-group-item category' >All Categories</a>
+									<?php $storeController->display_category();?>
 			        </div>
 			    </div>
 				</div>
 			<!-- <div class="col-sm-9"> -->
 				<div class="col-sm-9">
-				<?php $storeController->display_availabe_products(14, "../");?>
+          <div id="products">
+              <?php
+               $storeController->display_availabe_products(14, "../", 0);
+               ?>
+          </div>
 				<!--  Pagination starts here -->
 				<div class="col-lg-12 pagination text-center">
 						<ul class="pagination">
@@ -54,3 +60,19 @@ if($userController->is_authenticated()){
 <?php
 include 'footer.php';
 ?>
+<script>
+  $(document).ready(function() {
+    $("body").delegate('.category','click', function(e) {
+      var cid = $(this).attr('cid');
+      e.preventDefault();
+      $.ajax({
+        method:'post',
+        url:'get_products.php',
+        data: {cate:1, cid:cid},
+        success: function(data) {
+          $('#products').html(data);
+        }
+      });
+    });
+  });
+</script>

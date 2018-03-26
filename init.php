@@ -9,6 +9,7 @@ require_once "classes/controllers/groups.php";
 require_once "classes/controllers/events.php";
 require_once "classes/controllers/scholarships.php";
 require_once 'classes/controllers/users.php';
+require_once 'classes/controllers/resources.php';
 
 require_once "classes/models/news.php";
 require_once "classes/models/lodge.php";
@@ -25,6 +26,7 @@ $groupController = new Groups();
 $eventController = new Events();
 $userController = new Users();
 $scholarshipController = new Scholarships();
+$resources = new Resources();
 
 $newsModel = new NewsModel();
 $lodgeModel = new LodgeModel();
