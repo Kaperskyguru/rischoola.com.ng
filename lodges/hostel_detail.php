@@ -12,11 +12,12 @@ $id1 = $_GET['id']; //sanitizer($_GET["id"]);
 $id = intval($id1);
 if ($id == 0) {
   //logging goes here
-    header("Location:../index.php");
+    header("Location: hostel_detail.php");
 } else {
     $row = $lodgeController->get_lodge_by_id($id);
-    if (is_null($row)) {
+    if (is_null($row) || empty($row)) {
         //logging goes here
+        header("Location: hostel_detail.php");
     } else {
         ?>
         <div class="container marg-to-60">
@@ -112,7 +113,7 @@ if ($id == 0) {
                                                 </div>
                                             </div>
                                             <div class="list_mode_btns">
-                                                <button class="to-cart" type="submit" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $lodgeController->get_user_username_by_id($lodge_user_id);?></button>
+                                                <button class="to-cart" type="submit" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $userController->get_user_username_by_id($lodge_user_id);?></button>
                                                 <div class="product-btn">
                                                     <button class="to-wish"><i class="fa fa-heart"></i><span class="tooltip">Add To Wishlist</span></button>
                                                 </div>

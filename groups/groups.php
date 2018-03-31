@@ -7,7 +7,7 @@ if($userController->is_authenticated()){
   require 'header.php';
 }
 ?>
-?>
+
 <section id="groups">
 	<div class="container pad-up-50">
 		<div class="row">
@@ -18,11 +18,7 @@ if($userController->is_authenticated()){
 								<div class="col-sm-6 form-group">
 										<select class="form-control">
 												<option disabled="true" selected="">Select a school from here to get latest information</option>
-												<option>Rivers State University of Science and Technology (RSUST)</option>
-												<option>University of Port Harcourt (Uniport)</option>
-												<option>Ignatus Ajiri University of Education (IAUOE)</option>
-												<option>National Open University Rivers Chapter</option>
-												<option>University of Port Harcourt (Uniport)</option>
+												<?php $schoolController->get_schools(); ?>
 										</select>
 								</div>
 								<div class="col-sm-2 form-group">
@@ -33,7 +29,7 @@ if($userController->is_authenticated()){
 				 <div class="row">
 					 <div class="col-lg-12">
 						 <h2>Latest Groups</h2>
-			 		 	<?php $groupController->display_availabe_groups(8,"../"); ?>
+			 		 	<?php $groupController->display_availabe_groups(8,"../", ""); ?>
 
 						<!--  Pagination starts here -->
 						<div class="margin-btom-20">
@@ -46,7 +42,7 @@ if($userController->is_authenticated()){
 
 					<div class="col-lg-12">
 						<h2>Popular Groups</h2>
-					 <?php $groupController->display_availabe_groups(4,"../"); ?>
+					 <?php $groupController->display_availabe_groups(4,"../", ""); ?>
 
 					 <!--  Pagination starts here -->
 					 <div class="margin-btom-20">
@@ -59,7 +55,7 @@ if($userController->is_authenticated()){
 
 				 <div class="col-lg-12">
 					 <h2>Trending Groups</h2>
-					<?php $groupController->display_availabe_groups(4,"../"); ?>
+					<?php $groupController->display_availabe_groups(4,"../", ""); ?>
 
 					<!--  Pagination starts here -->
 					<div class="margin-btom-20">

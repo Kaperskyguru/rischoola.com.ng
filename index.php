@@ -15,7 +15,8 @@ if($userController->is_authenticated()){
 <section id="index-news">
     <div class="container">
         <h2>Latest Updates</h2>
-        <div class="row">
+        <div class="row" style="background-color:#ffffff; border-radius:10px; padding:10px">
+          <div>
             <div class="col-md-4">
                 <div>
                     <h3>Latest News</h3>
@@ -36,6 +37,7 @@ if($userController->is_authenticated()){
                     <a href="news/news.php"class="btn btn-success">See more latest scholarship/internship</a>
                 </div>
             </div>
+          </div>
             <div class="col-md-3">
                 <div class="row">
                   <?php require 'include/tabs.php'; ?>

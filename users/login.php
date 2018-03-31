@@ -1,6 +1,7 @@
 <?php
 require '../init.php';
 include 'header.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($_POST['password'])) {
 	$userModel->set_user_user_name($_POST['username']);
 	$userModel->set_user_password($_POST['password']);

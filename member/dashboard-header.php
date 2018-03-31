@@ -169,10 +169,10 @@
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                      <a href="javascript:;" data-toggle="collapse" data-target="#post"><i class="fa fa-fw fa-bar-chart-o"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
+                      <a href="javascript:;" data-toggle="collapse" data-target="#post"><i class="fa fa-bullhorn"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                       <ul id="post" class="collapse">
                           <li>
-                              <a href="add_post.php">Add Posts</a>
+                              ><a href="add_post.php">Add Posts</a>
                           </li>
                           <li>
                               <a href="posts.php">View Posts</a>
@@ -180,7 +180,7 @@
                       </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#hostel"><i class="fa fa-fw fa-bar-chart-o"></i> Hostels <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#hostel"><i class="fa fa-home"></i> Hostels <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="hostel" class="collapse">
                             <li>
                                 <a href="add_lodges.php">Add lodges</a>
@@ -191,7 +191,7 @@
                         </ul>
                     </li>
                     <li>
-                      <a href="javascript:;" data-toggle="collapse" data-target="#store"><i class="fa fa-fw fa-bar-chart-o"></i> Store <i class="fa fa-fw fa-caret-down"></i></a>
+                      <a href="javascript:;" data-toggle="collapse" data-target="#store"><i class="fa fa-shopping-cart"></i> Store <i class="fa fa-fw fa-caret-down"></i></a>
                       <ul id="store" class="collapse">
                           <li>
                               <a href="compose.php">Sell Products</a>
@@ -205,7 +205,7 @@
                       </ul>
                     </li>
                     <li>
-                      <a href="javascript:;" data-toggle="collapse" data-target="#roommate"><i class="fa fa-fw fa-bar-chart-o"></i> Roommate <i class="fa fa-fw fa-caret-down"></i></a>
+                      <a href="javascript:;" data-toggle="collapse" data-target="#roommate"><i class="fa fa-user"></i> Roommate <i class="fa fa-fw fa-caret-down"></i></a>
                       <ul id="roommate" class="collapse">
                           <li>
                               <a href="roommate.php">Find Roommate</a>
@@ -216,38 +216,38 @@
                       </ul>
                     </li>
                     <li>
-                      <a href="javascript:;" data-toggle="collapse" data-target="#groups"><i class="fa fa-fw fa-bar-chart-o"></i> Groups <i class="fa fa-fw fa-caret-down"></i></a>
+                      <a href="javascript:;" data-toggle="collapse" data-target="#groups"><i class="fa fa-users"></i> Groups <i class="fa fa-fw fa-caret-down"></i></a>
                       <ul id="groups" class="collapse">
                           <li>
-                              <a href="groups.php">Join a Group</a>
+                              <a href="../groups/groups.php">Join a Group</a>
                           </li>
                           <li>
-                              <a href="inbox.php">Membership</a>
+                              <a href="group_member.php">Membership</a>
                           </li>
                           <li>
-                              <a href="inbox.php">Create a Group</a>
+                              <a href="create_group.php">Create a Group</a>
                           </li>
                           <li>
-                              <a href="inbox.php">View Groups</a>
+                              <a href="groups.php">View Groups</a>
                           </li>
                       </ul>
                     </li>
                     <li>
-                      <a href="javascript:;" data-toggle="collapse" data-target="#events"><i class="fa fa-fw fa-bar-chart-o"></i> Events <i class="fa fa-fw fa-caret-down"></i></a>
+                      <a href="javascript:;" data-toggle="collapse" data-target="#events"><i class="fa fa-calendar"></i> Events <i class="fa fa-fw fa-caret-down"></i></a>
                       <ul id="events" class="collapse">
                           <li>
-                              <a href="compose.php">View Events</a>
+                              <a href="view_event.php">View Events</a>
                           </li>
                           <li>
-                              <a href="inbox.php">Create Event</a>
+                              <a href="create_event.php">Create Event</a>
                           </li>
                           <li>
-                              <a href="inbox.php">Remainders</a>
+                              <a href="event_reminder.php">Remainders</a>
                           </li>
                       </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Messages <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-inbox"></i> Messages <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="compose.php">Compose Message</a>
@@ -256,10 +256,28 @@
                                 <a href="inbox.php">Inbox</a>
                             </li>
                             <li>
-                                <a href="inbox.php">Sent Messages</a>
+                                <a href="sent_messages.php">Sent Messages</a>
                             </li>
                             <li>
-                                <a href="inbox.php">Draft</a>
+                                <a href="draft_messages.php">Draft</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#account"><i class="fa fa-user"></i> My Account <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="account" class="collapse">
+                            <li>
+                                <a href="compose.php">Update Profile</a>
+                            </li>
+                            <li>
+                                </i><a href="inbox.php">Change Password</a>
+                            </li>
+                            <li>
+                                <a href="inbox.php">Bank Information</a>
+                            </li>
+                            <li>
+                                <a href="logout.php">Logout</a>
                             </li>
                         </ul>
                     </li>

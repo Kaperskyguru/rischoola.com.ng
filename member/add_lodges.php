@@ -84,24 +84,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <label for="lodge_address" > Address: </label>
                     <textarea id="lodge_address" name="lodge_address" class="form-control"> </textarea>
                 </div>
-                <div class="form-group">
-                    <label for="lodge_image">Choose Featured image: </label>
-                    <input multiple type="file" id="lodge_image" name="lodge_image" class="form-control" />
-                </div>
+
         </div>
         <div class="col-md-5">
-            <div class="form-group">
-                <label for="lodge_category">Category:</label>
-                <select disabled class="form-control" id="lodge_category" name="lodge_category">
-                    <option value="">Select Categories </option>
-                    <option value="">Scholarships</option>
-                </select>
-            </div>
+          <div class="form-group">
+              <label for="lodge_image">Choose Featured image: </label>
+              <input multiple type="file" id="lodge_image" name="lodge_image" class="form-control" />
+          </div>
             <div class="form-group">
                 <label for="lodge_school">Select School</label>
                 <select class="form-control" id="lodge_school" name="lodge_school">
                     <option value="">All School </option>
-                    <?php $lodgeController->get_schools(); ?>
+                    <?php $schoolController->get_schools(); ?>
                 </select>
             </div>
             <div class="form-group">

@@ -29,14 +29,27 @@ public function __construct()
       return $user_user_name;
   }
 
-  public function get_user_display_name_by_id($id) {
-      $query = "SELECT usermeta_value FROM usermeta WHERE usermeta_key = :usermeta_key AND usermeta_user_id = :id";
+  public function get_user_id_by_username($username) {
+      $query = "SELECT user_id FROM users WHERE user_user_name = :username";
       $this->query($query);
-      $this->bind(':usermeta_key', 'display_name');
+      $this->bind(':username', $username);
+      $row = $this->resultset();
+      extract($row);
+      return $user_id;
+  }
+
+  public function get_user_display_name_by_id($id , $full = false) {
+      $query = "SELECT user_name FROM users WHERE user_id = :id";
+      $this->query($query);
       $this->bind(':id', $id);
       $row = $this->resultset();
       extract($row);
-      return $usermeta_value;
+      if($full){
+        return $user_name;
+      }else{
+        $first_name = explode(" ", $user_name);
+        return $first_name[0];
+      }
   }
 
   public function login(UserModel $userModel)
@@ -52,11 +65,6 @@ public function __construct()
       $stmt = $this->executer();
 
       $res = $stmt->fetch(PDO::FETCH_ASSOC);
-        //echo $password." string";
-        $p = $res["user_password"];
-        var_dump(password_verify($password, $res["user_password"]));
-        echo $p. " hahahah";
-
       if(password_verify($password, $res["user_password"])){
         $_SESSION['user_id'] = $res['user_id'];
          $this->user_id = $res["user_id"];
@@ -67,7 +75,7 @@ public function __construct()
 
         $this->create_session();
       }else {
-        echo "password don not match";
+        echo "password do not match";
       }
     }catch(PDOException $e){
       echo $e->getMessage();

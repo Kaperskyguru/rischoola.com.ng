@@ -16,12 +16,7 @@ if($userController->is_authenticated()){
                 <div class="form-group">
                     <label for="school">Enter School</label>
                     <select class="form-control">
-                        <option value="">RSUST</option>
-                        <option value="">UNIPORT</option>
-                        <option value="">IAUOE</option>
-                        <option value="">RIVPOLY</option>
-                        <option value="">RSPOLY</option>
-                        <option value="">FCE</option>
+                        <?php $schoolController->get_schools(); ?>
                     </select>
                 </div>
 

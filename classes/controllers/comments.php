@@ -14,6 +14,17 @@
         extract($row);
         return $user_user_name;
     }
+
+    public function get_comments_by_id($context, $id)
+    {
+      $query = "SELECT * FROM comments WHERE comment_context = :context AND comment_context_id = :id";
+      $this->query($query);
+      $this->bind(':context', $context);
+      $this->bind(':id', $id);
+      $stmt = $this->executer();
+      return $stmt;
+    }
+
   }
 
  ?>

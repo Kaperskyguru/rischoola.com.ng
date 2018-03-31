@@ -68,18 +68,6 @@ class News extends dbmodel {
       return $stmt;
     }
 
-    public function get_post_comments_by_id($context, $id)
-    {
-      //echo $id;
-      $query = "SELECT * FROM comments WHERE comment_context = :context AND comment_context_id = :id";
-      //echo $query;
-      $this->query($query);
-      $this->bind(':context', $context);
-      $this->bind(':id', $id);
-      $stmt = $this->executer();
-      return $stmt;
-    }
-
     public function get_post_by_user_id( $user_id)
     {
       $query = "SELECT * FROM posts WHERE post_user_id = $user_id";
@@ -103,49 +91,28 @@ class News extends dbmodel {
       }
     }
 
-    public function get_schools()
-    {
-      $query = "SELECT * FROM schools";
-      $this->query($query);
-      $stmt = $this->executer();
-      if($stmt->rowCount()>0){
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-          extract($row);
-          ?>
-            <option value="<?php echo $school_id ?>"><?php echo $school_name ?></option>
-            <?php
-        }
-      }
-    }
 
-    public function get_replies_by_comment_id($comment_id)
-    {
-      $query = "SELECT * FROM replies WHERE reply_comment_id = :comment_id";
-      $this->query($query);
-      $this->bind('comment_id', $comment_id);
-      return $this->executer();
-    }
 
     public function display_reply_box($id)
     {
 
     }
 
-    public function add_images_and_get_last_inserted_id($image, $user_id, $item_id) {
-      //echo "string". $user_id;
-      $query = "INSERT INTO resources(resource_url, resource_user_id, resource_item_id, resource_table_name, resource_type)
-      VALUES(:image, :user_id, :item_id, :table_name,:type)";
-      $this->query($query);
-      $this->bind(':image',$image);
-      $this->bind(':user_id', $user_id);
-      $this->bind(':item_id',$item_id);
-      $this->bind(':table_name','post');
-      $this->bind(':type','image');
-      $this->executer();
-      if ($id = $this->lastIdinsert()) {
-        return $id;
-      }
-    }
+    // public function add_images_and_get_last_inserted_id($image, $user_id, $item_id) {
+    //   //echo "string". $user_id;
+    //   $query = "INSERT INTO resources(resource_url, resource_user_id, resource_item_id, resource_table_name, resource_type)
+    //   VALUES(:image, :user_id, :item_id, :table_name,:type)";
+    //   $this->query($query);
+    //   $this->bind(':image',$image);
+    //   $this->bind(':user_id', $user_id);
+    //   $this->bind(':item_id',$item_id);
+    //   $this->bind(':table_name','post');
+    //   $this->bind(':type','image');
+    //   $this->executer();
+    //   if ($id = $this->lastIdinsert()) {
+    //     return $id;
+    //   }
+    // }
 
     public function addNews(NewsModel $postModel) {
         $post_title = $postModel->get_post_title();
@@ -175,12 +142,54 @@ class News extends dbmodel {
 
     }
 
-    public function incrementLikes(news $postModel) {
-
+    public function get_post_likes($id)
+    {
+      $query = 'SELECT post_like_count FROM posts WHERE post_id = :id';
+      $this->query($query);
+      $this->bind(':id', $id);
+      $row = $this->resultset();
+      extract($row);
+      return $post_like_count;
+    }
+    
+    public function get_post_dislikes($id)
+    {
+      $query = 'SELECT post_dislike_count FROM posts WHERE post_id = :id';
+      $this->query($query);
+      $this->bind(':id', $id);
+      $row = $this->resultset();
+      extract($row);
+      return $post_dislike_count;
     }
 
-    public function incrementDislikes(news $postModel) {
+    public function incrementLikes(NewsModel $postModel) {
+      $id = $postModel->get_post_id();
+      $post_like = $postModel->get_post_like_count();
+      $previous_likes = intval($this->get_post_likes($id));
 
+      if (!is_null($previous_likes) && !is_null($post_like)) {
+          $previous_likes = $previous_likes + $post_like;
+          $insertSql = "UPDATE posts SET post_like_count = :previous_likes WHERE post_id = $id";
+          $this->query($insertSql);
+          $this->bind(':previous_likes', $previous_likes);
+          $this->executer();
+          return $previous_likes;
+      }
+    }
+
+    public function incrementDislikes(NewsModel $postModel) {
+      $id = $postModel->get_post_id();
+      $post_like = $postModel->get_post_dislike_count();
+      $previous_likes = intval($this->get_post_dislikes($id));
+
+      if (!is_null($previous_likes) && !is_null($post_like)) {
+          $previous_likes = $previous_likes + $post_like;
+          $insertSql = "UPDATE posts SET post_dislike_count = :previous_likes WHERE post_id = $id";
+          $this->query($insertSql);
+          $this->bind(':previous_likes', $previous_likes);
+          $this->executer();
+          return $previous_likes;
+      }
     }
 
     public function getNewsDateById(news $postModel) {
@@ -209,7 +218,7 @@ class News extends dbmodel {
     {
       // Will be activated when i start inserting [post]
         //$id = $this->get_last_inserted_id();
-        $row = $this->get_post_by_id(23);
+        $row = $this->get_post_by_id(1);
                 extract($row);
                 ?>
                 <div>

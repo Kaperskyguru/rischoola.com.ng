@@ -13,12 +13,21 @@ class NewsModel {
     private $post_date_created;
     private $post_status_id;
     private $category_id;
+    private $post_id;
     public function __construct() {
 
     }
 
     public function get_post_title() {
         return filter_var($this->post_title, FILTER_SANITIZE_STRING);
+    }
+
+    public function get_post_id() {
+        return filter_var($this->post_id, FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    public function set_post_id($post_id) {
+        $this->post_id = $post_id;
     }
 
     public function get_post_content() {

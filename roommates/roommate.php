@@ -8,10 +8,39 @@ if($userController->is_authenticated()){
 }
 ?>
 ?>
-<section id="roommate">
+<section id="roomate">
     <div class="container pad-up-50">
         <div class="row">
+          <div class="col-md-9" style="background-color:#fff; border-radius:10px; border:2px solid #eee">
             <h2>Roommate In Need</h2>
+            <div class="row" style="padding-top: 20px;margin: 10px;background-color:#eee">
+              <div class="col-md-10">
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label>School:</label>
+                      <select class="form-control">
+                          <option disabled="true" selected="">Select a school from here to get latest information</option>
+                          <?php $schoolController->get_schools(); ?>
+                      </select>
+                    </div>
+                    <div class="col-xs-6">
+                      <label>Gender:</label>
+                      <select class="form-control">
+                          <option disabled="true" selected="">Select gender information</option>
+                          <option>Male</option>
+                          <option>Female</option>
+                      </select>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="">
+                            <button type="submit" class="fa fa-search btn-lg btn btn-success"> Search</button>
+                        </div>
+                    </div>
+
+              </div>
+            </div>
+            <div class="pad-up-50"></div>
             <?php $roommateController->display_availabe_roommates(12, "../"); ?>
 
             <!--  Pagination starts here -->
@@ -32,20 +61,29 @@ if($userController->is_authenticated()){
                     <li class="last-child"><a href="#">last</a></li>
                 </ul>
             </div>
-
-            <div class="pad-bottom-20">
-                <form>
-                    <div class="form-group">
-                        <label>Enter House Address And Description : </label>
-                        <textarea class="form-control" placeholder="enter house address and description">
-                        </textarea>
+            </div>
+            <div class="col-md-3">
+              <div class="container">
+                <!-- <div class="col-md-3"> -->
+                <div class="row">
+                    <!-- <?php require '../include/tabs.php'; ?> -->
+                    <!-- <div class="col-sm-12"> -->
+                    <div class="pad-bottom-20">
+                        <img src="../res/imgs/8722.gif" class="img-responsive">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Phone : </label>
-                        <input type="number" class="form-control"  placeholder="Your Phone Number">
+                    <div class="pad-bottom-20">
+                        <img src="../res/imgs/p.gif" class="img-responsive">
                     </div>
-                    <button  class="btn btn-success">Post To Get Roommate</button>
-                </form>
+                    <div class="pad-bottom-20">
+                        <img src="../res/imgs/m.png" class="img-responsive">
+                    </div>
+                    <div class="pad-bottom-20">
+                        <img src="../res/imgs/s.png" class="img-responsive">
+                    </div>
+                    <!-- </div> -->
+                </div>
+              </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>

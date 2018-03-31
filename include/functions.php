@@ -8,12 +8,28 @@
     }
 }
 
+function get_remain_excerpt($content, $length) {
+   if (strlen($content) < $length) {
+       return $content;
+   } else {
+       $content = substr($content, $length, strlen($content));
+       return $content;
+   }
+}
+
+function get_user_uid()
+{
+  if(isset($_SESSION['user_id'])){
+    return $_SESSION['user_id'];
+  }else{
+    return 0;
+  }
+}
+
 function display_error(){
   global $error,$error_text;
-
   if ($error !== 0){
-
-    echo '<div class="alert alert-danger">'. $error_text. '</div>';
+    echo '<div class="alert alert-default" style="color:red">'. $error_text. '</div>';
   }
 }
 
@@ -74,4 +90,40 @@ function display_error(){
        return  "$years years ago";
        }
     }
+}
+
+function get_formatted_date($date)
+{
+  return date('l jS \of F Y', strtotime($date));
+}
+
+function time_elapsed_string($datetime, $full = true)
+{
+  $now = new DateTime;
+  $ago = new DateTime($datetime);
+  $diff = $now->diff($ago);
+
+  $diff->w = floor($diff->d / 7);
+  $diff->d -= $diff->w * 7;
+
+  $string = array(
+      'y' => 'year',
+      'm' => 'month',
+      'w' => 'week',
+      'd' => 'day',
+      'h' => 'second',
+      'i' => 'minute',
+      's' => 'second',
+  );
+  foreach ($string as $k => &$v) {
+      if ($diff->$k) {
+          $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+      } else {
+          unset($string[$k]);
+      }
+  }
+
+  if (!$full) $string = array_slice($string, 0, 1);
+  return $string ? implode(', ', $string) . ' ago' : 'just now';
+
 }

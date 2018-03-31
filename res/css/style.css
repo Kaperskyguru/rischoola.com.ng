@@ -1,5 +1,5 @@
 body{
-
+background-color: #fcfcfc;
 }
 nav{
     background-color: #2D364C;
@@ -7,6 +7,13 @@ nav{
 }
 .icon-bar{
     background-color: #fff;
+}
+
+.group_layout{
+  background-color:#fff;
+  padding: 10px;
+  border-radius:10px;
+  border:2px solid #eee;
 }
 
 .top-nav {
@@ -311,10 +318,19 @@ section#hostel label{
     background: #353F59;
     margin-top: 2%;
 }
-
+label{
+  color: #212529;
+}
 section h2{
     color: #f44337;
     border-bottom: 1px solid #ccc;
+}
+
+.marg-rig-10{
+  margin-right: 10px;
+}
+section h1{
+    color: #f44337;
 }
 section#index-news h4, section#index-news h5{
     padding-top: 10px;

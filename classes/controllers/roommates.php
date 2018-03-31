@@ -92,31 +92,23 @@ class Roommates extends dbmodel {
       return $row;
   }
 
-  public function getExcerpt($content, $length) {
-     if (strlen($content) < $length) {
-         return $content;
-     } else {
-         $content = substr($content, 0, $length);
-         return $content . ' ...';
-     }
- }
-
   public function display_availabe_roommates($length, $src) {
       $stmt = $this->get_roommates($length);
       if ($stmt->rowCount() > 0) {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               extract($row);
               ?>
-              <div class="col-md-4 pad-bottom-20">
-                  <div class="col-md-5">
+              <div class="row">
+                  <div class="col-md-3">
                       <img src="<?php echo $src;?>res/imgs/1.jpg" class="img-responsive img-thumbnail">
                   </div>
-                  <div class="col-md-7 pad-bottom-20">
+                  <div class="col-md-9 pad-bottom-20">
                       <a href="#"><h5><?php echo $roommate_title;?></h5></a>
                       <p><?php echo getExcerpt($roommate_desc, 30);?></p>
                   </div>
 
               </div>
+              <hr >
               <?php
 
           }

@@ -17,10 +17,11 @@ class Scholarships extends dbmodel {
 
       public function get_scholarship_by_id( $id)
       {
-        $query = "SELECT * FROM scholarships WHERE scholarship_id = $id";
+        $query = "SELECT * FROM scholarships WHERE scholarship_id = :id";
         $this->query($query);
-        $stmt = $this->executer();
-        return $stmt;
+        $this->bind(':id', $id);
+        $row = $this->resultset();
+        return $row;
       }
 
       public function get_scholarship_by_user_id( $user_id)

@@ -1,5 +1,5 @@
 <?php
-//require_once 'init.php';
+require_once 'init.php';
 //print_r($lodgeController->display_related_lodges(1, 3, "res/"));
 echo "<br />";
 echo "<br />";
@@ -16,22 +16,4 @@ echo "<br />";
 //
 // }
 
-function foo($bar) {
-
-$qux = $bar;
-
-$bar += 1;
-
-return $qux;
-
-}
-
-$x = 5;
-
-$y = foo($x);
-
-// $x = 5;
-//
-// $y = foo1($x);
-//
- print_r( $x);
+//$groupController->INSERT();

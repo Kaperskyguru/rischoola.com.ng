@@ -8,47 +8,65 @@ if ($userController->is_authenticated()) {
 }
 
 
-
 $id1 = $_GET['id'];
 $id = intval($id1);
 
 if ($id == 0) {
-header("Location: news.php", true, 301);
+header("Location:../index.php", true, 301);
 exit;
 } else {
-    $row = $newsControler->get_post_by_id($id);
+    $row = $eventController->get_event_by_id($id);
     if (is_null($row) || empty($row)) {
         //Log message here
-        header("Location: news.php");
+        header("Location:events.php");
     } else {
         extract($row);
         ?>
         <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9" style="background-color:#fff; border-radius:10px">
-                        <h2 class="pad-up-50"><?php echo $post_title; ?></h2>
+                  <div class="col-md-12">
+                    <div class="pad-up-50">
+                      <h1 class=""><?php echo $event_title; ?></h1>
+                    </div>
+                  </div>
+                    <div class="col-md-8" style="background-color:#fff; border-radius:10px; border:2px solid #eee">
+                        <!-- <h2 class=""><?php echo $event_title; ?></h2> -->
                         <div class="text-left">
-                            <div>
+                            <!-- <div>
                                 <img src="../res/imgs/1.jpg" class="img-responsive img-thumbnail">
-                            </div>
+                            </div> -->
                             <div class="pad-up-20">
-                                <h6 style="color:#aaa; margin:8px;">
-                                    <span class="badge"></span><span style="margin-right:8px">&nbsp;	Posted by <?php echo $newsControler->get_user_username_by_id($post_user_id); ?></span>
-                                    <span class="fa fa-folder">&nbsp;	</span><span style="margin-right:8px">In <?php echo $newsControler->get_post_category_by_id($post_category_id); ?></span>
-                                    <span class="badge"><?php echo $post_comment_count; ?></span><span style="margin-right:8px">&nbsp;	Comments</span>
-                                    <a style="text-decoration:none;" pid="<?php echo $post_id;?>" href="#" id="like_btn"> <span class="badge" id="like_span<?php echo $post_id;?>"><?php echo $post_like_count; ?></span><span style="margin-right:8px">&nbsp;	<i class="fa fa-thumbs-up"></i></span></a>
-                                    <a style="text-decoration:none; color:red" pid="<?php echo $post_id;?>" href="#" id="dislike_btn"><span class="badge" id="dislike_span<?php echo $post_id;?>"><?php echo $post_dislike_count; ?></span><span style="margin-right:8px">&nbsp;	<i class="fa fa-thumbs-down"></i></span></a>
-                                    <span class="empty"></span><span style="margin-right:8px"><i class="fa fa-folder">&nbsp;</i><?php echo timeAgo($post_date_created); ?></span>
+                                <h6 style="color:#aaa;">
+                                    <span class="empty badge"></span><span class="marg-rig-10">&nbsp;	Posted by <?php echo $userController->get_user_username_by_id($event_user_id); ?></span>|
+                                    <span class="empty badge"><?php echo $event_comment_count; ?></span><span class="marg-rig-10">&nbsp; Views</span>|
+                                    <span class="empty badge"><?php echo $event_comment_count; ?></span><span class="marg-rig-10">&nbsp; Comments</span>|
+                                    <span class="empty"></span><span class="marg-rig-10"><i class="fa fa-folder">&nbsp;</i>Posted: <?php echo timeAgo($event_date_created); ?></span>|
+                                    <span class="empty"></span><span class="marg-rig-10"><i class="fa fa-folder">&nbsp;</i>Event Date: <?php echo ($event_date); ?></span>
                                 </h6>
                                 <hr />
                             </div>
-                            <div class="pad-bottom-50">
+                            <div class="">
                                 <h5>
                                     <p style="text-align: justify;">
-                                        <?php echo $post_content; ?>
+                                        <?php echo $event_desc; ?>
                                     </p>
                                 </h5>
+                            </div>
+                            <div class="pad-bottom-50">
+                              <ul class="pager">
+                                  <li class="previous"><a><< Previous </a></li>
+                                  <li class="next"><a href="#">Next >></a></li>
+                              </ul>
+                              <?php
+                              if ($eventController->is_reminder_set($event_id, $_SESSION['user_id'])) {?>
+                                <a id="reminder" disabled  class="fa fa-clock-o btn btn-lg btn-success"> Reminder Set</a>
+                              <?php
+                                }else{?>
+                                <a id="reminder" pid="<?php echo $event_id;?>" class="fa fa-clock-o btn btn-lg btn-success"> Set Reminder</a>
+                              <?php
+                              }
+                              ?>
                             </div>
                         </div>
                         <!-- commentlist here -->
@@ -56,7 +74,7 @@ exit;
                             <div class="col-md-12 pad-bottom-20">
 
                                 <section>
-                                    <h2><?php echo $post_comment_count; ?> Comments</h2>
+                                    <h2><?php echo $event_comment_count; ?> Comments</h2>
 
                                     <!--Leave a reply form-->
                                     <div class="reply-form">
@@ -66,14 +84,11 @@ exit;
                                             <form class="col-md-12" action="<?php echo htmlspecialchars('PHP_SELF'); ?>" method="POST">
                                                 <!--Content column-->
                                                 <?php if (!$userController->is_user_logged_in()) { ?>
-                                                    <div class="form-group">
-                                                        <label for="name">Enter Name</label>
-                                                        <input type="text" id="name" name="name" class="form-control" />
-                                                    </div>
+
                                                 <?php } ?>
                                                 <div class="form-group">
-                                                    <label for="commentBox">Enter Comment</label>
-                                                    <textarea type="text" id="commentBox" name="commentBox" class="form-control"></textarea>
+                                                    <label for="commentBox">Comment:</label>
+                                                    <textarea type="text" rows="5" id="commentBox" name="commentBox" class="form-control"></textarea>
                                                     <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
                                                 </div>
                                                 <div class="form-group">
@@ -97,7 +112,7 @@ exit;
                                 </section>
                                 <h2></h2>
                                 <?php
-                                $stmt = $commentController->get_comments_by_id('posts', $post_id);
+                                $stmt = $commentController->get_comments_by_id('events', $event_id);
                                 if ($stmt->rowCount() > 0) {
                                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                         extract($row);
@@ -109,7 +124,7 @@ exit;
                                                         <img alt="" src="../res/imgs/1.jpg" class="" height="45" width="45">
                                                     </div>
                                                     <div class="author-comment">
-                                                        <cite class="fn"><?php echo $userController->get_user_username_by_id($comment_user_id); ?></cite>
+                                                        <cite class="fn"><?php echo $userControler->get_user_username_by_id($comment_user_id); ?></cite>
                                                         <div class="">
                                                             <a href="">	<?php echo timeAgo($comment_date_inserted); ?></a>
                                                         </div>
@@ -180,9 +195,8 @@ exit;
                 }
             }
             ?>
-            <div class="col-md-3">
-                <h2 class="pad-up-50">.</h2>
-                <div class="row ">
+            <div class="col-md-4">
+                <div class="col-sm-12">
                     <?php require '../include/tabs.php'; ?>
                 </div>
                 <div class="col-sm-12">
@@ -212,7 +226,7 @@ exit;
             var pid = $(this).attr('pid');
             alert(pid);
             // $.ajax({
-            //   method:"post",
+            //   method:"event",
             //   url:"read-news.php"
             //   data:{pid:pid},
             //   success: function(da) {
@@ -221,6 +235,24 @@ exit;
             // });
         });
 
+        $('#reminder').click(function(e) {
+          e.preventDefault();
+          var event_id = $(this).attr('pid');
+          $.ajax({
+            method: "POST",
+            url: "set_reminder.php",
+            data:{set_reminder:1, event_id:event_id},
+            success: function(data) {
+              if(data == 'TRUE'){
+              $('#reminder').attr('disabled','disabled');
+            }else if (data == 'FALSE') {
+              //$(this).html('Reminder Set');
+            }else{
+              alert(data);
+            }
+          }
+          });
+        });
 
     });
 </script>
