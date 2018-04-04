@@ -40,26 +40,20 @@ class Roommates extends dbmodel {
   }
 
   public function get_roommates($length) {
-      $query = "SELECT * FROM roommates LIMIT $length";
+      $query = "SELECT * FROM roommates WHERE roommate_status_id != 2 AND roommate_status_id != 6 LIMIT $length";
       $this->query($query);
       $stmt = $this->executer();
       return $stmt;
   }
 
   public function get_roommate_by_id($id) {
-      $query = "SELECT * FROM roommates WHERE roommate_id = $id";
+      $query = "SELECT * FROM roommates WHERE roommate_id = $id AND roommate_status_id != 6 ";
       $this->query($query);
       $row = $this->resultset();
       return $row;
   }
 
-  public function get_roommate_model_by_id($id) {
-      $query = "SELECT status_body FROM statuses WHERE status_id = $id";
-      $this->query($query);
-      $row = $this->resultset();
-      extract($row);
-      return $status_body;
-  }
+
 
   public function get_roommate_status_by_id($id) {
       $query = "SELECT status_body FROM statuses WHERE status_id = $id";
@@ -86,11 +80,144 @@ class Roommates extends dbmodel {
   }
 
   public function get_roommates_by_user_id($user_id) {
-      $query = "SELECT * FROM roommates WHERE roommate_user_id = $user_id";
+      $query = "SELECT * FROM roommates WHERE roommate_user_id = $user_id AND roommate_status_id != 6";
       $this->query($query);
-      $row = $this->resultset();
-      return $row;
+      $stmt = $this->executer();
+      return $stmt;
   }
+
+  public function get_roommate_location_by_id($id)
+  {
+    $query = "SELECT roommate_location FROM roommates WHERE roommate_id = $id";
+    $this->query($query);
+    $row = $this->resultset();
+    extract($row);
+    return $roommate_location;
+  }
+
+
+   public function display_if_room($schoolController, $lodgeController)
+  {?>
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+       <label class="control-label col-sm-2">Name:</label>
+       <div class="col-sm-8">
+         <input type="text" name="" class="form-control" placeholder="Enter your name">
+       </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Phone Number</label>
+       <div class="col-sm-8">
+       <input type="number" name="" class="form-control" placeholder="Enter your phone number">
+     </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Hostel Name:</label>
+       <div class="col-sm-8">
+       <input type="text" name="" class="form-control" placeholder="Enter hostel name">
+     </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Hostel School:</label>
+       <div class="col-sm-8">
+       <select class="form-control" placeholder="Select School">
+         <?php  $schoolController->get_schools();?>
+       </select>
+     </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Hostel type:</label>
+       <div class="col-sm-8">
+         <select class="form-control">
+       <?php $lodgeController->get_lodge_models();?>
+     </select>
+     </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Price:</label>
+       <div class="col-sm-8">
+       <input type="number" name="" class="form-control" placeholder="Enter price">
+     </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Hostel Description: </label>
+       <div class="col-sm-8">
+       <textarea rows="2" name="" class="form-control" placeholder="Enter hostel description"></textarea>
+     </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">About You: </label>
+       <div class="col-sm-8">
+       <textarea rows="2" name="" class="form-control" placeholder="Tell your future roommate what you like, dislike or even more"></textarea>
+     </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-2">Expectations</label>
+       <div class="col-sm-8">
+       <textarea rows="2" name="" class="form-control" placeholder="What kind of person do you want?"></textarea>
+     </div>
+     </div>
+       <div class="form-group">
+           <div class="col-sm-8">
+         <button type="button" class="btn btn-success" data-dismiss="modal">Make Request</button>
+         <button type="button" class="btn btn-defualt" data-dismiss="modal">Close</button>
+       </div>
+     </div>
+    </form>
+  <?php }
+
+
+    public function display_no_room_form($schoolController,$lodgeController)
+    {?>
+      <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label class="control-label col-sm-2">Hostel School:</label>
+        <div class="col-sm-8">
+        <select class="form-control" placeholder="Select School">
+          <?php $schoolController->get_schools();?>
+        </select>
+      </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Hostel type:</label>
+        <div class="col-sm-8">
+          <select class="form-control">
+        <?php $lodgeController->get_lodge_models();?>
+      </select>
+      </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Price:</label>
+        <div class="col-sm-8">
+        <input type="number" name="" class="form-control" placeholder="Enter price">
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2">About You: </label>
+        <div class="col-sm-8">
+        <textarea rows="2" name="" class="form-control" placeholder="Tell your future roommate what you like, dislike or even more"></textarea>
+      </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Expectations</label>
+        <div class="col-sm-8">
+        <textarea rows="2" name="" class="form-control" placeholder="What kind of person do you want?"></textarea>
+      </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-8">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Make Request</button>
+        <button type="button" class="btn btn-defualt" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+   </form>
+   <?php }
+
+
+
+
+
 
   public function display_availabe_roommates($length, $src) {
       $stmt = $this->get_roommates($length);
@@ -104,7 +231,7 @@ class Roommates extends dbmodel {
                   </div>
                   <div class="col-md-9 pad-bottom-20">
                       <a href="#"><h5><?php echo $roommate_title;?></h5></a>
-                      <p><?php echo getExcerpt($roommate_desc, 30);?></p>
+                      <p><?php echo getExcerpt($roommate_desc, 100);?></p>
                   </div>
 
               </div>

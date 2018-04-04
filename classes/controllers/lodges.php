@@ -77,6 +77,21 @@ class Lodges extends dbmodel {
     $this->executer();
 }
 
+public function get_lodge_models()
+{
+  $query = "SELECT * FROM lodges_model";
+  $this->query($query);
+  $stmt = $this->executer();
+  if($stmt->rowCount()>0){
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+      ?>
+        <option value="<?php echo $model_id ?>"><?php echo $model_body ?></option>
+        <?php
+    }
+  }
+}
+
     public function add_lodge(LodgeModel $LodgeModel) {
         $lodge_name = $LodgeModel->get_lodge_name();
         $lodge_address = $LodgeModel->get_lodge_address();
@@ -219,11 +234,11 @@ class Lodges extends dbmodel {
     }
 
     public function get_lodge_model_by_id($id) {
-        $query = "SELECT status_body FROM statuses WHERE status_id = $id";
+        $query = "SELECT model_body FROM lodges_model WHERE model_id = $id";
         $this->query($query);
         $row = $this->resultset();
         extract($row);
-        return $status_body;
+        return $model_body;
     }
 
     public function get_lodge_status_by_id($id) {

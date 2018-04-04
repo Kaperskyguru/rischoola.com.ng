@@ -10,9 +10,9 @@ if($userController->is_authenticated()){
 ?>
 <section id="roomate">
     <div class="container pad-up-50">
-        <div class="row">
+        <div class="row margin-btom-20">
           <div class="col-md-9" style="background-color:#fff; border-radius:10px; border:2px solid #eee">
-            <h2>Roommate In Need</h2>
+            <h2>Available Roommates</h2>
             <div class="row" style="padding-top: 20px;margin: 10px;background-color:#eee">
               <div class="col-md-10">
                 <div class="form-group row">
@@ -40,9 +40,9 @@ if($userController->is_authenticated()){
 
               </div>
             </div>
-            <div class="pad-up-50"></div>
+            <div class="pad-up-20">
             <?php $roommateController->display_availabe_roommates(12, "../"); ?>
-
+            </div>
             <!--  Pagination starts here -->
             <div class="margin-btom-20 pagination">
                 <ul class="pagination">
@@ -62,6 +62,7 @@ if($userController->is_authenticated()){
                 </ul>
             </div>
             </div>
+
             <div class="col-md-3">
               <div class="container">
                 <!-- <div class="col-md-3"> -->

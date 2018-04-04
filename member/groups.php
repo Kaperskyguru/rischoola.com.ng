@@ -46,12 +46,12 @@
                                             <li class="dropdown">
                                                 <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
                                                 <ul class="dropdown-menu"> -->
-                                                    <a href="groups.php" id="group_del" class="btn btn-danger" gid = "<?php echo $group_id ?>">Delete</a>
-                                                    <a href="../groups/group_page.php?id=<?php echo $group_id ?>" class="btn btn-success" pid = "<?php echo $group_id ?>">Goto</a>
-                                                    <a href="#" class="btn btn-primary" pid = "<?php echo $group_id ?>" class="">View</a>
-                                                <!-- </ul>
-                                            </li>
-                                        </ul> -->
+                                        <a href="groups.php" id="group_del" class="btn btn-danger" gid = "<?php echo $group_id ?>">Delete</a>
+                                        <a href="../groups/group_page.php?id=<?php echo $group_id ?>" class="btn btn-success" pid = "<?php echo $group_id ?>">Goto</a>
+                                        <a href="#" class="btn btn-primary" pid = "<?php echo $group_id ?>" class="">View</a>
+                                        <!-- </ul>
+                                    </li>
+                                </ul> -->
                                     </td>
                                 </tr>
                                 <?php

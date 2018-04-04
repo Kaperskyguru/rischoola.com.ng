@@ -15,14 +15,14 @@
             <h4 class="text-center">Useful Links</h4>
             <hr>
             <ul>
-              <li><a href="index.php">Home</a></li>
-              <li><a href="news/news.php">Latest News</a></li>
-              <li><a href="lodges/lodges.php">Hostels</a></li>
-              <li><a href="roommates/roomates.php">Roommates</a></li>
-              <li><a href="news/news.php">Scholarships</a></li>
-              <li><a href="marketplace/store.php">Store</a></li>
-              <li><a href="events/events.php">Events</a></li>
-              <li><a href="groups/groups.php">Groups</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="news/news.php">Latest News</a></li>
+                <li><a href="lodges/lodges.php">Hostels</a></li>
+                <li><a href="roommates/roomates.php">Roommates</a></li>
+                <li><a href="news/news.php">Scholarships</a></li>
+                <li><a href="marketplace/store.php">Store</a></li>
+                <li><a href="events/events.php">Events</a></li>
+                <li><a href="groups/groups.php">Groups</a></li>
             </ul>
         </div>
         <div class="col-sm-3 pad-bottom-50 text-center">

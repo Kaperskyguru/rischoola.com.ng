@@ -27,4 +27,13 @@ class Schools extends dbmodel {
       extract($row);
       return $school_name;
   }
+
+  public function get_school_abbr_by_id($id) {
+      $query = "SELECT school_abbr FROM schools WHERE school_id = $id";
+      $this->query($query);
+      $row = $this->resultset();
+      extract($row);
+      return $school_abbr;
+  }
+
 }

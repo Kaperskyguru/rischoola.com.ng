@@ -1,5 +1,4 @@
-<?php
-require 'dashboard-header.php'; ?>
+<?php require 'dashboard-header.php'; ?>
 <div class="container-fluid">
 
     <div class="row">
@@ -24,47 +23,47 @@ require 'dashboard-header.php'; ?>
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
-                          <th>S/N</th>
-                          <th>Event Title</th>
-                          <th>Event Date</th>
-                          <th>Remind At </th>
-                          <th></th>
+                            <th>S/N</th>
+                            <th>Event Title</th>
+                            <th>Event Date</th>
+                            <th>Remind At </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                      <?php
-                      $stmt = $eventController->get_event_reminder_by_user_id($_SESSION['user_id']);
-                      if($stmt->rowCount()>0){
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                          extract($row);
-                          ?>
-                          <tr>
-                            <td><?php echo $reminder_id ?></td>
-                            <td><?php echo $eventController->get_event_title_by_id($reminder_event_id); ?></td>
-                            <td><?php echo date('l jS \of F Y', strtotime($eventController->get_event_date_by_id($reminder_id))); ?></td>
-                            <td><?php echo date('l jS \of F Y', strtotime($reminder_date)); ?></td>
-                            <td>
-                              <ul class="nav nav-pills">
-                              <li class="dropdown">
-                               <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
-                               <ul class="dropdown-menu">
-                                 <li><a href="#" id="event_reminder_view" pid = "<?php echo $reminder_id ?>" class="">View</a></li>
-                                 <li><a href="#" id="event_reminder_edit" pid = "<?php echo $reminder_id ?>" class="">Edit</a></li>
-                                 <li><a href="#" id="event_reminder_del" pid = "<?php echo $reminder_id ?>" class="">Delete</a></li>
-                               </ul>
-                             </li>
-                           </ul>
-                          </tr>
-                      <?php
+                        <?php
+                        $stmt = $eventController->get_event_reminder_by_user_id($_SESSION['user_id']);
+                        if ($stmt->rowCount() > 0) {
+                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                extract($row);
+                                ?>
+                                <tr>
+                                    <td><?php echo $reminder_id ?></td>
+                                    <td><?php echo $eventController->get_event_title_by_id($reminder_event_id); ?></td>
+                                    <td><?php echo date('l jS \of F Y', strtotime($eventController->get_event_date_by_id($reminder_id))); ?></td>
+                                    <td><?php echo date('l jS \of F Y', strtotime($reminder_date)); ?></td>
+                                    <td>
+                                        <ul class="nav nav-pills">
+                                            <li class="dropdown">
+                                                <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" id="event_reminder_view" pid = "<?php echo $reminder_id ?>" class="">View</a></li>
+                                                    <li><a href="#" id="event_reminder_edit" pid = "<?php echo $reminder_id ?>" class="">Edit</a></li>
+                                                    <li><a href="#" id="event_reminder_del" pid = "<?php echo $reminder_id ?>" class="">Delete</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                </tr>
+                                <?php
+                            }
                         }
-                      }
-                      ?>
+                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-  </div>
+</div>
 </div>
 <script src="js/jquery.js"></script>
 <script src="js/script.js"></script><!-- Bootstrap Core JavaScript -->

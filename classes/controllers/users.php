@@ -38,6 +38,16 @@ public function __construct()
       return $user_id;
   }
 
+  public function get_user_phone_number_by_id($id)
+  {
+    $query = "SELECT user_phone_number FROM users WHERE user_id = :id";
+    $this->query($query);
+    $this->bind(':id', $id);
+    $row = $this->resultset();
+    extract($row);
+    return $user_phone_number;
+  }
+
   public function get_user_display_name_by_id($id , $full = false) {
       $query = "SELECT user_name FROM users WHERE user_id = :id";
       $this->query($query);
