@@ -1,4 +1,4 @@
-$(document).ready(function() {
+var $(document).ready(function() {
   $('#event_reminder_view').click(function() {
     var reminder_id = $(this).attr('pid');
   });
@@ -76,6 +76,8 @@ $(document).ready(function() {
     });
   });
 
+  
+
   $('body').delegate("#leave_group","click", function() {
     var gid = $(this).attr('gid');
     $.ajax({
@@ -87,5 +89,7 @@ $(document).ready(function() {
         }
     });
   });
+
+
 
 });

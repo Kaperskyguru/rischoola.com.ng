@@ -15,9 +15,25 @@ private $user_password;
 private $user_status_id;
 private $date_expiry;
 
+private $user_birthday;
+private $user_level;
+private $user_gender;
+private $user_course_of_study;
+private $user_display_name;
+
 public function __construct()
 {
 
+}
+
+public function set_user_id($user_id)
+{
+  $this->user_id = $user_id;
+}
+
+public function get_user_id()
+{
+  return $this->user_id;
 }
 
 public function set_user_name($user_name)
@@ -132,5 +148,49 @@ public function get_user_date_expiry()
   return $this->user_date_expiry;
 }
 
+public function set_user_gender($user_gender)
+{
+   $this->user_gender = $user_gender;
+}
+
+public function set_user_level($user_level)
+{
+   $this->user_level = $user_level;
+}
+
+public function set_user_birthday($user_birthday)
+{
+   $this->user_birthday = $user_birthday;
+}
+
+public function set_user_course_of_study($user_course_of_study)
+{
+   $this->user_course_of_study = $user_course_of_study;
+}
+
+public function set_user_display_name($user_display_name){
+   $this->user_display_name = $user_display_name;
+}
+
+public function get_user_gender()
+{
+  return $this->user_gender;
+}
+
+public function get_user_level()
+{
+  return $this->user_level;
+}
+public function get_user_display_name(){
+  return $this->user_display_name;
+}
+
+public function get_user_birthday(){
+  return $this->user_birthday;
+}
+
+public function get_user_course_of_study(){
+  return $this->user_course_of_study;
+}
 
 }

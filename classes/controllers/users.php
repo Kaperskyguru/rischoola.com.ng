@@ -48,6 +48,16 @@ public function __construct()
     return $user_phone_number;
   }
 
+  public function get_user_detail_by_column_name($name, $id)
+  {
+    //echo $name;
+    $query = "SELECT `$name` FROM users WHERE user_id = :id";
+    $this->query($query);
+    $this->bind(':id', $id);
+    $row = $this->resultset();
+    return $row["$name"];
+  }
+
   public function get_user_display_name_by_id($id , $full = false) {
       $query = "SELECT user_name FROM users WHERE user_id = :id";
       $this->query($query);
@@ -60,6 +70,16 @@ public function __construct()
         $first_name = explode(" ", $user_name);
         return $first_name[0];
       }
+  }
+
+  public function verify_password($password, $id)
+  {
+    $trim_password = trim($password);
+    $query = "SELECT user_password FROM users WHERE user_id = :id";
+    $stmt = $this->query($query);
+    $this->bind(":id", $id);
+    $res = $this->resultset();
+    return password_verify($trim_password, $res["user_password"]);
   }
 
   public function login(UserModel $userModel)
@@ -221,6 +241,27 @@ public function __construct()
     return TRUE;
   }
 
+
+  public function update_user_password(UserModel $model)
+  {
+    $user_id = $model->get_user_id();
+    $user_password = $model->get_user_password();
+    if (!is_null($user_password) || !empty($user_password))
+    {
+      try{
+        $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
+        $sql = 'UPDATE users SET user_password = :user_password WHERE user_id = :id';
+        $this->query($sql);
+        $this->bind(':user_password', $user_password_hash);
+        $this->bind(':id', $user_id);
+        $this->executer();
+      }catch(PDOException $e){
+        return FALSE;
+      }
+      return TRUE;
+    }
+  }
+
   public function delete_user($user_id)
   {
     try
@@ -246,8 +287,21 @@ public function __construct()
 	   return TRUE;
   }
 
-  	public static function edit_user($user_id, &$db, $username = NULL, $password = NULL, $enabled = NULL, $expiry = NULL)
+  	public function update_user(UserModel $model)
   	{
+      $user_id = $model->get_user_id();
+      $username = $model->get_user_user_name();
+      $user_name = $model->get_user_name();
+      $user_email = $model->get_user_email();
+      $user_phone_number = $model->get_user_phone_number();
+      $user_address = $model->get_user_address();
+      $user_about = $model->get_user_about();
+      $user_birthday = $model->get_user_birthday();
+      $user_course_of_study = $model->get_user_course_of_study();
+      $user_level = $model->get_user_level();
+      $user_gender = $model->get_user_gender();
+      $user_school_id = $model->get_user_school_id();
+      $user_display_name = $model->get_user_display_name();
   	   /* Array of values for the PDO statement */
   	   $sql_vars = array();
 
@@ -255,28 +309,76 @@ public function __construct()
   	   $sql = 'UPDATE users SET ';
 
   	   /* Now we check which fields need to be updated */
-  	   if (!is_null($username))
+  	   if (!is_null($username) || !empty($username))
   	   {
-  		  $sql .= 'user_name = ?, ';
+  		  $sql .= 'user_name = :user_name, ';
   		  $sql_vars[] = $username;
   	   }
 
-  	   if (!is_null($password))
+       if (!is_null($user_display_name) || !empty($user_display_name))
+       {
+        $sql .= 'user_display_name = :user_display_name, ';
+        $sql_vars[] = $user_display_name;
+       }
+
+       if (!is_null($user_school_id) || !empty($user_school_id))
+       {
+        $sql .= 'user_school_id = :user_school_id, ';
+        $sql_vars[] = $user_school_id;
+       }
+
+       if (!is_null($user_gender) || !empty($user_gender))
+      {
+       $sql .= 'user_gender = :user_gender, ';
+       $sql_vars[] = $user_gender;
+      }
+
+       if (!is_null($user_level) || !empty($user_level))
+       {
+        $sql .= 'user_level = :user_level, ';
+        $sql_vars[] = $user_level;
+       }
+
+       if (!is_null($user_course_of_study) || !empty($user_course_of_study))
+       {
+        $sql .= 'user_course_of_study = :user_course_of_study, ';
+        $sql_vars[] = $user_course_of_study;
+       }
+
+       if (!is_null($user_birthday) || !empty($user_birthday))
+       {
+        $sql .= 'user_birthday = :user_birthday, ';
+        $sql_vars[] = $user_birthday;
+       }
+
+       if (!is_null(trim($user_name)) || !empty(trim($user_name)))
+       {
+        $sql .= 'user_name = :user_name, ';
+        $sql_vars[] = $user_name;
+       }
+
+       if (!is_null($user_about) || !empty($user_about))
+       {
+        $sql .= 'user_about = :user_about, ';
+        $sql_vars[] = $user_about;
+       }
+
+       if (!is_null($user_address) || !empty($user_address))
+       {
+        $sql .= 'user_address = :user_address, ';
+        $sql_vars[] = $user_address;
+       }
+
+  	   if (!is_null($user_email) || !empty($user_email))
   	   {
-  		  $sql .= 'user_password = ?, ';
-  		  $sql_vars[] = password_hash($password, PASSWORD_DEFAULT);
+  		  $sql .= 'user_email = :user_email, ';
+  		  $sql_vars[] = strval(intval($user_email, 10));
   	   }
 
-  	   if (!is_null($enabled))
+  	   if (!is_null($user_phone_number) || !empty($user_phone_number))
   	   {
-  		  $sql .= 'user_enabled = ?, ';
-  		  $sql_vars[] = strval(intval($enabled, 10));
-  	   }
-
-  	   if (!is_null($expiry))
-  	   {
-  		  $sql .= 'user_expiry = ?, ';
-  		  $sql_vars[] = $expiry;
+  		  $sql .= 'user_phone_number = :user_phone_number, ';
+  		  $sql_vars[] = $user_phone_number;
   	   }
 
   	   if (count($sql_vars) == 0)
@@ -285,14 +387,27 @@ public function __construct()
   		  return TRUE;
   	   }
 
-  	   $sql = mb_substr($sql, 0, -2) . ' WHERE (user_id = ?)';
+  	   $sql = mb_substr($sql, 0, -2) . ' WHERE (user_id = :user_id)';
   	   $sql_vars[] = $user_id;
 
   	   try
   	   {
   		  /* Execute query */
-  		  $st = $query($sql);
-  		  $st->execute($sql_vars);
+  		  $this->query($sql);
+        $this->bind(':user_name', $username);
+        $this->bind(':user_display_name', $user_display_name);
+        $this->bind(':user_school_id', $user_school_id);
+        $this->bind(':user_gender', $user_gender);
+        $this->bind(':user_level', $user_level);
+        $this->bind(':user_course_of_study', $user_course_of_study);
+        $this->bind(':user_birthday', $user_birthday);
+        $this->bind(':user_name', $user_name);
+        $this->bind(':user_about', $user_about);
+        $this->bind(':user_address', $user_address);
+        $this->bind(':user_email', $user_email);
+        $this->bind(':user_phone_number', $user_phone_number);
+        $this->bind(':user_id', $user_id);
+  		 $this->executer($sql_vars);
   	   }
   	   catch (PDOException $e)
   	   {
@@ -305,6 +420,20 @@ public function __construct()
   	   return TRUE;
   	}
 
-
+    public function update_user_bank_details($user_id, $bank_name, $account_name, $account_number)
+    {
+      try{
+        $sql = 'UPDATE users SET user_bank_name = :bank_name, user_bank_account_name = :account_name, user_bank_account_number = :account_number WHERE user_id = :user_id';
+        $this->query($sql);
+        $this->bind(':bank_name', $bank_name);
+        $this->bind(':account_name', $account_name);
+        $this->bind(':account_number', $account_number);
+        $this->bind(':user_id', $user_id);
+        $this->executer();
+      }catch(PDOException $e){
+          return FALSE;
+      }
+      return TRUE;
+    }
 
   }

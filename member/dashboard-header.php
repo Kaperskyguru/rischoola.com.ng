@@ -24,7 +24,19 @@
 
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript">
+        // Javascript to enable link to tab
+        var url = document.location.toString();
+        //alert(url);
+        if (url.match('#')) {
+            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
 
+        // Change hash for page-reload
+        $('.nav-tabs a').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash;
+        })
+      </script>
     </head>
 
     <body>
@@ -271,7 +283,7 @@
                                         <a href="profile.php">Update Profile</a>
                                     </li>
                                     <li>
-                                        </i><a href="profile.php#Changepassword">Change Password</a>
+                                    </i><a href="profile.php#Changepassword">Change Password</a>
                                     </li>
                                     <li>
                                         <a href="profile.php#Bankinformation">Bank Information</a>

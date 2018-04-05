@@ -66,6 +66,87 @@ if (isset($_POST['send_message']) && !isset($_POST['body']) && !isset($_POST['su
         echo "Message sent successfully";
         // Notify_user($user_id, $last_inserted_message_id);
     }
-} else {
-    echo "All fields are required";
 }
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['UpdateProfile'])) {
+    $id = get_user_uid();
+
+    // We may decide to check for errors later..
+    $username = $_POST['username'];
+    $user_name = $_POST['first_name']. ' '. $_POST['last_name'];
+    $user_email = $_POST['user_email'];
+    $user_phone_number = $_POST['user_phone_number'];
+    $user_address = $_POST['user_address'];
+    $user_about = $_POST['user_about'];
+    //$user_password = $_POST['password'];
+    $user_birthday = $_POST['user_birthday'];
+    $user_course_of_study = $_POST['user_course_of_study'];
+    $user_level = $_POST['user_level'];
+    $user_gender = $_POST['user_gender'];
+    $user_school_id = $_POST['user_school_id'];
+    $user_display_name = $_POST['user_display_name'];
+
+      $userModel->set_user_name($user_name);
+      $userModel->set_user_user_name($username);
+      $userModel->set_user_id($id);
+      $userModel->set_user_email($user_email);
+      $userModel->set_user_level($user_level);
+      $userModel->set_user_gender($user_gender);
+      $userModel->set_user_address($user_address);
+      $userModel->set_user_about($user_about);
+      $userModel->set_user_school_id($user_school_id);
+      $userModel->set_user_display_name($user_display_name);
+      $userModel->set_user_phone_number($user_phone_number);
+      $userModel->set_user_birthday($user_birthday);
+      $userModel->set_user_course_of_study($user_course_of_study);
+
+      if($userController->update_user($userModel)){
+        echo "Updated successfully";
+      }else {
+        echo "Sorry, we could not update your account";
+      }
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_bank_information']) && isset($_POST['account_number']) && isset($_POST['account_name']) && isset($_POST['bank_name'])) {
+    $id = get_user_uid();
+    // We may decide to check for errors later..
+    $bank_name = $_POST['bank_name'];
+    $account_name = $_POST['account_name'];
+    $account_number = $_POST['account_number'];
+    if($userController->update_user_bank_details($id, $bank_name, $account_name, $account_number)){
+      echo"Updated successfully";
+    }else {
+      echo "Sorry, we could not update your bank Information";
+    }
+  }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password']) && isset($_POST['old_password'])) {
+    $id = get_user_uid();
+
+    // We may decide to check for errors later..
+    $old_password = $_POST['old_password'];
+    $new_password = $_POST['new_password'];
+    $confirm_password = $_POST['confirm_password'];
+    $log_all_out = $_POST['log_all_out'];
+    $userModel->set_user_id($id);
+
+    if ($new_password == $confirm_password) {
+      $userModel->set_user_password($new_password);
+      if ($userController->verify_password($old_password, $id)) {
+        if($userController->update_user_password($userModel)){
+          if($log_all_out){
+            $userController->logout($id, TRUE);
+          }
+          echo "Updated successfully";
+        }else {
+          echo "Sorry, we could not update your account";
+        }
+      }else {
+        echo 'Old password do not match';
+      }
+    }else {
+      echo 'Password do not match';
+    }
+  }

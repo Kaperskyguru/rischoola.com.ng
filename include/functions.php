@@ -29,7 +29,10 @@ function get_user_uid()
 function display_error(){
   global $error,$error_text;
   if ($error !== 0){
-    echo '<div class="alert alert-default" style="color:red">'. $error_text. '</div>';
+    echo '<div id="alertbox" class="alert alert-defualt fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <p id="error">'. $error_text. '</p>
+          </div>';
   }
 }
 
