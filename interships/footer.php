@@ -1,7 +1,7 @@
 <footer>
 	<div class="container">
 		<div class="col-sm-3 pad-bottom-50">
-			<h4 class="">KERPESKY</h4>
+			<h4 class=""><?php echo mb_strtoupper(get_site_name()); ?></h4>
 			<hr>
             <p class="pad-bottom-50">Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit
                 amet, consectetur adipisicing elit.

@@ -5,7 +5,7 @@ $error = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $newsControler->get_user_id_by_username($userController->get_user_username_by_id($_SESSION['user_id']));
 
-    if (empty($_FILES['file']['name']) || empty($_FILES['file']['tmp_name']) || empty($_POST['file'])) {
+    if (empty($_FILES['event_image']['name']) || empty($_FILES['event_image']['tmp_name']) || empty($_POST['event_image'])) {
         //$error_text = "Image is required";
         //$eventModel->set_post_featured_image_id(NULL);
     } else {
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 function uploadFiles() {
     $error_status = 1;
-    $image_to_upload = $_FILES['file'];
+    $image_to_upload = $_FILES['event_image'];
     $target_dir = "../res/imgs/post/";
     $image_name = $image_to_upload['name'];
     $target_file = $target_dir . basename($image_to_upload['name']);

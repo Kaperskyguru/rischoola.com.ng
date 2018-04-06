@@ -17,13 +17,14 @@ if (isset($_POST['add_rule']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $lodgeController->get_user_id_by_username($userController->get_user_username_by_id($_SESSION['user_id']));
-    if (empty($_FILES['lodge_image']['name']) || empty($_FILES['lodge_image']['tmp_name']) || empty($_POST['lodge_image'])) {
+    if (empty($_FILES['lodge_image']['name']) || empty($_FILES['lodge_image']['tmp_name']) || empty($_FILES['lodge_image'])) {
         $lodgeModel->set_lodge_featured_image_id(NULL);
     } else {
-        if (uploadFiles() == 'none') {
+      $image_src = uploadFiles();
+        if ($image_src == 'none') {
             $error_text = "Not Uploaded";
         } else {
-            $image_id = $lodgeController->add_images_and_get_last_inserted_id(uploadFiles(), $id, 1);
+            $image_id = $lodgeController->add_images_and_get_last_inserted_id($image_src, $id, 1);
             $lodgeModel->set_lodge_featured_image_id($image_id);
         }
     }

@@ -1,12 +1,13 @@
 <?php include 'dashboard-header.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['profile_image'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
     $id = get_user_uid();
-    if (empty($_FILES['profile_image']['name']) || empty($_FILES['profile_image']['tmp_name']) || empty($_POST['profile_image'])) {
+    if (empty($_FILES['profile_image']['name']) || empty($_FILES['profile_image']['tmp_name']) || empty($_FILES['profile_image'])) {
         $error_text = "Image is required";
-        $newsModel->set_post_featured_image_id(0);
+        $newsModel->set_post_featured_image_id(NULL);
     } else {
-        if ($path = uploadFiles() == 'none') {
+      $path = uploadFiles();
+        if ($path == 'none') {
             $error_text = "Not Uploaded";
         } else {
             $image_id = $resources->add_images_and_get_last_inserted_id($path, $id, 1, "profile");

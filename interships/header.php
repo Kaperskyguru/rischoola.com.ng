@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kerpersky</title>
+	<title><?php echo get_site_name(); ?> | </title>
 
     <link rel="stylesheet" type="text/css" href="../res/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../res/css/font-awesome/css/font-awesome.css">
@@ -21,7 +21,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">KERPESKY</a>
+      <a class="navbar-brand" href="#"><?php echo get_site_name(); ?></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

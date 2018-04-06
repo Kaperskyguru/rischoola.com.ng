@@ -1,7 +1,7 @@
 <footer>
 	<div class="container">
 		<div class="col-sm-3 pad-bottom-50">
-			<h4 class="">KERPESKY</h4>
+			<h4 class=""><?php echo mb_strtoupper(get_site_name()); ?></h4>
 			<hr>
             <p class="pad-bottom-50">Schooling in Rivers State just got easier with our platform,
 							you can get access to news, lodges, intern space, scholarships,

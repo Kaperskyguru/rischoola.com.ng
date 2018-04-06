@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Dashboard</title>
+        <title><?php echo get_site_name(); ?> |</title>
 
         <link rel="stylesheet" type="text/css" href="../res/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="../res/css/font-awesome/css/font-awesome.css">
@@ -40,7 +40,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../index.php">River Schools</a>
+                    <a class="navbar-brand" href="../index.php"><?php echo get_site_name(); ?></a>
                 </div>
                 <div class="collapse navbar-collapse top-nav" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left">

@@ -26,6 +26,14 @@ function get_user_uid()
   }
 }
 
+function get_site_name()
+{
+  $site_name = 'Rischoola';
+    return $site_name;
+}
+
+
+
 function display_error(){
   global $error,$error_text;
   if ($error !== 0){
