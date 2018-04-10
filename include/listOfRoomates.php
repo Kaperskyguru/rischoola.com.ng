@@ -4,7 +4,7 @@
 <div class="col-md-8">
 <?php $roommateController->display_availabe_roommates(8, ""); ?>
 
-  <div class="text-center pad-bottom-20">
+  <div class="text-center col-lg-12 pad-bottom-20">
     <a href="roommates/roommate.php"class="btn btn-success">View All Available Roommates</a>
     <a href="#" class="btn btn-success">Post To Get A Roommate</a>
   </div>

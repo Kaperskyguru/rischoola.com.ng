@@ -23,13 +23,10 @@ if($userController->is_authenticated()){
 			        </div>
 			    </div>
 				</div>
-			<!-- <div class="col-sm-9"> -->
-				<div class="col-sm-9">
-          <div id="products">
-              <?php
-               $storeController->display_availabe_products(14, "../", 0);
-               ?>
-          </div>
+				<div class="col-md-9 col-sm-9">
+          <div class="row" id="products">
+              <?php $storeController->display_availabe_products(15, "../", 0);?>
+          <!-- </div> -->
 				<!--  Pagination starts here -->
 				<div class="col-lg-12 pagination text-center">
 						<ul class="pagination">
@@ -48,6 +45,7 @@ if($userController->is_authenticated()){
 								<li class="last-child"><a href="#">last »»</a></li>
 						</ul>
 				</div>
+      </div>
 		</div>
 </div>
 			</div>
@@ -62,6 +60,7 @@ include 'footer.php';
 ?>
 <script>
   $(document).ready(function() {
+
     $("body").delegate('.category','click', function(e) {
       var cid = $(this).attr('cid');
       e.preventDefault();
@@ -71,6 +70,17 @@ include 'footer.php';
         data: {cate:1, cid:cid},
         success: function(data) {
           $('#products').html(data);
+        }
+      });
+    });
+
+    $('body').delegate('#product', 'click', function(e) {
+      var pid = $(this).attr('pid');
+      $.ajax({
+        method: "post",
+        url: 'get_products.php',
+        data: {add_to_cart:1, pid:pid},
+        success: function(d) {
         }
       });
     });

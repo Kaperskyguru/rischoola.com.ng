@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10" style="margin-left: 10px;background-color:#fff; border-radius:10px; border:2px solid #eee">
             <h2>Create a New Group<hr /></h2>
             <?php display_error(); ?>
             <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">

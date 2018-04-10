@@ -23,7 +23,7 @@
             <div class="col-lg-12">
                 <h2>Available Hostels</h2>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover table-striped" id="lodge_table">
                         <thead>
                             <tr>
                                 <th>S/N</th>
@@ -77,9 +77,14 @@
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-
+<script type="text/javascript" src="datatable/datatables.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#lodge_table').dataTable();
+  });
+</script>
 
 </body>
 

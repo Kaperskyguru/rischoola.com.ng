@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover table-striped" id="roommate_table">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -115,6 +115,7 @@
 
 </html>
 
+<script type="text/javascript" src="datatable/datatables.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -129,16 +130,19 @@
             });
         });
 
+        $('#roommate_table').dataTable();
+
+
         $('#i_dont_have_a_room').click(function () {
             $.ajax({
                 method: "POST",
                 url: "actions.php",
                 data: {i_dont_have_a_room: 1},
                 success: function (s) {
-                    alert(s);
                     $('#form_content').html(s);
                 }
             });
         });
     });
+
 </script>

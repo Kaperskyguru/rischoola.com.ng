@@ -6,44 +6,151 @@ class Marketplace extends dbmodel {
 
     }
 
-    public function add_product(product $productModel) {
-        $product_title = $productModel->get_product_title();
+    public function add_product(MarketplaceModel $productModel) {
+        $product_name = $productModel->get_product_title();
         $product_address = $productModel->get_product_address();
         $product_desc = $productModel->get_product_desc();
         $product_status_id = $productModel->get_product_status_id();
-        $product_model_id = $productModel->get_product_model_id();
-        $product_facilities = $productModel->get_product_facilities();
-        $product_rules = $productModel->get_product_rules();
+        $product_avail_status_id = $productModel->get_product_avail_status_id();
+        $product_condition = $productModel->get_product_condition();
+        $product_price = $productModel->get_product_price();
         $product_school_id = $productModel->get_product_school_id();
-        $product_featured_image_id = $productModel->get_product_featured_image_id();
         $product_user_id = $productModel->get_product_user_id();
-        $product_keyword = $productModel->get_product_keyword();
+        $product_category_id = $productModel->get_product_category_id();
+        $product_show_email = $productModel->get_product_show_email();
+        $product_show_phone = $productModel->get_product_show_phone();
 
-        $query = "INSERT INTO products(product_title,product_address,product_desc,product_status_id,product_model_id,product_facilities,product_rules,product_school_id,product_user_id)"
-                . "VALUES(:product_title,:product_address,:product_desc,:product_status_id,product_model_id,:product_facilities,:product_rules,:product_school_id,:product_user_id)";
-        $this->query($query);
-
-        $this->bind(":product_title", $product_title);
-        $this->bind(":product_address", $product_address);
-        $this->bind(":product_desc", $product_desc);
-        $this->bind(":product_status_id", $product_status_id);
-        $this->bind(":product_model_id", $product_model_id);
-        $this->bind(":product_facilities", $product_facilities);
-        $this->bind(":product_rules", $product_rules);
-        $this->bind(":product_school_id", $product_school_id);
-        $this->bind(":product_user_id", $product_user_id);
-        $this->resultset();
-
-        if ($this->lastIdinsert()) {
-
+        $query = "INSERT INTO products(product_name,product_location,product_desc,product_status_id,
+          product_avail_status_id,product_condition,product_price,product_school_id,product_user_id,
+          product_category_id, product_show_email, product_show_phone)
+          VALUES(:product_name,:product_location,:product_desc,:product_status_id,:product_avail_status_id,
+            :product_condition,:product_price,:product_school_id,:product_user_id, :product_category_id,
+            :product_show_email, :product_show_phone)";
+      try{
+          $this->query($query);
+          $this->bind(":product_name", $product_name);
+          $this->bind(":product_location", $product_address);
+          $this->bind(":product_desc", $product_desc);
+          $this->bind(":product_status_id", $product_status_id);
+          $this->bind(":product_avail_status_id", $product_avail_status_id);
+          $this->bind(":product_condition", $product_condition);
+          $this->bind(":product_price", $product_price);
+          $this->bind(":product_school_id", $product_school_id);
+          $this->bind(":product_user_id", $product_user_id);
+          $this->bind(":product_category_id", $product_category_id);
+          $this->bind(":product_show_email", $product_show_email);
+          $this->bind(":product_show_phone", $product_show_phone);
+          $this->executer();
+          return $this->lastIdinsert();
+        }catch(PDOException $e){
+          echo $e->getMessage();
+          return 0;
         }
     }
 
+    public function insert_product_featured_image_id($image_id, $product_id)
+    {
+      $sql = "UPDATE products SET product_featured_image_id = :product_featured_image_id WHERE product_id = :product_id";
+      $this->query($sql);
+      $this->bind(':product_featured_image_id', $image_id);
+      $this->bind(':product_id', $product_id);
+      if($this->executer()){
+        return TRUE;
+      }
+      return FALSE;
+    }
+
+    public function get_product_price_by_id($product_id)
+    {
+      $query = "SELECT product_price FROM products WHERE product_id = $product_id";
+      $this->query($query);
+      $row = $this->resultset();
+      extract($row);
+      return $product_price;
+    }
+
+    public function is_product_in_cart($product_id, $user_id)
+    {
+      $query = "SELECT cart_id FROM cart WHERE cart_product_id = $product_id AND cart_user_id = $user_id";
+      $this->query($query);
+      $stmt = $this->executer();
+      if($stmt->rowCount() > 0){
+        return TRUE;
+      }
+      return FALSE;
+    }
+
+    public function get_product_name_by_id($id)
+    {
+      $query = "SELECT product_name FROM products WHERE product_id = $id";
+      $this->query($query);
+      $row = $this->resultset();
+      extract($row);
+      return $product_name;
+    }
+
+    public function get_product_quantity_by_id($product_id)
+    {
+      $query = "SELECT product_quantity FROM products WHERE product_id = $product_id";
+      $this->query($query);
+      $row = $this->resultset();
+      extract($row);
+      return $product_quantity;
+    }
+
+    public function get_total_amount()
+    {
+      # code...
+    }
+
+    public function get_cart_quantity_by_id($cart_id)
+    {
+      $query = "SELECT cart_quantity FROM cart WHERE cart_id = $cart_id";
+      $this->query($query);
+      $row = $this->resultset();
+      extract($row);
+      return $cart_quantity;
+    }
+
+    public function add_to_cart($product_id, $user_id)
+    {
+      $product_price = $this->get_product_price_by_id($product_id);
+      $sql = 'INSERT INTO cart(cart_product_id, cart_total_price, cart_user_id, cart_quantity)VALUES(:cart_product_id, :cart_total_price, :cart_user_id, :cart_quantity)';
+      $this->query($sql);
+      $this->bind(':cart_product_id', $product_id);
+      $this->bind(':cart_total_price', $product_price);
+      $this->bind(':cart_user_id', $user_id);
+      $this->bind(':cart_quantity', 1);
+      $this->executer();
+      if ($this->lastIdinsert()) {
+        return TRUE;
+      }else {
+        return FALSE;
+      }
+    }
+
     public function get_products($length) {
-        $query = "SELECT * FROM products WHERE product_status_id != 2 LIMIT $length";
+        $query = "SELECT * FROM products WHERE product_status_id != 2 ORDER BY RAND() LIMIT $length";
         $this->query($query);
         $stmt = $this->executer();
         return $stmt;
+    }
+
+    public function get_cart_products_by_user_id($user_id) {
+        $query = "SELECT * FROM cart WHERE cart_user_id = :user_id";
+        $this->query($query);
+        $this->bind(':user_id', $user_id);
+        $stmt = $this->executer();
+        return $stmt;
+    }
+
+    public function get_products_by_user_id($user_id)
+    {
+      $query = "SELECT * FROM products WHERE product_user_id = :user_id";
+      $this->query($query);
+      $this->bind(':user_id', $user_id);
+      $stmt = $this->executer();
+      return $stmt;
     }
 
     public function get_products_by_category_id($id, $length) {
@@ -59,6 +166,20 @@ class Marketplace extends dbmodel {
         $this->query($query);
         $stmt = $this->executer();
         return $stmt;
+    }
+
+    public function get_product_category() {
+        $query = "SELECT * FROM category";
+        $this->query($query);
+        $stmt = $this->executer();
+        if($stmt->rowCount()>0){
+          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            ?>
+              <option value="<?php echo $category_id ?>"><?php echo $category_name ?></option>
+              <?php
+          }
+        }
     }
 
     public function get_total_number_of_products_by_id($id)
@@ -156,22 +277,18 @@ class Marketplace extends dbmodel {
                 extract($row);
                 ?>
                 <div class='col-sm-4 col-lg-4 col-md-4'>
-                    <div class='row thumbnail'>
-                        <img src="<?php echo $src; ?>res/imgs/1.jpg" class="img-responsive img-thumbnail">
+                    <div class='thumbnail'>
+                        <img src="<?php echo $src; ?>res/imgs/1.jpg" class="img-responsive">
                         <div class='caption'>
-                            <h4 class='pull-right'>N<?php echo $product_price; ?>.00</h4>
-                            <h5><a href='product_details.php?id=<?php echo $product_id; ?>'><?php echo $product_name; ?></a></h5>
-                            <p><?php echo getExcerpt($product_desc, 40); ?></p>
-                            <button pid='$product_id' id='product' class='btn btn-danger pull-right'>AddToCart</button>
+                            <h4 class="hostelname"><a href='product_details.php?id=<?php echo $product_id; ?>'><?php echo $product_name; ?></a></h4>
+                            <h5 class='text-danger'>N<?php echo $product_price; ?></h5>
+                            <p><?php echo getExcerpt($product_desc, 100); ?></p>
                         </div>
-
-
-                        <div class="clearfix" style="position:relative; clear:both">
+                        <div class="tags">
                             <span class="label label-danger"><?php echo $this->get_product_school_by_id($product_school_id); ?></span>
                             <span class="label label-purple"><?php echo $this->get_product_status_by_id($product_status_id); ?></span>
                             <span class="label label-default"><?php echo $product_review_count; ?> reviews</span>
                         </div>
-
                     </div>
                 </div>
                 <?php
@@ -187,12 +304,12 @@ class Marketplace extends dbmodel {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
                 ?>
-                <div class="col-md-4 pad-bottom-20">
+                <div class="col-md-5 pad-bottom-20">
                  <div class="col-md-6">
                    <img src="<?php echo $src; ?>res/imgs/1.jpg" class="img-responsive img-thumbnail" >
                          </div>
                          <div class="col-md-6">
-                             <h5 class="" style="text-align:left"><a href="marketplace/product_details.php?id=<?php echo $product_id; ?>"><?php echo $this->getExcerpt($product_name, 30); ?></a></h5>
+                             <h5 class="" style="text-align:left"><a href="marketplace/product_details.php?id=<?php echo $product_id; ?>"><?php echo $product_name; ?></a></h5>
                          </div>
                          <div>
                              <span class="label label-default">₦ <?php echo $product_price; ?></span>
@@ -205,5 +322,4 @@ class Marketplace extends dbmodel {
                    }
                  }
                }
-
-}
+             }

@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="container">
     <div class="row">
+      <div class="col-md-11 member_layout">
         <div class="col-md-12">
             <h2>Add a new Lodge<hr /></h2>
         </div>
@@ -138,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         </form>
     </div>
+  </div>
 </div>
 
 <?php

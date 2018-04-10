@@ -119,12 +119,15 @@ public function __construct()
     return $this->is_authenticated;
   }
 
-  public function is_user_logged_in(){
-      if($this->is_authenticated){
-        return TRUE;
-      }
-      return FALSE;
-  }
+  public function display_log_in_box(){
+
+      echo '
+
+            Please Log in
+
+      ';
+    }
+
 
   public function create_session()
   {

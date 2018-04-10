@@ -274,7 +274,7 @@ exit;
                           <h3>Admin Contacts</h3>
                           <ul class="list-group">
                             <?php if($groupController->group_show_phone($group_id)){?>
-                            <li class="list-group-item"> <span class="fa fa-phone"> 08145655380</span></li>
+                            <li class="list-group-item"> <span class="fa fa-phone"> <?php echo $userController->get_user_phone_number_by_id($group_user_id);?></span></li>
                           <?php } if($groupController->group_show_email($group_id)) {?>
                             <li class="list-group-item"> <span class="fa fa-envelope"> </span> solomoneseme@gmail.com</li>
                           <?php }?>

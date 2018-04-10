@@ -213,7 +213,7 @@ public function get_lodge_models()
     }
 
     public function get_lodges($length) {
-        $query = "SELECT * FROM lodges WHERE lodge_status_id != 2 LIMIT $length";
+        $query = "SELECT * FROM lodges WHERE lodge_status_id != 2 ORDER BY RAND() LIMIT $length";
         $this->query($query);
         $stmt = $this->executer();
         return $stmt;
@@ -325,7 +325,7 @@ public function get_lodge_models()
                 extract($row);
                 ?>
 
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-lg-4 col-md-3">
                     <div class="thumbnail">
                         <div>
                             <img src="<?php echo $src;?>res/imgs/1.jpg" class="img-responsive img-thumbnail">

@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 member_layout">
             <h2>Create a new post<hr /></h2>
             <?php display_error(); ?>
             <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">

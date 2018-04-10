@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		<div class="col-md-8 col-md-offset-2 pad-up-50 pad-bottom-50" >
 
 			<form class="" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" style="border: 1px solid #ccc; padding: 20px;">
-				<h1 style="color: #B70C01">Create a RiverSchool Account</h1>
+				<h1 style="color: #B70C01">Create a <?php echo get_site_name() ?> Account</h1>
 				<div>
 					<?php display_error(); ?>
 					<div class="col-md-6">

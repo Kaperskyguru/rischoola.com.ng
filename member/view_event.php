@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <h2>Available Events</h2>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
+                <table class="table table-bordered table-hover table-striped" id="event_table">
                     <thead>
                         <tr>
                             <th>S/N</th>
@@ -62,3 +62,10 @@
 <script src="js/script.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="datatable/datatables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#event_table').dataTable();
+  });
+</script>

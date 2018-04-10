@@ -7,7 +7,7 @@ class Roommates extends dbmodel {
   }
 
   public function add_roommate(roommate $roommateModel) {
-      $roommate_title = $roommateModel->get_roommate_title();
+      $roommate_name = $roommateModel->get_roommate_name();
       $roommate_address = $roommateModel->get_roommate_address();
       $roommate_desc = $roommateModel->get_roommate_desc();
       $roommate_status_id = $roommateModel->get_roommate_status_id();
@@ -19,11 +19,11 @@ class Roommates extends dbmodel {
       $roommate_user_id = $roommateModel->get_roommate_user_id();
       $roommate_keyword = $roommateModel->get_roommate_keyword();
 
-      $query = "INSERT INTO roommates(roommate_title,roommate_address,roommate_desc,roommate_status_id,roommate_model_id,roommate_facilities,roommate_rules,roommate_school_id,roommate_user_id)"
-              . "VALUES(:roommate_title,:roommate_address,:roommate_desc,:roommate_status_id,roommate_model_id,:roommate_facilities,:roommate_rules,:roommate_school_id,:roommate_user_id)";
+      $query = "INSERT INTO roommates(roommate_name,roommate_address,roommate_desc,roommate_status_id,roommate_model_id,roommate_facilities,roommate_rules,roommate_school_id,roommate_user_id)"
+              . "VALUES(:roommate_name,:roommate_address,:roommate_desc,:roommate_status_id,roommate_model_id,:roommate_facilities,:roommate_rules,:roommate_school_id,:roommate_user_id)";
       $this->query($query);
 
-      $this->bind(":roommate_title", $roommate_title);
+      $this->bind(":roommate_name", $roommate_name);
       $this->bind(":roommate_address", $roommate_address);
       $this->bind(":roommate_desc", $roommate_desc);
       $this->bind(":roommate_status_id", $roommate_status_id);
@@ -230,7 +230,7 @@ class Roommates extends dbmodel {
                       <img src="<?php echo $src;?>res/imgs/1.jpg" class="img-responsive img-thumbnail">
                   </div>
                   <div class="col-md-9 pad-bottom-20">
-                      <a href="#"><h5><?php echo $roommate_title;?></h5></a>
+                      <a href="#"><h5><?php echo $roommate_name;?></h5></a>
                       <p><?php echo getExcerpt($roommate_desc, 100);?></p>
                   </div>
 

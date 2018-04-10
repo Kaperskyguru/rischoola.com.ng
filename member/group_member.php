@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
+                <table class="table table-bordered table-hover table-striped" id="group_member_table">
                     <thead>
                         <tr>
                             <th>S/N</th>
@@ -67,3 +67,10 @@
 <script src="js/script.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="datatable/datatables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#group_member_table').dataTable();
+  });
+</script>

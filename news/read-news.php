@@ -51,6 +51,7 @@ exit;
                                 </h5>
                             </div>
                         </div>
+
                         <!-- commentlist here -->
                         <div class="row">
                             <div class="col-md-12 pad-bottom-20">
@@ -65,7 +66,7 @@ exit;
                                         <div class="row">
                                             <form class="col-md-12" action="<?php echo htmlspecialchars('PHP_SELF'); ?>" method="POST">
                                                 <!--Content column-->
-                                                <?php if (!$userController->is_user_logged_in()) { ?>
+                                                <?php if (!$userController->is_authenticated()) { ?>
                                                     <div class="form-group">
                                                         <label for="name">Enter Name</label>
                                                         <input type="text" id="name" name="name" class="form-control" />
@@ -73,7 +74,7 @@ exit;
                                                 <?php } ?>
                                                 <div class="form-group">
                                                     <label for="commentBox">Enter Comment</label>
-                                                    <textarea type="text" id="commentBox" name="commentBox" class="form-control"></textarea>
+                                                    <textarea type="text" rows="5" id="commentBox" name="commentBox" class="form-control"></textarea>
                                                     <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
                                                 </div>
                                                 <div class="form-group">

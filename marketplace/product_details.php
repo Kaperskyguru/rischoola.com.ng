@@ -20,20 +20,20 @@ if ($id == 0) {
         header("Location: product_details.php");
     } else {
         ?>
-        <div class="container marg-to-60">
+        <div class="container-fluid marg-to-60 pad-up-20 margin-btom-20">
             <section>
                 <!-- Products -->
                 <div class="row">
                     <div id="product-wrap" class="list_mode">
-                        <div class="product single-product col-lg-12 new featured">
-                            <div class="row">
+                        <div class="prodct single-product col-lg-9 new featured ">
+                            <div class="row group_layout" style="margin-left:5px; margin-right:5px;">
                                 <div class="col-md-6">
                                     <div class="single-product-thumb">
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li role="presentation" class="active"><a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-1.jpg" alt="..."></a></li>
                                             <li role="presentation"><a href="#thumb-2" aria-controls="thumb-2" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-2.jpg" alt="..."></a></li>
                                             <li role="presentation"><a href="#thumb-3" aria-controls="thumb-3" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-3.jpg" alt="..."></a></li>
-                                            <li role="presentation"><a href="#thumb-4" aria-controls="thumb-4" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-4.jpg" alt="..."></a></li>
+                                            <!-- <li role="presentation"><a href="#thumb-4" aria-controls="thumb-4" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-4.jpg" alt="..."></a></li> -->
                                         </ul>
 
                                         <div class="tab-content">
@@ -120,10 +120,11 @@ if ($id == 0) {
                                                 </div>
                                             </div>
                                             <div class="list_mode_btns">
-                                                <button class="to-cart" type="submit" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $storeController->get_product_username_by_id($product_user_id); ?></button>
-                                                <div class="product-btn">
-                                                    <button class="to-wish"><i class="fa fa-heart"></i><span class="tooltip">Add To Wishlist</span></button>
-                                                </div>
+                                                <a href="../member/compose.php" class="btn btn-success btn-lg" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $storeController->get_product_username_by_id($product_user_id); ?></a>
+                                                <a class="btn btn-danger btn-lg to-wish"><i class=" fa fa-phone"></i>  <?php echo $retVal = ($product_show_phone == 1) ? $userController->get_user_phone_number_by_id($product_user_id) : "" ;?>
+</a>
+                                                <!-- <a class="btn btn-purple btn-lg to-wish"><i class=" fa fa-phone"></i>  solomoneseme@gmail.com</a> -->
+                                                <!-- </div> -->
                                             </div>
                                         </form>
                                     </div>
@@ -199,10 +200,30 @@ if ($id == 0) {
                         ?>
                     </div>
                 </div>
+
             </div>
+            <div class="col-md-3">
+                <div class="row" style="margin-left:2px; margin-right:2px;">
+                  <?php require '../include/tabs.php'; ?>
+                  <div class="col-sm-12">
+                      <div class="pad-bottom-20">
+                          <img src="../res/imgs/8722.gif" class="img-responsive">
+                      </div>
+                      <div class="pad-bottom-20">
+                          <img src="../res/imgs/p.gif" class="img-responsive">
+                      </div>
+                      <div class="pad-bottom-20">
+                          <img src="../res/imgs/m.png" class="img-responsive">
+                      </div>
+
+                  </div>
+                </div>
+            </div>
+
+        <?php require_once 'related_hostel_mod.php'; ?>
         </div>
 </div>
-<?php //require_once 'related_hostel_mod.php'; ?>
+
 </section>
 </div>
 <?php

@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <h2>Available Events</h2>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
+                <table class="table table-bordered table-hover table-striped" id="event_reminder_table">
                     <thead>
                         <tr>
                             <th>S/N</th>
@@ -40,8 +40,8 @@
                                 <tr>
                                     <td><?php echo $reminder_id ?></td>
                                     <td><?php echo $eventController->get_event_title_by_id($reminder_event_id); ?></td>
-                                    <td><?php echo date('l jS \of F Y', strtotime($eventController->get_event_date_by_id($reminder_id))); ?></td>
-                                    <td><?php echo date('l jS \of F Y', strtotime($reminder_date)); ?></td>
+                                    <td><?php echo get_formatted_date($eventController->get_event_date_by_id($reminder_id)); ?></td>
+                                    <td><?php echo get_formatted_date($reminder_date); ?></td>
                                     <td>
                                         <ul class="nav nav-pills">
                                             <li class="dropdown">
@@ -53,6 +53,7 @@
                                                 </ul>
                                             </li>
                                         </ul>
+                                      </td>
                                 </tr>
                                 <?php
                             }
@@ -68,3 +69,10 @@
 <script src="js/jquery.js"></script>
 <script src="js/script.js"></script><!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="datatable/datatables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#event_reminder_table').dataTable();
+  });
+</script>

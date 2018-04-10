@@ -1,4 +1,9 @@
-<?php require_once '../init.php'; ?>
+<?php require_once '../init.php'; 
+$userController->cookie_login();
+if(!$userController->is_authenticated()){
+  header('Location: ../users/login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +20,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
+        <link href="datatable/datatables.min.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="css/sb-admin.css" rel="stylesheet">
         <!-- <link href="../res/css/style.css" rel="stylesheet"> -->
@@ -206,13 +212,16 @@
                                 <a href="javascript:;" data-toggle="collapse" data-target="#store"><i class="fa fa-shopping-cart"></i> Store <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="store" class="collapse">
                                     <li>
-                                        <a href="compose.php">Sell Products</a>
+                                        <a href="add_product.php">Sell Products</a>
                                     </li>
                                     <li>
                                         <a href="../marketplace/store.php">Place Order</a>
                                     </li>
+                                    <!-- <li>
+                                      <a href="cart.php">Cart</a>
+                                    </li> -->
                                     <li>
-                                        <a href="store.php">View Orders</a>
+                                        <a href="store.php">View Products</a>
                                     </li>
                                 </ul>
                             </li>
@@ -254,7 +263,7 @@
                                         <a href="create_event.php">Create Event</a>
                                     </li>
                                     <li>
-                                        <a href="event_reminder.php">Remainders</a>
+                                        <a href="event_reminder.php">Reminders</a>
                                     </li>
                                 </ul>
                             </li>

@@ -11,7 +11,7 @@ if($userController->is_authenticated()){
 <section id="roomate">
     <div class="container pad-up-50">
         <div class="row margin-btom-20">
-          <div class="col-md-9" style="background-color:#fff; border-radius:10px; border:2px solid #eee">
+          <div class="col-md-9 group_layout">
             <h2>Available Roommates</h2>
             <div class="row" style="padding-top: 20px;margin: 10px;background-color:#eee">
               <div class="col-md-10">

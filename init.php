@@ -23,6 +23,7 @@ require_once "classes/models/user.php";
 require_once "classes/models/event.php";
 require_once "classes/models/group.php";
 require_once "classes/models/message.php";
+require_once "classes/models/marketplace.php";
 
 require_once 'include/functions.php';
 
@@ -46,3 +47,4 @@ $userModel = new UserModel();
 $eventModel = new EventModel();
 $groupModel = new GroupModel();
 $messageModel = new MessageModel();
+$storeModel = new MarketplaceModel();
