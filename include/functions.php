@@ -36,8 +36,8 @@ function get_site_name()
 
 function display_error(){
   global $error,$error_text;
-  if ($error !== 0){
-    echo '<div id="alertbox" class="alert alert-defualt fade in">
+  if (!empty($error_text)){
+    echo '<div id="alertbox" class="alert alert-danger fade in">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <p id="error">'. $error_text. '</p>
           </div>';

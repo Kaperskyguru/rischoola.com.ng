@@ -22,30 +22,82 @@ public function __construct()
 }
 
   public function get_user_username_by_id($id) {
+    try{
       $query = "SELECT user_user_name FROM users WHERE user_id = $id";
       $this->query($query);
       $row = $this->resultset();
-      extract($row);
-      return $user_user_name;
+      if (!is_null($row['user_user_name'])) {
+        extract($row);
+        return $user_user_name;
+      }
+    }catch(PDOException $e){
+      return 0;
+    }
+    return 0;
   }
 
   public function get_user_id_by_username($username) {
+    try{
       $query = "SELECT user_id FROM users WHERE user_user_name = :username";
       $this->query($query);
       $this->bind(':username', $username);
       $row = $this->resultset();
-      extract($row);
-      return $user_id;
+      if (!is_null($row['user_id'])) {
+        extract($row);
+        return $user_id;
+      }
+    }catch(PDOException $e){
+      return 0;
+    }
+    return 0;
   }
 
   public function get_user_phone_number_by_id($id)
   {
-    $query = "SELECT user_phone_number FROM users WHERE user_id = :id";
-    $this->query($query);
-    $this->bind(':id', $id);
-    $row = $this->resultset();
-    extract($row);
-    return $user_phone_number;
+    try{
+      $query = "SELECT user_phone_number FROM users WHERE user_id = :id";
+      $this->query($query);
+      $this->bind(':id', $id);
+      $row = $this->resultset();
+      if (!is_null($row['user_phone_number'])) {
+        extract($row);
+        return $user_phone_number;
+      }
+    }catch(PDOException $e){
+      return 0;
+    }
+  return 0;
+  }
+
+  public function is_user_user_name_exist($user_user_name){
+    try{
+      $query = "SELECT COUNT(user_user_name) FROM users WHERE user_user_name = :user_user_name";
+      $this->query($query);
+      $this->bind(':user_user_name', $user_user_name);
+      $stmt = $this->executer();
+      $num = $stmt->rowCount();
+      if ($num > 0) {
+        return TRUE;
+      }
+    }catch(PDOException $e){
+      return TRUE;
+    }
+  return FALSE;
+  }
+
+  public function is_user_email_exist($user_email){
+    try{
+      $query = "SELECT COUNT(user_email) FROM users WHERE user_email = :user_email";
+      $this->query($query);
+      $this->bind(':user_email', $user_email);
+      $stmt = $this->executer();
+      if ($stmt->rowCount() > 0) {
+        return TRUE;
+      }
+    }catch(PDOException $e){
+      return TRUE;
+    }
+  return FALSE;
   }
 
   public function get_user_detail_by_column_name($name, $id)

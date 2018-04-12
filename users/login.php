@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 				  </div>
 				  <div class="form-group">
 				    <label for="password">Password</label>
+						<a href="#" style="float:right; color:#0366d6" for="password">Forgot Password?</a>
 				    <div class="input-group">
 	      				<div class="input-group-addon"><i class="fa fa-key"></i></div>
 				    	<input type="password" class="form-control" id="password" name="password" placeholder="Password">

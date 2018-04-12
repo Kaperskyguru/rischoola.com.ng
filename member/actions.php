@@ -31,6 +31,8 @@ if (isset($_POST['set_group_del']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 
+
+
 if (isset($_POST['leave_group']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     if ($groupController->leave_group($_POST['gid'], get_user_uid())) {
         // Log message: solomon left 'group name'
@@ -41,7 +43,7 @@ if (isset($_POST['leave_group']) && $_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 if (isset($_POST['i_have_a_room'])) {
-    $roommateController->display_if_room($schoolController, $lodgeController);
+    $roommateController->display_if_room($schoolController, $lodgeController, $error_text_name);
     //display_no_room_form();
 }
 
@@ -50,8 +52,11 @@ if (isset($_POST['i_dont_have_a_room'])) {
 }
 
 
-if (isset($_POST['send_message']) && !isset($_POST['body']) && !isset($_POST['subject']) && !isset($_POST['receiver']) && $_SERVER['REQUEST_METHOD'] == "POST") {
+if (isset($_POST['send_message']) && isset($_POST['body']) && isset($_POST['subject']) && isset($_POST['receiver']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     $receiver_id = $userController->get_user_id_by_username($_POST['receiver']);
+    if ($receiver_id == 0) {
+      echo "Sorry, We could not find the user";
+    }else {
     $messageModel->set_message_sender_id(get_user_uid());
     $messageModel->set_message_receiver_id($receiver_id);
     $messageModel->set_message_subject($_POST['subject']);
@@ -66,6 +71,7 @@ if (isset($_POST['send_message']) && !isset($_POST['body']) && !isset($_POST['su
         echo "Message sent successfully";
         // Notify_user($user_id, $last_inserted_message_id);
     }
+  }
 }
 
 

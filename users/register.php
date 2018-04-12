@@ -11,13 +11,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$error = 1;
 	}
 	if (isset($_POST['user_name'])) {
-		$userModel->set_user_user_name($_POST['user_name']);
+		if($userController->is_user_user_name_exist($_POST['user_name'])){
+			$error_text = 'Username already taken';
+			$error = 1;
+		}else {
+			$userModel->set_user_user_name($_POST['user_name']);
+		}
 	}else {
 		$error_text = "Username is required";
 		$error = 1;
 	}
 	if (isset($_POST['email'])) {
-		$userModel->set_user_email($_POST['email']);
+		if($userController->is_user_email_exist($_POST['email'])){
+			$error_text = 'Email Address already in Use';
+			$error = 1;
+		}else {
+			$userModel->set_user_email($_POST['email']);
+		}
 	}else {
 		$error_text = "A valid Email address required";
 		$error = 1;
@@ -73,8 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						<div class="form-group">
 						    <label for="school_id">School :</label>
 								<select required class="form-control" name="school_id" id="school_id">
-									<option value="1">Uniport</option>
-									<option value="2">RSUST</option>
+									<?php $schoolController->get_schools(); ?>
 								</select>
 						</div>
 						<div class="form-group">

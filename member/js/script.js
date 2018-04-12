@@ -1,4 +1,4 @@
-var $(document).ready(function() {
+$(document).ready(function() {
   $('#event_reminder_view').click(function() {
     var reminder_id = $(this).attr('pid');
   });
@@ -76,8 +76,6 @@ var $(document).ready(function() {
     });
   });
 
-  
-
   $('body').delegate("#leave_group","click", function() {
     var gid = $(this).attr('gid');
     $.ajax({
@@ -90,6 +88,76 @@ var $(document).ready(function() {
     });
   });
 
+  $('#i_have_a_room').click(function () {
+      $.ajax({
+          method: "POST",
+          url: "actions.php",
+          data: {i_have_a_room: 1},
+          success: function (d) {
+              $('#form_content').html(d);
+          }
+      });
+  });
 
+  $('#i_dont_have_a_room').click(function () {
+      $.ajax({
+          method: "POST",
+          url: "actions.php",
+          data: {i_dont_have_a_room: 1},
+          success: function (s) {
+              $('#form_content').html(s);
+          }
+      });
+  });
+
+  $('body').delegate('#submit_i_have_a_room', 'click', function() {
+    var name = $('#name').val();
+    var phone = $('#phone').val();
+    var hostel_name = $('#hostel_name').val();
+    var school = $('#school').val();
+    var hostel_type = $('#hostel_type').val();
+    var price = $('#price').val();
+    var hostel_desc = $('#hostel_desc').val();
+    var about_you = $('#about_you').val();
+    var expectation = $('#expectation').val();
+    $.ajax({
+        method: "POST",
+        url: "roommate.php",
+        data: {submit_i_have_a_room: 1, expectation:expectation, about_you:about_you,hostel_desc:hostel_desc,name:name, phone:phone, hostel_name:hostel_name, school:school, hostel_type:hostel_type, price:price},
+        success: function (s) {
+            alert(s);
+        }
+    });
+  });
+
+  $('body').delegate('#delete_roommate', 'click', function(e) {
+    e.preventDefault();
+    var rid = $(this).attr('rid');
+    $.ajax({
+        method: "POST",
+        url: "roommate.php",
+        data: {delete_roommate: 1, rid:rid},
+        success: function (s) {
+           $('body').html(s);
+        }
+    });
+  });
+
+
+  $('body').delegate('#submit_i_dont_have_a_room', 'click', function() {
+    var school = $('#school').val();
+    var hostel_type = $('#hostel_type').val();
+    var price = $('#price').val();
+    var about_you = $('#about_you').val();
+    var expectation = $('#expectation').val();
+    $.ajax({
+        method: "POST",
+        url: "roommate.php",
+        data: {submit_i_dont_have_a_room: 1, expectation:expectation, about_you:about_you, school:school, hostel_type:hostel_type, price:price},
+        success: function (s) {
+            $('#test').html(s);
+        }
+    });
+  });
 
 });

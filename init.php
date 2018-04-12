@@ -48,3 +48,4 @@ $eventModel = new EventModel();
 $groupModel = new GroupModel();
 $messageModel = new MessageModel();
 $storeModel = new MarketplaceModel();
+$roommateModel = new RoommateModel();

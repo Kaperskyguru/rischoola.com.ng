@@ -3,7 +3,7 @@ require 'dashboard-header.php';
 
 $error = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $newsControler->get_user_id_by_username($userController->get_user_username_by_id($_SESSION['user_id']));
+    $id = get_user_uid();//$newsControler->get_user_id_by_username($userController->get_user_username_by_id($_SESSION['user_id']));
 
     if (empty($_FILES['event_image']['name']) || empty($_FILES['event_image']['tmp_name']) || empty($_POST['event_image'])) {
         //$error_text = "Image is required";

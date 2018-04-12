@@ -6,37 +6,43 @@ class Roommates extends dbmodel {
 
   }
 
-  public function add_roommate(roommate $roommateModel) {
-      $roommate_name = $roommateModel->get_roommate_name();
-      $roommate_address = $roommateModel->get_roommate_address();
-      $roommate_desc = $roommateModel->get_roommate_desc();
-      $roommate_status_id = $roommateModel->get_roommate_status_id();
-      $roommate_model_id = $roommateModel->get_roommate_model_id();
-      $roommate_facilities = $roommateModel->get_roommate_facilities();
-      $roommate_rules = $roommateModel->get_roommate_rules();
-      $roommate_school_id = $roommateModel->get_roommate_school_id();
-      $roommate_featured_image_id = $roommateModel->get_roommate_featured_image_id();
+  public function add_roommate(RoommateModel $roommateModel) {
       $roommate_user_id = $roommateModel->get_roommate_user_id();
-      $roommate_keyword = $roommateModel->get_roommate_keyword();
+      $roommate_name = $roommateModel->get_roommate_name();
+      $roommate_status_id = $roommateModel->get_roommate_status_id();
+      $roommate_user_id = $roommateModel->get_roommate_user_id();
+      $type_of_roommate = $roommateModel->get_type_of_roommate();
+      $roommate_phone_number = $roommateModel->get_roommate_phone_number();
+      $roommate_hostel_name = $roommateModel->get_roommate_hostel_name();
+      $roommate_school_id = $roommateModel->get_roommate_school_id();
+      $roommate_hostel_type_id = $roommateModel->get_roommate_hostel_type_id();
+      $roommate_price = $roommateModel->get_roommate_price();
+      $roommate_hostel_desc = $roommateModel->get_roommate_hostel_desc();
+      $roommate_desc = $roommateModel->get_roommate_desc();
+      $roommate_expectations = $roommateModel->get_roommate_expectations();
 
-      $query = "INSERT INTO roommates(roommate_name,roommate_address,roommate_desc,roommate_status_id,roommate_model_id,roommate_facilities,roommate_rules,roommate_school_id,roommate_user_id)"
-              . "VALUES(:roommate_name,:roommate_address,:roommate_desc,:roommate_status_id,roommate_model_id,:roommate_facilities,:roommate_rules,:roommate_school_id,:roommate_user_id)";
+      $query = "INSERT INTO roommates(roommate_name,type_of_roommate,roommate_phone_number,roommate_status_id,roommate_hostel_name,
+        roommate_school_id,roommate_hostel_type_id,roommate_price, roommate_desc, roommate_expectations, roommate_hostel_desc,
+        roommate_user_id) VALUES (:roommate_name,:type_of_roommate,:roommate_phone_number,:roommate_status_id,
+          :roommate_hostel_name,:roommate_school_id,:roommate_hostel_type_id,:roommate_price,:roommate_desc, :roommate_expectations, :roommate_hostel_desc,:roommate_user_id)";
       $this->query($query);
-
       $this->bind(":roommate_name", $roommate_name);
-      $this->bind(":roommate_address", $roommate_address);
-      $this->bind(":roommate_desc", $roommate_desc);
+      $this->bind(":type_of_roommate", $type_of_roommate);
+      $this->bind(":roommate_phone_number", $roommate_phone_number);
       $this->bind(":roommate_status_id", $roommate_status_id);
-      $this->bind(":roommate_model_id", $roommate_model_id);
-      $this->bind(":roommate_facilities", $roommate_facilities);
-      $this->bind(":roommate_rules", $roommate_rules);
+      $this->bind(":roommate_hostel_name", $roommate_hostel_name);
       $this->bind(":roommate_school_id", $roommate_school_id);
+      $this->bind(":roommate_hostel_type_id", $roommate_hostel_type_id);
+      $this->bind(":roommate_price", $roommate_price);
+      $this->bind(":roommate_desc", $roommate_desc);
+      $this->bind(":roommate_expectations", $roommate_expectations);
+      $this->bind(":roommate_hostel_desc", $roommate_hostel_desc);
       $this->bind(":roommate_user_id", $roommate_user_id);
-      $this->resultset();
-
+      $this->executer();
       if ($this->lastIdinsert()) {
-
+        return TRUE;
       }
+      return FALSE;
   }
 
   public function get_roommates($length) {
@@ -71,6 +77,18 @@ class Roommates extends dbmodel {
       return $school_abbr;
   }
 
+  public function trash_roommate($roommate_id)
+  {
+    $query = "UPDATE roommates SET roommate_status_id = 6 WHERE roommate_id = :roommate_id";
+    $this->query($query);
+    $this->bind(':roommate_id', $roommate_id);
+    $this->executer();
+    if($this->lastIdinsert()){
+      return TRUE;
+    }
+    return FALSE;
+  }
+
   public function get_roommate_review_count_by_id($id) {
       $query = "SELECT roommate_review_count FROM roommates WHERE roommate_id = $id";
       $this->query($query);
@@ -80,7 +98,7 @@ class Roommates extends dbmodel {
   }
 
   public function get_roommates_by_user_id($user_id) {
-      $query = "SELECT * FROM roommates WHERE roommate_user_id = $user_id AND roommate_status_id != 6";
+      $query = "SELECT * FROM roommates WHERE roommate_user_id = $user_id AND roommate_status_id != 6 ORDER BY roommate_status_id";
       $this->query($query);
       $stmt = $this->executer();
       return $stmt;
@@ -97,73 +115,75 @@ class Roommates extends dbmodel {
 
 
    public function display_if_room($schoolController, $lodgeController)
-  {?>
-    <form class="form-horizontal" role="form">
-      <div class="form-group">
-       <label class="control-label col-sm-2">Name:</label>
+  { global $data;$error_text_name = $data['error_text_name'];?>
+
+    <div class="form-horizontal" role="form">
+      <div class="form-group <?php (isset($error_text_name))? ' has-error has-feedback':'' ?> ">
+       <label class="control-label col-sm-2" for="name">Name: <sup>*</sup></label>
        <div class="col-sm-8">
-         <input type="text" name="" class="form-control" placeholder="Enter your name">
+         <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name">
+         <span class="form-control-feedback"><?php echo $error_text_name; ?></span>
        </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Phone Number</label>
+       <label class="control-label col-sm-2" for="phone">Phone Number</label>
        <div class="col-sm-8">
-       <input type="number" name="" class="form-control" placeholder="Enter your phone number">
+       <input type="number" name="phone" id="phone" class="form-control" placeholder="Enter your phone number">
      </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Hostel Name:</label>
+       <label class="control-label col-sm-2" for="hostel_name">Hostel Name:</label>
        <div class="col-sm-8">
-       <input type="text" name="" class="form-control" placeholder="Enter hostel name">
+       <input type="text" name="hostel_name" id="hostel_name" class="form-control" placeholder="Enter hostel name">
      </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Hostel School:</label>
+       <label class="control-label col-sm-2" for="school">Hostel School:</label>
        <div class="col-sm-8">
-       <select class="form-control" placeholder="Select School">
+       <select class="form-control" id="school" name="school" placeholder="Select School">
          <?php  $schoolController->get_schools();?>
        </select>
      </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Hostel type:</label>
+       <label class="control-label col-sm-2" for="hostel_type">Hostel type:</label>
        <div class="col-sm-8">
-         <select class="form-control">
+         <select class="form-control" id="hostel_type" name="hostel_type">
        <?php $lodgeController->get_lodge_models();?>
      </select>
      </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Price:</label>
+       <label class="control-label col-sm-2" for="price">Price:</label>
        <div class="col-sm-8">
-       <input type="number" name="" class="form-control" placeholder="Enter price">
+       <input type="number" name="price" id="price" class="form-control" placeholder="Enter price">
      </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Hostel Description: </label>
+       <label class="control-label col-sm-2" for="hostel_desc">Hostel Description: </label>
        <div class="col-sm-8">
-       <textarea rows="2" name="" class="form-control" placeholder="Enter hostel description"></textarea>
+       <textarea rows="2" name="hostel_desc" id="hostel_desc" class="form-control" placeholder="Enter hostel description"></textarea>
      </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">About You: </label>
+       <label class="control-label col-sm-2" for="about_you" >About You: </label>
        <div class="col-sm-8">
-       <textarea rows="2" name="" class="form-control" placeholder="Tell your future roommate what you like, dislike or even more"></textarea>
+       <textarea rows="2" id="about_you" name="about_you" class="form-control" placeholder="Tell your future roommate what you like, dislike or even more"></textarea>
      </div>
      </div>
      <div class="form-group">
-       <label class="control-label col-sm-2">Expectations</label>
+       <label class="control-label col-sm-2" for="expectation">Expectations</label>
        <div class="col-sm-8">
-       <textarea rows="2" name="" class="form-control" placeholder="What kind of person do you want?"></textarea>
+       <textarea rows="2" name="expectation" id="expectation" class="form-control" placeholder="What kind of person do you want?"></textarea>
      </div>
      </div>
        <div class="form-group">
            <div class="col-sm-8">
-         <button type="button" class="btn btn-success" data-dismiss="modal">Make Request</button>
-         <button type="button" class="btn btn-defualt" data-dismiss="modal">Close</button>
+         <button type="button" id="submit_i_have_a_room" class="btn btn-success">Make Request</button>
+         <button type="button" id="" class="btn btn-defualt" data-dismiss="modal">Close</button>
        </div>
      </div>
-    </form>
+   </div>
   <?php }
 
 
@@ -171,53 +191,48 @@ class Roommates extends dbmodel {
     {?>
       <form class="form-horizontal" role="form">
       <div class="form-group">
-        <label class="control-label col-sm-2">Hostel School:</label>
+        <label class="control-label col-sm-2" for="school">Hostel School:</label>
         <div class="col-sm-8">
-        <select class="form-control" placeholder="Select School">
+        <select class="form-control" id="school" name="school" placeholder="Select School">
           <?php $schoolController->get_schools();?>
         </select>
       </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2">Hostel type:</label>
+        <label class="control-label col-sm-2" for="hostel_type">Hostel type:</label>
         <div class="col-sm-8">
-          <select class="form-control">
+          <select class="form-control" id="hostel_type">
         <?php $lodgeController->get_lodge_models();?>
       </select>
       </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2">Price:</label>
+        <label class="control-label col-sm-2" for="price">Price:</label>
         <div class="col-sm-8">
-        <input type="number" name="" class="form-control" placeholder="Enter price">
+        <input type="number" id="price" name="" class="form-control" placeholder="Enter price">
       </div>
       </div>
 
       <div class="form-group">
-        <label class="control-label col-sm-2">About You: </label>
+        <label class="control-label col-sm-2" for="about_you">About You: </label>
         <div class="col-sm-8">
-        <textarea rows="2" name="" class="form-control" placeholder="Tell your future roommate what you like, dislike or even more"></textarea>
+        <textarea rows="2" name="about_you" id="about_you" class="form-control" placeholder="Tell your future roommate what you like, dislike or even more"></textarea>
       </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2">Expectations</label>
+        <label class="control-label col-sm-2" for="expectation">Expectations</label>
         <div class="col-sm-8">
-        <textarea rows="2" name="" class="form-control" placeholder="What kind of person do you want?"></textarea>
+        <textarea rows="2" name="expectation" id="expectation" class="form-control" placeholder="What kind of person do you want?"></textarea>
       </div>
       </div>
       <div class="form-group">
           <div class="col-sm-8">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Make Request</button>
+        <button type="button" id="submit_i_dont_have_a_room" name="submit_i_dont_have_a_room"  class="btn btn-danger">Make Request</button>
         <button type="button" class="btn btn-defualt" data-dismiss="modal">Close</button>
       </div>
     </div>
    </form>
    <?php }
-
-
-
-
-
 
   public function display_availabe_roommates($length, $src) {
       $stmt = $this->get_roommates($length);
