@@ -119,28 +119,26 @@ class News extends dbmodel {
         $post_content = $postModel->get_post_content();
         $post_user_id = $postModel->get_post_user_id();
         $post_school_id = $postModel->get_post_school_id();
-        $post_featured_image_id = $postModel->get_post_featured_image_id();
         $post_status_id = $postModel->get_post_status_id();
         $post_category_id = $postModel->get_post_category_id();
 
-        $query = "INSERT INTO posts(post_title,post_content,post_user_id,post_school_id, post_category_id,post_featured_image_id,post_status_id)"
-                . "VALUES(:post_title, :post_content, :post_user_id, :post_school_id, :post_category_id, :post_featured_image_id,:post_status_id);";
-        $this->query($query);
-        $this->bind(':post_title',$post_title);
-        $this->bind(':post_content',$post_content);
-        $this->bind(':post_user_id',$post_user_id);
-        $this->bind(':post_school_id',$post_school_id);
-        $this->bind(':post_category_id', $post_category_id);
-        $this->bind(':post_featured_image_id',$post_featured_image_id);
-        $this->bind(':post_status_id',$post_status_id);
-        $this->executer();
-        if ($this->lastIdinsert()) {
-          return TRUE;
-        }else {
-          return FALSE;
+        $query = "INSERT INTO posts(post_title,post_content,post_user_id,post_school_id, post_category_id,post_status_id)"
+                . "VALUES(:post_title, :post_content, :post_user_id, :post_school_id, :post_category_id, :post_status_id);";
+        try{
+          $this->query($query);
+          $this->bind(':post_title',$post_title);
+          $this->bind(':post_content',$post_content);
+          $this->bind(':post_user_id',$post_user_id);
+          $this->bind(':post_school_id',$post_school_id);
+          $this->bind(':post_category_id', $post_category_id);
+          $this->bind(':post_status_id',$post_status_id);
+          $this->executer();
+          return $this->lastIdinsert();
+        }catch(PDOException $e){
+          echo $e->getMessage();
+          return 0;
         }
-
-    }
+      }
 
     public function get_post_likes($id)
     {
@@ -151,7 +149,7 @@ class News extends dbmodel {
       extract($row);
       return $post_like_count;
     }
-    
+
     public function get_post_dislikes($id)
     {
       $query = 'SELECT post_dislike_count FROM posts WHERE post_id = :id';
@@ -207,6 +205,18 @@ class News extends dbmodel {
            $content = substr($content, 0, $length);
            return $content . ' ...';
        }
+   }
+
+   public function insert_post_featured_image_id($image_id, $post_id)
+   {
+     $sql = "UPDATE posts SET post_featured_image_id = :post_featured_image_id WHERE post_id = :post_id";
+     $this->query($sql);
+     $this->bind(':post_featured_image_id', $image_id);
+     $this->bind(':post_id', $post_id);
+     if($this->executer()){
+       return TRUE;
+     }
+     return FALSE;
    }
 
     public function get_last_inserted_id()

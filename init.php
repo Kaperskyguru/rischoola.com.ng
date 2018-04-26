@@ -15,6 +15,13 @@ require_once 'classes/controllers/comments.php';
 require_once 'classes/controllers/replies.php';
 require_once 'classes/controllers/schools.php';
 require_once 'classes/controllers/messages.php';
+require_once 'classes/controllers/mails.php';
+
+require_once 'lib/cloudinary/src/Api.php';
+require_once 'lib/cloudinary/src/Cloudinary.php';
+require_once 'lib/cloudinary/src/Uploader.php';
+
+require_once 'classes/controllers/Images.php';
 
 require_once "classes/models/news.php";
 require_once "classes/models/lodge.php";
@@ -40,6 +47,7 @@ $commentController = new Comments();
 $replyController = new Replies();
 $schoolController = new Schools();
 $messageController = new Messages();
+$mailer = new Mails();
 
 $newsModel = new NewsModel();
 $lodgeModel = new LodgeModel();

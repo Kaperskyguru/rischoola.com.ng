@@ -101,29 +101,39 @@ public function get_lodge_models()
         $lodge_facilities = $LodgeModel->get_lodge_facilities();
         $lodge_rules = $LodgeModel->get_lodge_rules();
         $lodge_school_id = $LodgeModel->get_lodge_school_id();
-        $lodge_featured_image_id = $LodgeModel->get_lodge_featured_image_id();
         $lodge_user_id = $LodgeModel->get_lodge_user_id();
-        $lodge_keyword = $LodgeModel->get_lodge_keyword();
 
         $query = "INSERT INTO lodges(lodge_name,lodge_address,lodge_desc,lodge_status_id,lodge_model_id,lodge_facilities,lodge_rules,lodge_school_id,lodge_user_id)"
-                . "VALUES(:lodge_name,:lodge_address,:lodge_desc,:lodge_status_id,lodge_model_id,:lodge_facilities,:lodge_rules,:lodge_school_id,:lodge_user_id)";
-        $this->query($query);
+                . "VALUES(:lodge_name,:lodge_address,:lodge_desc,:lodge_status_id, :lodge_model_id,:lodge_facilities,:lodge_rules,:lodge_school_id,:lodge_user_id)";
+        try{
+          $this->query($query);
+          $this->bind(":lodge_name", $lodge_name);
+          $this->bind(":lodge_address", $lodge_address);
+          $this->bind(":lodge_desc", $lodge_desc);
+          $this->bind(":lodge_status_id", $lodge_status_id);
+          $this->bind(":lodge_model_id", $lodge_model_id);
+          $this->bind(":lodge_facilities", $lodge_facilities);
+          $this->bind(":lodge_rules", $lodge_rules);
+          $this->bind(":lodge_school_id", $lodge_school_id);
+          $this->bind(":lodge_user_id", $lodge_user_id);
+          $this->executer();
+          return $this->lastIdinsert();
+      }catch(PDOException $e){
+        echo $e->getMessage();
+        return 0;
+      }
+    }
 
-        $this->bind(":lodge_name", $lodge_name);
-        $this->bind(":lodge_address", $lodge_address);
-        $this->bind(":lodge_desc", $lodge_desc);
-        $this->bind(":lodge_status_id", $lodge_status_id);
-        $this->bind(":lodge_model_id", $lodge_model_id);
-        $this->bind(":lodge_facilities", $lodge_facilities);
-        $this->bind(":lodge_rules", $lodge_rules);
-        $this->bind(":lodge_school_id", $lodge_school_id);
-        $this->bind(":lodge_user_id", $lodge_user_id);
-        $this->executer();
-        if ($this->lastIdinsert()) {
-          return TRUE;
-        }else {
-          return FALSE;
-        }
+    public function insert_lodge_featured_image_id($image_id, $lodge_id)
+    {
+      $sql = "UPDATE lodges SET lodge_featured_image_id = :lodge_featured_image_id WHERE lodge_id = :lodge_id";
+      $this->query($sql);
+      $this->bind(':lodge_featured_image_id', $image_id);
+      $this->bind(':lodge_id', $lodge_id);
+      if($this->executer()){
+        return TRUE;
+      }
+      return FALSE;
     }
 
 

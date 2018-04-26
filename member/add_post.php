@@ -6,15 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_SESSION['user_id'];
     if (empty($_FILES['post_image']['name']) || empty($_FILES['post_image']['tmp_name']) || empty($_FILES['post_image'])) {
         $error_text = "Image is required";
-        $newsModel->set_post_featured_image_id(NULL);
-    } else {
-      $image_src = uploadFiles();
-        if ($image_src == 'none') {
-            $error_text = "Not Uploaded";
-        } else {
-            $image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, 1, "post");
-            $newsModel->set_post_featured_image_id($image_id);
-        }
     }
     if (empty($_POST['title'])) {
         $error_text = 'Please title is required';
@@ -39,8 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newsModel->set_post_user_id($id);
     $newsModel->set_post_status_id(2);
     if (!isset($error_text)) {
-        if ($newsControler->addNews($newsModel)) {
-            $error_text = "Your Post is pending verifications...";
+      $new_id = $newsControler->addNews($newsModel);
+        if ($new_id != 0) {
+           $image_id = uploadFiles($id, $new_id, $resources);
+        //   if ($image_src == 'none') {
+        //       $error_text = "Not Uploaded";
+        //   } else {
+            //$image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, $new_id, "post");
+            if($newsControler->insert_post_featured_image_id($image_id, $new_id)){
+              $error_text = "Your Post is pending verifications...";
+            }else {
+              $error_text = "Your Post inserted without featured Image...";
+            }
+          //}
+
         } else {
             $error_text = "We could not Post it";
         }
@@ -63,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="post_image">Choose Featured image: </label>
-                    <input type="file" id="post_image" name="post_image" class="form-control" />
+                    <input type="file" id="post_image[]" name="post_image[]" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label for="cat">Category:</label>
@@ -94,43 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php
 
-function uploadFiles() {
-    $error_status = 1;
-    $image_to_upload = $_FILES['post_image'];
-    $target_dir = "../res/imgs/post/";
-    $image_name = $image_to_upload['name'];
-    $target_file = $target_dir . basename($image_to_upload['name']);
-    $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
-    if (!empty($target_file)) {
-        if (getimagesize($image_to_upload['tmp_name']) !== FALSE) {
-            $error_status = 1;
-        } else {
-            $error_status = 0;
-        }
-
-        if (file_exists($target_file)) {
-            $error_status = 0;
-        } else {
-            $error_status = 1;
-        }
-
-        if ($image_to_upload['size'] > 10485760) {
-            $error_status = 0;
-        }
-
-        if ($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
-            $error_status = 0;
-        } else {
-            $error_status = 1;
-        }
-
-        if ($error_status == 1) {
-            if (move_uploaded_file($image_to_upload['tmp_name'], $target_file)) {
-                return dirname($target_file) . "/" . basename($image_to_upload['name']);
-            }
-        }
-    } else {
-        return 'none';
-    }
+function uploadFiles($user_id, $inserted_id, $resources) {
+    $files = $_FILES["post_image"];
+    return Image::upload_image($files, $user_id, $inserted_id, $resources, "posts");  
 }
-?>

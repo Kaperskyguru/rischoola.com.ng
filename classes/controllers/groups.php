@@ -13,16 +13,14 @@ class Groups extends dbmodel {
       $group_user_id = $groupModel->get_group_user_id();
       $showEmail = $groupModel->get_show_email();
       $showPhone = $groupModel->get_show_phone();
-      $type = $groupModel->get_group_type();
-      $profile_image = $groupModel->get_group_featured_image_id();
+      $group_type = $groupModel->get_group_type();
 
-      $query = "INSERT INTO groups(group_title,group_type, group_profile_image_id,group_desc,group_status_id,group_school_id,group_user_id, group_show_email, group_show_phone)"
-              . "VALUES(:group_title, :group_type, :profile_image,:group_desc,:group_status_id,:group_school_id,:group_user_id, :group_show_email, :group_show_phone)";
+      $query = "INSERT INTO groups(group_title,group_type, group_desc,group_status_id,group_school_id,group_user_id, group_show_email, group_show_phone)"
+              . "VALUES(:group_title, :group_type,:group_desc,:group_status_id,:group_school_id,:group_user_id, :group_show_email, :group_show_phone)";
       $this->query($query);
 
       $this->bind(":group_title", $group_title);
       $this->bind(":group_type", $group_type);
-      $this->bind(':profile_image', $profile_image);
       $this->bind(":group_desc", $group_desc);
       $this->bind(":group_status_id", $group_status_id);
       $this->bind(":group_school_id", $group_school_id);
@@ -30,14 +28,27 @@ class Groups extends dbmodel {
       $this->bind(":group_show_email", $showEmail);
       $this->bind(":group_show_phone", $showPhone);
       $this->executer();
-      if ($id = $this->lastIdinsert()) {
+      if ($id = $this->lastIdinsert() !== 0) {
         if($this->join_group($id, $group_user_id)){
           if($this->update_member_count($id, TRUE)){// or add 1 when creating the group
-            return TRUE;
+            return $id;
           }
         }
       }
-      return FALSE;
+      return 0;
+  }
+
+
+  public function insert_group_featured_image_id($image_id, $group_id)
+  {
+    $sql = "UPDATE groups SET group_profile_image_id = :group_profile_image_id WHERE group_id = :group_id";
+    $this->query($sql);
+    $this->bind(':group_profile_image_id', $image_id);
+    $this->bind(':group_id', $group_id);
+    if($this->executer()){
+      return TRUE;
+    }
+    return FALSE;
   }
 
 

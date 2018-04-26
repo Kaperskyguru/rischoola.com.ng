@@ -7,8 +7,6 @@ if ($userController->is_authenticated()) {
     require 'header.php';
 }
 
-
-
 $id1 = $_GET['id'];
 $id = intval($id1);
 
@@ -38,7 +36,7 @@ exit;
                                     <span class="fa fa-folder">&nbsp;	</span><span style="margin-right:8px">In <?php echo $newsControler->get_post_category_by_id($post_category_id); ?></span>
                                     <span class="badge"><?php echo $post_comment_count; ?></span><span style="margin-right:8px">&nbsp;	Comments</span>
                                     <a style="text-decoration:none;" pid="<?php echo $post_id;?>" href="#" id="like_btn"> <span class="badge" id="like_span<?php echo $post_id;?>"><?php echo $post_like_count; ?></span><span style="margin-right:8px">&nbsp;	<i class="fa fa-thumbs-up"></i></span></a>
-                                    <a style="text-decoration:none; color:red" pid="<?php echo $post_id;?>" href="#" id="dislike_btn"><span class="badge" id="dislike_span<?php echo $post_id;?>"><?php echo $post_dislike_count; ?></span><span style="margin-right:8px">&nbsp;	<i class="fa fa-thumbs-down"></i></span></a>
+                                    <a style="text-decoration:none; color:red" pid="<?php echo $post_id;?>" href="#" id="dislike_btn<?php echo $s = (isset($_SESSION['dislike_id']) && $_SESSION['dislike_id'] == get_user_uid())?"d":'' ?>"><span class="badge" id="dislike_span<?php echo $post_id;?>"><?php echo $post_dislike_count; ?></span><span style="margin-right:8px">&nbsp;	<i class="fa fa-thumbs-down"></i></span></a>
                                     <span class="empty"></span><span style="margin-right:8px"><i class="fa fa-folder">&nbsp;</i><?php echo timeAgo($post_date_created); ?></span>
                                 </h6>
                                 <hr />
@@ -64,14 +62,14 @@ exit;
                                         <!-- <h3 class="section-heading">Make a Comment </h3> -->
                                         <!--Third row-->
                                         <div class="row">
-                                            <form class="col-md-12" action="<?php echo htmlspecialchars('PHP_SELF'); ?>" method="POST">
+                                            <form class="col-md-12" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']).'?id='.$post_id; ?>" method="POST" enctype="multipart/form-data">
                                                 <!--Content column-->
-                                                <?php if (!$userController->is_authenticated()) { ?>
+                                                <!-- <?php if (!$userController->is_authenticated()) { ?>
                                                     <div class="form-group">
                                                         <label for="name">Enter Name</label>
                                                         <input type="text" id="name" name="name" class="form-control" />
                                                     </div>
-                                                <?php } ?>
+                                                <?php } ?> -->
                                                 <div class="form-group">
                                                     <label for="commentBox">Enter Comment</label>
                                                     <textarea type="text" rows="5" id="commentBox" name="commentBox" class="form-control"></textarea>
@@ -86,7 +84,7 @@ exit;
 
                                                 <div class="form-group">
                                                     <a href="#cc">
-                                                        <button class="btn btn-primary" pid="<?php echo $id; ?>">Comment</button>
+                                                        <button class="btn btn-primary" id="comment" pid="<?php echo $id; ?>">Comment</button>
                                                     </a>
                                                 </div>
                                                 <!--/.Content column-->
@@ -220,6 +218,23 @@ exit;
             //       alert(da);
             //   };
             // });
+        });
+
+        $('body').delegate('#comment', 'click', function() {
+            //e.preventDefault();
+            var pid = $(this).attr('pid');
+            var comment_body = $('#commentBox').val();
+            var file = $('#file1').val();
+            alert(file);
+            $.ajax({
+              method:'post',
+              url:'getNews.php',
+              cache:false,
+              data:{comment:1, pid:pid, comment_body:comment_body},
+              success:function (d) {
+                alert(d);
+              }
+            });
         });
 
 

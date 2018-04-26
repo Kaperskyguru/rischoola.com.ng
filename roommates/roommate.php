@@ -15,22 +15,32 @@ if($userController->is_authenticated()){
             <h2>Available Roommates</h2>
             <div class="row" style="padding-top: 20px;margin: 10px;background-color:#eee">
               <div class="col-md-10">
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                      <label>School:</label>
-                      <select class="form-control">
-                          <option disabled="true" selected="">Select a school from here to get latest information</option>
-                          <?php $schoolController->get_schools(); ?>
-                      </select>
-                    </div>
-                    <div class="col-xs-6">
-                      <label>Gender:</label>
-                      <select class="form-control">
-                          <option disabled="true" selected="">Select gender information</option>
-                          <option>Male</option>
-                          <option>Female</option>
-                      </select>
-                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label>School:</label>
+                            <select class="form-control">
+                                <option disabled="true" selected="">Select a school from here to get latest information</option>
+                                <?php $schoolController->get_schools(); ?>
+                            </select>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="col-md-6">
+                                <label>Gender:</label>
+                                <select class="form-control" id="roommate_gender">
+                                    <option disabled="true" selected="">Select gender information</option>
+                                    <option value="0">Male</option>
+                                    <option value="1">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Type:</label>
+                                <select class="form-control">
+                                    <option disabled="true" selected="">Select Roommate Type</option>
+                                    <option value ="0">I Have A Room</option>
+                                    <option value="1">I Dont Have A Room</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="">

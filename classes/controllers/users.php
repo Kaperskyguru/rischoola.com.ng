@@ -71,7 +71,7 @@ public function __construct()
 
   public function is_user_user_name_exist($user_user_name){
     try{
-      $query = "SELECT COUNT(user_user_name) FROM users WHERE user_user_name = :user_user_name";
+      $query = "SELECT 1 FROM users WHERE user_user_name = :user_user_name";
       $this->query($query);
       $this->bind(':user_user_name', $user_user_name);
       $stmt = $this->executer();
@@ -87,7 +87,7 @@ public function __construct()
 
   public function is_user_email_exist($user_email){
     try{
-      $query = "SELECT COUNT(user_email) FROM users WHERE user_email = :user_email";
+      $query = "SELECT 1 FROM users WHERE user_email = :user_email";
       $this->query($query);
       $this->bind(':user_email', $user_email);
       $stmt = $this->executer();
@@ -95,7 +95,8 @@ public function __construct()
         return TRUE;
       }
     }catch(PDOException $e){
-      return TRUE;
+      echo $e->getMessage();
+      //return FALSE;
     }
   return FALSE;
   }
@@ -266,7 +267,7 @@ public function __construct()
      return TRUE;
   }
 
-  public function add_user(UserModel $userModel)
+  public function add_temporary_user(UserModel $userModel, $unique_id)
   {
     try {
       $pass = $userModel->get_user_password();
@@ -276,8 +277,37 @@ public function __construct()
       $email = $userModel->get_user_email();
       $school_id = $userModel->get_user_school_id();
 
+      //$hash_pass = password_hash($pass, PASSWORD_DEFAULT);
+      $sql = "INSERT INTO guest (guest_name, guest_username, guest_password, guest_mobile_phone, guest_email, guest_school_id, guest_uid) VALUES
+      (:guest_name, :guest_username, :guest_password, :guest_mobile_phone, :guest_email, :guest_school_id, :guest_uid)";
+      $stmt = $this->query($sql);
+      $this->bind(":guest_name", $name);
+      $this->bind(":guest_username", $user_name);
+      $this->bind(":guest_password", $pass);
+      $this->bind(":guest_mobile_phone", $phone_number);
+      $this->bind(":guest_email", $email);
+      $this->bind(":guest_school_id", $school_id);
+      $this->bind(":guest_uid", $unique_id);
+      $stmt = $this->executer();
+      return $this->lastIdinsert();
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      return 0;
+    }
+  }
+
+  public function add_user(UserModel $userModel)
+  {
+    try {
+      // Retrieving all user details to stored
+      $pass = $userModel->get_user_password();
+      $name = $userModel->get_user_name();
+      $user_name = $userModel->get_user_user_name();
+      $phone_number = $userModel->get_user_phone_number();
+      $email = $userModel->get_user_email();
+      $school_id = $userModel->get_user_school_id();
+
       $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
-     var_dump($hash_pass);
       $sql = "INSERT INTO users (user_name, user_user_name, user_password, user_phone_number, user_email, user_school_id) VALUES
       (:user_name, :user_user_name, :user_password, :user_phone_number, :user_email, :user_school_id)";
       $stmt = $this->query($sql);
@@ -288,7 +318,6 @@ public function __construct()
       $this->bind(":user_email", $email);
       $this->bind(":user_school_id", $school_id);
       $stmt = $this->executer();
-
     } catch (Exception $e) {
       echo $e->getMessage();
       return FALSE;
@@ -322,14 +351,16 @@ public function __construct()
     try
 	   {
 		  /* First, we close any open session the user may have */
-		  $sql = 'DELETE FROM sessions WHERE (session_user_id = ?)';
-		  $st = $query($sql);
-		  $st->execute(array($user_id));
+		  $sql = "DELETE FROM sessions WHERE (session_user_id = :user_id)";
+      $this->query($sql);
+      $this->bind(':user_id', $user_id);
+		  $this->executer();
 
 		  /* Now we delete the user record */
-		  $sql = 'DELETE FROM users WHERE (user_id = ?)';
-		  $st = $query($sql);
-		  $st->execute(array($user_id));
+		  $sql = "DELETE FROM users WHERE (user_id = :user_id)";
+      $this->query($sql);
+      $this->bind(':user_id',$user_id);
+		  $this->executer();
 	   }
 	   catch (PDOException $e)
 	   {
@@ -340,6 +371,62 @@ public function __construct()
 
 	   /* If no exception occurs, return true */
 	   return TRUE;
+  }
+
+  public function delete_temporary_user($guest_id)
+  {
+    try
+	   {
+		  /* Now we delete the temporary user record */
+		  $sql = 'DELETE FROM guest WHERE (guest_id = :guest_id)';
+      $this->query($sql);
+      $this->bind(':guest_id',$guest_id);
+		  $this->executer();
+	   }
+	   catch (PDOException $e)
+	   {
+		  /* Exception (SQL error) */
+		  echo $e->getMessage();
+		  return FALSE;
+	   }
+
+	   /* If no exception occurs, return true */
+	   return TRUE;
+  }
+
+  public function is_temporary_user_exist($guest_id, $unique_id){
+    $query = "SELECT 1 FROM guest WHERE (guest_id = :guest_id) AND (guest_uid = :guest_uid)"; // AND ((date_expiry > NOW()) OR (date_expiry < :date_expiry))";
+    $this->query($query);
+    $this->bind(':guest_id', $guest_id);
+    $this->bind(':guest_uid', $unique_id);
+    $row = $this->resultset();
+    if($row){
+      return TRUE;
+    }else {
+      return FALSE;
+    }
+  }
+
+
+  public function move_guest_to_member($userModel, $guest_id, $unique_id)
+  {
+    $query = "SELECT * FROM guest WHERE (guest_id = :guest_id) AND (guest_uid = :guest_uid)";// AND ((date_expiry > NOW()) OR (date_expiry < :date_expiry))";
+    $this->query($query);
+    $this->bind(':guest_id', $guest_id);
+    $this->bind(':guest_uid', $unique_id);
+    $row = $this->resultset();
+    extract($row);
+
+    $userModel->set_user_password($guest_password);
+    $userModel->set_user_name($guest_name);
+    $userModel->set_user_user_name($guest_username);
+    $userModel->set_user_phone_number($guest_mobile_phone);
+    $userModel->set_user_email($guest_email);
+    $userModel->set_user_school_id($guest_school_id);
+
+    if($this->delete_temporary_user($guest_id)){
+      return $this->add_user($userModel);
+    }
   }
 
   	public function update_user(UserModel $model)

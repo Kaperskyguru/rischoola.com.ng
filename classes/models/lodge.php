@@ -2,7 +2,7 @@
 
 class LodgeModel {
   private $lodge_name	;
-  private $lodge_address	;
+  private $lodge_address;
   private $lodge_desc	;
   private $lodge_status_id;
   private $lodge_model_id	;

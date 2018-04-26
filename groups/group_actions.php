@@ -33,20 +33,22 @@ if(isset($_POST['leave_group']) && $_SERVER['REQUEST_METHOD'] == "POST"){
   }
 }
 
-if(isset($_POST['send_group_admin_message']) && !empty($_POST['message']) && !empty($_POST['subject']) && $_SERVER['REQUEST_METHOD'] == "POST"){
-  $messageModel->set_message_sender_id(get_user_uid());
-  $messageModel->set_message_receiver_id($_POST['uid']);
-  $messageModel->set_message_subject($_POST['subject']);
-  $messageModel->set_message_body($_POST['message']);
-  $messageModel->set_message_type("groups");
-  $last_inserted_message_id = $messageController->send_message($messageModel);
+if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['send_group_admin_message'])){
+    if(!empty($_POST['message']) && !empty($_POST['subject'])){
+    $messageModel->set_message_sender_id(get_user_uid());
+    $messageModel->set_message_receiver_id($_POST['uid']);
+    $messageModel->set_message_subject($_POST['subject']);
+    $messageModel->set_message_body($_POST['message']);
+    $messageModel->set_message_type("groups");
+    $last_inserted_message_id = $messageController->send_message($messageModel);
 
-  if($last_inserted_message_id != 0){
-    // Log message: 'Sender name' send 'Receiver name'
-    echo "Message Sent";
+    if($last_inserted_message_id != 0){
+      // Log message: 'Sender name' send 'Receiver name'
+      echo "Message Sent";
+    }else {
+      echo "Sorry, We Could not send your message";
+    }
   }else {
-    echo "Sorry, We Could not send your message";
+    echo "No field should be empty.. Please check";
   }
-}else {
-  echo "No field should be empty.. Please check";
 }

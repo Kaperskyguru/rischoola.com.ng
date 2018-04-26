@@ -18,31 +18,30 @@ if (isset($_POST['add_rule']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $lodgeController->get_user_id_by_username($userController->get_user_username_by_id($_SESSION['user_id']));
     if (empty($_FILES['lodge_image']['name']) || empty($_FILES['lodge_image']['tmp_name']) || empty($_FILES['lodge_image'])) {
-        $lodgeModel->set_lodge_featured_image_id(NULL);
-    } else {
-      $image_src = uploadFiles();
-        if ($image_src == 'none') {
-            $error_text = "Not Uploaded";
-        } else {
-            $image_id = $lodgeController->add_images_and_get_last_inserted_id($image_src, $id, 1);
-            $lodgeModel->set_lodge_featured_image_id($image_id);
-        }
+      $error_text = 'Please Lodge Image is required';
+        //$lodgeModel->set_lodge_featured_image_id(NULL);
     }
     if (empty($_POST['lodge_name'])) {
         $error_text = 'Please Lodge Name is required';
     } else {
         $lodgeModel->set_lodge_name($_POST['lodge_name']);
     }
+
+    if (empty($_POST['lodge_address'])) {
+        $error_text = 'Please Lodge Address is required';
+    } else {
+        $lodgeModel->set_lodge_address($_POST['lodge_address']);
+    }
+
     if (empty($_POST['lodge_desc'])) {
         $error_text = 'Please Content is required';
     } else {
         $lodgeModel->set_lodge_desc($_POST['lodge_desc']);
     }
     if (empty($_POST['lodge_model'])) {
-        $error_text = 'Please Category is required';
+        $error_text = 'Please Model is required';
     } else {
-        $check = serialize(filter_input(INPUT_POST, 'lodge_model'));
-        $lodgeModel->set_lodge_model_id($check);
+        $lodgeModel->set_lodge_model_id($_POST['lodge_model']);
     }
     if (empty($_POST['lodge_school'])) {
         $error_text = 'Please School is required';
@@ -52,10 +51,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lodgeModel->set_lodge_user_id($id);
     $lodgeModel->set_lodge_status_id(2);
     if (!isset($error_text)) {
-        if ($lodgeController->add_lodge($lodgeModel)) {
-            $error_text = "Your Lodge is pending verifications...";
+      $lodge_id = $lodgeController->add_lodge($lodgeModel);
+        if ($lodge_id != 0) {
+            $image_id = uploadFiles($id, $lodge_id, $resources);
+        //   if ($image_src == 'none') {
+        //       $error_text = "Not Uploaded";
+        //   } else {
+            // $image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, $lodge_id, "lodge");
+            if($lodgeController->insert_lodge_featured_image_id($image_id, $lodge_id)){
+              $succes_text = "Your Lodge is pending verifications...";
+            }else {
+              $error_text = "Your Lodge inserted without featured Image...";
+            }
+        //   }
         } else {
-            $error_text = "We could not Post it";
+            $error_text = "Sorry, We could not Post your Lodge";
         }
     }
 }
@@ -69,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="col-md-5">
             <div id="err"><?php display_error(); ?></div>
-            <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+            <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="lodge_name">Lodge Name:</label>
                     <input class="form-control" id="lodge_name" name="lodge_name" type="text" />
@@ -91,7 +101,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-md-5">
             <div class="form-group">
                 <label for="lodge_image">Choose Featured image: </label>
-                <input multiple type="file" id="lodge_image" name="lodge_image" class="form-control" />
+                <input type="file" id="lodge_image" name="lodge_image[]" class="form-control" />
+                <i>featured image </i>
+            </div>
+            <div class="form-group">
+                <label for="lodge_image">Choose image: </label>
+                <input type="file" id="lodge_image" name="lodge_image[]" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="lodge_image">Choose image: </label>
+                <input type="file" id="lodge_image" name="lodge_image[]" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="lodge_school">Select School</label>
@@ -103,13 +122,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="lodge_model">Select Models</label>
                 <div class="checkbox">
-                    <label><input id="lodge_model" name="lodge_model[]" type="checkbox" value="">Self Contain</label>
+                    <label><input id="lodge_model" name="lodge_model" type="radio" value="3">Self Contain</label>
                 </div>
                 <div class="checkbox">
-                    <label><input id="lodge_model" name="lodge_model[]" type="checkbox" value="">Single Room</label>
+                    <label><input id="lodge_model" name="lodge_model" type="radio" value="1" checked>Single Room</label>
                 </div>
                 <div class="checkbox">
-                    <label><input id="lodge_model" name="lodge_model[]" type="checkbox" value="">Hostel</label>
+                    <label><input id="lodge_model" name="lodge_model" type="radio" value="6">Hostel</label>
                 </div>
 
             </div>
@@ -143,46 +162,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <?php
-
-function uploadFiles() {
-    $error_status = 1;
-    $image_to_upload = $_FILES['lodge_image'];
-    $target_dir = "../res/imgs/post/";
-    $image_name = $image_to_upload['name'];
-    $target_file = $target_dir . basename($image_to_upload['name']);
-    $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
-    if (!empty($target_file)) {
-        if (getimagesize($image_to_upload['tmp_name']) !== FALSE) {
-            $error_status = 1;
-        } else {
-            $error_status = 0;
-        }
-
-        if (file_exists($target_file)) {
-            $error_status = 0;
-        } else {
-            $error_status = 1;
-        }
-
-        if ($image_to_upload['size'] > 10485760) {
-            $error_status = 0;
-        }
-
-        if ($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
-            $error_status = 0;
-        } else {
-            $error_status = 1;
-        }
-
-        if ($error_status == 1) {
-            if (move_uploaded_file($image_to_upload['tmp_name'], $target_file)) {
-                return dirname($target_file) . "/" . basename($image_to_upload['name']);
-            }
-        }
-    } else {
-        return 'none';
-    }
+function uploadFiles($user_id, $inserted_id, $resources) {
+    $files = $_FILES["lodge_image"];
+    return Image::upload_image($files, $user_id, $inserted_id, $resources, "lodges");  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+//     $image_to_upload = $_FILES['lodge_image'];
+//     $target_dir = "../res/imgs/lodge/";
+//     $image_name = $image_to_upload['name'];
+//     $target_file = $target_dir . basename($image_to_upload['name']);
+//     $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+//     if (!empty($target_file)) {
+//         if (getimagesize($image_to_upload['tmp_name']) !== FALSE) {
+//             $error_status = 1;
+//         } else {
+//             $error_status = 0;
+//         }
+
+//         if (file_exists($target_file)) {
+//             $error_status = 0;
+//         } else {
+//             $error_status = 1;
+//         }
+
+//         if ($image_to_upload['size'] > 10485760) {
+//             $error_status = 0;
+//         }
+
+//         if ($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
+//             $error_status = 0;
+//         } else {
+//             $error_status = 1;
+//         }
+
+//         if ($error_status == 1) {
+//             if (move_uploaded_file($image_to_upload['tmp_name'], $target_file)) {
+//                 return dirname($target_file) . "/" . basename($image_to_upload['name']);
+//             }
+//         }
+//     } else {
+//         return 'none';
+//     }
+// }
 ?>
 
 <script src="js/jquery.js"></script>
@@ -190,35 +229,36 @@ function uploadFiles() {
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-                        $(document).ready(function () {
-                            //alert();
+    $(document).ready(function () {
+        //alert();
 
-                            $('#lodge_rules').change(function () {
-                                var val = this.value;
-                                $.ajax({
-                                    method: "POST",
-                                    url: 'add_lodges.php',
-                                    data: {add_rule: 1, val: val},
-                                    success: function (data) {
-                                        //$('#err').html(data);
-                                    }
-                                });
-                            });
+        $('#lodge_rules').change(function () {
+            var val = this.value;
+            $.ajax({
+                method: "POST",
+                url: 'add_lodges.php',
+                data: {add_rule: 1, val: val},
+                success: function (data) {
+                    //$('#err').html(data);
+                }
+            });
+        });
 
-                            $('#lodge_facilities').change(function () {
-                                var val = this.value;
-                                $.ajax({
-                                    method: "POST",
-                                    url: 'add_lodges.php',
-                                    data: {add_facility: 1, val: val},
-                                    success: function (data) {
-                                        //$('#err').html(data);
-                                    }
-                                });
-                            });
+        $('#lodge_facilities').change(function () {
+            var val = this.value;
+            $.ajax({
+                method: "POST",
+                url: 'add_lodges.php',
+                data: {add_facility: 1, val: val},
+                success: function (data) {
+                    //$('#err').html(data);
+                }
+            });
+        });
 
-                        });
+    });
 
 
 </script>
+
 <!-- <?php require 'footer.php'; ?> -->

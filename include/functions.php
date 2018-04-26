@@ -28,20 +28,43 @@ function get_user_uid()
 
 function get_site_name()
 {
-  $site_name = 'Rischoola';
+  $site_name = 'Rischoola ';
     return $site_name;
 }
 
+function generate_unique_id(){
+    return bin2hex(random_bytes(25));
+}
 
 
 function display_error(){
-  global $error,$error_text;
+  global $error,$error_text, $succes_text;
   if (!empty($error_text)){
     echo '<div id="alertbox" class="alert alert-danger fade in">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <p id="error">'. $error_text. '</p>
           </div>';
+  }elseif (isset($succes_text)) {
+    echo '<div id="alertbox" class="alert alert-success fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <p id="error">'. $succes_text. '</p>
+          </div>';
   }
+}
+
+function random_string_gen(){
+    $text = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012346789"),0,6);	
+    $time = substr(time(),6,4);
+    $string = $text.$time;
+    return $string;    
+}
+
+function post_image_options(){
+    return $options = array(
+        "tags" => "My Image",
+        "use_filename" => TRUE,
+        "unique_filename" => FALSE,
+    );
 }
 
 

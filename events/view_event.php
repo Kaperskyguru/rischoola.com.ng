@@ -59,7 +59,7 @@ exit;
                                   <li class="next"><a href="#">Next >></a></li>
                               </ul>
                               <?php
-                              if ($eventController->is_reminder_set($event_id, $_SESSION['user_id'])) {?>
+                              if ($eventController->is_reminder_set($event_id, get_user_uid())) {?>
                                 <a id="reminder" disabled  class="fa fa-clock-o btn btn-lg btn-success"> Reminder Set</a>
                               <?php
                                 }else{?>
@@ -83,7 +83,7 @@ exit;
                                         <div class="row">
                                             <form class="col-md-12" action="<?php echo htmlspecialchars('PHP_SELF'); ?>" method="POST">
                                                 <!--Content column-->
-                                                <?php if (!$userController->is_user_logged_in()) { ?>
+                                                <?php if (!$userController->is_authenticated()) { ?>
 
                                                 <?php } ?>
                                                 <div class="form-group">

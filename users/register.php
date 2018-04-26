@@ -58,8 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$error = 1;
 	}
 	if ($error !== 1) {
-		if($userController->add_user($userModel)){
-			$error_text =  "Registered successfully, please verify your account";
+		$unique_id = generate_unique_id();
+		$guest_id = $userController->add_temporary_user($userModel, $unique_id);
+		if($guest_id !== 0){
+			if($mailer->send_verification_mail($guest_id, $unique_id , $userModel->get_user_email())){
+				$success_text =  "Registered successfully, please verify your account";
+			}
 		}else {
 			$error_text  = "Sorry, We could not register you, please try again";
 			$error = 1;

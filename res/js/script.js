@@ -102,4 +102,9 @@ $(document).ready(function() {
     });
   }
 
+  $('#roommate_gender').change(function(){
+    var gender_id = $(this).val();
+    
+  });
+
 });

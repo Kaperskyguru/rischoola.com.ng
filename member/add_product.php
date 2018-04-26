@@ -64,17 +64,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
       $product_id = $storeController->add_product($storeModel);
         if ($product_id != 0) {
-            $image_src = uploadFiles();
-            if ($image_src == 'none') {
-                $error_text = "Not Uploaded";
-            } else {
-              $image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, $product_id, "product");
+            $image_id = uploadFiles($id, $product_id, $resources);
+            // if ($image_src == 'none') {
+            //     $error_text = "Not Uploaded";
+            // } else {
+              //$image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, $product_id, "product");
               if($storeController->insert_product_featured_image_id($image_id, $product_id)){
                 $error_text = "Your product is pending verifications...";
               }else {
                 $error_text = "Your product inserted without featured Image...";
               }
-            }
+            // }
         } else {
             $error_text = "Sorry, We could not publish your product.";
         }
@@ -104,19 +104,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group row">
                     <div class="col-xs-3">
                         <label for="product_image">Choose Featured image:</label>
-                        <input type="file"id="product_image" name="product_image" class="form-control"></input>
+                        <input type="file"id="product_image" name="product_image[]" class="form-control"></input>
                     </div>
                     <div class="col-xs-3">
                         <label for="">Product Image 2</label>
-                        <input type="file" class="form-control"></input>
+                        <input type="file" id="product_image2" name="product_image[]" class="form-control"></input>
                     </div>
                     <div class="col-xs-3">
                         <label for="product_image3">Product image 3: </label>
-                        <input type="file" id="product_image3" name="product_image3" class="form-control" />
+                        <input type="file" id="product_image3" name="product_image[]" class="form-control" />
                     </div>
                     <div class="col-xs-3">
                         <label for="product_image3">Product image 4: </label>
-                        <input type="file" id="product_image3" name="product_image3" class="form-control" />
+                        <input type="file" id="product_image3" name="product_image[]" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -172,43 +172,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php
 
-function uploadFiles() {
-    $error_status = 1;
-    $image_to_upload = $_FILES['product_image'];
-    $target_dir = "../res/imgs/product/";
-    $image_name = $image_to_upload['name'];
-    $target_file = $target_dir . basename($image_to_upload['name']);
-    $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
-    if (!empty($target_file)) {
-        if (getimagesize($image_to_upload['tmp_name']) !== FALSE) {
-            $error_status = 1;
-        } else {
-            $error_status = 0;
-        }
-
-        if (file_exists($target_file)) {
-            $error_status = 0;
-        } else {
-            $error_status = 1;
-        }
-
-        if ($image_to_upload['size'] > 10485760) {
-            $error_status = 0;
-        }
-
-        if ($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
-            $error_status = 0;
-        } else {
-            $error_status = 1;
-        }
-
-        if ($error_status == 1) {
-            if (move_uploaded_file($image_to_upload['tmp_name'], $target_file)) {
-                return dirname($target_file) . "/" . basename($image_to_upload['name']);
-            }
-        }
-    } else {
-        return 'none';
-    }
+function uploadFiles($user_id, $inserted_id, $resources) {
+    $files = $_FILES["product_image"];
+    return Image::upload_image($files, $user_id, $inserted_id, $resources, 'products');  
 }
+
+// function uploadFiles() {
+//     $error_status = 1;
+//     $image_to_upload = $_FILES['product_image'];
+//     $target_dir = "../res/imgs/product/";
+//     $image_name = $image_to_upload['name'];
+//     $target_file = $target_dir . basename($image_to_upload['name']);
+//     $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+//     if (!empty($target_file)) {
+//         if (getimagesize($image_to_upload['tmp_name']) !== FALSE) {
+//             $error_status = 1;
+//         } else {
+//             $error_status = 0;
+//         }
+
+//         if (file_exists($target_file)) {
+//             $error_status = 0;
+//         } else {
+//             $error_status = 1;
+//         }
+
+//         if ($image_to_upload['size'] > 10485760) {
+//             $error_status = 0;
+//         }
+
+//         if ($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
+//             $error_status = 0;
+//         } else {
+//             $error_status = 1;
+//         }
+
+//         if ($error_status == 1) {
+//             if (move_uploaded_file($image_to_upload['tmp_name'], $target_file)) {
+//                 return dirname($target_file) . "/" . basename($image_to_upload['name']);
+//             }
+//         }
+//     } else {
+//         return 'none';
+//     }
+// }
 ?>
