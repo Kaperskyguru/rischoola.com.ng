@@ -1,16 +1,17 @@
 <?php include 'dashboard-header.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
-    $id = get_user_uid();
+    $user_id = get_user_uid();
     if (empty($_FILES['profile_image']['name']) || empty($_FILES['profile_image']['tmp_name']) || empty($_FILES['profile_image'])) {
         $error_text = "Image is required";
-        $newsModel->set_post_featured_image_id(NULL);
+        //$newsModel->set_post_featured_image_id(NULL);
     } else {
-      $path = uploadFiles();
-        if ($path == 'none') {
+      $image_id = uploadFiles($user_id, 0, $resources);
+        if ($image_id == 0) {
             $error_text = "Not Uploaded";
         } else {
-            $image_id = $resources->add_images_and_get_last_inserted_id($path, $id, 1, "profile");
+            $userController->insert_user_profile_id($image_id, $user_id);
+            $success_text = "Profile Picture Changed Successfully";
         }
     }
   }
@@ -51,11 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
                             <form role="form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
                             <div class="form-group row">
                               <div class="col-xs-7">
-                                <input id="profile_image" name="profile_image" type="file" >
+                                <input id="profile_image" name="profile_image[]" type="file" >
                               </div>
                             <div class="col-xs-5">
                                 <div class="form-group">
-                                    <button class="text-center btn btn-primary btn-lg" type="submit">Upload Profile Photo</button>
+                                    <button id="img_submit" class="text-center btn btn-primary btn-lg" disabled type="submit">Upload Profile Photo</button>
                                 </div>
                             </div>
                           </div>
@@ -229,55 +230,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
 <script src="js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-$('body').delegate('#submit_personal_data','click', function() {
-  var username = $('#user_name').val();
-    var first_name = $('#first_name').val();
-    var last_name = $('#last_name').val();
-    var user_email = $('#email_address').val();
-    var user_phone_number = $('#phone_number').val();
-    var user_address = $('#address').val();
-    var user_about = $('#about_you').val();
-    var user_birthday = $('#birthday').val();
-    var user_course_of_study = $('#course_of_study').val();
-    var user_level = $('#level').val();
-    var user_gender = $('#gender').val();
-    var user_school_id = $('#school').val();
-    var user_display_name = $('#display_name').val();
+$(document).ready(function() {
+    $('#profile_image').change(function() {
+        $v = $(this).val();
+        if($v == ""){
+            $('#img_submit').attr('disabled', 'disabled');
+        }else{
+            $('#img_submit').removeAttr('disabled');
+        }
+    });
+    $('body').delegate('#submit_personal_data','click', function() {
+    var username = $('#user_name').val();
+        var first_name = $('#first_name').val();
+        var last_name = $('#last_name').val();
+        var user_email = $('#email_address').val();
+        var user_phone_number = $('#phone_number').val();
+        var user_address = $('#address').val();
+        var user_about = $('#about_you').val();
+        var user_birthday = $('#birthday').val();
+        var user_course_of_study = $('#course_of_study').val();
+        var user_level = $('#level').val();
+        var user_gender = $('#gender').val();
+        var user_school_id = $('#school').val();
+        var user_display_name = $('#display_name').val();
 
+        $.ajax({
+            method:"POST",
+            url:"actions.php",
+            data: {UpdateProfile:1, user_display_name:user_display_name, user_school_id:user_school_id, user_gender:user_gender, user_level:user_level, user_course_of_study:user_course_of_study, user_birthday:user_birthday, user_about:user_about, user_address:user_address, username:username, user_phone_number:user_phone_number,first_name:first_name, last_name:last_name, user_email:user_email},
+            success: function(d) {
+            }
+        });
+    });
+
+    $('#change_password').click(function() {
+    var old_password = $('#old_password').val();
+    var new_password = $('#new_password').val();
+    var confirm_password = $('#confirm_password').val();
+    var log_all_out = $('#log_all_out').is(':checked');
     $.ajax({
         method:"POST",
         url:"actions.php",
-        data: {UpdateProfile:1, user_display_name:user_display_name, user_school_id:user_school_id, user_gender:user_gender, user_level:user_level, user_course_of_study:user_course_of_study, user_birthday:user_birthday, user_about:user_about, user_address:user_address, username:username, user_phone_number:user_phone_number,first_name:first_name, last_name:last_name, user_email:user_email},
+        data: {change_password:1, log_all_out:log_all_out, old_password:old_password, new_password:new_password, confirm_password:confirm_password},
         success: function(d) {
         }
     });
-});
+    });
 
-$('#change_password').click(function() {
-  var old_password = $('#old_password').val();
-  var new_password = $('#new_password').val();
-  var confirm_password = $('#confirm_password').val();
-  var log_all_out = $('#log_all_out').is(':checked');
-  $.ajax({
-      method:"POST",
-      url:"actions.php",
-      data: {change_password:1, log_all_out:log_all_out, old_password:old_password, new_password:new_password, confirm_password:confirm_password},
-      success: function(d) {
-      }
-  });
-});
-
-$('#change_bank_information').click(function() {
-  var bank_name = $('#bank_name').val();
-  var account_name = $('#account_name').val();
-  var account_number = $('#account_number').val();
-  $.ajax({
-      method:"POST",
-      url:"actions.php",
-      data: {change_bank_information:1, bank_name:bank_name, account_name:account_name, account_number:account_number},
-      success: function(d) {
-        $('#error').html(d);
-      }
-  });
+    $('#change_bank_information').click(function() {
+    var bank_name = $('#bank_name').val();
+    var account_name = $('#account_name').val();
+    var account_number = $('#account_number').val();
+    $.ajax({
+        method:"POST",
+        url:"actions.php",
+        data: {change_bank_information:1, bank_name:bank_name, account_name:account_name, account_number:account_number},
+        success: function(d) {
+            $('#error').html(d);
+        }
+    });
+    });
 });
 </script>
+<?php
+function uploadFiles($user_id, $inserted_id, $resources) {
+    $files = $_FILES["profile_image"];
+    return Image::upload_image($files, $user_id, $inserted_id, $resources, "profiles");  
+}
+

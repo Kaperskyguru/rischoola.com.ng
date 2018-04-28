@@ -1,7 +1,7 @@
 <?php
 
 class Users extends dbmodel {
-
+  private static $instance;
   private const COOKIE_NAME = "auth_cookie";
   private const SESSION_TIME = 604800; // 7 days
   private $user_id;
@@ -11,7 +11,7 @@ class Users extends dbmodel {
   private $session_id;
   private $session_start_time;
 
-public function __construct()
+private function __construct()
 {
   $this->user_id = NULL;
   $this->user_name = NULL;
@@ -20,6 +20,15 @@ public function __construct()
   $this->session_id = NULL;
   $this->session_start_time = NULL;
 }
+
+    private function __clone(){}
+
+    public static function getInstance(){
+      if(!self::$instance){
+        self::$instance = new self();
+      }
+      return self::$instance;
+    }
 
   public function get_user_username_by_id($id) {
     try{
@@ -83,6 +92,18 @@ public function __construct()
       return TRUE;
     }
   return FALSE;
+  }
+
+  public function insert_user_profile_id($image_id, $user_id)
+  {
+  $sql = "UPDATE users SET user_profile_id = :user_profile_id WHERE user_id = :user_id";
+    $this->query($sql);
+    $this->bind(':user_profile_id', $image_id);
+    $this->bind(':user_id', $user_id);
+    if($this->executer()){
+      return TRUE;
+    }
+    return FALSE;
   }
 
   public function is_user_email_exist($user_email){

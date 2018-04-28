@@ -1,8 +1,15 @@
 <?php
 
 class Groups extends dbmodel {
-  public function __construct() {
+  private static $instance;
+  private function __construct() {}
+  private function __clone(){}
 
+  public static function getInstance(){
+    if(!self::$instance){
+      self::$instance = new self();
+    }
+    return self::$instance;
   }
 
   public function add_group(GroupModel $groupModel) {
@@ -28,14 +35,15 @@ class Groups extends dbmodel {
       $this->bind(":group_show_email", $showEmail);
       $this->bind(":group_show_phone", $showPhone);
       $this->executer();
-      if ($id = $this->lastIdinsert() !== 0) {
-        if($this->join_group($id, $group_user_id)){
-          if($this->update_member_count($id, TRUE)){// or add 1 when creating the group
-            return $id;
-          }
+      $group_id = $this->lastIdinsert();
+      if ($group_id !== 0) {
+        if($this->join_group($group_id, $group_user_id) && $this->update_member_count($group_id, TRUE)){
+          return $group_id;
         }
+        return $group_id;
+      }else{
+        return 0;
       }
-      return 0;
   }
 
 
@@ -129,10 +137,8 @@ class Groups extends dbmodel {
 
   public function update_member_count($group_id, $increment){
     $count = $this->get_member_count($group_id);
-    echo "string ".$count;
         if ($increment) {
           $count = $count + 1;
-          echo "string String".$count;
           $query = "UPDATE groups SET group_member_count = :group_member_count WHERE group_id = :group_id";
           $this->query($query);
           $this->bind(':group_member_count', $count);
@@ -140,7 +146,6 @@ class Groups extends dbmodel {
           $this->executer();
         }else {
           $count = $count - 1;
-          echo "string String String".$count;
           $query = "UPDATE groups SET group_member_count = :group_member_count WHERE group_id = :group_id";
           $this->query($query);
           $this->bind(':group_member_count', $count);

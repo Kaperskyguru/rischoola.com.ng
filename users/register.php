@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$guest_id = $userController->add_temporary_user($userModel, $unique_id);
 		if($guest_id !== 0){
 			if($mailer->send_verification_mail($guest_id, $unique_id , $userModel->get_user_email())){
-				$success_text =  "Registered successfully, please verify your account";
+				$succes_text =  "Registered successfully, please verify your account";
 			}
 		}else {
 			$error_text  = "Sorry, We could not register you, please try again";

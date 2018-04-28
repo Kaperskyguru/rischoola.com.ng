@@ -1,6 +1,7 @@
 <?php
 session_start();
 ob_start();
+require_once 'config.php';
 require 'classes/controllers/dbmodel.php';
 require_once "classes/controllers/news.php";
 require_once "classes/controllers/lodges.php";
@@ -34,26 +35,28 @@ require_once "classes/models/marketplace.php";
 
 require_once 'include/functions.php';
 
-$newsControler = new News();
-$lodgeController = new Lodges();
-$roommateController = new Roommates();
-$storeController = new Marketplace();
-$groupController = new Groups();
-$eventController = new Events();
-$userController = new Users();
-$scholarshipController = new Scholarships();
-$resources = new Resources();
-$commentController = new Comments();
-$replyController = new Replies();
-$schoolController = new Schools();
-$messageController = new Messages();
-$mailer = new Mails();
 
-$newsModel = new NewsModel();
-$lodgeModel = new LodgeModel();
-$userModel = new UserModel();
-$eventModel = new EventModel();
-$groupModel = new GroupModel();
-$messageModel = new MessageModel();
-$storeModel = new MarketplaceModel();
-$roommateModel = new RoommateModel();
+$newsControler = News::getInstance();
+$lodgeController = Lodges::getInstance();
+$roommateController = Roommates::getInstance();
+$storeController = Marketplace::getInstance();
+$groupController = Groups::getInstance();
+$eventController = Events::getInstance();
+$userController = Users::getInstance();
+$scholarshipController = Scholarships::getInstance();
+$resources = Resources::getInstance();
+$commentController = Comments::getInstance();
+$replyController = Replies::getInstance();
+$schoolController = Schools::getInstance();
+$messageController = Messages::getInstance();
+$mailer = Mails::getInstance();
+
+$newsModel = NewsModel::getInstance();
+$lodgeModel = LodgeModel::getInstance();
+$userModel = UserModel::getInstance();
+$eventModel = EventModel::getInstance();
+$groupModel = GroupModel::getInstance();
+$messageModel = MessageModel::getInstance();
+$storeModel = MarketplaceModel::getInstance();
+$roommateModel = RoommateModel::getInstance();
+

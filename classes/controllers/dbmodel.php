@@ -3,29 +3,24 @@
  abstract class dbmodel
 {
 private $db;
-public  $dbh;
+public static $dbh;
 private $stmt;
 
-  public function __construct()
-  {
-    $this->dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "");
-    $this->dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    }
+  private function __construct(){}
 
-    public function db()
-    {
-      if(is_null($this->dbh))
-      {
-          $this->dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "");
-          $this->dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    //Using a singleton pattern to avoid duplication database connection
+    public function db(){
+      if(!self::$dbh){
+          self::$dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "");
+          self::$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       }
-      return;
+      return self::$dbh;
     }
 
   public function query($query)
   {
-    $this->db();
-    $this->stmt = $this->dbh->prepare($query);
+    $this->db = $this->db();
+    $this->stmt = $this->db->prepare($query);
   }
 
   public function bind($param, $value, $type = null)
@@ -64,7 +59,7 @@ private $stmt;
 
   public function lastIdinsert()
   {
-    return $this->dbh->lastInsertId();
+    return $this->db->lastInsertId();
   }
 
 }

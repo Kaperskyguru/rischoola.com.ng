@@ -120,7 +120,8 @@ if ($id == 0) {
                                                 </div>
                                             </div>
                                             <div class="list_mode_btns">
-                                                <a href="../member/compose.php" class="btn btn-success btn-lg" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $storeController->get_product_username_by_id($product_user_id); ?></a>
+                                            <?php $username = $storeController->get_product_username_by_id($product_user_id);?>
+                                                <a href="../member/compose.php?user_user_name=<?php echo $username?>" class="btn btn-success btn-lg" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $username; ?></a>
                                                 <a class="btn btn-danger btn-lg to-wish"><i class=" fa fa-phone"></i>  <?php echo $retVal = ($product_show_phone == 1) ? $userController->get_user_phone_number_by_id($product_user_id) : "" ;?>
 </a>
                                                 <!-- <a class="btn btn-purple btn-lg to-wish"><i class=" fa fa-phone"></i>  solomoneseme@gmail.com</a> -->

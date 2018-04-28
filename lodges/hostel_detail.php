@@ -113,7 +113,8 @@ if ($id == 0) {
                                                 </div>
                                             </div>
                                             <div class="list_mode_btns">
-                                                <button class="to-cart" type="submit" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $userController->get_user_username_by_id($lodge_user_id);?></button>
+                                            <?php $username = $userController->get_user_username_by_id($lodge_user_id)?>
+                                                <a href="../member/compose.php?user_user_name=<?php echo $username?>" style="text-decoration:none" class="to-cart" type="submit" name="to-cart"><i class="fa fa-plus"></i> Message <?php echo $username;?></a>
                                                 <div class="product-btn">
                                                     <button class="to-wish"><i class="fa fa-heart"></i><span class="tooltip">Add To Wishlist</span></button>
                                                 </div>

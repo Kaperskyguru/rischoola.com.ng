@@ -2,25 +2,30 @@
 require 'dashboard-header.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_SESSION['user_id'];
+    $user_id = $_SESSION['user_id'];
+    $error = 0;
     if (empty($_FILES['group_image']['name']) || empty($_FILES['group_image']['tmp_name']) || empty($_FILES['group_image'])) {
         $error_text = "Image is required";
+        $error = 1;
         //$groupModel->set_group_featured_image_id(0);
     } 
     
     if (empty($_POST['title'])) {
         $error_text = 'Please title is required';
+        $error = 1;
     } else {
         $groupModel->set_group_title($_POST['title']);
     }
     if (empty($_POST['desc'])) {
         $error_text = 'Please Content is required';
+        $error = 1;
     } else {
         $groupModel->set_group_desc($_POST['desc']);
     }
 
     if (empty($_POST['school'])) {
         $error_text = 'Please School is required';
+        $error = 1;
     } else {
         $groupModel->set_group_school_id($_POST['school']);
     }
@@ -38,12 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $groupModel->set_group_type($_POST['type']);
-    $groupModel->set_group_user_id($id);
+    $groupModel->set_group_user_id($user_id);
     $groupModel->set_group_status_id(2);
     if (!isset($error_text)) {
         $inserted_id = $groupController->add_group($groupModel);
         if ($inserted_id !== 0) {
-            $image_id = uploadFiles($id, $inserted_id, $resources);
+            $image_id = uploadFiles($user_id, $inserted_id, $resources);
             if($groupController->insert_group_featured_image_id($image_id, $inserted_id)){
                 $success_text = "Your Group is pending verifications...";
               }else {
@@ -86,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="group_image">Group Profile Image:</label>
-                    <input type="file" id="group_image" name="group_image"  />
+                    <input type="file" id="group_image[]" name="group_image[]"  />
                 </div>
                 <div class="checkbox">
                     <label><input name="showEmail"type="checkbox">Show Email Address</label>
@@ -112,4 +117,3 @@ function uploadFiles($user_id, $inserted_id, $resources) {
     $files = $_FILES["group_image"];
     return Image::upload_image($files, $user_id, $inserted_id, $resources, "groups");  
 }
-?>

@@ -17,9 +17,15 @@ class MarketplaceModel {
   private $showEmail, $showPhone;
   private $category;
 
-  public function __construct()
-  {
+  private static $instance;
+  private function __construct() {}
+  private function __clone(){}
 
+  public static function getInstance(){
+    if(!self::$instance){
+      self::$instance = new self();
+    }
+    return self::$instance;
   }
 
   public function get_product_show_email() {

@@ -10,9 +10,15 @@ class MessageModel {
   private $message_date_created	;
   private $message_type;
 
-  public function __construct()
-  {
+  private static $instance;
+  private function __construct() {}
+  private function __clone(){}
 
+  public static function getInstance(){
+    if(!self::$instance){
+      self::$instance = new self();
+    }
+    return self::$instance;
   }
 
   public function get_message_id () {

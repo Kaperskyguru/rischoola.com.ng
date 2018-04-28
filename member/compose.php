@@ -1,4 +1,12 @@
-<?php include 'dashboard-header.php' ?>
+<?php include 'dashboard-header.php';
+
+if(isset($_GET['user_user_name'])){
+    // Sanitize data
+    $username = $_GET['user_user_name'];
+}else{
+    $username = null;
+}
+?>
 <div id="page-wrapper">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -27,7 +35,7 @@
             <form>
                 <div class="form-group">
                     <label for="receiver">Enter Receiver Name</label>
-                    <input type="text" name="receiver" id="receiver" class="form-control">
+                    <input type="text" value="<?php echo $username = (!is_null($username))? $username : '';?>" name="receiver" id="receiver" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Subject:</label>

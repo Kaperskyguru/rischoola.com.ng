@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //   } else {
             //$image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, $new_id, "post");
             if($newsControler->insert_post_featured_image_id($image_id, $new_id)){
-              $error_text = "Your Post is pending verifications...";
+              $success_text = "Your Post is pending verifications...";
             }else {
               $error_text = "Your Post inserted without featured Image...";
             }

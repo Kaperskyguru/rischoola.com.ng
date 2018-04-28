@@ -10,9 +10,16 @@ class GroupModel {
   private $group_keyword;
   private $group_featured_image_id;
   private $showEmail, $showPhone, $group_type;
-  public function __construct()
-  {
+  private static $instance;
+  
+  private function __construct() {}
+  private function __clone(){}
 
+  public static function getInstance(){
+    if(!self::$instance){
+      self::$instance = new self();
+    }
+    return self::$instance;
   }
   public function get_group_type() {
       return filter_var($this->group_type, FILTER_SANITIZE_NUMBER_INT);
