@@ -19,7 +19,7 @@ if($userController->is_authenticated()){
             <div>
                 <h3>Latest News </h3>
             </div>
-            <?php echo $newsControler->get_last_inserted_post("../res/imgs/1.jpg", ""); ?>
+            <?php echo $newsControler->get_last_inserted_post("../res/imgs/1.jpg", "", $resources); ?>
             <div class="col-md-12" id="displayNews">
                  <!-- News will display here -->
             </div>
@@ -40,7 +40,7 @@ if($userController->is_authenticated()){
             <section class="index-scholarships">
               <div class="row">
               <h3>Available Scholarships/Internships</h3>
-                <?php $scholarshipController->display_latest_scholarship(9, "../"); ?>
+                <?php $scholarshipController->display_latest_scholarship(9, "../", $resources); ?>
               </div>
             </section>
           </div>

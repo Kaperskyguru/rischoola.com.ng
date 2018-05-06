@@ -271,7 +271,7 @@ class Marketplace extends dbmodel {
           }
         }
 
-    public function display_availabe_products($length, $src, $category_id) {
+    public function display_availabe_products($length, $res, $category_id) {
       if($category_id == 0){
         $stmt = $this->get_products($length);
       }else{
@@ -283,7 +283,7 @@ class Marketplace extends dbmodel {
                 ?>
                 <div class='col-sm-4 col-lg-4 col-md-4'>
                     <div class='thumbnail'>
-                        <img src="<?php echo $src; ?>res/imgs/1.jpg" class="img-responsive">
+                    <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                      
                         <div class='caption'>
                             <h4 class="hostelname"><a href='product_details.php?id=<?php echo $product_id; ?>'><?php echo $product_name; ?></a></h4>
                             <h5 class='text-danger'>N<?php echo $product_price; ?></h5>
@@ -303,7 +303,7 @@ class Marketplace extends dbmodel {
         }
     }
 
-    public function display_index_products($length, $src) {
+    public function display_index_products($length, $res) {
         $stmt = $this->get_products($length);
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -311,7 +311,7 @@ class Marketplace extends dbmodel {
                 ?>
                 <div class="col-md-5 pad-bottom-20">
                  <div class="col-md-6">
-                   <img src="<?php echo $src; ?>res/imgs/1.jpg" class="img-responsive img-thumbnail" >
+                 <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
                          </div>
                          <div class="col-md-6">
                              <h5 class="" style="text-align:left"><a href="marketplace/product_details.php?id=<?php echo $product_id; ?>"><?php echo $product_name; ?></a></h5>

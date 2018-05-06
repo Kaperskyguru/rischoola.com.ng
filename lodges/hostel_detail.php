@@ -30,10 +30,27 @@ if ($id == 0) {
                                 <div class="col-md-6">
                                     <div class="single-product-thumb">
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active"><a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-1.jpg" alt="..."></a></li>
-                                            <li role="presentation"><a href="#thumb-2" aria-controls="thumb-2" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-2.jpg" alt="..."></a></li>
+                                            <li role="presentation">
+                                                <?php 
+                                                    $image_stmt = $resources->get_multiple_image_id($id, 'lodge');
+                                                    $count = 0;
+                                                    if($image_stmt->rowCount() > 0){
+                                                        ?>
+                                                        <a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab">
+                                                            <?php while($image_row = $image_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                            //$count++;
+                                                            extract($image_row);?>
+                                                            <?php $resources::display($resource_url, array_merge($resources::SLIDE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                                                        </a>
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                            </li> 
+                                            <!-- <!-- <li role="presentation" class="active"><a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-1.jpg" alt="..."></a></li> -->
+                                            <!-- <li role="presentation"><a href="#thumb-2" aria-controls="thumb-2" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-2.jpg" alt="..."></a></li> -->
                                             <li role="presentation"><a href="#thumb-3" aria-controls="thumb-3" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-3.jpg" alt="..."></a></li>
-                                            <li role="presentation"><a href="#thumb-4" aria-controls="thumb-4" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-4.jpg" alt="..."></a></li>
+                                            <!-- <li role="presentation"><a href="#thumb-4" aria-controls="thumb-4" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-4.jpg" alt="..."></a></li> -->
                                         </ul>
 
                                         <div class="tab-content">

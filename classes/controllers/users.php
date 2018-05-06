@@ -246,6 +246,8 @@ private function __construct()
           $this->session_start_time = intval($res['session_start_ts'], 10);
 
           //echo $this->user_id;
+        }else{
+          $this->delete_expired_session($this->user_id);
         }
       }
     } catch (Exception $e) {
@@ -253,6 +255,18 @@ private function __construct()
       return FALSE;
     }
     return TRUE;
+  }
+
+  public function delete_expired_session($user_id)
+  {
+    try{
+    $sql = 'DELETE FROM sessions WHERE session_user_id = :session_user_id';
+        $this->query($sql);
+        $this->bind(":session_user_id", $user_id);
+        $this->executer();
+    }catch(Exception $e){
+      echo $e->getMessage();
+    }
   }
 
   public function logout($user_id, $close_all_sessions = FALSE)
@@ -339,6 +353,11 @@ private function __construct()
       $this->bind(":user_email", $email);
       $this->bind(":user_school_id", $school_id);
       $stmt = $this->executer();
+
+      // Notify admin
+      $Notify->set_notification_user_id($this->lastInInsert());
+      $Notify->set_notification_content("A new User Just Registered");
+      Notification::Notify($Notify);
     } catch (Exception $e) {
       echo $e->getMessage();
       return FALSE;

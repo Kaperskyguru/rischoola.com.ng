@@ -18,7 +18,7 @@ class Image extends dbmodel {
       return self::$instance;
     }
 
-    public static function Upload($file_name, $options){
+    public static function Uplad($file_name, $options){
         $result = \Cloudinary\Uploader::upload($file_name, $options);
 
         unlink($file_name);
@@ -28,7 +28,7 @@ class Image extends dbmodel {
 
     }
 
-    public static function display($public_id, $options){
+    public static function dispay($public_id, $options){
       echo cl_image_tag($public_id, $options);
     }
 
@@ -41,7 +41,7 @@ class Image extends dbmodel {
          return FALSE;
     }
 
-    public static function upload_image($files, $user_id, $inserted_id, $resources, $dir)
+    public static function upload_imge($files, $user_id, $inserted_id, $resources, $dir)
     {
         $error_status = 1;
         $files = is_array($files) ? $files : array( $files );

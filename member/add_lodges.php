@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php
 function uploadFiles($user_id, $inserted_id, $resources) {
     $files = $_FILES["lodge_image"];
-    return Image::upload_image($files, $user_id, $inserted_id, $resources, "lodges");  
+    return Resources::upload_image($files, $user_id, $inserted_id, $resources, "lodges");  
 }
 
 

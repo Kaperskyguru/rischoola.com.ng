@@ -1,17 +1,20 @@
+
+<!-- update this file Few changes were made-->
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo get_site_name(); ?> | </title>
+    <title><?php echo get_site_name(); ?>|</title>
 
     <link rel="stylesheet" type="text/css" href="../res/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../res/css/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="../res/css/style.css">
     <link rel="stylesheet" href="../res/css/responsive.css">
+        <link rel="stylesheet" type="text/css" href="../res/css/font-awesome/css/font-awesome.css">
 
 </head>
 <body>
 
- <nav class="navbar navbar-fixed-top top-nav">
+ <nav class="navbar navbar-fixed-top top-nav" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -21,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.php"><?php echo get_site_name(); ?></a>
+      <a class="logo_marg" href="index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive" ></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,26 +39,27 @@
             </div>
           </div>
         </form>
-      <ul class="nav navbar-nav">
-        <li><a href="../index.php">Home<span class="sr-only">(current)</span></a></li>
+      <ul class="nav navbar-nav" >
+        <li><a href="../index.php" >Home<span class="sr-only">(current)</span></a></li>
         <li><a href="../news/news.php">Latest News</a></li>
         <li><a href="../lodges/hostels.php">Hostels</a></li>
-				<li><a href="../roommates/roommate.php">Roommate Finder</a></li>
-        <!-- <li><a href="../scholarships/scholarships.php">Scholarships</a></li> -->
+                <li><a href="../roommates/roommate.php">Roommate Finder</a></li>
+        <!-- <li><a href="scholarships/scholarships.php">Scholarships</a></li> -->
         <li><a href="../marketplace/store.php">Store</a></li>
-        <li><a href="groups.php">Groups</a></li>
+        <li><a href="../groups/groups.php">Groups</a></li>
         <li><a href="../events/events.php">Events</a></li>
+        <hr>
+        <li class="visible-xs"><a href="../users/register.php">Sign Up</a></li>
+        <li class="visible-xs"><a href="../users/login.php">Login</a></li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav nav-drop navbar-right hidden-xs">
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../users/register.php">Sign Up</a></li>
             <li><a href="../users/login.php">Login</a></li>
-
-
           </ul>
         </li>
       </ul>

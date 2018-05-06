@@ -62,7 +62,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="desc" > Description: </label>
-                    <textarea rows="5" id="desc" name="desc" class="form-control"> </textarea>
+                    <textarea  id="editor" name="desc" class="form-control"> </textarea>
+                    <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#editor' ) )
+                            .then( editor => {
+                                console.log( editor );
+                            } )
+                            .catch( error => {
+                                console.error( error );
+				            } );
+                    </script>
                 </div>
                 <div class="form-group">
                     <label for="post_image">Choose Featured image: </label>
@@ -83,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-success" type="submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -99,5 +109,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 function uploadFiles($user_id, $inserted_id, $resources) {
     $files = $_FILES["post_image"];
-    return Image::upload_image($files, $user_id, $inserted_id, $resources, "posts");  
+    return Resources::upload_image($files, $user_id, $inserted_id, $resources, "posts");  
 }

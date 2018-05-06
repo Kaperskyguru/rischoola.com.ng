@@ -44,11 +44,14 @@ if($userController->is_authenticated()){
                     </select>
                 </div>
 
+                <!--changes made-->
                 <div class="form-group">
-                    <div class="col-sm-offset-2">
-                        <button type="submit" class="btn btn-success">Search</button>
+                    <div class="">
+                        <button type="submit" class="btn btn-block btn-success">Search</button>
                     </div>
                 </div>
+                <!--changes finished here-->
+
                 <br />
                 <h5 class="side-header">Hostel Facilities </h5>
                 <div class="checkbox-items">
@@ -126,7 +129,7 @@ if($userController->is_authenticated()){
             <div class="col-sm-9">
                 <h2>Available Hostels For Rent</h2>
                 <div class="row">
-                    <?php $lodgeController->display_availabe_lodges(12, "../"); ?>
+                    <?php $lodgeController->display_availabe_lodges(12, "../",$resources); ?>
 
                     <!--  Pagination starts here -->
                     <div class="col-lg-12 pagination text-center">

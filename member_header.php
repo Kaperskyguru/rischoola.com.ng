@@ -34,7 +34,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php"><?php echo get_site_name(); ?></a>
+                    <a class="logo_marg" href="index.php"><img src="res/imgs/brand.fw.png" class="img-responsive"></a>
                 </div>
                 <div class="collapse navbar-collapse top-nav" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form navbar-left">

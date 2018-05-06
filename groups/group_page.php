@@ -118,7 +118,8 @@ exit;
                                                       <ul>
                                                           <div class="comment-wrap">
                                                               <div class="comment-avatar">
-                                                                  <img alt="" src="../res/imgs/1.jpg" class="" height="45" width="45">
+                                                                  <?php $resources::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($resources::AVATAR_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
+                                                                  <!-- <img alt="" src="../res/imgs/1.jpg" class="" height="45" width="45"> -->
                                                               </div>
                                                               <div class="author-comment">
                                                                   <cite class="fn"><?php echo $userController->get_user_username_by_id($discussion_user_id); ?></cite>
@@ -259,7 +260,7 @@ exit;
                             </tr>
                           </table>
                           <div class="text-center pad-up-20">
-                              <img src="../res/imgs/1.jpg" class="img-responsive img-thumbnail">
+                          <?php $resources::display($resources->get_image_url($id, 'group'), array_merge($resources::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
                           </div>
                           <div class="pad-bottom-50 pad-up-20">
                             <h4>Description:</h4>

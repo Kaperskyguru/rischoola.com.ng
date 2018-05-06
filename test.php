@@ -16,5 +16,5 @@ echo $_SESSION['old']."<br />";
 // return $qux;
 //
 // }
-
+Notifications::Notify();
 //$groupController->INSERT();

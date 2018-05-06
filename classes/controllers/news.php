@@ -232,7 +232,7 @@ private static $instance;
       return $this->lastIdinsert();
     }
 
-    public function get_last_inserted_post($src, $post_src)
+    public function get_last_inserted_post($src, $post_src, Resources $res)
     {
       // Will be activated when i start inserting [post]
         //$id = $this->get_last_inserted_id();
@@ -240,7 +240,14 @@ private static $instance;
                 extract($row);
                 ?>
                 <div>
-                    <a href="<?php echo $post_src; ?>read-news.php?id=<?php echo $post_id ?>"><img src="<?php echo $src; ?>" class="img-responsive img-thumbnail"></a>
+                    <a href="<?php echo $post_src; ?>read-news.php?id=<?php echo $post_id ?>">
+                    
+                    <?php 
+                   
+                    $res::display($res->get_image_url(68, 'post'), array_merge($res::LATEST_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                    
+                  
+                  </a>
                 </div>
                 <div>
                     <a href="<?php echo $post_src; ?>read-news.php?id=<?php echo $post_id ?>"><h4><?php echo $post_title;?></h4></a>

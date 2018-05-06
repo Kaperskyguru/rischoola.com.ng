@@ -11,13 +11,13 @@ $id1 = $_GET['id'];
 $id = intval($id1);
 
 if ($id == 0) {
-header("Location:scholarships.php", true, 301);
+header("Location: scholarships.php");
 exit;
 } else {
     $row = $scholarshipController->get_scholarship_by_id($id);
     if (is_null($row)  || empty($row)) {
         //Log message here
-        header("Location:scholarships.php");
+        header("Location: scholarships.php");
     } else {
         extract($row);
         ?>
@@ -50,8 +50,8 @@ exit;
 
 			</p>
 			<div class="pad-bottom-20 text-center">
-				<img src="../res/imgs/1.jpg" class="img-responsive img-thumbnail">
-			</div>
+                <?php $resources::display($resources->get_image_url($id, 'scholarship'), array_merge($resources::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
+            </div>
       <h5>
           <p style="text-align: justify;">
               <?php echo get_remain_excerpt($scholarship_desc, 150); ?>
@@ -79,7 +79,7 @@ exit;
                     <div class="row">
                         <form class="col-md-12" action="<?php echo htmlspecialchars('PHP_SELF'); ?>" method="POST">
                             <!--Content column-->
-                            <?php if (!$userController->is_user_logged_in()) { ?>
+                            <?php if (!$userController->is_authenticated()) { ?>
 
                             <?php } ?>
                             <div class="form-group">

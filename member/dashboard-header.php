@@ -24,14 +24,17 @@ if(!$userController->is_authenticated()){
         <!-- Custom CSS -->
         <link href="css/sb-admin.css" rel="stylesheet">
         <!-- <link href="../res/css/style.css" rel="stylesheet"> -->
-
+        <link href="../res/css/style.css" rel="stylesheet">
         <!-- Morris Charts CSS -->
         <link href="css/plugins/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
+        
         <script type="text/javascript">
         // Javascript to enable link to tab
+
         var url = document.location.toString();
         //alert(url);
         if (url.match('#')) {
@@ -60,7 +63,7 @@ if(!$userController->is_authenticated()){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../index.php">Home</a>
+                        <a class="logo_marg" href="index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive"></a>
                     </div>
                     <div class="collapse navbar-collapse bs-example-navbar-collapse-1" id="bs-example-navbar-collapse-1">
                         <form class="navbar-form navbar-left">
@@ -139,25 +142,19 @@ if(!$userController->is_authenticated()){
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                                 <ul class="dropdown-menu alert-dropdown">
-                                    <li>
-                                        <a href="#"> <span class="label label-default">uche sent u a message</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><span class="label label-primary">uche sent u a message</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><span class="label label-success">uche sent u a message</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"> <span class="label label-info">uche sent u a message</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><span class="label label-warning">uche sent u a message</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><span class="label label-danger">uche sent u a message</span></a>
-                                    </li>
 
+                                    <?php
+                                        $stmt = $notifier->get_notifications_by_user_id(get_user_uid());
+                                        if($stmt->rowCount() > 0){
+                                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                extract($row);?>
+                                                    <li>
+                                                        <a href="#"> <span class="label label-default"><?php echo $notification_content;?></span></a>
+                                                    </li>
+                                                <?php
+                                            }
+                                        }
+                                    ?>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -287,7 +284,7 @@ if(!$userController->is_authenticated()){
 
                             <li>
                                 <a href="javascript:;" data-toggle="collapse" data-target="#account"><i class="fa fa-user"></i> My Account <i class="fa fa-fw fa-caret-down"></i></a>
-                                <ul id="account" class="collapse">
+                                <ul id="account" class="collapse member-collapse" style="color:blue">
                                     <li>
                                         <a href="profile.php">Update Profile</a>
                                     </li>

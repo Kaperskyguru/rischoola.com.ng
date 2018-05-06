@@ -37,6 +37,7 @@ class Groups extends dbmodel {
       $this->executer();
       $group_id = $this->lastIdinsert();
       if ($group_id !== 0) {
+        // Set default group table: Member_count to 1.... remove update_member_count function
         if($this->join_group($group_id, $group_user_id) && $this->update_member_count($group_id, TRUE)){
           return $group_id;
         }
@@ -300,7 +301,7 @@ class Groups extends dbmodel {
      }
  }
 
-  public function display_availabe_groups($length, $src, $link) {
+  public function display_availabe_groups($length, $res, $link) {
       $stmt = $this->get_groups($length);
       if ($stmt->rowCount() > 0) {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -308,7 +309,7 @@ class Groups extends dbmodel {
               ?>
               <div class="col-sm-3 pad-bottom-20">
                 <div>
-                  <img src="<?php echo $src; ?>res/imgs/1.jpg" class="img-responsive img-thumbnail">
+                <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                 </div>
                 <div>
                   <h4><?php echo $group_title; ?></h4>

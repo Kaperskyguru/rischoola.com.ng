@@ -21,7 +21,7 @@ if($userController->is_authenticated()){
                 <div>
                     <h3>Latest News</h3>
                 </div>
-                <?php echo $newsControler->get_last_inserted_post("res/imgs/1.jpg", "news/"); ?>
+                <?php echo $newsControler->get_last_inserted_post("res/imgs/1.jpg", "news/", $resources); ?>
                 <div class="col-md-12" id="displayNews">
                     <?php $newsControler->display_latest_post(9, "news/"); ?>
                 </div>

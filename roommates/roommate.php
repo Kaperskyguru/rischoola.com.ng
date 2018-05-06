@@ -8,7 +8,7 @@ if($userController->is_authenticated()){
 }
 ?>
 ?>
-<section id="roomate">
+<section id="roomate" class="container">
     <div class="container pad-up-50">
         <div class="row margin-btom-20">
           <div class="col-md-9 group_layout">
@@ -44,14 +44,13 @@ if($userController->is_authenticated()){
                     </div>
                     <div class="form-group">
                         <div class="">
-                            <button type="submit" class="fa fa-search btn-lg btn btn-success"> Search</button>
-                        </div>
+                        <button type="submit" class="fa fa-search btn-lg btn-block btn-success"> Search</button>                        </div>
                     </div>
 
               </div>
             </div>
             <div class="pad-up-20">
-            <?php $roommateController->display_availabe_roommates(12, "../"); ?>
+            <?php $roommateController->display_availabe_roommates(12, $resources); ?>
             </div>
             <!--  Pagination starts here -->
             <div class="margin-btom-20 pagination">

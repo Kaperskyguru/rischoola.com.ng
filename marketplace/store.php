@@ -25,7 +25,7 @@ if($userController->is_authenticated()){
 				</div>
 				<div class="col-md-9 col-sm-9">
           <div class="row" id="products">
-              <?php $storeController->display_availabe_products(15, "../", 0);?>
+              <?php $storeController->display_availabe_products(15, $resources, 0);?>
           <!-- </div> -->
 				<!--  Pagination starts here -->
 				<div class="col-lg-12 pagination text-center">

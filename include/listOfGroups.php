@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid pad-l-r-30">
   <h2>Groups</h2>
   <div class="col-sm-3 pad-bottom-20">
     <div>

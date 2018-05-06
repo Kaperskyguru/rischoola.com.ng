@@ -334,7 +334,7 @@ public function get_lodge_models()
        }
    }
 
-    public function display_availabe_lodges($length, $src) {
+    public function display_availabe_lodges($length, $src, Resources $res) {
         $stmt = $this->get_lodges($length);
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -344,11 +344,13 @@ public function get_lodge_models()
                 <div class="col-sm-4 col-lg-4 col-md-3">
                     <div class="thumbnail">
                         <div>
-                            <img src="<?php echo $src;?>res/imgs/1.jpg" class="img-responsive img-thumbnail">
+
+                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                        
                         </div>
                         <div>
                             <h3 class="hostelname"><a href="<?php echo $src;?>lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a></h3>
-                            <h5><img src="<?php echo $src;?>res/icons/address.png" /><?php echo $lodge_address; ?></h5>
+                            <h5><img /><?php echo $lodge_address; ?></h5>
                             <p><?php echo $this->getExcerpt($lodge_desc, 60); ?></p>
                             <h3 class="hostelname text-danger"># <?php echo $lodge_price; ?> / year</h3>
                         </div>

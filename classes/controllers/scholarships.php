@@ -105,7 +105,9 @@ class Scholarships extends dbmodel {
                   extract($row);
                   ?>
                   <div>
-                      <a href="<?php echo $scholarship_src; ?>read-scholarship.php"><img src="<?php echo $src; ?>" class="img-responsive img-thumbnail"></a>
+                      <a href="<?php echo $scholarship_src; ?>read-scholarship.php">
+                      <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                    </a>
                   </div>
                   <div>
                       <a href="<?php echo $scholarship_src; ?>read-scholarship.php"><h4><?php echo $scholarship_title;?></h4></a>
@@ -115,7 +117,7 @@ class Scholarships extends dbmodel {
           }
         }
 
-        public function display_latest_scholarship($limit, $src)
+        public function display_latest_scholarship($limit, $src, Resources $res)
         {
           $stmt = $this->get_all_scholarship($limit);
           if ($stmt->rowCount() > 0) {
@@ -124,7 +126,8 @@ class Scholarships extends dbmodel {
                   ?>
                   <div class="pad-bottom-20">
                       <div class="col-sm-4">
-                          <img src="<?php echo $src; ?>res/imgs/1.jpg" class="img-responsive img-thumbnail" width="200px" height="200px">
+                      <?php 
+                      $res::display($res->get_image_url($scholarship_id, 'scholarship'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                       </div>
                       <div class="col-sm-8" >
                           <div>

@@ -30,7 +30,7 @@ if($userController->is_authenticated()){
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Upcoming Events</h2>
-                        <?php $eventController->display_availabe_events(6, "../", ""); ?>
+                        <?php $eventController->display_availabe_events(6, $resources, ""); ?>
 
                         <div class="col-lg-12">
                             <ul class="pager">
@@ -41,7 +41,7 @@ if($userController->is_authenticated()){
                     </div>
                     <div class="col-lg-12">
                         <h2>Past Events</h2>
-                        <?php $eventController->display_availabe_events(6, "../", ""); ?>
+                        <?php $eventController->display_availabe_events(6, $resources, ""); ?>
 
                         <div class="col-lg-12">
                             <ul class="pager">

@@ -240,7 +240,7 @@ class Roommates extends dbmodel {
    </form>
    <?php }
 
-  public function display_availabe_roommates($length, $src) {
+  public function display_availabe_roommates($length, $res) {
       $stmt = $this->get_roommates($length);
       if ($stmt->rowCount() > 0) {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -248,7 +248,7 @@ class Roommates extends dbmodel {
               ?>
               <div class="row">
                   <div class="col-md-3">
-                      <img src="<?php echo $src;?>res/imgs/1.jpg" class="img-responsive img-thumbnail">
+                  <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                   </div>
                   <div class="col-md-9 pad-bottom-20">
                       <a href="#"><h5><?php echo $roommate_name;?></h5></a>

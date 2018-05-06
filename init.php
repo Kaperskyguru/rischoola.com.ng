@@ -1,6 +1,10 @@
 <?php
 session_start();
 ob_start();
+require_once 'lib/cloudinary/src/Api.php';
+require_once 'lib/cloudinary/src/Cloudinary.php';
+require_once 'lib/cloudinary/src/Uploader.php';
+
 require_once 'config.php';
 require 'classes/controllers/dbmodel.php';
 require_once "classes/controllers/news.php";
@@ -17,11 +21,7 @@ require_once 'classes/controllers/replies.php';
 require_once 'classes/controllers/schools.php';
 require_once 'classes/controllers/messages.php';
 require_once 'classes/controllers/mails.php';
-
-require_once 'lib/cloudinary/src/Api.php';
-require_once 'lib/cloudinary/src/Cloudinary.php';
-require_once 'lib/cloudinary/src/Uploader.php';
-
+require_once 'classes/controllers/notifications.php';
 require_once 'classes/controllers/Images.php';
 
 require_once "classes/models/news.php";
@@ -50,6 +50,7 @@ $replyController = Replies::getInstance();
 $schoolController = Schools::getInstance();
 $messageController = Messages::getInstance();
 $mailer = Mails::getInstance();
+$notifier = Notifications::getInstance();
 
 $newsModel = NewsModel::getInstance();
 $lodgeModel = LodgeModel::getInstance();

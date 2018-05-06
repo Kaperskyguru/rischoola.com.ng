@@ -28,7 +28,7 @@ exit;
                         <h2 class="pad-up-50"><?php echo $post_title; ?></h2>
                         <div class="text-left">
                             <div>
-                                <img src="../res/imgs/1.jpg" class="img-responsive img-thumbnail">
+                                <?php $resources::display($resources->get_image_url($id, 'post'), array_merge($resources::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
                             </div>
                             <div class="pad-up-20">
                                 <h6 style="color:#aaa; margin:8px;">
@@ -62,29 +62,22 @@ exit;
                                         <!-- <h3 class="section-heading">Make a Comment </h3> -->
                                         <!--Third row-->
                                         <div class="row">
-                                            <form class="col-md-12" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']).'?id='.$post_id; ?>" method="POST" enctype="multipart/form-data">
-                                                <!--Content column-->
-                                                <!-- <?php if (!$userController->is_authenticated()) { ?>
-                                                    <div class="form-group">
-                                                        <label for="name">Enter Name</label>
-                                                        <input type="text" id="name" name="name" class="form-control" />
-                                                    </div>
-                                                <?php } ?> -->
+                                            <form id="sub" class="col-md-12" action="" method="POST" enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label for="commentBox">Enter Comment</label>
                                                     <textarea type="text" rows="5" id="commentBox" name="commentBox" class="form-control"></textarea>
                                                     <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" class="form" id="file1" name="file1"></input>
+                                                    <input type="file" class="form" id="file0" name="file"></input>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" class="form" id="file2" name="file2"></input>
+                                                    <input type="file" class="form" id="file1" name="file"></input>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <a href="#cc">
-                                                        <button class="btn btn-primary" id="comment" pid="<?php echo $id; ?>">Comment</button>
+                                                        <button type="submit" class="btn btn-primary" id="comment" pid="<?php echo $id; ?>">Comment</button>
                                                     </a>
                                                 </div>
                                                 <!--/.Content column-->
@@ -220,7 +213,24 @@ exit;
             // });
         });
 
-        $('body').delegate('#comment', 'click', function() {
+
+        $('#comnt').click(function() {;
+            var files1 = $(this)[].files;
+            alert(files1);
+            for(var i=0; i<files1.length; i++){
+                var files = files1.files[i];
+                    // uploadFile(this.files[i]); // call the function to upload the file
+
+                }
+            alert(
+                "File Name : " + files.name + "\n" +
+                "File Size : " + files.size + "\n" +
+                "File type : " + files.type + "\n" +
+                "File date : " + files.lastModified
+            );
+        });
+
+        $('body').delegate('#comnt', 'click', function() {
             //e.preventDefault();
             var pid = $(this).attr('pid');
             var comment_body = $('#commentBox').val();
@@ -236,7 +246,5 @@ exit;
               }
             });
         });
-
-
     });
 </script>

@@ -22,7 +22,7 @@ class Mails extends dbmodel
 
   public function send_verification_mail($guest_id, $unique_id, $guest_email){
       $link ='users/login.php?guestid='.$guest_id.'&uniqueid='.$unique_id;
-
+    
       $msg = '
 
         <!Doctype html>
@@ -46,9 +46,10 @@ class Mails extends dbmodel
       </body>';
 
       $title = "ACCOUNT VERIFICATION";
-      //header('Location: /old_rsschools.ng'.$link);
-      $this->pretty_mail($guest_email, $title, $msg, 'null');
-      return true;
+      if($this->pretty_mail($guest_email,$title, $msg, 'null')){
+        return TRUE;
+    }
+    return FALSE;
   }
 
 

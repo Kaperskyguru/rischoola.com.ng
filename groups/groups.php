@@ -29,7 +29,7 @@ if($userController->is_authenticated()){
 				 <div class="row">
 					 <div class="col-lg-12">
 						 <h2>Latest Groups</h2>
-			 		 	<?php $groupController->display_availabe_groups(8,"../", ""); ?>
+			 		 	<?php $groupController->display_availabe_groups(8,$resources, ""); ?>
 
 						<!--  Pagination starts here -->
 						<div class="margin-btom-20">
@@ -42,7 +42,7 @@ if($userController->is_authenticated()){
 
 					<div class="col-lg-12">
 						<h2>Popular Groups</h2>
-					 <?php $groupController->display_availabe_groups(4,"../", ""); ?>
+					 <?php $groupController->display_availabe_groups(4,$resources, ""); ?>
 
 					 <!--  Pagination starts here -->
 					 <div class="margin-btom-20">
@@ -55,7 +55,7 @@ if($userController->is_authenticated()){
 
 				 <div class="col-lg-12">
 					 <h2>Trending Groups</h2>
-					<?php $groupController->display_availabe_groups(4,"../", ""); ?>
+					<?php $groupController->display_availabe_groups(4,$resources, ""); ?>
 
 					<!--  Pagination starts here -->
 					<div class="margin-btom-20">

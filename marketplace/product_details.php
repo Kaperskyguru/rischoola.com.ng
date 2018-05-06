@@ -30,10 +30,22 @@ if ($id == 0) {
                                 <div class="col-md-6">
                                     <div class="single-product-thumb">
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active"><a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-1.jpg" alt="..."></a></li>
-                                            <li role="presentation"><a href="#thumb-2" aria-controls="thumb-2" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-2.jpg" alt="..."></a></li>
-                                            <li role="presentation"><a href="#thumb-3" aria-controls="thumb-3" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-3.jpg" alt="..."></a></li>
-                                            <!-- <li role="presentation"><a href="#thumb-4" aria-controls="thumb-4" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-4.jpg" alt="..."></a></li> -->
+                                            <?php 
+                                            $image_stmt = $resources->get_multiple_image_id($id, 'product');
+                                            $count = 0;
+                                                if($image_stmt->rowCount() > 0){
+                                                    while($image_row = $image_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                        $count++;
+                                                        extract($image_row);?>
+                                                            <li role="presentation" class="active">
+                                                                <a href="#thumb-<?php echo $count?>" aria-controls="thumb-<?php echo $count?>" role="tab" data-toggle="tab">
+                                                                    <?php $resources::display($resource_url, array_merge($resources::SLIDE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                                                                </a>
+                                                            </li>                                                        
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
                                         </ul>
 
                                         <div class="tab-content">
@@ -41,7 +53,7 @@ if ($id == 0) {
                                                 <img src="../res/imgs/product/6.jpg" alt="...">
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="thumb-2">
-                                                <img src="../res/imgs/product/6-hover.jpg" alt="...">
+                                                <img src="../res/imgs/product/6-hover.jpg" alt="...">   
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="thumb-3">
                                                 <img src="../res/imgs/product/4.jpg" alt="...">
