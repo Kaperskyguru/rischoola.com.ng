@@ -163,10 +163,18 @@ class Events extends dbmodel {
   }
 
   public function get_events_by_user_id($user_id) {
-      $query = "SELECT * FROM events WHERE event_status_id = 5 OR event_status_id = 2 AND event_user_id = $user_id";
+      $query = "SELECT * FROM events WHERE event_status_id = 5 AND event_user_id = $user_id";
       $this->query($query);
       $stmt = $this->executer();
       return $stmt;
+  }
+
+  public function get_events_by_school_id($school_id) 
+  {
+    $query = "SELECT * FROM events WHERE event_status_id = 5 AND event_school_id = $school_id";
+    $this->query($query);
+    $stmt = $this->executer();
+    return $stmt;
   }
 
 
@@ -179,19 +187,44 @@ class Events extends dbmodel {
               <div class="col-md-5 pad-bottom-20">
                 <div class="row">
                   <div class="col-md-6">
-                 <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
+                    <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
                   </div>
                   <div class="col-md-6 pad-bottom-20">
-                    <a href="<?php echo $link;?>view_event.php?id=<?php echo $event_id; ?>"><h5><?php echo $event_title; ?></h5><a/>
+                    <a href="<?php echo $link;?>view_event.php?id=<?php echo $event_id; ?>"><h5><?php echo $event_title; ?></h5></a>
                     <h6><?php echo date('l jS \of F Y h:i:s A', strtotime($event_date)); ?></h6>
                   </div>
-              </div>
+                </div>
               </div>
               <?php
-
           }
       }
   }
+
+  public function display_search_events($res,$event_school_id) 
+  {
+    $stmt = $this->get_events_by_school_id($event_school_id);
+    if ($stmt->rowCount() > 0) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            ?>
+            <div class="col-md-5 pad-bottom-20">
+              <div class="row">
+                <div class="col-md-6">
+                  <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
+                </div>
+                <div class="col-md-6 pad-bottom-20">
+                  <a href="view_event.php?id=<?php echo $event_id; ?>"><h5><?php echo $event_title; ?></h5></a>
+                  <h6><?php echo date('l jS \of F Y h:i:s A', strtotime($event_date)); ?></h6>
+                </div>
+              </div>
+            </div>
+            <?php
+
+        }
+    }else {
+      echo '<div> <h2> No Record was found in our database </h2></div>';
+    }
+}
 
 
 

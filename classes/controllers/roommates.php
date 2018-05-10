@@ -110,6 +110,27 @@ class Roommates extends dbmodel {
       return $stmt;
   }
 
+
+  public function get_roommates_by_search($school_id, $gender, $type) {
+    $query = "SELECT * FROM roommates WHERE roommate_status_id != 2 AND roommate_status_id != 6";
+
+    if(!is_null($gender) && !empty($gender)){
+        $query .= " AND roommate_gender = $gender";
+    }
+
+    if (!is_null($school_id) && !empty($school_id)) {
+        $query .= " AND roommate_school_id = $school_id";
+    }
+    
+    if (!is_null($type) && !empty($type)) {
+        $query .= " AND type_of_roommate = $type";
+    }
+
+    $this->query($query);
+    $stmt = $this->executer();
+    return $stmt;
+}
+
   public function get_roommate_location_by_id($id)
   {
     $query = "SELECT roommate_location FROM roommates WHERE roommate_id = $id";
@@ -262,4 +283,33 @@ class Roommates extends dbmodel {
           }
       }
   }
+
+  public function display_search_roommates($length = 0, $res, $options) {
+    $school_id = $options['school_id'];
+    $gender = $options['gender'];
+    $type= $options['type'];
+
+    $stmt = $this->get_roommates_by_search($school_id, $gender, $type);
+    if ($stmt->rowCount() > 0) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            ?>
+            <div class="row">
+                <div class="col-md-3">
+                <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                </div>
+                <div class="col-md-9 pad-bottom-20">
+                    <a href="#"><h5><?php echo $roommate_name;?></h5></a>
+                    <p><?php echo getExcerpt($roommate_desc, 100);?></p>
+                </div>
+
+            </div>
+            <hr >
+            <?php
+
+        }
+    }else{
+      echo '<div> <h2> No Record was found in our database </h2></div>';
+    }
+}
 }

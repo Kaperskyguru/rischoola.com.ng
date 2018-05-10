@@ -37,21 +37,17 @@
                     <div>
                         <div class="row">
                             <div class="col-sm-4 form-group">
-                                <select class="form-control">
+                                <select class="form-control" id="school_type">
                                     <option disabled="ture" selected="">Select School Category</option>
-                                    <option>University</option>
-                                    <option>Polytecnic</option>
-                                    <option>Colledges</option>
+                                    <option value= 1>University</option>
+                                    <option value= 2>Polytecnic</option>
+                                    <option value= 3>Colledges</option>
                                 </select>
                             </div>
                             <div class="col-sm-6 form-group">
-                                <select class="form-control">
-                                    <option disabled="true" selected="">Select a school from here to get latest information</option>
-                                    <option>Rivers State University of Science and Technology (RSUST)</option>
-                                    <option>University of Port Harcourt (Uniport)</option>
-                                    <option>Ignatus Ajiri University of Education (IAUOE)</option>
-                                    <option>National Open University Rivers Chapter</option>
-                                    <option>University of Port Harcourt (Uniport)</option>
+                                <select class="form-control" id="list_of_schools">
+                                <option disabled="true" selected="">Select a school from here to get latest information</option>
+                                    <?php $schoolController->get_schools();?>
                                 </select>
 
                             </div>

@@ -52,3 +52,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['send_group_admin_messag
     echo "No field should be empty.. Please check";
   }
 }
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+  if(isset($_POST['group_search_set'])){
+    $groupController->display_search_groups(0,$resources, "", $_POST['sid']);
+  }
+}

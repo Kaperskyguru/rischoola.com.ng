@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="logo_marg" href="index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive" ></a>
+      <a class="logo_marg" href="../index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive" ></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

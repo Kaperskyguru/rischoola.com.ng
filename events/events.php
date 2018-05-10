@@ -6,8 +6,9 @@ if($userController->is_authenticated()){
 }else {
   require 'header.php';
 }
+
 ?>
-?>
+
 
 <section id="events">
     <div class="container pad-up-50">
@@ -17,8 +18,8 @@ if($userController->is_authenticated()){
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-sm-6 form-group">
-                            <select class="form-control">
-                                <option disabled="true" selected="">Select a school from here to get latest information</option>
+                            <select class="form-control" id="search_event">
+                                <option disabled="true"  selected="">Select a school from here to get latest information</option>
                                 <?php $schoolController->get_schools(); ?>
                             </select>
                         </div>
@@ -28,25 +29,26 @@ if($userController->is_authenticated()){
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h2>Upcoming Events</h2>
-                        <?php $eventController->display_availabe_events(6, $resources, ""); ?>
-
+                <h2>Upcoming Events</h2>
+                    <div class="col-lg-12" id="event_contnt">
+                        <div class="col-lg-12" id="event_content">
+                            <?php $eventController->display_availabe_events(6, $resources, ""); ?>
+                        </div>
                         <div class="col-lg-12">
                             <ul class="pager">
-                                <li class="previous"><a>Previous</a></li>
-                                <li class="next"><a href="#">Next</a></li>
+                                <li class="previous"><a> Previous </a></li>
+                                <li class="next"><a href="#"> Next </a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <h2>Past Events</h2>
                         <?php $eventController->display_availabe_events(6, $resources, ""); ?>
-
+                        
                         <div class="col-lg-12">
                             <ul class="pager">
-                                <li class="previous"><a>Previous</a></li>
-                                <li class="next"><a href="#">Next</a></li>
+                                <li class="previous"><a href="#"> Previous </a></li>
+                                <li class="next"><a href="#"> Next </a></li>
                             </ul>
                         </div>
                     </div>
@@ -55,7 +57,7 @@ if($userController->is_authenticated()){
             <div class="col-md-3 pad-up-50">
                 <!-- <div class="col-md-3"> -->
                 <div class="row">
-                    <!-- <?php require '../include/tabs.php'; ?> -->
+                    <!-- <?php //require '../include/tabs.php'; ?> -->
                     <!-- <div class="col-sm-12"> -->
                     <div class="pad-bottom-20">
                         <img src="../res/imgs/8722.gif" class="img-responsive">
@@ -76,3 +78,20 @@ if($userController->is_authenticated()){
         </div>
 </section>
 <?php include 'footer.php'; ?>
+
+<script>
+$(document).ready(function() {
+    $('#search_event').change(function() {
+        var sid = $(this).val();
+        $.ajax({
+            method:'post',
+            url:'set_reminder.php',
+            data:{search_set:1, sid:sid},
+            success: function(data) {
+                $('#event_content').empty();
+                $('#event_content').html(data);              
+            }
+        });
+    });
+});
+</script>

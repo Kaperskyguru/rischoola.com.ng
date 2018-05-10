@@ -283,17 +283,17 @@ class Marketplace extends dbmodel {
                 ?>
                 <div class='col-sm-4 col-lg-4 col-md-4'>
                     <div class='thumbnail'>
-                    <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                      
-                        <div class='caption'>
-                            <h4 class="hostelname"><a href='product_details.php?id=<?php echo $product_id; ?>'><?php echo $product_name; ?></a></h4>
-                            <h5 class='text-danger'>N<?php echo $product_price; ?></h5>
-                            <p><?php echo getExcerpt($product_desc, 100); ?></p>
-                        </div>
-                        <div class="tags">
-                            <span class="label label-danger"><?php echo $this->get_product_school_by_id($product_school_id); ?></span>
-                            <span class="label label-purple"><?php echo $this->get_product_status_by_id($product_status_id); ?></span>
-                            <span class="label label-default"><?php echo $product_review_count; ?> reviews</span>
-                        </div>
+                      <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                      
+                          <div class='caption'>
+                              <h4 class="hostelname"><a href='product_details.php?id=<?php echo $product_id; ?>'><?php echo $product_name; ?></a></h4>
+                              <h5 class='text-danger'>N<?php echo $product_price; ?></h5>
+                              <p><?php echo getExcerpt($product_desc, 100); ?></p>
+                          </div>
+                          <div class="tags">
+                              <span class="label label-danger"><?php echo $this->get_product_school_by_id($product_school_id); ?></span>
+                              <span class="label label-purple"><?php echo $this->get_product_status_by_id($product_status_id); ?></span>
+                              <span class="label label-default"><?php echo $product_review_count; ?> reviews</span>
+                          </div>
                     </div>
                 </div>
                 <?php

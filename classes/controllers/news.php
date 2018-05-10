@@ -100,28 +100,6 @@ private static $instance;
     }
 
 
-
-    public function display_reply_box($id)
-    {
-
-    }
-
-    // public function add_images_and_get_last_inserted_id($image, $user_id, $item_id) {
-    //   //echo "string". $user_id;
-    //   $query = "INSERT INTO resources(resource_url, resource_user_id, resource_item_id, resource_table_name, resource_type)
-    //   VALUES(:image, :user_id, :item_id, :table_name,:type)";
-    //   $this->query($query);
-    //   $this->bind(':image',$image);
-    //   $this->bind(':user_id', $user_id);
-    //   $this->bind(':item_id',$item_id);
-    //   $this->bind(':table_name','post');
-    //   $this->bind(':type','image');
-    //   $this->executer();
-    //   if ($id = $this->lastIdinsert()) {
-    //     return $id;
-    //   }
-    // }
-
     public function addNews(NewsModel $postModel) {
         $post_title = $postModel->get_post_title();
         $post_content = $postModel->get_post_content();
@@ -229,24 +207,21 @@ private static $instance;
 
     public function get_last_inserted_id()
     {
-      return $this->lastIdinsert();
+      $query = "SELECT post_id FROM posts WHERE post_status_id != 2 ORDER BY post_id DESC  LIMIT 1";
+      $this->query($query);
+      $row = $this->resultset();
+      return $row['post_id'];
     }
 
     public function get_last_inserted_post($src, $post_src, Resources $res)
     {
-      // Will be activated when i start inserting [post]
-        //$id = $this->get_last_inserted_id();
-        $row = $this->get_post_by_id(1);
+        $row = $this->get_post_by_id($this->get_last_inserted_id());
                 extract($row);
                 ?>
                 <div>
                     <a href="<?php echo $post_src; ?>read-news.php?id=<?php echo $post_id ?>">
-                    
                     <?php 
-                   
                     $res::display($res->get_image_url(68, 'post'), array_merge($res::LATEST_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
-                    
-                  
                   </a>
                 </div>
                 <div>

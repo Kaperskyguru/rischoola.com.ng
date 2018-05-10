@@ -15,7 +15,7 @@ if($userController->is_authenticated()){
             <div class="searchHostel col-sm-3 margin-btom-20 pad-bottom-20">
                 <div class="form-group">
                     <label for="school">Enter School</label>
-                    <select class="form-control">
+                    <select class="form-control" id="list_of_schools">
                         <?php $schoolController->get_schools(); ?>
                     </select>
                 </div>
@@ -23,31 +23,28 @@ if($userController->is_authenticated()){
                 <div class="form-group row">
                     <div class="col-xs-6">
                         <label for="">Max Price</label>
-                        <input type="text" class="form-control"></input>
+                        <input id="max_price" type="text" class="form-control"></input>
                     </div>
                     <div class="col-xs-6">
                         <label for="">Min Price</label>
-                        <input type="text" class="form-control"></input>
+                        <input id="min_price" type="text" class="form-control"></input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="school">Hostel Name</label>
-                    <input type="text" id="school" class="form-control"></input>
+                    <input type="text" id="hostel_name" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label for="school">Hostel type</label>
-                    <select class="form-control">
-                        <option value="">Self Contain</option>
-                        <option value="">Single Room</option>
-                        <option value="">Flats</option>
-                        <option value="">School hostel</option>
+                    <select class="form-control" id="hostel_type">
+                        <?php $lodgeController->get_lodge_models();?>
                     </select>
                 </div>
-
+                <?php // echo  __DIR__?>
                 <!--changes made-->
                 <div class="form-group">
                     <div class="">
-                        <button type="submit" class="btn btn-block btn-success">Search</button>
+                        <button id="hostel_search" type="submit" class="btn btn-block btn-success">Search</button>
                     </div>
                 </div>
                 <!--changes finished here-->
@@ -129,7 +126,9 @@ if($userController->is_authenticated()){
             <div class="col-sm-9">
                 <h2>Available Hostels For Rent</h2>
                 <div class="row">
-                    <?php $lodgeController->display_availabe_lodges(12, "../",$resources); ?>
+                    <div id="lodge_content">
+                        <?php $lodgeController->display_availabe_lodges(12, "../",$resources); ?>
+                    </div>
 
                     <!--  Pagination starts here -->
                     <div class="col-lg-12 pagination text-center">

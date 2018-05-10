@@ -18,7 +18,7 @@ if($userController->is_authenticated()){
                     <div class="form-group row">
                         <div class="col-md-4">
                             <label>School:</label>
-                            <select class="form-control">
+                            <select id="roommate_school" class="form-control">
                                 <option disabled="true" selected="">Select a school from here to get latest information</option>
                                 <?php $schoolController->get_schools(); ?>
                             </select>
@@ -26,31 +26,33 @@ if($userController->is_authenticated()){
                         <div class="col-md-8">
                             <div class="col-md-6">
                                 <label>Gender:</label>
-                                <select class="form-control" id="roommate_gender">
-                                    <option disabled="true" selected="">Select gender information</option>
-                                    <option value="0">Male</option>
-                                    <option value="1">Female</option>
+                                <select id="roommate_gender" class="form-control" id="roommate_gender">
+                                    <option value= 0 selected="">Select gender information</option>
+                                    <option value= 1>Male</option>
+                                    <option value= 2 >Female</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label>Type:</label>
-                                <select class="form-control">
-                                    <option disabled="true" selected="">Select Roommate Type</option>
-                                    <option value ="0">I Have A Room</option>
-                                    <option value="1">I Dont Have A Room</option>
+                                <select id="roommate_type" class="form-control">
+                                    <option value= 0 selected="">Select Roommate Type</option>
+                                    <option value = 1>I Have A Room</option>
+                                    <option value= 2>I Dont Have A Room</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="">
-                        <button type="submit" class="fa fa-search btn-lg btn-block btn-success"> Search</button>                        </div>
+                        <button id="roommate_search_submit" type="submit" class="fa fa-search btn-lg btn-block btn-success"> Search</button>                        </div>
                     </div>
 
               </div>
             </div>
             <div class="pad-up-20">
-            <?php $roommateController->display_availabe_roommates(12, $resources); ?>
+            <div id="roommate_content">
+                <?php $roommateController->display_availabe_roommates(12, $resources); ?>
+            </div>
             </div>
             <!--  Pagination starts here -->
             <div class="margin-btom-20 pagination">
@@ -101,3 +103,30 @@ if($userController->is_authenticated()){
 <?php
 include 'footer.php';
 ?>
+
+<script>
+    $(document).ready(function() {
+        
+        $('body').delegate('#roommate_search_submit', 'click', function () {
+            
+            var roommate_school = $('#roommate_school').val();
+            var roommate_gender = $('#roommate_gender').val();
+            var roommate_type = $('#roommate_type').val();
+
+            $.ajax({
+                method : 'POST',
+                url : 'roommate_actions.php',
+                data : {roommate_search_set:1, roommate_school:roommate_school, roommate_gender:roommate_gender, roommate_type:roommate_type},
+                success : function(data) {
+                    $('#roommate_content').html(data)
+                },
+                onerror : function(data) {
+                    alert(data);
+                }
+            });
+
+        });
+
+    });
+
+</script>

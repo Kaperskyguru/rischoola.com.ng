@@ -53,8 +53,15 @@ private $stmt;
 
   public function resultset()
   {
+    try{
     $this->executer();
-    return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $this->stmt->fetch(PDO::FETCH_ASSOC);
+    if($this->stmt->rowCount() > 0){
+      return $stmt;
+    }
+  }catch(PDOException $e){
+    echo $e->getMessage();
+  }
   }
 
   public function lastIdinsert()

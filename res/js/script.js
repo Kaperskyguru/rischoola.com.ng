@@ -107,4 +107,46 @@ $(document).ready(function() {
     
   });
 
+  $('#school_type').change(function() {
+    var cat_id = $(this).val();
+    $.ajax({
+      url: 'actions.php',
+      method: "post",
+      data: {id:1, cat_id:cat_id},
+      success: function(data){
+       $('#list_of_schools').empty();
+        $('#list_of_schools').html(data);
+      },
+      onerror: function(err){
+        alert(err);
+      }
+    });
+  });
+
+
+  $('body').delegate('#hostel_search', 'click', function() {
+    var hostel_school = $('#list_of_schools').val();
+    var max_price = $('#max_price').val();
+    var min_price = $('#min_price').val();
+    var hostel_name = $('#hostel_name').val();
+    var hostel_type = $('#hostel_type').val();
+    $.ajax({
+        method: "POST",
+        url: "getLodges.php",
+        data: {hostel_search:1, hostel_school:hostel_school, max_price:max_price, min_price:min_price, hostel_name:hostel_name, hostel_type:hostel_type},
+        cache: false,
+        processDefualt: false,
+        success: function(data) {
+          $('#lodge_content').empty();
+          $('#lodge_content').html(data);
+           // alert(data);
+        },
+        onerror: function(err) {
+            alert(err);
+        }
+    });
+
+});
+
+
 });

@@ -367,6 +367,72 @@ public function get_lodge_models()
         }
     }
 
+
+
+    public function get_lodges_by_search_terms($option)
+    {
+        $lodge_name = $option['hostel_name'];
+        $lodge_school_id = $option['hostel_school'];
+        $lodge_max_price = $option['max_price'];
+        $lodge_min_price = $option['min_price'];
+        $lodge_type = $option['hostel_type'];
+
+        $query = "SELECT * FROM lodges WHERE lodge_status_id != 2";
+
+        if(!is_null($option['hostel_school']) && !empty($option['hostel_school'])){
+            $query .= " AND lodge_school_id = $lodge_school_id";
+        }
+
+        if (!is_null($option['hostel_type']) && !empty($option['hostel_type'])) {
+            $query .= " AND lodge_model_id = $lodge_type";
+        }
+        
+        if (!is_null($option['max_price']) && !is_null($option['min_price']) && !empty($option['max_price']) && !empty($option['min_price'])) {
+            $query .= " AND lodge_price BETWEEN $lodge_min_price AND $lodge_max_price";
+        }
+
+        if (!is_null($option['hostel_name']) && !empty($option['hostel_name'])) {
+            $query .= " AND lodge_name LIKE '%$lodge_name%'";
+        }
+
+        $this->query($query);
+        $stmt = $this->executer();
+        return $stmt;
+    }
+
+    public function display_search_lodges($length = 0, $src, Resources $res, Array $options) {
+        $stmt = $this->get_lodges_by_search_terms($options);
+        if ($stmt->rowCount() > 0) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
+                ?>
+
+                <div class="col-sm-4 col-lg-4 col-md-3">
+                    <div class="thumbnail">
+                        <div>
+
+                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                        
+                        </div>
+                        <div>
+                            <h3 class="hostelname"><a href="<?php echo $src;?>lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a></h3>
+                            <h5><img /><?php echo $lodge_address; ?></h5>
+                            <p><?php echo $this->getExcerpt($lodge_desc, 60); ?></p>
+                            <h3 class="hostelname text-danger"># <?php echo $lodge_price; ?> / year</h3>
+                        </div>
+                        <div class="tags">
+                            <span class="label label-default"><?php echo $this->get_lodge_review_count_by_id($lodge_id) ?></span>
+                            <span class="label label-danger"><?php echo $this->get_lodge_model_by_id($lodge_model_id) ?></span>
+                            <span class="label label-purple"><?php echo $this->get_lodge_status_by_id($lodge_status_id) ?></span>
+                            <span class="label label-primary"><?php echo $this->get_lodge_school_by_id($lodge_school_id) ?></span>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+    }
+
     public function display_related_lodges($school_id, $length, $src){
       $stmt = $this->get_related_lodges($school_id,$length);
       if ($stmt->rowCount() > 0) {

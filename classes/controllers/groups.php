@@ -255,6 +255,14 @@ class Groups extends dbmodel {
       return $group_title;
   }
 
+  public function get_groups_by_school_id($school_id) 
+  {
+    $query = "SELECT * FROM groups WHERE group_status_id = 5 AND group_school_id = $school_id";
+    $this->query($query);
+    $stmt = $this->executer();
+    return $stmt;
+  }
+
   public function get_group_school_by_id($id) {
       $query = "SELECT school_abbr FROM schools WHERE school_id = $id";
       $this->query($query);
@@ -324,6 +332,32 @@ class Groups extends dbmodel {
           }
       }
   }
+
+  public function display_search_groups($length = 0, $res, $link = "", $group_school_id) {
+    $stmt = $this->get_groups_by_school_id($group_school_id);
+    if ($stmt->rowCount() > 0) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            ?>
+            <div class="col-sm-3 pad-bottom-20">
+              <div>
+              <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+              </div>
+              <div>
+                <h4><?php echo $group_title; ?></h4>
+              <?php if($this->is_group_member($group_id, get_user_uid())){?>
+                <a href="<?php echo $link; ?>group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Goto Group</a>
+              <?php } else { ?>
+                <a href="<?php echo $link; ?>group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Join Group</a>
+              <?php }?>
+              </div>
+            </div>
+            <?php
+        }
+    }else {
+      echo '<div> <h2> No Record was found in our database </h2></div>';
+    }
+}
 
 public function display_group_discussios($group_id)
 {

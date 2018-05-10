@@ -16,7 +16,7 @@ if($userController->is_authenticated()){
 					<div class="col-lg-12">
 						<div class="row">
 								<div class="col-sm-6 form-group">
-										<select class="form-control">
+										<select id="group_search" class="form-control">
 												<option disabled="true" selected="">Select a school from here to get latest information</option>
 												<?php $schoolController->get_schools(); ?>
 										</select>
@@ -29,7 +29,9 @@ if($userController->is_authenticated()){
 				 <div class="row">
 					 <div class="col-lg-12">
 						 <h2>Latest Groups</h2>
-			 		 	<?php $groupController->display_availabe_groups(8,$resources, ""); ?>
+						 <div id="group_content">
+			 		 		<?php $groupController->display_availabe_groups(8,$resources, ""); ?>
+						</div>
 
 						<!--  Pagination starts here -->
 						<div class="margin-btom-20">
@@ -91,3 +93,25 @@ if($userController->is_authenticated()){
 <?php
 include 'footer.php';
 ?>
+<script>
+$(document).ready(function() {
+	$('#group_search').change(function() {
+		var sid = $(this).val();
+		$.ajax({
+			method: 'POST',
+			url : 'group_actions.php',
+			cache: false,
+			data: {group_search_set:1, sid:sid},
+			success: function(data) {
+				//alert(data);
+				$('#group_content').empty();
+				$('#group_content').html(data);
+			},
+			onerror: function(params) {
+				alert(params);
+			}
+		});
+	});
+});
+
+</script>

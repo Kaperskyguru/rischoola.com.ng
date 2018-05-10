@@ -19,3 +19,9 @@ if (isset($_POST['set_reminder']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     echo 'Please log in' ;
   }
 }
+
+if(isset($_SERVER['REQUEST_METHOD']) == "post"){
+    if (isset($_POST['search_set'])){
+     $eventController->display_search_events($resources, $_POST['sid']); 
+    }
+}
