@@ -47,7 +47,7 @@ if(isset($_GET['user_user_name'])){
                 </div>
                 <div class="form-group" style="padding-top: 20px;">
                     <button type="button" id="send_message" name="send_message" class="btn btn-lg btn-success">Send Message</button>
-                    <button type="button" class="btn btn-lg btn-success">Save Draft</button>
+                    <button type="button" id="save_draft" name="save_draft" class="btn btn-lg btn-danger">Save Draft</button>
                 </div>
             </form>
         </div>

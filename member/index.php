@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>
-                    Dashboard <small>Statistics Overview</small>
+                     <h1>Statistics <small>Overview</small></h1>
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">
@@ -39,7 +39,7 @@
                                 <i class="fa fa-tasks fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><?php echo $lodgeController->get_total_number_of_lodges_by_id($_SESSION['user_id']); ?></div>
+                                <div class="huge"><?php echo $lodgeController->get_total_number_of_lodges_by_id(get_user_uid()); ?></div>
                                 <div>Total Lodges!</div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 <i class="fa fa-shopping-cart fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><?php echo $storeController->get_total_number_of_products_by_id($_SESSION['user_id']); ?></div>
+                                <div class="huge"><?php echo $storeController->get_total_number_of_products_by_id(get_user_uid()); ?></div>
                                 <div>Total Store Item</div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                 <i class="fa fa-support fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">13</div>
+                                <div class="huge"><?php echo $messageController->get_total_number_of_messages_by_user_id(get_user_uid()); ?></div>
                                 <div>Messages</div>
                             </div>
                         </div>

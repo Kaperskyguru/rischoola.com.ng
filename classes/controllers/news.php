@@ -99,6 +99,14 @@ private static $instance;
       }
     }
 
+    public function get_search_post($term)
+    {
+      $query =  "SELECT post_id, post_title, post_content FROM posts WHERE post_title LIKE '%$term%' OR post_content LIKE '%$term%'";
+      $this->query($query);
+      $stmt = $this->executer();
+      return $stmt;
+    }
+
 
     public function addNews(NewsModel $postModel) {
         $post_title = $postModel->get_post_title();

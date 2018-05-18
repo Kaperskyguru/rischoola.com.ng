@@ -65,6 +65,14 @@ class Roommates extends dbmodel {
       return $row;
   }
 
+  public function get_search_roommates($term)
+  {
+    $query =  "SELECT roommate_id, roommate_name, roommate_desc FROM roommates WHERE roommate_desc LIKE '%$term%' OR roommate_name LIKE '%$term%'";
+    $this->query($query);
+    $stmt = $this->executer();
+    return $stmt;
+  }
+
 
 
   public function get_roommate_status_by_id($id) {
@@ -121,7 +129,7 @@ class Roommates extends dbmodel {
     if (!is_null($school_id) && !empty($school_id)) {
         $query .= " AND roommate_school_id = $school_id";
     }
-    
+
     if (!is_null($type) && !empty($type)) {
         $query .= " AND type_of_roommate = $type";
     }
@@ -142,7 +150,7 @@ class Roommates extends dbmodel {
 
 
    public function display_if_room($schoolController, $lodgeController)
-  { global $data;$error_text_name = $data['error_text_name'];?>
+  { global $data; $error_text_name = $data['error_text_name'];?>
 
     <div class="form-horizontal" role="form">
       <div class="form-group <?php (isset($error_text_name))? ' has-error has-feedback':'' ?> ">
@@ -268,10 +276,10 @@ class Roommates extends dbmodel {
               extract($row);
               ?>
               <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                   <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                   </div>
-                  <div class="col-md-9 pad-bottom-20">
+                  <div class="col-md-10">
                       <a href="#"><h5><?php echo $roommate_name;?></h5></a>
                       <p><?php echo getExcerpt($roommate_desc, 100);?></p>
                   </div>

@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             } )
                             .catch( error => {
                                 console.error( error );
-				            } );
+                        } )
                     </script>
                 </div>
                 <div class="form-group">

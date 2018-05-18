@@ -65,53 +65,64 @@
                         <li><a href="../events/events.php">Events</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                            <ul class="dropdown-menu message-dropdown">
-                              <!-- Carry from here -->
-                                <li class="message-preview">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="pull-left">
-                                                <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                            </span>
-                                            <div class="media-body">
-                                                <h5 class="media-heading"><strong><?php echo $userController->get_user_display_name_by_id($_SESSION['user_id']); ?></strong>
-                                                </h5>
-                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- Stop here -->
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                            <ul class="dropdown-menu alert-dropdown">
-                                <li>
-                                    <a href="#"> <span class="label label-default">uche sent u a message</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"> <span class="label label-default">uche sent u a message</span></a>
-                                </li>
-                            </ul>
-                        </li>
+                    <li class="dropdown">
+                            <?php $m_stmt = $messageController->get_message_notifications(get_user_uid());?>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="text-danger"><?php echo $m_stmt->rowCount();?></b><b class="caret"></b></a>
+                                <ul class="dropdown-menu message-dropdown">
+                                    <?php
+                                        if ($m_stmt->rowCount() > 0){
+                                            while ($m_row = $m_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                extract($m_row);?>
+                                                    <li class="message-preview">
+                                                        <a href="inbox.php">
+                                                            <div class="media">
+                                                                <div class="media-body">
+                                                                    <h5 class="media-heading"><strong><?php echo $userController->get_user_display_name_by_id($message_sender_id); ?></strong>
+                                                                    </h5>
+                                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> <?php echo timeAgo($message_date_created); ?> </p>
+                                                                    <p><?php echo getExcerpt($message_body, 50); ?></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+
+                                            <?php }
+                                        }else{
+                                            echo '<i>No New Messages </i>';
+                                        }
+                                    ?>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                            <?php
+                                $stmt = $notifier->get_notifications_by_user_id(get_user_uid());?>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="text-danger"><?php echo $stmt->rowCount();?></b><b class="caret"></b></a>
+                                <ul class="dropdown-menu alert-dropdown">
+                                    <?php if($stmt->rowCount() > 0){
+                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                            extract($row);?>
+                                                <li>
+                                                    <a href="#"> <span class="label label-default"><?php echo $notification_content;?></span></a>
+                                                </li>
+                                            <?php
+                                        }
+                                    }else{
+                                        echo '<i>No New Notifications </i>';
+                                    }
+                                    ?>
+                                </ul>
+                            </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $userController->get_user_display_name_by_id($_SESSION['user_id']); ?> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <li>
+                                    <a href="../member/profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                                 </li>
                                 <li>
                                     <a href="../member/"><i class="fa fa-fw fa-user"></i> Dashboard</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-user"></i> Update Profile</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                                    <a href="../member/inbox.php"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>

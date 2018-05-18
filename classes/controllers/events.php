@@ -130,6 +130,14 @@ class Events extends dbmodel {
       return $event_title;
   }
 
+  public function get_search_events($term)
+  {
+    $query =  "SELECT event_id, event_title, event_location, event_desc FROM events WHERE event_desc LIKE '%$term%' OR event_location LIKE '%$term%' OR event_title LIKE '%$term%'";
+    $this->query($query);
+    $stmt = $this->executer();
+    return $stmt;
+  }
+
   public function set_event_reminder($event_id, $user_id, $reminder_date)
   {
     $query = "INSERT INTO event_reminders(reminder_event_id, reminder_user_id, reminder_date)

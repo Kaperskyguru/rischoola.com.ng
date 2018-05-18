@@ -60,6 +60,14 @@ class Groups extends dbmodel {
     return FALSE;
   }
 
+  public function get_search_groups($term)
+  {
+    $query =  "SELECT group_id, group_title, group_desc FROM groups WHERE group_desc LIKE '%$term%' OR group_title LIKE '%$term%'";
+    $this->query($query);
+    $stmt = $this->executer();
+    return $stmt;
+  }
+
 
   public function create_group_meta(GroupModel $groupModel, $id)
   {

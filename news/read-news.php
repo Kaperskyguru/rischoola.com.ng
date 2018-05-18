@@ -214,7 +214,7 @@ exit;
         });
 
 
-        $('#comnt').click(function() {;
+        $('#comnt').click(function () {
             var files1 = $(this)[].files;
             alert(files1);
             for(var i=0; i<files1.length; i++){

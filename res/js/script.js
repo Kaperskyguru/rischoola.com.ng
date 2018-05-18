@@ -123,6 +123,23 @@ $(document).ready(function() {
     });
   });
 
+  $('body').delegate('#search_btn', 'click', function (e) {
+    var term = $('#search_input').val();
+    $.ajax({
+      method: "POST",
+      url: "search.php",
+      processDefualt:false,
+      data: {search_set:1, term:term},
+      cache:true,
+      success: function (data) {
+        $('#index-news').html(data);
+      },
+      onerror : function(err){
+        alert(err);
+      }
+    });
+  });
+
 
   $('body').delegate('#hostel_search', 'click', function() {
     var hostel_school = $('#list_of_schools').val();

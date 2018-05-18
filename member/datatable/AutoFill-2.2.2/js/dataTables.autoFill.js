@@ -604,7 +604,7 @@ $.extend( AutoFill.prototype, {
 
 			currNode = currOffsetParent; // for next loop
 		}
-		while ( currOffsetParent.get(0) !== targetParent.get(0) )
+		while ( currOffsetParent.get(0) !== targetParent.get(0) );
 
 		return {
 			top: top,

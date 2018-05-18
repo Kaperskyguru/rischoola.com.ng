@@ -14,8 +14,15 @@ class Resources extends dbmodel
 
   public const SAMPLE_IMAGE_OPTIONS = array(
     "format" => "png", 
-    // "height" => "200", 
-    // "width" => "200", 
+     "height" => "70", 
+     "width" => "100", 
+    "class" => "thumpnail inline"
+  );
+
+  public const DETAILS_IMAGE_OPTIONS = array(
+    "format" => "png", 
+     "height" => "200", 
+     "width" => "300", 
     "class" => "thumpnail inline"
   );
 
@@ -36,7 +43,7 @@ class Resources extends dbmodel
 
   public const LATEST_IMAGE_OPTIONS = array(
     "format" => "png", 
-    "height" => "500", 
+    "height" => "200", 
     "width" => "300", 
     "class" => "thumpnail inline"
   );

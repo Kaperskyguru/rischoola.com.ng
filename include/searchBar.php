@@ -5,7 +5,7 @@
                 <div class="item active">
                     <div style="width: 100%; height: 350px; background-color: transparent;
     background: linear-gradient(to bottom, #BDBFC1,#000);">
-                        
+                        <img src="res/imgs/adult-application-asian-733856.jpg" />
                     </div>
 
                    
@@ -13,21 +13,10 @@
                 <div class="item">
                     <div style="width: 100%; height: 350px; background-color: transparent;
     background: linear-gradient(to bottom, #2d364c ,#f44337); ">
-                        
+    <img src="res/imgs/adolescent-adult-beauty-459971.jpg" />
                     </div>
                 </div>
-                <div class="item">
-                    <div style="width: 100%; height: 350px; background-color: transparent;
-    background: linear-gradient(to bottom,#f44337 , #1579BB);">
-                        
-                    </div>
-                </div>
-                <div class="item">
-                    <div style="width: 100%; height: 350px;  background-color: transparent;
-    background: linear-gradient(to bottom,#5cb85c , #1579BB);  ">
-                        
-                    </div>
-                </div>
+              
                 <div class="carousel-caption">
                     <div class="text-center">
                         <h1 class="site-slogan white-text hidden-xs" >Schooling in Rivers State just got easier</h1>

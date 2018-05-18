@@ -29,6 +29,14 @@ class Scholarships extends dbmodel {
         return $row;
       }
 
+      public function get_search_scholarships($term)
+      {
+        $query =  "SELECT scholarship_id, scholarship_title, scholarship_desc FROM scholarships WHERE scholarship_desc LIKE '%$term%' OR scholarship_title LIKE '%$term%'";
+        $this->query($query);
+        $stmt = $this->executer();
+        return $stmt;
+      }
+
       public function get_scholarship_by_user_id( $user_id)
       {
         $query = "SELECT * FROM scholarships WHERE scholarship_user_id = $user_id";
@@ -126,8 +134,10 @@ class Scholarships extends dbmodel {
                   ?>
                   <div class="pad-bottom-20">
                       <div class="col-sm-4">
-                      <?php 
-                      $res::display($res->get_image_url($scholarship_id, 'scholarship'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                      
+                      <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+
+                      <!-- $res::display($res->get_image_url($scholarship_id, 'scholarship'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?> -->
                       </div>
                       <div class="col-sm-8" >
                           <div>

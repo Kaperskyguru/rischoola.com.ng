@@ -243,6 +243,14 @@ class Marketplace extends dbmodel {
         return $product_review_count;
     }
 
+    public function get_search_products($term)
+    {
+      $query =  "SELECT product_id, product_name, product_desc FROM products WHERE product_desc LIKE '%$term%' OR product_name LIKE '%$term%'";
+      $this->query($query);
+      $stmt = $this->executer();
+      return $stmt;
+    }
+
     public function get_product_by_user_id($user_id) {
         $query = "SELECT * FROM products WHERE product_user_id = $user_id";
         $this->query($query);
@@ -283,7 +291,7 @@ class Marketplace extends dbmodel {
                 ?>
                 <div class='col-sm-4 col-lg-4 col-md-4'>
                     <div class='thumbnail'>
-                      <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                      
+                      <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                           <div class='caption'>
                               <h4 class="hostelname"><a href='product_details.php?id=<?php echo $product_id; ?>'><?php echo $product_name; ?></a></h4>
                               <h5 class='text-danger'>N<?php echo $product_price; ?></h5>
@@ -304,25 +312,24 @@ class Marketplace extends dbmodel {
     }
 
     public function display_index_products($length, $res) {
-        $stmt = $this->get_products($length);
+        $stmt = $this->get_products(4);
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
                 ?>
-                <div class="col-md-5 pad-bottom-20">
-                 <div class="col-md-6">
-                 <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
-                         </div>
-                         <div class="col-md-6">
-                             <h5 class="" style="text-align:left"><a href="marketplace/product_details.php?id=<?php echo $product_id; ?>"><?php echo $product_name; ?></a></h5>
-                         </div>
-                         <div>
-                             <span class="label label-default">₦ <?php echo $product_price; ?></span>
-                             <span class="label label-danger"><?php echo $this->get_product_school_by_id($product_school_id); ?></span>
-                             <span class="label label-purple"><?php echo $this->get_product_status_by_id($product_status_id); ?></span>
-                         </div>
-                         <hr />
+                <div class="col-md-6 col-xs-12 pad-bottom-20">
+                  <div class="row thumpnail">
+                    <div class="col-md-3 col-sm-4">
+                      <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                    </div>
+                     <div class="col-md-9 col-sm-8">
+                         <h5 class="" style="text-align:left"><a href="marketplace/product_details.php?id=<?php echo $product_id; ?>"><?php echo $product_name; ?></a></h5>
+                         <span class="label label-default">₦ <?php echo $product_price; ?></span>
+                         <span class="label label-danger"><?php echo $this->get_product_school_by_id($product_school_id); ?></span>
+                         <span class="label label-purple"><?php echo $this->get_product_status_by_id($product_status_id); ?></span>
                      </div>
+                   </div>
+                  </div>
                      <?php
                    }
                  }

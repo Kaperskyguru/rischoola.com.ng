@@ -7,3 +7,4 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $schoolController->get_schools_by_category($_POST['cat_id']);
     }
 }
+

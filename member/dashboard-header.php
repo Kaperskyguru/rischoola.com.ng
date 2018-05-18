@@ -1,4 +1,4 @@
-<?php require_once '../init.php'; 
+<?php require_once '../init.php';
 $userController->cookie_login();
 if(!$userController->is_authenticated()){
   header('Location: ../users/login.php');
@@ -31,7 +31,7 @@ if(!$userController->is_authenticated()){
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
-        
+
         <script type="text/javascript">
         // Javascript to enable link to tab
 
@@ -63,7 +63,7 @@ if(!$userController->is_authenticated()){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="logo_marg" href="index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive"></a>
+                        <a class="logo_marg" href="../index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive"></a>
                     </div>
                     <div class="collapse navbar-collapse bs-example-navbar-collapse-1" id="bs-example-navbar-collapse-1">
                         <form class="navbar-form navbar-left">
@@ -89,71 +89,49 @@ if(!$userController->is_authenticated()){
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                            <?php $m_stmt = $messageController->get_message_notifications(get_user_uid());?>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="text-danger"><?php echo $m_stmt->rowCount();?></b><b class="caret"></b></a>
                                 <ul class="dropdown-menu message-dropdown">
-                                    <li class="message-preview">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="pull-left">
-                                                    <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                                </span>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading"><strong><?php echo $userController->get_user_display_name_by_id($_SESSION['user_id']); ?></strong>
-                                                    </h5>
-                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="message-preview">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="pull-left">
-                                                    <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                                </span>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading"><strong>Don Iyke</strong>
-                                                    </h5>
-                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="message-preview">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="pull-left">
-                                                    <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                                </span>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                                    </h5>
-                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    <?php
+                                        if ($m_stmt->rowCount() > 0){
+                                            while ($m_row = $m_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                extract($m_row);?>
+                                                    <li class="message-preview">
+                                                        <a href="inbox.php">
+                                                            <div class="media">
+                                                                <div class="media-body">
+                                                                    <h5 class="media-heading"><strong><?php echo $userController->get_user_display_name_by_id($message_sender_id); ?></strong>
+                                                                    </h5>
+                                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> <?php echo timeAgo($message_date_created); ?> </p>
+                                                                    <p><?php echo getExcerpt($message_body, 50); ?></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
 
+                                            <?php }
+                                        }else{
+                                            echo '<i>No New Messages </i>';
+                                        }
+                                    ?>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                            <?php
+                                $stmt = $notifier->get_notifications_by_user_id(get_user_uid());?>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="text-danger"><?php echo $stmt->rowCount();?></b><b class="caret"></b></a>
                                 <ul class="dropdown-menu alert-dropdown">
-
-                                    <?php
-                                        $stmt = $notifier->get_notifications_by_user_id(get_user_uid());
-                                        if($stmt->rowCount() > 0){
-                                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                                extract($row);?>
-                                                    <li>
-                                                        <a href="#"> <span class="label label-default"><?php echo $notification_content;?></span></a>
-                                                    </li>
-                                                <?php
-                                            }
+                                    <?php if($stmt->rowCount() > 0){
+                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                            extract($row);?>
+                                                <li>
+                                                    <a href="#"> <span class="label label-default"><?php echo $notification_content;?></span></a>
+                                                </li>
+                                            <?php
                                         }
+                                    }else{
+                                        echo '<i>No New Notifications </i>';
+                                    }
                                     ?>
                                 </ul>
                             </li>
@@ -164,7 +142,7 @@ if(!$userController->is_authenticated()){
                                         <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                                        <a href="inbox.php"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
@@ -184,7 +162,7 @@ if(!$userController->is_authenticated()){
                                 <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#post"><i class="fa fa-bullhorn"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#post"><i class="fa fa-bullhorn"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="post" class="collapse">
                                     <li>
                                         <a href="add_post.php">Add Posts</a>
@@ -195,7 +173,7 @@ if(!$userController->is_authenticated()){
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#hostel"><i class="fa fa-home"></i> Hostels <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#hostel"><i class="fa fa-home"></i> Hostels <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="hostel" class="collapse">
                                     <li>
                                         <a href="add_lodges.php">Add lodges</a>
@@ -206,7 +184,7 @@ if(!$userController->is_authenticated()){
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#store"><i class="fa fa-shopping-cart"></i> Store <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#store"><i class="fa fa-shopping-cart"></i> Store <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="store" class="collapse">
                                     <li>
                                         <a href="add_product.php">Sell Products</a>
@@ -223,7 +201,7 @@ if(!$userController->is_authenticated()){
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#roommate"><i class="fa fa-user"></i> Roommate <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#roommate"><i class="fa fa-user"></i> Roommate <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="roommate" class="collapse">
                                     <li>
                                         <a href="roommate.php">Find Roommate</a>
@@ -234,7 +212,7 @@ if(!$userController->is_authenticated()){
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#groups"><i class="fa fa-users"></i> Groups <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#groups"><i class="fa fa-users"></i> Groups <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="groups" class="collapse">
                                     <li>
                                         <a href="../groups/groups.php">Join a Group</a>
@@ -251,7 +229,7 @@ if(!$userController->is_authenticated()){
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#events"><i class="fa fa-calendar"></i> Events <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#events"><i class="fa fa-calendar"></i> Events <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="events" class="collapse">
                                     <li>
                                         <a href="view_event.php">View Events</a>
@@ -265,7 +243,7 @@ if(!$userController->is_authenticated()){
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-inbox"></i> Messages <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#demo"><i class="fa fa-inbox"></i> Messages <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="demo" class="collapse">
                                     <li>
                                         <a href="compose.php">Compose Message</a>
@@ -283,7 +261,7 @@ if(!$userController->is_authenticated()){
                             </li>
 
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#account"><i class="fa fa-user"></i> My Account <i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:" data-toggle="collapse" data-target="#account"><i class="fa fa-user"></i> My Account <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="account" class="collapse member-collapse" style="color:blue">
                                     <li>
                                         <a href="profile.php">Update Profile</a>

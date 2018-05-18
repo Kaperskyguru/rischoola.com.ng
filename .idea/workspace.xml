@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e6bbe2ba-ba44-46d0-8847-7f1a54d3240b" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\xampp\htdocs\old_rsschools.ng\res\imgs\brand.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/imgs/brand.fw.png" afterPath="$PROJECT_DIR$/res/imgs/brand.fw.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/actions.php" afterPath="$PROJECT_DIR$/actions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/actions.php" afterPath="$PROJECT_DIR$/member/actions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/add_post.php" afterPath="$PROJECT_DIR$/member/add_post.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/js/bootstrap.js" afterPath="$PROJECT_DIR$/member/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/compose.php" afterPath="$PROJECT_DIR$/member/compose.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/dashboard-header.php" afterPath="$PROJECT_DIR$/member/dashboard-header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/datatable/AutoFill-2.2.2/js/dataTables.autoFill.js" afterPath="$PROJECT_DIR$/member/datatable/AutoFill-2.2.2/js/dataTables.autoFill.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/datatable/datatables.js" afterPath="$PROJECT_DIR$/member/datatable/datatables.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/events.php" afterPath="$PROJECT_DIR$/classes/controllers/events.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/groups.php" afterPath="$PROJECT_DIR$/classes/controllers/groups.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/header.php" afterPath="$PROJECT_DIR$/header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/inbox.php" afterPath="$PROJECT_DIR$/member/inbox.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/index.php" afterPath="$PROJECT_DIR$/member/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/datatable/DataTables-1.10.16/js/jquery.dataTables.js" afterPath="$PROJECT_DIR$/member/datatable/DataTables-1.10.16/js/jquery.dataTables.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/js/plugins/flot/jquery.flot.pie.js" afterPath="$PROJECT_DIR$/member/js/plugins/flot/jquery.flot.pie.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/listOfStoreItems.php" afterPath="$PROJECT_DIR$/include/listOfStoreItems.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/lodges.php" afterPath="$PROJECT_DIR$/classes/controllers/lodges.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/marketplace.php" afterPath="$PROJECT_DIR$/classes/controllers/marketplace.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member_header.php" afterPath="$PROJECT_DIR$/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/events/member_header.php" afterPath="$PROJECT_DIR$/events/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groups/member_header.php" afterPath="$PROJECT_DIR$/groups/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interships/member_header.php" afterPath="$PROJECT_DIR$/interships/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lodges/member_header.php" afterPath="$PROJECT_DIR$/lodges/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketplace/member_header.php" afterPath="$PROJECT_DIR$/marketplace/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news/member_header.php" afterPath="$PROJECT_DIR$/news/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roommates/member_header.php" afterPath="$PROJECT_DIR$/roommates/member_header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/messages.php" afterPath="$PROJECT_DIR$/classes/controllers/messages.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/news.php" afterPath="$PROJECT_DIR$/classes/controllers/news.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/profile.php" afterPath="$PROJECT_DIR$/member/profile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news/read-news.php" afterPath="$PROJECT_DIR$/news/read-news.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/resources.php" afterPath="$PROJECT_DIR$/classes/controllers/resources.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/roommates.php" afterPath="$PROJECT_DIR$/classes/controllers/roommates.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/controllers/scholarships.php" afterPath="$PROJECT_DIR$/classes/controllers/scholarships.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member/js/script.js" afterPath="$PROJECT_DIR$/member/js/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/js/script.js" afterPath="$PROJECT_DIR$/res/js/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/searchBar.php" afterPath="$PROJECT_DIR$/include/searchBar.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/css/style.css" afterPath="$PROJECT_DIR$/res/css/style.css" />
+    </list>
+    <ignored path="old_rsschools.ng.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="old_rsschools.ng" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="profile.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/member/profile.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="198" column="19" selection-start-line="198" selection-start-column="19" selection-end-line="198" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compose.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/member/compose.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="49" column="104" selection-start-line="49" selection-start-column="104" selection-end-line="49" selection-end-column="104" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/member/js/script.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="actions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/member/actions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="draft_messages.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/member/draft_messages.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes/controllers/messages.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="91" column="37" selection-start-line="91" selection-start-column="37" selection-end-line="91" selection-end-column="37" />
+              <folding>
+                <marker date="1526602732523" expanded="true" signature="393:423" placeholder="SELECT * FRO..messages..." />
+                <marker date="1526602732523" expanded="true" signature="584:674" placeholder="SELECT messa..messages..." />
+                <marker date="1526602732523" expanded="true" signature="887:957" placeholder="SELECT * FRO..messages..." />
+                <marker date="1526602732523" expanded="true" signature="1201:1309" placeholder="SELECT * FRO..messages..." />
+                <marker date="1526602732523" expanded="true" signature="1520:1598" placeholder="SELECT * FRO..messages..." />
+                <marker date="1526602732523" expanded="true" signature="2057:2305" placeholder="INSERT INTO ..." />
+                <marker date="1526602732523" expanded="true" signature="3095:3343" placeholder="INSERT INTO ..." />
+                <marker date="1526602732523" expanded="true" signature="3877:3949" placeholder="UPDATE messa..." />
+                <marker date="1526602732523" expanded="true" signature="4235:4368" placeholder="SELECT messa..messages..." />
+                <marker date="1526602732523" expanded="true" signature="4573:4679" placeholder="SELECT * FRO..messages..." />
+                <marker date="1526602732523" expanded="true" signature="4897:4950" placeholder="SELECT messa..messages..." />
+                <marker date="1526602732523" expanded="true" signature="5180:5236" placeholder="SELECT messa..messages..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/search.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7383821">
+              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/member/profile.php" />
+        <option value="$PROJECT_DIR$/classes/controllers/messages.php" />
+        <option value="$PROJECT_DIR$/member/compose.php" />
+        <option value="$PROJECT_DIR$/member/js/script.js" />
+        <option value="$PROJECT_DIR$/member/actions.php" />
+        <option value="$PROJECT_DIR$/search.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="old_rsschools.ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="old_rsschools.ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="old_rsschools.ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6bbe2ba-ba44-46d0-8847-7f1a54d3240b" name="Default" comment="" />
+      <created>1526599330093</created>
+      <option name="number" value="Default" />
+      <updated>1526599330093</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17715959" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/member/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="198" column="19" selection-start-line="198" selection-start-column="19" selection-end-line="198" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/compose.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="104" selection-start-line="49" selection-start-column="104" selection-end-line="49" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/actions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/draft_messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/controllers/messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="37" selection-start-line="91" selection-start-column="37" selection-end-line="91" selection-end-column="37" />
+          <folding>
+            <marker date="1526602732523" expanded="true" signature="393:423" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="584:674" placeholder="SELECT messa..messages..." />
+            <marker date="1526602732523" expanded="true" signature="887:957" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="1201:1309" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="1520:1598" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="2057:2305" placeholder="INSERT INTO ..." />
+            <marker date="1526602732523" expanded="true" signature="3095:3343" placeholder="INSERT INTO ..." />
+            <marker date="1526602732523" expanded="true" signature="3877:3949" placeholder="UPDATE messa..." />
+            <marker date="1526602732523" expanded="true" signature="4235:4368" placeholder="SELECT messa..messages..." />
+            <marker date="1526602732523" expanded="true" signature="4573:4679" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="4897:4950" placeholder="SELECT messa..messages..." />
+            <marker date="1526602732523" expanded="true" signature="5180:5236" placeholder="SELECT messa..messages..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14629948">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="198" column="19" selection-start-line="198" selection-start-column="19" selection-end-line="198" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/models/message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63511187">
+          <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/compose.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="104" selection-start-line="49" selection-start-column="104" selection-end-line="49" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/draft_messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member/actions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/controllers/messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="37" selection-start-line="91" selection-start-column="37" selection-end-line="91" selection-end-column="37" />
+          <folding>
+            <marker date="1526602732523" expanded="true" signature="393:423" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="584:674" placeholder="SELECT messa..messages..." />
+            <marker date="1526602732523" expanded="true" signature="887:957" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="1201:1309" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="1520:1598" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="2057:2305" placeholder="INSERT INTO ..." />
+            <marker date="1526602732523" expanded="true" signature="3095:3343" placeholder="INSERT INTO ..." />
+            <marker date="1526602732523" expanded="true" signature="3877:3949" placeholder="UPDATE messa..." />
+            <marker date="1526602732523" expanded="true" signature="4235:4368" placeholder="SELECT messa..messages..." />
+            <marker date="1526602732523" expanded="true" signature="4573:4679" placeholder="SELECT * FRO..messages..." />
+            <marker date="1526602732523" expanded="true" signature="4897:4950" placeholder="SELECT messa..messages..." />
+            <marker date="1526602732523" expanded="true" signature="5180:5236" placeholder="SELECT messa..messages..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7383821">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

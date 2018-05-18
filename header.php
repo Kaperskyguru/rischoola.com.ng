@@ -31,11 +31,11 @@
     <div class="collapse navbar-collapse top-nav" id="bs-example-navbar-collapse-1">
         <form class="navbar-form navbar-left">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" id="search_input" class="form-control" placeholder="Search">
             <div class="input-group-btn">
-              <button class="btn btn-default" type="submit">
+              <a id="search_btn" class="btn btn-default">
                 <i class="fa fa-search"></i>
-              </button>
+              </a>
             </div>
           </div>
         </form>
