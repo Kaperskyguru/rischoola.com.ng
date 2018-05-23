@@ -270,7 +270,6 @@ private function __construct()
           $this->session_id = $res['session_id'];
           $this->session_start_time = intval($res['session_start_ts'], 10);
 
-          //echo $this->user_id;
         }else{
           $this->delete_expired_session($this->user_id);
         }

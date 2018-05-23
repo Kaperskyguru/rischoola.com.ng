@@ -8,7 +8,7 @@ if ($userController->is_authenticated()) {
 }
 
 if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST"){
-  echo uploadFiles();
+  // GROUP DISCUSSION CODE HERE
 }
 
 $id1 = $_GET['id'];
@@ -325,86 +325,4 @@ exit;
     </div>
 </section>
 <!-- </section> -->
-<?php require_once '../include/footer.php'; ?>
-<script>
-    $(document).ready(function () {
-        $('#reply').click(function (e) {
-            e.prgroupDefault();
-            var pid = $(this).attr('pid');
-            alert(pid);
-            // $.ajax({
-            //   method:"group",
-            //   url:"read-news.php"
-            //   data:{pid:pid},
-            //   success: function(da) {
-            //       alert(da);
-            //   };
-            // });
-        });
-
-        $('#reminder').click(function(e) {
-          e.prgroupDefault();
-          var group_id = $(this).attr('pid');
-          $.ajax({
-            method: "POST",
-            url: "set_reminder.php",
-            data:{set_reminder:1, group_id:group_id},
-            success: function(data) {
-              if(data == 'TRUE'){
-              $('#reminder').attr('disabled','disabled');
-            }else if (data == 'FALSE') {
-              //$(this).html('Reminder Set');
-            }else{
-              alert(data);
-            }
-          }
-          });
-        });
-
-    });
-</script>
-
-<?php
-function uploadFiles(){
-  $error_status = 1;
-  $target_dir = "../res/imgs/group/";
-
-  for($i = 0; count($_FILES['file']['name']); $i++){
-    echo "string";
-  $image_to_upload = $_FILES['file'];
-  $image_name = $image_to_upload['name'][$i];
-  $target_file = $target_dir . basename($image_to_upload['name'][$i]);
-  $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
-if(!empty($target_file)){
-    if(getimagesize($image_to_upload['tmp_name'][$i]) !== FALSE){
-      $error_status = 1;
-    }else{
-      $error_status = 0;
-    }
-
-    if(file_exists($target_file)){
-      $error_status = 0;
-    }else{
-      $error_status = 1;
-    }
-
-    if($image_to_upload['size'] > 10485760){
-      $error_status = 0;
-    }
-
-    if($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif"){
-      $error_status = 0;
-    }else{
-      $error_status = 1;
-    }
-
-    if($error_status == 1){
-      if(move_uploaded_file($image_to_upload['tmp_name'][$i], $target_file)){
-        return dirname($target_file)."/".basename($image_to_upload['name'][$i]);
-      }
-    }
-  }else {
-    return 'none';
-  }
-}
-}
+<?php require_once '../include/footer.php';

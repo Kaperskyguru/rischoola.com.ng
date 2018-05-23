@@ -30,7 +30,7 @@ if($userController->is_authenticated()){
 					 <div class="col-lg-12">
 						 <h2>Latest Groups</h2>
 						 <div id="group_content">
-			 		 		<?php $groupController->display_availabe_groups(8,$resources, ""); ?>
+			 		 		<?php $groupController->display_availabe_groups(8,$resources); ?>
 						</div>
 
 						<!--  Pagination starts here -->
@@ -44,7 +44,7 @@ if($userController->is_authenticated()){
 
 					<div class="col-lg-12">
 						<h2>Popular Groups</h2>
-					 <?php $groupController->display_availabe_groups(4,$resources, ""); ?>
+					 <?php $groupController->display_availabe_groups(4,$resources); ?>
 
 					 <!--  Pagination starts here -->
 					 <div class="margin-btom-20">
@@ -57,7 +57,7 @@ if($userController->is_authenticated()){
 
 				 <div class="col-lg-12">
 					 <h2>Trending Groups</h2>
-					<?php $groupController->display_availabe_groups(4,$resources, ""); ?>
+					<?php $groupController->display_availabe_groups(4,$resources); ?>
 
 					<!--  Pagination starts here -->
 					<div class="margin-btom-20">
@@ -93,25 +93,3 @@ if($userController->is_authenticated()){
 <?php
 require_once '../include/footer.php';
 ?>
-<script>
-$(document).ready(function() {
-	$('#group_search').change(function() {
-		var sid = $(this).val();
-		$.ajax({
-			method: 'POST',
-			url : 'group_actions.php',
-			cache: false,
-			data: {group_search_set:1, sid:sid},
-			success: function(data) {
-				//alert(data);
-				$('#group_content').empty();
-				$('#group_content').html(data);
-			},
-			onerror: function(params) {
-				alert(params);
-			}
-		});
-	});
-});
-
-</script>

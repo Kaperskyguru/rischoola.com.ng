@@ -342,7 +342,7 @@ public function get_lodge_models()
        }
    }
 
-    public function display_availabe_lodges($length, $src, Resources $res) {
+    public function display_availabe_lodges($length, Resources $res) {
         $stmt = $this->get_lodges($length);
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -355,7 +355,7 @@ public function get_lodge_models()
                             <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS , array( "crop" => "fill" )));?>
                         </div>
                         <!-- <div> -->
-                            <h3 class="hostelname"><a href="<?php echo $src;?>lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a></h3>
+                            <h3 class="hostelname"><a href="<?php echo SITEURL;?>/lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a></h3>
                             <h5><img /><?php echo $lodge_address; ?></h5>
                             <p><?php echo $this->getExcerpt($lodge_desc, 60); ?></p>
                             <h3 class="hostelname text-danger"># <?php echo $lodge_price; ?> / year</h3>
@@ -406,7 +406,7 @@ public function get_lodge_models()
         return $stmt;
     }
 
-    public function display_search_lodges($length = 0, $src, Resources $res, Array $options) {
+    public function display_search_lodges($length = 0, Resources $res, Array $options) {
         $stmt = $this->get_lodges_by_search_terms($options);
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -421,7 +421,7 @@ public function get_lodge_models()
 
                         </div>
                         <div>
-                            <h3 class="hostelname"><a href="<?php echo $src;?>lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a></h3>
+                            <h3 class="hostelname"><a href="<?php echo SITEURL;?>/lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a></h3>
                             <h5><img /><?php echo $lodge_address; ?></h5>
                             <p><?php echo $this->getExcerpt($lodge_desc, 60); ?></p>
                             <h3 class="hostelname text-danger"># <?php echo $lodge_price; ?> / year</h3>
@@ -439,7 +439,7 @@ public function get_lodge_models()
         }
     }
 
-    public function display_related_lodges($school_id, $length, $src){
+    public function display_related_lodges($school_id, $length){
       $stmt = $this->get_related_lodges($school_id,$length);
       if ($stmt->rowCount() > 0) {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -448,8 +448,8 @@ public function get_lodge_models()
               <div class="product col-lg-3 col-sm-6">
                   <div class="product-thumb">
                       <a href="#" class="thumb-link">
-                          <img class="hover-img" src="<?php echo $src;?>/imgs/product/6-hover.jpg" alt="Product Hover">
-                          <img class="front-img" src="<?php echo $src;?>/imgs/product/6.jpg" alt="Product Front">
+                          <img class="hover-img" src="<?php echo SITEURL;?>/res/imgs/product/6-hover.jpg" alt="Product Hover">
+                          <img class="front-img" src="<?php echo SITEURL;?>/res/imgs/product/6.jpg" alt="Product Front">
                       </a>
                       <div class="attr-group">
                           <span class="new"><?php echo $this->get_lodge_status_by_id($lodge_status_id);?></span>

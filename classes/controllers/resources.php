@@ -180,7 +180,7 @@ class Resources extends dbmodel
                 array_push($files_id, $resources->add_images_and_get_last_inserted_id($image_name, $user_id, $inserted_id, "post"));
                 return $files_id[0]; 
               }else{
-                
+                return 0;
               }
           }
       } 

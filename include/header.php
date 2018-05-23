@@ -29,16 +29,16 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse top-nav" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left">
-          <div class="input-group">
-            <input type="text" id="search_input" class="form-control" placeholder="Search">
+      <form class="navbar-form navbar-left">
+        <div class="input-group">
+            <input type="text" id="search_input" url = "<?php echo SITEURL; ?>" class="form-control" placeholder="Search">
             <div class="input-group-btn">
-              <a id="search_btn" class="btn btn-default">
-                <i class="fa fa-search"></i>
-              </a>
+                <a href="#" id="search_btn" class="btn btn-default">
+                    <i class="fa fa-search"></i>
+                </a>
             </div>
-          </div>
-        </form>
+        </div>
+      </form>
       <ul class="nav navbar-nav" >
         <li><a href="<?php echo SITEURL ?>/index.php" >Home<span class="sr-only">(current)</span></a></li>
         <li><a href="<?php echo SITEURL ?>/news/news.php">Latest News</a></li>

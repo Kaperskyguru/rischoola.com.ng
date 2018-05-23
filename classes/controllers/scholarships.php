@@ -113,19 +113,19 @@ class Scholarships extends dbmodel {
                   extract($row);
                   ?>
                   <div>
-                      <a href="<?php echo $scholarship_src; ?>read-scholarship.php">
+                    <a href="<?php echo SITEURL; ?>/scholarships/read-scholarship.php">
                       <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                     </a>
                   </div>
                   <div>
-                      <a href="<?php echo $scholarship_src; ?>read-scholarship.php"><h4><?php echo $scholarship_title;?></h4></a>
+                    <a href="<?php echo SITEURL; ?>/scholarships/read-scholarship.php"><h4><?php echo $scholarship_title;?></h4></a>
                   </div>
                   <?php
               }
           }
         }
 
-        public function display_latest_scholarship($limit, $src, Resources $res)
+        public function display_latest_scholarship($limit, Resources $res)
         {
           $stmt = $this->get_all_scholarship($limit);
           if ($stmt->rowCount() > 0) {
@@ -141,7 +141,7 @@ class Scholarships extends dbmodel {
                       </div>
                       <div class="col-sm-8" >
                           <div>
-                              <a href="<?php echo $src; ?>scholarships/view-scholarship.php?id=<?php echo $scholarship_id; ?>"><h4><?php echo $scholarship_title; ?></h4></a>
+                              <a href="<?php echo SITEURL; ?>/scholarships/view-scholarship.php?id=<?php echo $scholarship_id; ?>"><h4><?php echo $scholarship_title; ?></h4></a>
                           </div>
                           <div>
                               <p><?php echo getExcerpt($scholarship_desc, 100); ?></p>

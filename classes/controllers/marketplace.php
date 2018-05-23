@@ -304,7 +304,7 @@ class Marketplace extends dbmodel
         }
     }
 
-    public function display_availabe_products($length, $res, $category_id)
+    public function display_availabe_products($length, Resources $res, $category_id)
     {
         if ($category_id == 0) {
             $stmt = $this->get_products($length);

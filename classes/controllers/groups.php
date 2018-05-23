@@ -317,7 +317,7 @@ class Groups extends dbmodel {
      }
  }
 
-  public function display_availabe_groups($length, $res, $link) {
+  public function display_availabe_groups($length, $res) {
       $stmt = $this->get_groups($length);
       if ($stmt->rowCount() > 0) {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -330,9 +330,9 @@ class Groups extends dbmodel {
                 <div>
                   <h4><?php echo $group_title; ?></h4>
                 <?php if($this->is_group_member($group_id, get_user_uid())){?>
-                  <a href="<?php echo $link; ?>group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Goto Group</a>
+                  <a href="<?php echo SITEURL; ?>/group/group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Goto Group</a>
                 <?php } else { ?>
-                  <a href="<?php echo $link; ?>group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Join Group</a>
+                  <a href="<?php echo SITEURL; ?>/groups/group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Join Group</a>
                 <?php }?>
                 </div>
               </div>
@@ -341,7 +341,7 @@ class Groups extends dbmodel {
       }
   }
 
-  public function display_search_groups($length = 0, $res, $link = "", $group_school_id) {
+  public function display_search_groups($length = 0, $res, $group_school_id) {
     $stmt = $this->get_groups_by_school_id($group_school_id);
     if ($stmt->rowCount() > 0) {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -354,9 +354,9 @@ class Groups extends dbmodel {
               <div>
                 <h4><?php echo $group_title; ?></h4>
               <?php if($this->is_group_member($group_id, get_user_uid())){?>
-                <a href="<?php echo $link; ?>group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Goto Group</a>
+                <a href="<?php echo SITEURL; ?>/groups/group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Goto Group</a>
               <?php } else { ?>
-                <a href="<?php echo $link; ?>group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Join Group</a>
+                <a href="<?php echo SITEURL; ?>/groups/group_page.php?id=<?php echo $group_id; ?>" class="btn btn-primary">Join Group</a>
               <?php }?>
               </div>
             </div>

@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Lodges For Rent</h2>
-    <?php $lodgeController->display_availabe_lodges(6, "", $resources); ?>
+    <?php $lodgeController->display_availabe_lodges(6, $resources); ?>
 
     <div class="row">
         <div class="col-md-5">

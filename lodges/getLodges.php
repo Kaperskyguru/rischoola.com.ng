@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             'hostel_type' => $_POST['hostel_type'],
         ];
 
-        $lodgeController->display_search_lodges(0, "../", $resources, $option);
+        $lodgeController->display_search_lodges(0, $resources, $option);
         
     }
 }

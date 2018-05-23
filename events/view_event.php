@@ -218,42 +218,4 @@ exit;
     </div>
 </section>
 <!-- </section> -->
-<?php require_once '../include/footer.php'; ?>
-<script>
-    $(document).ready(function () {
-        $('#reply').click(function (e) {
-            e.preventDefault();
-            var pid = $(this).attr('pid');
-            alert(pid);
-            // $.ajax({
-            //   method:"event",
-            //   url:"read-news.php"
-            //   data:{pid:pid},
-            //   success: function(da) {
-            //       alert(da);
-            //   };
-            // });
-        });
-
-        $('#reminder').click(function(e) {
-          e.preventDefault();
-          var event_id = $(this).attr('pid');
-          alert();
-          $.ajax({
-            method: "POST",
-            url: "set_reminder.php",
-            data:{set_reminder:1, event_id:event_id},
-            success: function(data) {
-              if(data == 'TRUE'){
-              $('#reminder').attr('disabled','disabled');
-            }else if (data == 'FALSE') {
-              //$(this).html('Reminder Set');
-            }else{
-              alert(data);
-            }
-          }
-          });
-        });
-
-    });
-</script>
+<?php require_once '../include/footer.php';

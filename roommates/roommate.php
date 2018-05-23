@@ -102,31 +102,3 @@ if($userController->is_authenticated()){
 </section>
 <?php
 require_once '../include/footer.php';
-?>
-
-<script>
-    $(document).ready(function() {
-        
-        $('body').delegate('#roommate_search_submit', 'click', function () {
-            
-            var roommate_school = $('#roommate_school').val();
-            var roommate_gender = $('#roommate_gender').val();
-            var roommate_type = $('#roommate_type').val();
-
-            $.ajax({
-                method : 'POST',
-                url : 'roommate_actions.php',
-                data : {roommate_search_set:1, roommate_school:roommate_school, roommate_gender:roommate_gender, roommate_type:roommate_type},
-                success : function(data) {
-                    $('#roommate_content').html(data)
-                },
-                onerror : function(data) {
-                    alert(data);
-                }
-            });
-
-        });
-
-    });
-
-</script>

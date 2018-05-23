@@ -52,7 +52,7 @@ extract($row);
                             <span class="empty"></span><span style="margin-right:8px"><i class="fa fa-folder">
                                     &nbsp;</i><?php echo timeAgo($post_date_created); ?></span>
                         </h6>
-                        <hr/>
+                        <hr>
                     </div>
                     <div class="pad-bottom-50">
                         <h5>
@@ -236,55 +236,4 @@ extract($row);
     </div>
 </section>
 <!-- </section> -->
-<?php require_once '../include/footer.php'; ?>
-<script>
-    $(document).ready(function () {
-        $('#reply').click(function (e) {
-            e.preventDefault();
-            var pid = $(this).attr('pid');
-            alert(pid);
-            // $.ajax({
-            //   method:"post",
-            //   url:"read-news.php"
-            //   data:{pid:pid},
-            //   success: function(da) {
-            //       alert(da);
-            //   };
-            // });
-        });
-
-
-        $('#comnt').click(function () {
-            var files1 = $(this)[].files;
-            alert(files1);
-            for (var i = 0; i < files1.length; i++) {
-                var files = files1.files[i];
-                // uploadFile(this.files[i]); // call the function to upload the file
-
-            }
-            alert(
-                "File Name : " + files.name + "\n" +
-                "File Size : " + files.size + "\n" +
-                "File type : " + files.type + "\n" +
-                "File date : " + files.lastModified
-            );
-        });
-
-        $('body').delegate('#comnt', 'click', function () {
-            //e.preventDefault();
-            var pid = $(this).attr('pid');
-            var comment_body = $('#commentBox').val();
-            var file = $('#file1').val();
-            alert(file);
-            $.ajax({
-                method: 'post',
-                url: 'getNews.php',
-                cache: false,
-                data: {comment: 1, pid: pid, comment_body: comment_body},
-                success: function (d) {
-                    alert(d);
-                }
-            });
-        });
-    });
-</script>
+<?php require_once '../include/footer.php';

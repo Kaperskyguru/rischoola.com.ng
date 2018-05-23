@@ -21,10 +21,10 @@ if (isset($_POST['add_to_cart']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 if(isset($_POST["cate"]) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $id = $_POST['cid'];
    if ($id == 0) {
-      $storeController->display_availabe_products(14, "../", 0);
+      $storeController->display_availabe_products(14, $resources, 0);
    }else {
      $id = $_POST['cid'];
-      $storeController->display_availabe_products(14, "../", $id);
+      $storeController->display_availabe_products(14, $resources, $id);
    }
   }
 

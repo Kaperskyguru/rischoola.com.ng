@@ -230,24 +230,24 @@ private static $instance;
       return $row['post_id'];
     }
 
-    public function get_last_inserted_post($src, $post_src, Resources $res)
+    public function get_last_inserted_post( Resources $res)
     {
         $row = $this->get_post_by_id($this->get_last_inserted_id());
-                extract($row);
-                ?>
-                <div>
-                    <a href="<?php echo $post_src; ?>read-news.php?id=<?php echo $post_id ?>">
-                    <?php 
-                    $res::display($res->get_image_url(68, 'post'), array_merge($res::LATEST_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
-                  </a>
-                </div>
-                <div>
-                    <a href="<?php echo $post_src; ?>read-news.php?id=<?php echo $post_id ?>"><h4><?php echo $post_title;?></h4></a>
-                </div>
-                <?php
+            extract($row);
+            ?>
+            <div>
+                <a href="<?php echo SITEURL;?>/news/read-news.php?id=<?php echo $post_id ?>">
+                <?php 
+                $res::display($res->get_image_url(68, 'post'), array_merge($res::LATEST_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+              </a>
+            </div>
+            <div>
+                <a href="<?php echo SITEURL;?>/news/read-news.php?id=<?php echo $post_id ?>"><h4><?php echo $post_title;?></h4></a>
+            </div>
+            <?php
       }
 
-      public function display_latest_post($limit, $src)
+      public function display_latest_post($limit)
       {
         $stmt = $this->get_all_post($limit);
         if ($stmt->rowCount() > 0) {
@@ -255,7 +255,7 @@ private static $instance;
                 extract($row);
                 ?>
                 <div>
-                    <h4><a href="<?php echo $src; ?>read-news.php?id=<?php echo $post_id ?>"><?php echo $post_title; ?></a></h4>
+                    <h4><a href="<?php echo SITEURL;?>/news/read-news.php?id=<?php echo $post_id ?>"><?php echo $post_title; ?></a></h4>
                 </div>
                 <div>
                     <p><?php echo getExcerpt($post_content, 100);?></p>

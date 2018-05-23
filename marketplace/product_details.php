@@ -20,7 +20,7 @@ if ($id == 0) {
         header("Location: product_details.php");
     } else {
         ?>
-        <div class="container-fluid marg-to-60 pad-up-20 margin-btom-20">
+        <div class="container-fluid marg-to-50 pad-up-20 margin-btom-20">
             <section>
                 <!-- Products -->
                 <div class="row">
@@ -243,13 +243,6 @@ if ($id == 0) {
 require_once '../include/footer.php';?>
 <script>
     $(document).ready(function() {
-        $('#quantity_order').change(function() {
-            var qty = $(this).val();
-            var price = $(this).attr('pip');
-
-            var total = qty * price;
-            $('#amount').html("N "+total);
-            
-        });
+        
     });
 </script>

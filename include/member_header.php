@@ -45,7 +45,7 @@
                 <div class="collapse navbar-collapse top-nav" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input type="text" id="search_input" class="form-control" placeholder="Search">
+                            <input type="text" id="search_input" url = "<?php echo SITEURL; ?>" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
                                 <a href="#" id="search_btn" class="btn btn-default">
                                     <i class="fa fa-search"></i>
@@ -113,7 +113,7 @@
                                 </ul>
                             </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $userController->get_user_display_name_by_id($_SESSION['user_id']); ?> <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $userController->get_user_display_name_by_id(get_user_uid()); ?> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                             <li>
                                     <a href="<?php echo SITEURL ?>/member/profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>

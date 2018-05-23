@@ -186,7 +186,7 @@ class Events extends dbmodel {
   }
 
 
-  public function display_availabe_events($length, $res, $link) {
+  public function display_availabe_events($length, $res) {
       $stmt = $this->get_events($length);
       if ($stmt->rowCount() > 0) {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -198,7 +198,7 @@ class Events extends dbmodel {
                     <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
                   </div>
                   <div class="col-md-7 pad-bottom-20">
-                    <a href="<?php echo $link;?>view_event.php?id=<?php echo $event_id; ?>"><h5><?php echo $event_title; ?></h5></a>
+                    <a href="<?php echo SITEURL;?>/events/view_event.php?id=<?php echo $event_id; ?>"><h5><?php echo $event_title; ?></h5></a>
                     <h6><?php echo date('l jS \of F Y h:i:s A', strtotime($event_date)); ?></h6>
                   </div>
                 </div>

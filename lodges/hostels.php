@@ -127,7 +127,7 @@ if($userController->is_authenticated()){
                 <h2>Available Hostels For Rent</h2>
                 <div class="row">
                     <div id="lodge_content">
-                        <?php $lodgeController->display_availabe_lodges(12, "../",$resources); ?>
+                        <?php $lodgeController->display_availabe_lodges(12,$resources); ?>
                     </div>
 
                     <!--  Pagination starts here -->

@@ -32,7 +32,7 @@ if($userController->is_authenticated()){
                 <h2>Upcoming Events</h2>
                     <div class="col-lg-12" id="event_contnt">
                         <div class="col-lg-12" id="event_content">
-                            <?php $eventController->display_availabe_events(6, $resources, ""); ?>
+                            <?php $eventController->display_availabe_events(6, $resources); ?>
                         </div>
                         <div class="col-lg-12">
                             <ul class="pager">
@@ -79,20 +79,3 @@ if($userController->is_authenticated()){
 </section>
 </section>
 <?php require_once '../include/footer.php'; ?>
-
-<script>
-$(document).ready(function() {
-    $('#search_event').change(function() {
-        var sid = $(this).val();
-        $.ajax({
-            method:'post',
-            url:'set_reminder.php',
-            data:{search_set:1, sid:sid},
-            success: function(data) {
-                $('#event_content').empty();
-                $('#event_content').html(data);              
-            }
-        });
-    });
-});
-</script>

@@ -55,6 +55,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['send_group_admin_messag
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
   if(isset($_POST['group_search_set'])){
-    $groupController->display_search_groups(0,$resources, "", $_POST['sid']);
+    $groupController->display_search_groups(0,$resources, $_POST['sid']);
   }
 }

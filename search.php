@@ -10,9 +10,9 @@ if ($userController->is_authenticated()) {
 <section id="search-results" class="marg-to-50 margin-btom-20">
     <div class="container">
         <?php
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            if (isset($_POST['search_set'])) {
-                $term = $_POST['term'];
+        // if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        //     if (isset($_POST['search_set'])) {
+                $term = $_GET['term'];
                 if ($term != "" || !isset($term) || !empty($term)) {
 
                     $post_stmt = $newsControler->get_search_post($term);
@@ -166,8 +166,9 @@ if ($userController->is_authenticated()) {
                     }
 
                 }
-            }
-        }
+            //}
+       // }
         ?>
     </div>
 </section>
+<?php require_once 'include/footer.php';
