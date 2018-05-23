@@ -1,4 +1,4 @@
-<div class="container-fluid pad-l-r-30">
+<div class="container">
   <div class="row">
   <h2>Roommate In Need</h2>
 <div class="col-md-8">
@@ -6,7 +6,7 @@
 
   <div class="text-center col-lg-12 pad-bottom-20">
   <a href="roommates/roommate.php" class="btn btn-success" style="margin-bottom: 10px;">View All Available Roommates</a>
-    <a href="#" class="btn btn-success" style="margin-bottom: 10px;">Post To Get A Roommate</a>
+    <a href="<?php echo $url = (get_user_uid() != null)? "member/roommate.php":"users/login.php"; ?>" class="btn btn-success" style="margin-bottom: 10px;">Post To Get A Roommate</a>
   </div>
 </div>
 <div class="col-md-4">

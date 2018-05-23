@@ -118,7 +118,7 @@ if(!$userController->is_authenticated()){
                             </li>
                             <li class="dropdown">
                             <?php
-                                $stmt = $notifier->get_notifications_by_user_id(get_user_uid());?>
+                                $stmt = $notifier->get_notifications_by_user_id(get_user_uid(),5);?>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="text-danger"><?php echo $stmt->rowCount();?></b><b class="caret"></b></a>
                                 <ul class="dropdown-menu alert-dropdown">
                                     <?php if($stmt->rowCount() > 0){

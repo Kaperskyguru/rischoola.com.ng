@@ -1,5 +1,5 @@
 <?php
-require '../init.php';
+require_once '../init.php';
 $userController->cookie_login();
 if (isset($_POST['id'])) {
 $newsControler->display_latest_post(8, "");

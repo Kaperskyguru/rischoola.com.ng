@@ -1,10 +1,10 @@
 <?php
-require '../init.php';
+require_once '../init.php';
 $userController->cookie_login();
 if($userController->is_authenticated()){
-  require 'member_header.php';
+  require_once '../include/member_header.php';
 }else {
-  require 'header.php';
+  require_once '../include/header.php';
 }
 ?>
 
@@ -91,7 +91,7 @@ if($userController->is_authenticated()){
 </div>
 </section>
 <?php
-include 'footer.php';
+require_once '../include/footer.php';
 ?>
 <script>
 $(document).ready(function() {

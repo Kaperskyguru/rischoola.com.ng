@@ -349,11 +349,11 @@ public function get_lodge_models()
                 extract($row);
                 ?>
 
-                <div class="col-sm-8 col-xs-12 col-md-4">
-                    <div class="thumbnail">
-                        <!-- <div> -->
+                <div class="col-xs-12 col-md-4 col-sm-6 ">
+                    <div class="thumbnail" style="padding:10px">
+                        <div class="img-thumbnail img-responsive">
                             <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS , array( "crop" => "fill" )));?>
-                        <!-- </div> -->
+                        </div>
                         <!-- <div> -->
                             <h3 class="hostelname"><a href="<?php echo $src;?>lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a></h3>
                             <h5><img /><?php echo $lodge_address; ?></h5>

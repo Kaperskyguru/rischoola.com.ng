@@ -67,8 +67,11 @@ if (isset($_POST['send_message']) && isset($_POST['body']) && isset($_POST['subj
             // Log error
         } else {
             // Log message: user name send direct message to 'user name'
+
+            // Notify user
             echo "Message sent successfully";
-            // Notify_user($user_id, $last_inserted_message_id);
+            $message = 'You sent a message to '. $userController->get_user_username_by_id($receiver_id);
+            $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'New Message', $message));
         }
     }
 }
@@ -130,6 +133,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['UpdateProfile'])) {
     $userModel->set_user_course_of_study($user_course_of_study);
 
     if ($userController->update_user($userModel)) {
+
+        // Notify user
+        $message = 'You updated your account details';
+        $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'Account update', $message));
         echo "Updated successfully";
     } else {
         echo "Sorry, we could not update your account";
@@ -144,6 +151,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_bank_informatio
     $account_name = $_POST['account_name'];
     $account_number = $_POST['account_number'];
     if ($userController->update_user_bank_details($id, $bank_name, $account_name, $account_number)) {
+
+        // Notify user
+        $message = 'You updated your bank details';
+        $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'Bank update', $message));
         echo "Updated successfully";
     } else {
         echo "Sorry, we could not update your bank Information";
@@ -167,6 +178,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password']) && 
                 if ($log_all_out) {
                     $userController->logout($id, TRUE);
                 }
+
+                 // Notify user
+                 $nmessage = 'You changed your password';
+                $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'Password change', $message));
                 echo "Updated successfully";
             } else {
                 echo "Sorry, we could not update your account";

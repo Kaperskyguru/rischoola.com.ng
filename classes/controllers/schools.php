@@ -51,6 +51,8 @@ class Schools extends dbmodel {
       return $school_name;
   }
 
+
+
   public function get_school_abbr_by_id($id) {
       $query = "SELECT school_abbr FROM schools WHERE school_id = $id";
       $this->query($query);

@@ -70,7 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // } else {
               //$image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, $product_id, "product");
               if($storeController->insert_product_featured_image_id($image_id, $product_id)){
-                $error_text = "Your product is pending verifications...";
+                  // Log here
+
+
+                // Notify user
+                $message = 'You inserted a new Product';
+                $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'New Product', $message));
+                $success_text = "Your product is pending verifications...";
+
               }else {
                 $error_text = "Your product inserted without featured Image...";
               }

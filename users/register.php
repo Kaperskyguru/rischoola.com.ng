@@ -1,6 +1,6 @@
 <?php
-require '../init.php';
-include 'header.php';
+require_once '../init.php';
+require_once '../include/header.php';
 $error = 0;
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	if (isset($_POST['name']) && isset($_POST['last_name'])) {
@@ -133,4 +133,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		</div>
 
 	</div>
-<?php include 'footer.php'; ?>
+<?php require_once '../include/footer.php'; ?>

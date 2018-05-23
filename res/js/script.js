@@ -132,7 +132,7 @@ $(document).ready(function() {
       data: {search_set:1, term:term},
       cache:true,
       success: function (data) {
-        $('#index-news').html(data);
+        $('.wrapper').html(data);
       },
       onerror : function(err){
         alert(err);

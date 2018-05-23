@@ -1,10 +1,10 @@
 <?php
-require '../init.php';
+require_once '../init.php';
 $userController->cookie_login();
 if($userController->is_authenticated()){
-  require 'member_header.php';
+  require_once '../include/member_header.php';
 }else {
-  require 'header.php';
+  require_once '../include/header.php';
 }
 
 
@@ -113,9 +113,9 @@ if ($id == 0) {
                                             <div class="order-variations">
                                                 <div class="order-variation quantity-variation">
                                                     <label>Quantity:</label>
-                                                    <input class="form-control" type="number" id="quantity_order" name="quantity_order" min="1" max="12" value="1" required>
+                                                    <input class="form-control" type="number" id="quantity_order" name="quantity_order" pip="<?php echo $product_price;?>" min="1" max="12" value="1" required>
                                                     <div class="form-group">
-                                                        <label style="color:red"> Calculating: 1 X <?php echo $product_price;?> = </label>
+                                                        <label style="color:red"> Calculating: 1 X <?php echo $product_price;?> = <span id="amount">N <?php echo (1 * $product_price);?></span></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -217,7 +217,7 @@ if ($id == 0) {
             </div>
             <div class="col-md-3">
                 <div class="row" style="margin-left:2px; margin-right:2px;">
-                  <?php require '../include/tabs.php'; ?>
+                  <?php require_once '../include/tabs.php'; ?>
                   <div class="col-sm-12">
                       <div class="pad-bottom-20">
                           <img src="../res/imgs/8722.gif" class="img-responsive">
@@ -240,4 +240,16 @@ if ($id == 0) {
 </section>
 </div>
 <?php
-include 'footer.php';
+require_once '../include/footer.php';?>
+<script>
+    $(document).ready(function() {
+        $('#quantity_order').change(function() {
+            var qty = $(this).val();
+            var price = $(this).attr('pip');
+
+            var total = qty * price;
+            $('#amount').html("N "+total);
+            
+        });
+    });
+</script>

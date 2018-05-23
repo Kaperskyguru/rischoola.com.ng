@@ -1,10 +1,10 @@
 <?php
-require '../init.php';
+require_once '../init.php';
 $userController->cookie_login();
 if ($userController->is_authenticated()) {
-    require 'member_header.php';
+    require_once '../include/member_header.php';
 } else {
-    require 'header.php';
+    require_once '../include/header.php';
 }
 
 if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST"){
@@ -82,9 +82,9 @@ exit;
                                   </div>
                                   <?php
                                   }else{
-                                    echo "<p>Not yet a member, Join group to start discussing </p><br />";
-                                    echo "<a href='group_page.php?id=$group_id' id='join_group' gid = '$group_id' class='btn btn-primary'>Join Group</a>";
-                                  }
+                                    echo "<p>Not yet a member, Join group to start discussing </p><br />";?>
+                                     <a href="<?php echo $url = get_user_uid() != null? "group_page.php?id=".$group_id : "../users/login.php"; ?>" id="join_group" gid = "<?php echo $group_id?>" class="btn btn-primary">Join Group</a>
+                                  <?php }
                                   ?>
                                   <!--/.Leave a reply form-->
                                   <div class="row">
@@ -119,7 +119,6 @@ exit;
                                                           <div class="comment-wrap">
                                                               <div class="comment-avatar">
                                                                   <?php $resources::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($resources::AVATAR_IMAGE_OPTIONS, array( "crop" => "fill" )));?>                   
-                                                                  <!-- <img alt="" src="../res/imgs/1.jpg" class="" height="45" width="45"> -->
                                                               </div>
                                                               <div class="author-comment">
                                                                   <cite class="fn"><?php echo $userController->get_user_username_by_id($discussion_user_id); ?></cite>
@@ -277,7 +276,8 @@ exit;
                             <?php if($groupController->group_show_phone($group_id)){?>
                             <li class="list-group-item"> <span class="fa fa-phone"> <?php echo $userController->get_user_phone_number_by_id($group_user_id);?></span></li>
                           <?php } if($groupController->group_show_email($group_id)) {?>
-                            <li class="list-group-item"> <span class="fa fa-envelope"> </span> solomoneseme@gmail.com</li>
+                            <li class="list-group-item"> <span class="fa fa-envelope"> </span> solomoneseme@gmail.com</li> 
+                            <!-- LOOK INTO THIS  ===> EMAIL--> 
                           <?php }?>
                           </ul>
                           <h4>Send Personal Message to Group Admin</h4>
@@ -304,7 +304,7 @@ exit;
                 ?>
             <div class="col-md-4">
                 <div class="col-sm-12">
-                    <?php require '../include/tabs.php'; ?>
+                    <?php require_once '../include/tabs.php'; ?>
                 </div>
                 <div class="col-sm-12">
                     <div class="pad-bottom-20">
@@ -325,7 +325,7 @@ exit;
     </div>
 </section>
 <!-- </section> -->
-<?php include 'footer.php'; ?>
+<?php require_once '../include/footer.php'; ?>
 <script>
     $(document).ready(function () {
         $('#reply').click(function (e) {

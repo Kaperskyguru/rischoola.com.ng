@@ -33,12 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $new_id = $newsControler->addNews($newsModel);
         if ($new_id != 0) {
            $image_id = uploadFiles($id, $new_id, $resources);
-        //   if ($image_src == 'none') {
-        //       $error_text = "Not Uploaded";
-        //   } else {
-            //$image_id = $resources->add_images_and_get_last_inserted_id($image_src, $id, $new_id, "post");
             if($newsControler->insert_post_featured_image_id($image_id, $new_id)){
-              $success_text = "Your Post is pending verifications...";
+                // Lodge here
+
+
+                // Notify user
+                $message = 'You inserted a new post';
+                $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'New Post', $message));
+                $success_text = "Your Post is pending verifications...";
+                
             }else {
               $error_text = "Your Post inserted without featured Image...";
             }
@@ -50,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-<div class="container">
+<div class="container marg-to-10">
     <div class="row">
         <div class="col-md-10 member_layout">
             <h2>Create a new post<hr /></h2>

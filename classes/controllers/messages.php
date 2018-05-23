@@ -49,7 +49,7 @@ class Messages extends dbmodel
 
     public function get_messages_by_receiver_id($id)
     {
-        $query = "SELECT * FROM messages WHERE message_receiver_id = :id AND message_status_id != 9 AND message_status_id != 6";
+        $query = "SELECT * FROM messages WHERE message_receiver_id = :id AND message_status_id != 9 AND message_status_id != 6 ORDER BY message_status_id DESC";
         $this->query($query);
         $this->bind(':id', $id);
         $stmt = $this->executer();

@@ -1,4 +1,4 @@
-<?php require_once '../init.php'; ?>
+<?php require_once SITEURL.'/init.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,22 +10,22 @@
 
         <title><?php echo get_site_name(); ?>|</title>
 
-        <link rel="stylesheet" type="text/css" href="../res/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="../res/css/font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" type="text/css" href="../res/css/style.css">
-        <link rel="stylesheet" href="../res/css/responsive.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/style.css">
+        <link rel="stylesheet" href="<?php echo SITEURL ?>/res/css/responsive.css">
 
         <!-- Bootstrap Core CSS -->
-        <link href="../res/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo SITEURL ?>/res/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../res/css/sb-admin.css" rel="stylesheet">
+        <link href="<?php echo SITEURL ?>/res/css/sb-admin.css" rel="stylesheet">
 
         <!-- Morris Charts CSS -->
-        <link href="../res/css/plugins/morris.css" rel="stylesheet">
+        <link href="<?php echo SITEURL ?>/res/css/plugins/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo SITEURL ?>/res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
@@ -40,29 +40,29 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="logo_marg" href="../index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive"></a>
+                    <a class="logo_marg" href="<?php echo SITEURL ?>/index.php"><img src="<?php echo SITEURL ?>/res/imgs/brand.fw.png" class="img-responsive"></a>
                 </div>
                 <div class="collapse navbar-collapse top-nav" id="bs-example-navbar-collapse-1">
-                    <form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" id="search_input" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
+                                <a href="#" id="search_btn" class="btn btn-default">
                                     <i class="fa fa-search"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </form>
                     <!-- Top Menu Items -->
                     <ul class="nav navbar-nav">
-                        <li ><a href="../index.php" class="active">Home<span class="sr-only">(current)</span></a></li>
-                        <li><a href="../news/news.php">Latest News</a></li>
-                        <li><a href="../lodges/hostels.php">Hostel</a></li>
-                        <!-- <li><a href="../scholarships.php">Scholarships</a></li> -->
-                        <li><a href="../marketplace/store.php">Store</a></li>
-                        <li><a href="roommate.php">Roommate Finder</a></li>
-                        <li><a href="../groups/groups.php">Groups</a></li>
-                        <li><a href="../events/events.php">Events</a></li>
+                        <li ><a href="<?php echo SITEURL ?>/index.php" class="active">Home<span class="sr-only">(current)</span></a></li>
+                        <li><a href="<?php echo SITEURL ?>/news/news.php">Latest News</a></li>
+                        <li><a href="<?php echo SITEURL ?>/lodges/hostels.php">Hostel</a></li>
+                        <!-- <li><a href="<?php echo SITEURL ?>/scholarships.php">Scholarships</a></li> -->
+                        <li><a href="<?php echo SITEURL ?>/marketplace/store.php">Store</a></li>
+                        <li><a href="<?php echo SITEURL ?>/roommates/roommate.php">Roommate Finder</a></li>
+                        <li><a href="<?php echo SITEURL ?>/groups/groups.php">Groups</a></li>
+                        <li><a href="<?php echo SITEURL ?>/events/events.php">Events</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -95,7 +95,7 @@
                             </li>
                             <li class="dropdown">
                             <?php
-                                $stmt = $notifier->get_notifications_by_user_id(get_user_uid());?>
+                                $stmt = $notifier->get_notifications_by_user_id(get_user_uid(), 5);?>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="text-danger"><?php echo $stmt->rowCount();?></b><b class="caret"></b></a>
                                 <ul class="dropdown-menu alert-dropdown">
                                     <?php if($stmt->rowCount() > 0){
@@ -115,21 +115,21 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $userController->get_user_display_name_by_id($_SESSION['user_id']); ?> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a href="../member/profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <li>
+                                    <a href="<?php echo SITEURL ?>/member/profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                                 </li>
                                 <li>
-                                    <a href="../member/"><i class="fa fa-fw fa-user"></i> Dashboard</a>
+                                    <a href="<?php echo SITEURL ?>/member/"><i class="fa fa-fw fa-user"></i> Dashboard</a>
                                 </li>
                                 <li>
-                                    <a href="../member/inbox.php"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                                    <a href="<?php echo SITEURL ?>/member/inbox.php"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="../users/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                    <a href="<?php echo SITEURL ?>/users/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                                 </li>
                             </ul>
                         </li>

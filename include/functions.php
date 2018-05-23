@@ -67,6 +67,17 @@ function post_image_options(){
     );
 }
 
+function build_notification($notifyModel, $receiver_id, $title, $message){
+    // Notify user
+    $notifyModel->set_notification_user_id(get_user_uid());
+    $notifyModel->set_notification_receiver_id($receiver_id);
+    $notifyModel->set_notification_content($message);
+    $notifyModel->set_notification_title($title);
+    $notifyModel->set_notification_status_id(13);
+
+    return $notifyModel;
+}
+
 
  function timeAgo($time_ago){
   $cur_time = time();
@@ -79,7 +90,11 @@ function post_image_options(){
   $months = round($time_elapsed / 2600640 );
   $years = round($time_elapsed / 31207680 );
     if($seconds <= 60){
-     return  "$seconds seconds ago";
+        if($seconds <= 5){
+            return  "Just now";
+        }else{
+            return  "$seconds seconds ago";
+        }
     }
     else if($minutes <=60){
        if($minutes==1){

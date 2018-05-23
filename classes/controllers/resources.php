@@ -3,6 +3,8 @@
  *
  */
 
+
+
 \Cloudinary::config(array(
   'cloud_name' => 'kaperskydisk',
   'api_key' => '951922678984356',
@@ -71,6 +73,7 @@ class Resources extends dbmodel
 
   public function add_images_and_get_last_inserted_id($image, $user_id, $item_id, $type) {
     //echo "string". $user_id;
+    try{
     $query = "INSERT INTO resources(resource_url, resource_user_id, resource_item_id, resource_table_name, resource_type)
     VALUES(:image, :user_id, :item_id, :table_name,:type)";
     $this->query($query);
@@ -83,6 +86,9 @@ class Resources extends dbmodel
     if ($id = $this->lastIdinsert()) {
       return $id;
     }
+  }catch(PDOException $e){
+    echo $e->getMessage();
+  }
   }
 
   public function get_resource_table_name($id)
@@ -93,12 +99,14 @@ class Resources extends dbmodel
 
 
   public function Upload($file_name, $options){
+    try{
       $result = \Cloudinary\Uploader::upload($file_name, $options);
-
       unlink($file_name);
-      //save_image_public_id_to_db("", $result['public_id']);
-      //echo "Upload result: " .ret_err($result);
       return $result;
+    }catch(Exception $e){
+      echo $e->getMessage();
+      return null;
+    }
 
   }
   public function get_multiple_image_id($id, $table_name){
@@ -143,6 +151,7 @@ class Resources extends dbmodel
       $files_data = array();
       $files_id = array();
 
+      try{
       foreach ($files["tmp_name"] as $index => $value) {
           $t = basename($files["name"][$index]);
           $image_file_type = pathinfo($t, PATHINFO_EXTENSION);
@@ -164,12 +173,21 @@ class Resources extends dbmodel
               $options = array_merge(post_image_options(), array(
                   "public_id" => "Rischoola/".$dir."/".random_string_gen()."_"."$name",
               ));
+              
               array_push($files_data, self::upload($value, $options));
               $image_name = $files_data[$index]['public_id'];
-              array_push($files_id, $resources->add_images_and_get_last_inserted_id($image_name, $user_id, $inserted_id, "post"));
-              
+              if(!is_null($image_name)){
+                array_push($files_id, $resources->add_images_and_get_last_inserted_id($image_name, $user_id, $inserted_id, "post"));
+                return $files_id[0]; 
+              }else{
+                
+              }
           }
       } 
-      return $files_id[0];   
-      }    
+
+    }catch(Exception $e){
+      echo $e->getMessage();
+    }
+
+    }    
 }

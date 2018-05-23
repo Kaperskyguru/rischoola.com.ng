@@ -1,11 +1,11 @@
 <?php
-include '../init.php';
+require_once '../init.php';
 
 $userController->cookie_login();
 if($userController->is_authenticated()){
-  require 'member_header.php';
+  require_once '../include/member_header.php';
 }else {
-  require 'header.php';
+  require_once '../include/header.php';
 }
 ?>
 
@@ -56,7 +56,7 @@ if($userController->is_authenticated()){
 
         <div class="col-md-3">
           <div class="row">
-            <?php require '../include/tabs.php'; ?>
+            <?php require_once '../include/tabs.php'; ?>
           </div>
           <div class="col-sm-12">
               <div class="pad-bottom-20">
@@ -75,4 +75,4 @@ if($userController->is_authenticated()){
         </div>
     </div>
 </section>
-<?php include 'footer.php'; ?>
+<?php require_once '../include/footer.php'; ?>

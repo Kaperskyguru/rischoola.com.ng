@@ -1,6 +1,6 @@
 <?php
-require '../init.php';
-include 'header.php';
+require_once '../init.php';
+require_once '../include/header.php';
 
 
 // MY VERIFICATION EMAIL LINK LOOKS LIKE THIS:
@@ -33,13 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 	$userModel->set_user_password($_POST['password']);
 	$userController->login($userModel);
 	if($userController->is_authenticated()){
-		//$_SESSION['user_uid'] = $userController->get_user_uid_by_user_user_name();
 		header("Location: ../member/index.php");
 		exit;
 	}else{
-		  //var_dump(password_verify($password, $hash_pass));
 		//log message here
-		$error_text = "Account Not Found";
+		$error_text = "Username/Password combination not correct";
 	}
 }
 
@@ -74,4 +72,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 		</div>
 
 	</div>
-<?php include 'footer.php'; ?>
+<?php require_once '../include/footer.php'; ?>

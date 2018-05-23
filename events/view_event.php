@@ -2,9 +2,9 @@
 require '../init.php';
 $userController->cookie_login();
 if ($userController->is_authenticated()) {
-    require 'member_header.php';
+    require_once '../include/member_header.php';
 } else {
-    require 'header.php';
+    require_once '../include/header.php';
 }
 
 
@@ -218,7 +218,7 @@ exit;
     </div>
 </section>
 <!-- </section> -->
-<?php include 'footer.php'; ?>
+<?php require_once '../include/footer.php'; ?>
 <script>
     $(document).ready(function () {
         $('#reply').click(function (e) {
@@ -238,6 +238,7 @@ exit;
         $('#reminder').click(function(e) {
           e.preventDefault();
           var event_id = $(this).attr('pid');
+          alert();
           $.ajax({
             method: "POST",
             url: "set_reminder.php",

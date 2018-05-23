@@ -1,10 +1,10 @@
 <?php
-include '../init.php';
+require_once '../init.php';
 $userController->cookie_login();
 if($userController->is_authenticated()){
-  require 'member_header.php';
+  require_once '../include/member_header.php';
 }else {
-  require 'header.php';
+  require_once '../include/header.php';
 }
 ?>
 
@@ -12,7 +12,7 @@ if($userController->is_authenticated()){
 <section id="hostel">
     <div class="container pad-up-50">
         <div class="row">
-            <div class="searchHostel col-sm-3 margin-btom-20 pad-bottom-20">
+            <div class="searchHostel col-md-4  margin-btom-20 pad-bottom-20">
                 <div class="form-group">
                     <label for="school">Enter School</label>
                     <select class="form-control" id="list_of_schools">
@@ -123,7 +123,7 @@ if($userController->is_authenticated()){
             </div>
 
 
-            <div class="col-sm-9">
+            <div class="col-md-8">
                 <h2>Available Hostels For Rent</h2>
                 <div class="row">
                     <div id="lodge_content">
@@ -153,4 +153,4 @@ if($userController->is_authenticated()){
         </div>
 </section>
 <?php
-include 'footer.php';
+require_once '../include/footer.php';

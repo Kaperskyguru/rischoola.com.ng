@@ -84,6 +84,15 @@ private static $instance;
       return $stmt;
     }
 
+    public function get_posts_by_school_id($school_id, $length)
+    {
+      $query = "SELECT * FROM posts WHERE post_school_id = :school_id AND post_like_count > post_dislike_count LIMIT $length";
+      $this->query($query);
+      $this->bind(':school_id', $school_id);
+      $stmt = $this->executer();
+      return $stmt;
+    }
+
     public function get_post_category()
     {
       $query = "SELECT * FROM post_category";

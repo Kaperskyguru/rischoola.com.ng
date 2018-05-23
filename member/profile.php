@@ -204,7 +204,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
                                 </form>
                              </div>
                             <div class="col-md-6">
-                                <img src="../res/imgs/1.jpg" class="img-responsive img-thumbnail" />
+                            <?php 
+                            if ($resources->get_image_url($userController->get_user_Profile_id(get_user_uid()), 'profiles') != NULL) {
+                                $resources::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($resources::DETAILS_IMAGE_OPTIONS, array("crop" => "fill")));                           
+                            }else{
+                                echo '<h2> No Profile Image </h2>';
+                            }?> 
                             </div>
                         </div>
                     </div>

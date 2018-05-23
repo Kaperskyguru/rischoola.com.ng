@@ -45,6 +45,23 @@ private function __construct()
     return 0;
   }
 
+
+  public function get_school_id_by_user_id($id) {
+    try{
+    $query = "SELECT user_school_id FROM users WHERE user_id = :id";
+    $this->query($query);
+    $this->bind(':id', $id);
+    $row = $this->resultset();
+    if (!is_null($row['user_school_id'])) {
+      extract($row);
+      return $user_school_id;
+    }
+  }catch(PDOException $e){
+    echo $e->getMessage();
+  }
+    
+}
+
   public function get_user_id_by_username($username) {
     try{
       $query = "SELECT user_id FROM users WHERE user_user_name = :username";
@@ -92,6 +109,14 @@ private function __construct()
       return TRUE;
     }
   return FALSE;
+  }
+
+  public function get_user_Profile_id($user_id){
+    $query = "SELECT user_profile_id FROM users WHERE user_id = :user_id";
+    $this->query($query);
+    $this->bind(':user_id', $user_id);
+    $row = $this->resultset();
+    return $n = $row['user_profile_id']==NULL?$row['user_profile_id']:0;
   }
 
   public function insert_user_profile_id($image_id, $user_id)

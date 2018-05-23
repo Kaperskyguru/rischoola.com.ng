@@ -38,15 +38,18 @@
                         <tbody>
                             <?php
                             $stmt = $messageController->get_messages_by_receiver_id(get_user_uid());
+                            $count = 0;
                             if ($stmt->rowCount() > 0) {
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    $count++;
                                     extract($row);
                                     ?>
-                                    <tr class="active">
-                                    <td><?php echo $message_id ?></td>                                        
+                                    <tr style="<?php echo $font = ($message_status_id == 13)? 'font-weight:bold;':'' ?>">
+                                        <strong>
+                                        <td><?php echo $count ?></td>                                        
                                         <td><?php echo $userController->get_user_username_by_id($message_sender_id); ?></td>
                                         <td><?php echo $message_subject; ?></td>
-                                        <td><?php echo getExcerpt($message_body, 50); ?></td>
+                                        <td><?php echo getExcerpt($message_body, 50); ?></td></strong>
                                         <td>
                                             <button type="button" mid="<?php echo $message_id ?>" class="btn btn-info " data-toggle="modal" data-target="#myModal">
                                                 view message

@@ -42,7 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $eventModel->set_event_status_id(2);
     if (!isset($error_text)) {
         if ($eventController->add_event($eventModel)) {
+
+            // Notify user
+            $message = 'You created a new Event';
+            $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'New Event', $message));
             $error_text = "Your Event is pending verifications...";
+            
         } else {
             $error_text = "Sorry, We could not Post the Event";
         }

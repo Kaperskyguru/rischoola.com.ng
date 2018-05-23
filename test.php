@@ -1,5 +1,5 @@
 <?php
-// require_once 'init.php';
+ require_once 'init.php';
 // print_r($lodgeController->display_related_lodges(1, 3, "res/"));
 // echo "<br />";
 // echo "<br />";
@@ -16,5 +16,5 @@
 // return $qux;
 //
 // }
-phpinfo();
+echo SITEURL;
 //$groupController->INSERT();

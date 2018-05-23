@@ -14,29 +14,27 @@ class Notifications extends dbmodel{
         return self::$instance;
     }
     
-    public function add_notification(Nofication $notification)
+    public function add_notification( $notification)
     {
         try{
             $notification_title = $notification->get_notification_title();
             $notification_content = $notification->get_notification_content();
-            $notification_url = $notification->get_notification_url();
-            $notification_school_id = $notification->get_notification_school_id();
             $notification_user_id = $notification->get_notification_user_id();
+            $notification_receiver_id = $notification->get_notification_receiver_id();
     
-            $query = "INSERT INTO notifications(notification_title,notification_content,notification_url,notification_user_id)"
-                    . "VALUES(:notification_title,:notification_desc,:notification_url,:notification_user_id)";
+            $query = "INSERT INTO notifications(notification_title,notification_content,notification_receiver_id,notification_user_id)"
+                    . "VALUES(:notification_title,:notification_content, :notification_receiver_id, :notification_user_id)";
             $this->query($query);
 
             $this->bind(":notification_title", $notification_title);
             $this->bind(":notification_content", $notification_content);
-            $this->bind(":notification_url", $notification_url);
-            //   $this->bind(":notification_status_id", $notification_status_id);
-            //   $this->bind(":notification_school_id", $notification_school_id);
+            //$this->bind(":notification_url", $notification_url);
+            $this->bind(":notification_receiver_id", $notification_receiver_id);
             $this->bind(":notification_user_id", $notification_user_id);
             $this->executer();
             return $this->lastIdInsert();
         }catch(PDOException $e){
-            echo $e.getMessage();
+            echo $e->getMessage();
             return 0;
         }
     }
@@ -50,9 +48,9 @@ class Notifications extends dbmodel{
   
     }
 
-    public function get_notifications_by_user_id($user_id)
+    public function get_notifications_by_user_id($user_id, $length)
     {
-        $query = "SELECT * FROM notifications WHERE notification_receiver_id = $user_id ORDER BY notification_status_id LIMIT 10";
+        $query = "SELECT * FROM notifications WHERE notification_receiver_id = $user_id ORDER BY notification_date_created DESC LIMIT $length";
         $this->query($query);
         $stmt = $this->executer();
         return $stmt;

@@ -50,7 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($inserted_id !== 0) {
             $image_id = uploadFiles($user_id, $inserted_id, $resources);
             if($groupController->insert_group_featured_image_id($image_id, $inserted_id)){
+
+                // Notify user
+                $message = 'You created a new Group';
+                $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'New Group', $message));
                 $success_text = "Your Group is pending verifications...";
+                
               }else {
                 $error_text = "Your Group created without featured Image...";
               }
