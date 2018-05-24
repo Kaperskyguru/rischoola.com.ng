@@ -12,6 +12,7 @@ $id1 = $_GET['id']; //sanitizer($_GET["id"]);
 $id = intval($id1);
 if ($id == 0) {
   //logging goes here
+    $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
     header("Location: hostel_detail.php");
 } else {
     $row = $lodgeController->get_lodge_by_id($id);

@@ -376,9 +376,17 @@ $(document).ready(function () {
     });
 
     $('body').delegate('#search_btn', 'click', function (e) {
+        e.preventDefault();
         var term = $('#search_input').val();
         var url = $('#search_input').attr('url');
         window.location.assign(url + "/search.php?term=" + term);
+    });
+
+    $('#search_input').onkeyup(function () {
+        $v = $(this).val();
+        if ($v != "") {
+            $('#search_btn').removeAttr('disabled');
+        }
     });
 
 

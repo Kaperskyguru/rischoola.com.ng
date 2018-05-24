@@ -43,7 +43,7 @@ if($userController->is_authenticated()){
                     </div>
                     <div class="col-lg-12">
                         <h2>Past Events</h2>
-                        <?php $eventController->display_availabe_events(6, $resources, ""); ?>
+                        <?php $eventController->display_availabe_events(6, $resources); ?>
                         
                         <div class="col-lg-12">
                             <ul class="pager">

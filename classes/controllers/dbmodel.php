@@ -1,73 +1,88 @@
 <?php
 
- abstract class dbmodel
+abstract class dbmodel
 {
-private $db;
-public static $dbh;
-private $stmt;
+    private $db;
+    public static $dbh;
+    private $stmt;
 
-  private function __construct(){}
+    private function __construct()
+    {
+    }
 
     //Using a singleton pattern to avoid duplication database connection
-    public function db(){
-      if(!self::$dbh){
-          self::$dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "");
-          self::$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      }
-      return self::$dbh;
-    }
-
-  public function query($query)
-  {
-    $this->db = $this->db();
-    $this->stmt = $this->db->prepare($query);
-  }
-
-  public function bind($param, $value, $type = null)
-  {
-    if(is_null($type))
+    public function db()
     {
-      switch ($value) {
-        case is_int($value):
-          $type = PDO::PARAM_INT;
-        break;
-        case is_bool($value):
-          $type = PDO::PARAM_BOOL;
-        break;
-        case is_null($value):
-          $type = PDO::PARAM_NULL;
-        break;
-        default:
-          $type = PDO::PARAM_STR;
-        break;
-      }
+        if (!self::$dbh) {
+            try {
+                self::$dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "");
+                self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                $_SESSION['error'] = $e->getMessage();
+            }
+        }
+        return self::$dbh;
     }
-    $this->stmt->bindValue($param,$value,$type);
-  }
 
-  public function executer()
-  {
-   $this->stmt->execute();
-   return $this->stmt;
-  }
-
-  public function resultset()
-  {
-    try{
-    $this->executer();
-    $stmt = $this->stmt->fetch(PDO::FETCH_ASSOC);
-    if($this->stmt->rowCount() > 0){
-      return $stmt;
+    public function query($query)
+    {
+        try {
+            $this->db = $this->db();
+            $this->stmt = $this->db->prepare($query);
+        } catch (PDOException $e) {
+            $_SESSION['error'] = $e->getMessage();
+        }
     }
-  }catch(PDOException $e){
-    echo $e->getMessage();
-  }
-  }
 
-  public function lastIdinsert()
-  {
-    return $this->db->lastInsertId();
-  }
+    public function bind($param, $value, $type = null)
+    {
+        if (is_null($type)) {
+            switch ($value) {
+                case is_int($value):
+                    $type = PDO::PARAM_INT;
+                    break;
+                case is_bool($value):
+                    $type = PDO::PARAM_BOOL;
+                    break;
+                case is_null($value):
+                    $type = PDO::PARAM_NULL;
+                    break;
+                default:
+                    $type = PDO::PARAM_STR;
+                    break;
+            }
+        }
+        $this->stmt->bindValue($param, $value, $type);
+    }
+
+    public function executer()
+    {
+        try {
+            $this->stmt->execute();
+            return $this->stmt;
+        } catch (PDOException $e) {
+            $_SESSION['error'] = $e->getMessage();
+        }
+    }
+
+    public function resultset()
+    {
+        try {
+            $this->executer();
+            $stmt = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            if ($this->stmt->rowCount() > 0) {
+                return $stmt;
+            }
+        } catch (PDOException $e) {
+            $_SESSION['erroe'] = $e->getMessage();
+        }
+    }
+
+    public function lastIdinsert()
+    {
+        return $this->db->lastInsertId();
+    }
+
 
 }
 

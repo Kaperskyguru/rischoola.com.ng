@@ -1,6 +1,6 @@
 <?php
 
-class Internships extends Controller {
+class Internships extends Logger {
 
   
 }

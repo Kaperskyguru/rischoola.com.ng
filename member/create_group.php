@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
         $inserted_id = $groupController->add_group($groupModel);
         if ($inserted_id !== 0) {
-            if($image_id = uploadFiles($user_id, $inserted_id, $resources)){
+            if($image_id = uploadFiles($user_id, $inserted_id)){
                 if($groupController->insert_group_featured_image_id($image_id, $inserted_id)){
 
                     // Notify user
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script src="js/bootstrap.min.js"></script>
 
 <?php
-function uploadFiles($user_id, $inserted_id, $resources) {
+function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["group_image"];
-    return Image::upload_image($files, $user_id, $inserted_id, $resources, "groups");  
+    return Image::upload_image($files, $user_id, $inserted_id, "groups");
 }

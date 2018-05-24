@@ -11,12 +11,11 @@ if($userController->is_authenticated()){
 $id1 = $_GET['id']; //sanitizer($_GET["id"]);
 $id = intval($id1);
 if ($id == 0) {
-    //logging goes here
+    $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
     header("Location: product_details.php");
 } else {
     $row = $storeController->get_product_by_id($id);
     if (is_null($row) || empty($row)) {
-        //logging goes here
         header("Location: product_details.php");
     } else {
         ?>

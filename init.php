@@ -47,6 +47,7 @@ $schoolController = Schools::getInstance();
 $messageController = Messages::getInstance();
 $mailer = Mails::getInstance();
 $notifier = Notifications::getInstance();
+$logger = Logger::getInstance();
 
 $newsModel = NewsModel::getInstance();
 $lodgeModel = LodgeModel::getInstance();

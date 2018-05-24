@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
       $new_id = $newsControler->addNews($newsModel);
         if ($new_id != 0) {
-           if($image_id = uploadFiles($id, $new_id, $resources) != 0){
+           if($image_id = uploadFiles($id, $new_id) != 0){
                 if($newsControler->insert_post_featured_image_id($image_id, $new_id)){
                     // Lodge here
 
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php
 
-function uploadFiles($user_id, $inserted_id, $resources) {
+function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["post_image"];
-    return Resources::upload_image($files, $user_id, $inserted_id, $resources, "posts");  
+    return Resources::upload_image($files, $user_id, $inserted_id, "posts");
 }

@@ -11,6 +11,7 @@ $id1 = $_GET['id'];
 $id = intval($id1);
 
 if ($id == 0) {
+    $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
     header("Location: scholarships.php");
     exit;
 } else {

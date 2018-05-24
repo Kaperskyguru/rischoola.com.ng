@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
       $lodge_id = $lodgeController->add_lodge($lodgeModel);
         if ($lodge_id != 0) {
-            if($image_id = uploadFiles($id, $lodge_id, $resources) != 0){
+            if($image_id = uploadFiles($id, $lodge_id) != 0){
                 if($lodgeController->insert_lodge_featured_image_id($image_id, $lodge_id)){
                     // Log here
 
@@ -163,9 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <?php
-function uploadFiles($user_id, $inserted_id, $resources) {
+function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["lodge_image"];
-    return Resources::upload_image($files, $user_id, $inserted_id, $resources, "lodges");  
+    return Resources::upload_image($files, $user_id, $inserted_id, "lodges");
 }?>
 
 <script src="js/jquery.js"></script>

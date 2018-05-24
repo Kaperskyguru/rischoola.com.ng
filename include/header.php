@@ -33,7 +33,7 @@
         <div class="input-group">
             <input type="text" id="search_input" url = "<?php echo SITEURL; ?>" class="form-control" placeholder="Search">
             <div class="input-group-btn">
-                <a href="#" id="search_btn" class="btn btn-default">
+                <a href="#" disabled id="search_btn" class="btn btn-default">
                     <i class="fa fa-search"></i>
                 </a>
             </div>
