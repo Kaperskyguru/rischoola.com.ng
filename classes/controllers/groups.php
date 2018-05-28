@@ -442,10 +442,10 @@ class Groups extends Logger
                         <div>
                             <h4><?php echo $group_title; ?></h4>
                             <?php if ($this->is_group_member($group_id, get_user_uid())) { ?>
-                                <a href="<?php echo SITEURL; ?>/group/group_page.php?id=<?php echo $group_id; ?>"
+                                <a href="<?php echo SITEURL; ?>/groups/<?php echo $group_id; ?>"
                                    class="btn btn-primary">Goto Group</a>
                             <?php } else { ?>
-                                <a href="<?php echo SITEURL; ?>/groups/group_page.php?id=<?php echo $group_id; ?>"
+                                <a href="<?php echo SITEURL; ?>/groups/<?php echo $group_id; ?>"
                                    class="btn btn-primary">Join Group</a>
                             <?php } ?>
                         </div>
@@ -508,10 +508,10 @@ class Groups extends Logger
                         <div>
                             <h4><?php echo $group_title; ?></h4>
                             <?php if ($this->is_group_member($group_id, get_user_uid())) { ?>
-                                <a href="<?php echo SITEURL; ?>/groups/group_page.php?id=<?php echo $group_id; ?>"
+                                <a href="<?php echo SITEURL; ?>/groups/<?php echo $group_id; ?>"
                                    class="btn btn-primary">Goto Group</a>
                             <?php } else { ?>
-                                <a href="<?php echo SITEURL; ?>/groups/group_page.php?id=<?php echo $group_id; ?>"
+                                <a href="<?php echo SITEURL; ?>/groups/<?php echo $group_id; ?>"
                                    class="btn btn-primary">Join Group</a>
                             <?php } ?>
                         </div>

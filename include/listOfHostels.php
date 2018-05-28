@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-5">
-            <a href="lodges/hostels.php" class="btn btn-success" style="margin-bottom: 10px;">View All Available
+            <a href="lodges" class="btn btn-success" style="margin-bottom: 10px;">View All Available
                 Hostels</a>
 
             <div class="col-md-7">

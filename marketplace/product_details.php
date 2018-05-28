@@ -12,11 +12,11 @@ $id1 = $_GET['id']; //sanitizer($_GET["id"]);
 $id = intval($id1);
 if ($id == 0) {
     $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
-    header("Location: product_details.php");
+    header("Location: index.php");
 } else {
     $row = $storeController->get_product_by_id($id);
     if (is_null($row) || empty($row)) {
-        header("Location: product_details.php");
+        header("Location: index.php");
     } else {
         ?>
         <div class="container-fluid marg-to-50 pad-up-20 margin-btom-20">

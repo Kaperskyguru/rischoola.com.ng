@@ -15,12 +15,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/style.css">
         <link rel="stylesheet" href="<?php echo SITEURL ?>/res/css/responsive.css">
 
-        <!-- Bootstrap Core CSS -->
-        <link href="<?php echo SITEURL ?>/res/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="<?php echo SITEURL ?>/res/css/sb-admin.css" rel="stylesheet">
-
+       
         <!-- Morris Charts CSS -->
         <link href="<?php echo SITEURL ?>/res/css/plugins/morris.css" rel="stylesheet">
 
@@ -40,7 +35,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="logo_marg" href="<?php echo SITEURL ?>/index.php"><img src="<?php echo SITEURL ?>/res/imgs/brand.fw.png" class="img-responsive"></a>
+                    <a class="logo_marg" href="<?php echo SITEURL ?>/"><img src="<?php echo SITEURL ?>/res/imgs/brand.fw.png" class="img-responsive"></a>
                 </div>
                 <div class="collapse navbar-collapse top-nav" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
@@ -55,14 +50,14 @@
                     </form>
                     <!-- Top Menu Items -->
                     <ul class="nav navbar-nav">
-                        <li ><a href="<?php echo SITEURL ?>/index.php" class="active">Home<span class="sr-only">(current)</span></a></li>
-                        <li><a href="<?php echo SITEURL ?>/news/news.php">Latest News</a></li>
-                        <li><a href="<?php echo SITEURL ?>/lodges/hostels.php">Hostel</a></li>
+                        <li ><a href="<?php echo SITEURL ?>/" class="active">Home<span class="sr-only">(current)</span></a></li>
+                        <li><a href="<?php echo SITEURL ?>/posts">Latest News</a></li>
+                        <li><a href="<?php echo SITEURL ?>/lodges">Hostel</a></li>
                         <!-- <li><a href="<?php echo SITEURL ?>/scholarships.php">Scholarships</a></li> -->
-                        <li><a href="<?php echo SITEURL ?>/marketplace/store.php">Store</a></li>
-                        <li><a href="<?php echo SITEURL ?>/roommates/roommate.php">Roommate Finder</a></li>
-                        <li><a href="<?php echo SITEURL ?>/groups/groups.php">Groups</a></li>
-                        <li><a href="<?php echo SITEURL ?>/events/events.php">Events</a></li>
+                        <li><a href="<?php echo SITEURL ?>/marketplace">Store</a></li>
+                        <li><a href="<?php echo SITEURL ?>/roommates">Roommate Finder</a></li>
+                        <li><a href="<?php echo SITEURL ?>/groups">Groups</a></li>
+                        <li><a href="<?php echo SITEURL ?>/events">Events</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

@@ -32,7 +32,7 @@ class Lodges extends Logger
                 return FALSE;
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return FALSE;
         }
@@ -47,7 +47,7 @@ class Lodges extends Logger
             $row = $this->executer();
             return $row->rowCount();
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -68,7 +68,7 @@ class Lodges extends Logger
                 return FALSE;
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return FALSE;
         }
@@ -84,7 +84,7 @@ class Lodges extends Logger
             $this->bind(":lodge_rule_meta_user_id", $id);
             $this->executer();
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -99,7 +99,7 @@ class Lodges extends Logger
             extract($row);
             return $lodge_rule_id;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -115,7 +115,7 @@ class Lodges extends Logger
             $this->bind(":lodge_facility_meta_user_id", $id);
             $this->executer();
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -130,7 +130,7 @@ class Lodges extends Logger
             extract($row);
             return $lodge_facility_id;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -151,7 +151,7 @@ class Lodges extends Logger
                 }
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -186,7 +186,7 @@ class Lodges extends Logger
             $this->executer();
             return $this->lastIdinsert();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            echo $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return 0;
         }
@@ -204,7 +204,7 @@ class Lodges extends Logger
             }
             return FALSE;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return FALSE;
         }
@@ -225,7 +225,7 @@ class Lodges extends Logger
                 }
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -249,7 +249,7 @@ class Lodges extends Logger
             extract($row);
             return $user_id;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -263,7 +263,7 @@ class Lodges extends Logger
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -282,7 +282,7 @@ class Lodges extends Logger
                 return FALSE;
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return FALSE;
         }
@@ -301,7 +301,7 @@ class Lodges extends Logger
                 return FALSE;
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return FALSE;
         }
@@ -324,7 +324,7 @@ class Lodges extends Logger
                 return $id;
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return 0;
         }
@@ -338,7 +338,7 @@ class Lodges extends Logger
             $row = $this->resultset();
             return $row;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -359,7 +359,7 @@ class Lodges extends Logger
                 }
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -379,7 +379,7 @@ class Lodges extends Logger
                 }
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -392,7 +392,7 @@ class Lodges extends Logger
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -406,7 +406,7 @@ class Lodges extends Logger
             $row = $this->resultset();
             return $row;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -428,7 +428,7 @@ class Lodges extends Logger
                             </div>
                             <!-- <div> -->
                             <h3 class="hostelname"><a
-                                    href="<?php echo SITEURL; ?>/lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
+                                    href="<?php echo SITEURL; ?>/lodges/<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
                             </h3>
                             <h5><img/><?php echo $lodge_address; ?></h5>
 
@@ -452,7 +452,7 @@ class Lodges extends Logger
                 }
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -465,7 +465,7 @@ class Lodges extends Logger
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -490,7 +490,7 @@ class Lodges extends Logger
             extract($row);
             return $lodge_review_count;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -505,7 +505,7 @@ class Lodges extends Logger
             extract($row);
             return $model_body;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -520,7 +520,7 @@ class Lodges extends Logger
             extract($row);
             return $status_body;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -535,7 +535,7 @@ class Lodges extends Logger
             extract($row);
             return $school_abbr;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -559,7 +559,7 @@ class Lodges extends Logger
                             </div>
                             <div>
                                 <h3 class="hostelname"><a
-                                        href="<?php echo SITEURL; ?>/lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
+                                        href="<?php echo SITEURL; ?>/lodges/<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
                                 </h3>
                                 <h5><img/><?php echo $lodge_address; ?></h5>
 
@@ -583,7 +583,7 @@ class Lodges extends Logger
                 }
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -619,7 +619,7 @@ class Lodges extends Logger
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -650,14 +650,14 @@ class Lodges extends Logger
 
                             <div class="product-btn">
                                 <a class="to-view" data-fancybox-type="iframe"
-                                   href="hostel_detail.php?id=<?php echo $lodge_id; ?>"><i class="fa fa-eye"></i><span
+                                   href="<?php echo $lodge_id; ?>"><i class="fa fa-eye"></i><span
                                         class="tooltip">Quick View</span></a>
                                 <a class="to-wish" href="#"><i class="fa fa-heart"></i><span class="tooltip">Add To Wishlist</span></a>
                             </div>
                         </div>
                         <div class="product-info">
                             <h5 class="product-name"><a
-                                    href="hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
+                                    href="<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
                             </h5>
 
                             <div class="rating" itemtype="http://schema.org/Offer" itemscope>
@@ -680,7 +680,7 @@ class Lodges extends Logger
                 }
             }
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
@@ -693,7 +693,7 @@ class Lodges extends Logger
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
@@ -708,7 +708,7 @@ class Lodges extends Logger
             extract($row);
             return $user_user_name;
         } catch (PDOException $e) {
-            $_SESSION['error'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }

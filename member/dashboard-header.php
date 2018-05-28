@@ -1,7 +1,7 @@
 <?php require_once '../init.php';
 $userController->cookie_login();
 if(!$userController->is_authenticated()){
-  header('Location: ../users/login.php');
+  header('Location: ../users/login');
 }
 ?>
 <!DOCTYPE html>
@@ -23,8 +23,8 @@ if(!$userController->is_authenticated()){
         <link href="datatable/datatables.min.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="css/sb-admin.css" rel="stylesheet">
-        <!-- <link href="../res/css/style.css" rel="stylesheet"> -->
-        <link href="../res/css/style.css" rel="stylesheet">
+        <!-- <link href="<?php echo SITEURL; ?>/res/css/style.css" rel="stylesheet"> -->
+        <link href="<?php echo SITEURL; ?>/res/css/style.css" rel="stylesheet">
         <!-- Morris Charts CSS -->
         <link href="css/plugins/morris.css" rel="stylesheet">
 
@@ -63,7 +63,7 @@ if(!$userController->is_authenticated()){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="logo_marg" href="../index.php"><img src="../res/imgs/brand.fw.png" class="img-responsive"></a>
+                        <a class="logo_marg" href="<?php echo SITEURL; ?>/"><img src="<?php echo SITEURL; ?>/res/imgs/brand.fw.png" class="img-responsive"></a>
                     </div>
                     <div class="collapse navbar-collapse bs-example-navbar-collapse-1" id="bs-example-navbar-collapse-1">
                         <form class="navbar-form navbar-left">
@@ -78,14 +78,14 @@ if(!$userController->is_authenticated()){
                         </form>
                         <!-- Top Menu Items -->
                         <ul class="nav navbar-nav top-nav">
-                            <li ><a href="../index.php" class="active">Home<span class="sr-only">(current)</span></a></li>
-                            <li><a href="../news/news.php">Latest News</a></li>
-                            <li><a href="../lodges/hostels.php">Hostel</a></li>
-                            <!-- <li><a href="../scholarships.php">Scholarships</a></li> -->
-                            <li><a href="../marketplace/store.php">Store</a></li>
-                            <li><a href="../roommates/roommate.php">Roommate Finder</a></li>
-                            <li><a href="../groups/groups.php">Groups</a></li>
-                            <li><a href="../events/events.php">Events</a></li>
+                            <li ><a href="<?php echo SITEURL; ?>/" class="active">Home<span class="sr-only">(current)</span></a></li>
+                            <li><a href="<?php echo SITEURL; ?>/posts/">Latest News</a></li>
+                            <li><a href="<?php echo SITEURL; ?>/lodges/">Hostel</a></li>
+                            <!-- <li><a href="<?php echo SITEURL; ?>/scholarships.php">Scholarships</a></li> -->
+                            <li><a href="<?php echo SITEURL; ?>/marketplace/">Store</a></li>
+                            <li><a href="<?php echo SITEURL; ?>/roommates/">Roommate Finder</a></li>
+                            <li><a href="<?php echo SITEURL; ?>/groups/">Groups</a></li>
+                            <li><a href="<?php echo SITEURL; ?>/events/">Events</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -190,7 +190,7 @@ if(!$userController->is_authenticated()){
                                         <a href="add_product.php">Sell Products</a>
                                     </li>
                                     <li>
-                                        <a href="../marketplace/store.php">Place Order</a>
+                                        <a href="<?php echo SITEURL; ?>/marketplace/">Place Order</a>
                                     </li>
                                     <!-- <li>
                                       <a href="cart.php">Cart</a>
@@ -207,7 +207,7 @@ if(!$userController->is_authenticated()){
                                         <a href="roommate.php">Find Roommate</a>
                                     </li>
                                     <li>
-                                        <a href="../roommates/roommate.php">Available Roommates</a>
+                                        <a href="<?php echo SITEURL; ?>/roommates/">Available Roommates</a>
                                     </li>
                                 </ul>
                             </li>
@@ -215,7 +215,7 @@ if(!$userController->is_authenticated()){
                                 <a href="javascript:" data-toggle="collapse" data-target="#groups"><i class="fa fa-users"></i> Groups <i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="groups" class="collapse">
                                     <li>
-                                        <a href="../groups/groups.php">Join a Group</a>
+                                        <a href="<?php echo SITEURL; ?>/groups/">Join a Group</a>
                                     </li>
                                     <li>
                                         <a href="group_member.php">Membership</a>

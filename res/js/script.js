@@ -1,21 +1,7 @@
 $(document).ready(function () {
-    get_all_news();
-    get_all_lodges();
 
     //++++++++++++ POST ACTIONS STARTS HERE +++++++++++++++++++++++
 
-    function get_all_news()
-    {
-        $.ajax({
-            url: "getNews.php",
-            method: "POST",
-            data: {id: 1},
-            success: function (data) {
-                $('#displayNews').html(data);
-            }
-        });
-
-    }
 
     $('#reply').click(function (e) {
         e.preventDefault();
@@ -56,7 +42,7 @@ $(document).ready(function () {
         alert(file);
         $.ajax({
             method: 'post',
-            url: 'getNews.php',
+            url: 'post_action.php',
             cache: false,
             data: {comment: 1, pid: pid, comment_body: comment_body},
             success: function (d) {
@@ -69,7 +55,7 @@ $(document).ready(function () {
         var pid = $(this).attr('pid');
         $.ajax({
             method: "POST",
-            url: "getNews.php",
+            url: "post_action.php",
             data: {like: 1, pid: pid},
             success: function (d) {
                 $('#like_span' + pid).html(d);
@@ -81,7 +67,7 @@ $(document).ready(function () {
         var pid = $(this).attr('pid');
         $.ajax({
             method: "POST",
-            url: "getNews.php",
+            url: "post_action.php",
             data: {dislike: 1, pid: pid},
             success: function (d) {
                 $('#dislike_span' + pid).html(d);
@@ -382,7 +368,7 @@ $(document).ready(function () {
         window.location.assign(url + "/search.php?term=" + term);
     });
 
-    $('#search_input').onkeyup(function () {
+    $('#search_input').keyup(function () {
         $v = $(this).val();
         if ($v != "") {
             $('#search_btn').removeAttr('disabled');

@@ -1,0 +1,14 @@
+Options -indexes
+<IfModule mod_rewrite.c>
+    Options -Multiviews
+    RewriteEngine On
+    RewriteBase /rischoola/users
+    RewriteRule "^register$" "register.php" [QSA,L]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    Options -Multiviews
+    RewriteEngine On
+    RewriteBase /rischoola/users
+    RewriteRule "^login$" "login.php" [QSA,L]
+</IfModule>

@@ -9,21 +9,21 @@
             </p>
             <div >
             	<h5>Join Us Today</h5>
-            	<a href="<?php echo SITEURL ?>/users/register.php" class="btn btn-success btn-lg">Register</a>
+            	<a href="<?php echo SITEURL ?>/users/register" class="btn btn-success btn-lg">Register</a>
             </div>
 		</div>
 		<div class="col-sm-3 pad-bottom-50 text-center">
 			<h4 class="text-center">Useful Links</h4>
 			<hr>
             <ul>
-                <li><a href="<?php echo SITEURL ?>/index.php">Home</a></li>
-                <li><a href="<?php echo SITEURL ?>/news/news.php">Latest News</a></li>
-								<li><a href="<?php echo SITEURL ?>/lodges/lodges.php">Hostels</a></li>
-                <li><a href="<?php echo SITEURL ?>/roommates/roommate.php">Roommates</a></li>
-                <li><a href="<?php echo SITEURL ?>/news/news.php">Scholarships</a></li>
-								<li><a href="<?php echo SITEURL ?>/marketplace/store.php">Store</a></li>
-                <li><a href="<?php echo SITEURL ?>/events/events.php">Events</a></li>
-                <li><a href="<?php echo SITEURL ?>/groups/groups.php">Groups</a></li>
+                <li><a href="<?php echo SITEURL ?>/">Home</a></li>
+                <li><a href="<?php echo SITEURL ?>/posts/">Latest News</a></li>
+								<li><a href="<?php echo SITEURL ?>/lodges/">Hostels</a></li>
+                <li><a href="<?php echo SITEURL ?>/roommates/">Roommates</a></li>
+                <li><a href="<?php echo SITEURL ?>/posts/">Scholarships</a></li>
+								<li><a href="<?php echo SITEURL ?>/marketplace/">Store</a></li>
+                <li><a href="<?php echo SITEURL ?>/events/">Events</a></li>
+                <li><a href="<?php echo SITEURL ?>/groups/">Groups</a></li>
 
             </ul>
 		</div>

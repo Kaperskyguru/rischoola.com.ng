@@ -15,19 +15,19 @@
     </div>
     <div id="comment" class="tab-pane fade">
           <div>
-              <a href="read-news.php"><img src="res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
+              <a href="read-news.php"><img src="<?php echo SITEURL; ?>/res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
                   <h5>Abia Poly Entrance Exam and cut off marks</h5></a>
           </div>
           <div>
-              <a href="read-news.php"><img src="res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
+              <a href="read-news.php"><img src="<?php echo SITEURL; ?>/res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
                   <h5>Abia Poly Entrance Exam and cut off marks</h5></a>
           </div>
           <div>
-              <a href="read-news.php"><img src="res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
+              <a href="read-news.php"><img src="<?php echo SITEURL; ?>/res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
                   <h5>Abia Poly Entrance Exam and cut off marks</h5></a>
           </div>
           <div>
-              <a href="read-news.php"><img src="res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
+              <a href="read-news.php"><img src="<?php echo SITEURL; ?>/res/imgs/1.jpg" class="img-responsive img-thumbnail" width="100px" height="100px">
                   <h5>Abia Poly Entrance Exam and cut off marks</h5></a>
           </div>
         </div>

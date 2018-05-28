@@ -27,7 +27,7 @@ if ($userController->is_authenticated()) {
                             <?php $newsControler->display_latest_post(9); ?>
                         </div>
                         <div>
-                            <a href="news/news.php" class="btn btn-success">See more latest news</a>
+                            <a href="news/" class="btn btn-success">See more latest news</a>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -35,7 +35,7 @@ if ($userController->is_authenticated()) {
                             <?php require_once 'include/listOfScholarships.php'; ?>
                         </section>
                         <div>
-                            <a href="news/news.php" class="btn btn-success">See more latest scholarship/internship</a>
+                            <a href="news/" class="btn btn-success">See more latest scholarship/internship</a>
                         </div>
                     </div>
                 </div>

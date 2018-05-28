@@ -168,7 +168,7 @@ class Scholarships extends Logger
                         </div>
                         <div class="col-sm-8">
                             <div>
-                                <a href="<?php echo SITEURL; ?>/scholarships/view-scholarship.php?id=<?php echo $scholarship_id; ?>">
+                                <a href="<?php echo SITEURL; ?>/scholarships/<?php echo $scholarship_id; ?>">
                                     <h4><?php echo $scholarship_title; ?></h4></a>
                             </div>
                             <div>

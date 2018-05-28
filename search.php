@@ -38,7 +38,7 @@ if ($userController->is_authenticated()) {
 
 
                             <div class="search-results">
-                                <h4><a href="news/read-news.php?id=<?php echo $post_id ?>"><?php echo $post_title ?></a></h4>
+                                <h4><a href="news/<?php echo $post_id ?>"><?php echo $post_title ?></a></h4>
 
                                 <p> <?php echo getExcerpt($post_content, 100); ?></p>
                             </div>
@@ -58,7 +58,7 @@ if ($userController->is_authenticated()) {
                         while ($scholarship_row = $scholarship_stmt->fetch(PDO::FETCH_ASSOC)) {
                             extract($scholarship_row); ?>
                             <div class="search-results">
-                                <h4><a href="scholarships/view-scholarship.php?id=<?php echo $scholarship_id;?>"><?php echo $scholarship_title ?></a></h4>
+                                <h4><a href="scholarships/<?php echo $scholarship_id;?>"><?php echo $scholarship_title ?></a></h4>
 
                                 <p> <?php echo getExcerpt($scholarship_desc, 100); ?></p>
                             </div>
@@ -77,7 +77,7 @@ if ($userController->is_authenticated()) {
                         while ($lodge_row = $lodge_stmt->fetch(PDO::FETCH_ASSOC)) {
                             extract($lodge_row); ?>
                             <div class="search-results">
-                                <h4><a href="lodges/hostel_detail.php?id=<?php echo $lodge_id; ?>"><?php echo $lodge_name ?></a></h4>
+                                <h4><a href="lodges/<?php echo $lodge_id; ?>"><?php echo $lodge_name ?></a></h4>
 
                                 <p> <?php echo getExcerpt($lodge_desc, 100); ?></p>
                             </div>
@@ -117,7 +117,7 @@ if ($userController->is_authenticated()) {
                         while ($store_row = $store_stmt->fetch(PDO::FETCH_ASSOC)) {
                             extract($store_row); ?>
                             <div class="search-results">
-                                <h4><a href="marketplace/product_details.php?id=<?php echo $product_id; ?>"><?php echo $product_name ?></a></h4>
+                                <h4><a href="marketplace/<?php echo $product_id; ?>"><?php echo $product_name ?></a></h4>
 
                                 <p> <?php echo getExcerpt($product_desc, 100); ?></p>
                             </div>
@@ -137,7 +137,7 @@ if ($userController->is_authenticated()) {
                         while ($group_row = $group_stmt->fetch(PDO::FETCH_ASSOC)) {
                             extract($group_row); ?>
                             <div class="search-results">
-                                <h4><a href="groups/group_page.php?id=<?php echo $group_id; ?>"><?php echo $group_title ?></a></h4>
+                                <h4><a href="groups/<?php echo $group_id; ?>"><?php echo $group_title ?></a></h4>
 
                                 <p> <?php echo getExcerpt($group_desc, 100); ?></p>
                             </div>
@@ -156,7 +156,7 @@ if ($userController->is_authenticated()) {
                         while ($event_row = $event_stmt->fetch(PDO::FETCH_ASSOC)) {
                             extract($event_row); ?>
                             <div class="search-results">
-                                <h4><a href="events/view_event.php?id=<?php echo $event_id; ?>"><?php echo $event_title ?></a></h4>
+                                <h4><a href="events/<?php echo $event_id; ?>"><?php echo $event_title ?></a></h4>
 
                                 <p> <?php echo getExcerpt($event_desc, 100); ?></p>
                             </div>

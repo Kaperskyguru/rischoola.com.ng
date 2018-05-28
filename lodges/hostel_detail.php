@@ -21,7 +21,7 @@ if ($id == 0) {
         header("Location: hostel_detail.php");
     } else {
         ?>
-        <div class="container marg-to-60">
+        <div class="container marg-to-50 pad-up-50">
             <section id="hostel">
                 <!-- Products -->
                 <div class="row">

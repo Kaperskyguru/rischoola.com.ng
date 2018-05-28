@@ -5,7 +5,7 @@
 <?php $roommateController->display_availabe_roommates(8, $resources); ?>
 
   <div class="text-center col-lg-12 pad-bottom-20">
-  <a href="roommates/roommate.php" class="btn btn-success" style="margin-bottom: 10px;">View All Available Roommates</a>
+  <a href="roommates" class="btn btn-success" style="margin-bottom: 10px;">View All Available Roommates</a>
     <a href="<?php echo $url = (get_user_uid() != null)? "member/roommate.php":"users/login.php"; ?>" class="btn btn-success" style="margin-bottom: 10px;">Post To Get A Roommate</a>
   </div>
 </div>

@@ -351,6 +351,7 @@ class News extends Logger
         }
     }
 
+
     public function get_last_inserted_post(Resources $res)
     {
         try {
@@ -358,12 +359,12 @@ class News extends Logger
             extract($row);
             ?>
             <div>
-                <a href="<?php echo SITEURL; ?>/news/read-news.php?id=<?php echo $post_id ?>">
+                <a href="<?php echo SITEURL; ?>/posts/<?php echo $post_id ?>">
                     <?php $res::display($res->get_image_url(68, 'post'), array_merge($res::LATEST_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                 </a>
             </div>
             <div>
-                <a href="<?php echo SITEURL; ?>/news/read-news.php?id=<?php echo $post_id ?>">
+                <a href="<?php echo SITEURL; ?>/posts/<?php echo $post_id ?>">
                     <h4><?php echo $post_title; ?></h4></a>
             </div>
             <?php
@@ -383,7 +384,7 @@ class News extends Logger
                     ?>
                     <div>
                         <h4>
-                            <a href="<?php echo SITEURL; ?>/news/read-news.php?id=<?php echo $post_id ?>"><?php echo $post_title; ?></a>
+                            <a href="<?php echo SITEURL; ?>/posts/<?php echo $post_id ?>"><?php echo $post_title; ?></a>
                         </h4>
                     </div>
                     <div>
