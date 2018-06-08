@@ -77,7 +77,7 @@ if ($userController->is_authenticated()) {
                         while ($lodge_row = $lodge_stmt->fetch(PDO::FETCH_ASSOC)) {
                             extract($lodge_row); ?>
                             <div class="search-results">
-                                <h4><a href="lodges/<?php echo $lodge_id; ?>"><?php echo $lodge_name ?></a></h4>
+                                <h4><a href="lodges/<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>"><?php echo $lodge_name ?></a></h4>
 
                                 <p> <?php echo getExcerpt($lodge_desc, 100); ?></p>
                             </div>

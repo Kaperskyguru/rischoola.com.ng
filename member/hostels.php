@@ -49,7 +49,7 @@
                                         <td><?php echo $lodgeController->get_lodge_school_by_id($lodge_school_id); ?></td>
                                         <td># <?php echo $lodge_price ?></td>
                                         <td><?php echo $lodgeController->get_lodge_status_by_id($lodge_status_id); ?></td>
-                                        <td><?php echo timeAgo($lodge_date_created); ?></td>
+                                        <td><?php echo time_ago($lodge_date_created); ?></td>
                                         <td>
                                             <a href="#" pid = "<?php echo $lodge_id ?>" class="btn btn-primary">View</a>
                                             <a href="#" pid = "<?php echo $lodge_id ?>" class="btn btn-danger">Delete</a>

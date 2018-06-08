@@ -16,13 +16,15 @@ $id = intval($id1);
 
 if ($id == 0) {
     $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
-    header("Location:../index.php", true, 301);
+    header("Location: index.php");
     exit;
 } else {
     $row = $groupController->get_group_by_id($id);
     if (is_null($row) || empty($row)) {
         //Log message here
-        header("Location: groups.php");
+        $logger->logWarn("Row is null or empty in " . __FILE__, get_user_uid());
+        header("Location: index.php");
+        exit;
     } else {
         extract($row);
         ?>
@@ -53,31 +55,31 @@ if ($id == 0) {
                                     <h3 class="section-heading">Start A Discussion </h3>
                                 </div>
                                 <div class="col-md-2">
-                                    <a href='group_page.php?id=<?php echo $group_id; ?>' id='leave_group'
+                                    <a href='<?php echo SITEURL . "/groups/" . $group_id; ?>' id='leave_group'
                                        gid='<?php echo $group_id; ?>' class='btn btn-danger'>Leave Group</a>
                                 </div>
                             </div>
                             <!--Third row-->
                             <div class="row">
-                                <form class="col-md-12" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"
-                                      method="POST">
+                                <form class="col-md-12" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>"
+                                      method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="commentBox">Type your topic in the box below:</label>
                                         <textarea type="text" rows="5" id="commentBox" name="commentBox"
                                                   class="form-control"></textarea>
-                                        <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
+                                        <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" name="file[]"></input>
+                                        <input type="file" class="form" name="file"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" name="file[]"></input>
+                                        <input type="file" class="form" name="file"/>
                                     </div>
 
                                     <div class="form-group">
                                         <a href="#cc">
-                                            <a href="#" class="btn btn-primary" name="submit" id="submit"
-                                               gid="<?php echo $id; ?>">Post Topic</a>
+                                            <button class="btn btn-primary" type="submit" name="submit" id="submit"
+                                               gid="<?php echo $id; ?>">Post Topic</button>
                                         </a>
                                     </div>
                                     <!--/.Content column-->
@@ -88,7 +90,7 @@ if ($id == 0) {
                         <?php
                     } else {
                         echo "<p>Not yet a member, Join group to start discussing </p><br />"; ?>
-                        <a href="<?php echo $url = get_user_uid() != null ? "group_page.php?id=" . $group_id : "../users/login.php"; ?>"
+                        <a href="<?php echo $url = get_user_uid() != null ? SITEURL . "/groups/" . $group_id : "../users/login.php"; ?>"
                            id="join_group" gid="<?php echo $group_id ?>" class="btn btn-primary">Join Group</a>
                     <?php }
                     ?>
@@ -116,10 +118,10 @@ if ($id == 0) {
                     <div class="row">
                         <div class="col-md-12 pad-bottom-20">
                             <?php
-                            $stmt = $groupController->get_group_discussions_by_id($group_id);
-                            if ($stmt->rowCount() > 0) {
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    extract($row);
+                            $dis_stmt = $groupController->get_group_discussions_by_group_id($group_id);
+                            if ($dis_stmt->rowCount() > 0) {
+                                while ($dis_row = $dis_stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    extract($dis_row);
                                     ?>
                                     <div class="commentlist">
                                         <ul>
@@ -132,7 +134,7 @@ if ($id == 0) {
                                                         class="fn"><?php echo $userController->get_user_username_by_id($discussion_user_id); ?></cite>
 
                                                     <div class="">
-                                                        <a href="">    <?php echo timeAgo($discussion_date); ?></a>
+                                                        <a href="">    <?php echo time_ago($discussion_date); ?></a>
                                                     </div>
                                                 </div>
                                                 <div class="clear"></div>
@@ -177,7 +179,7 @@ if ($id == 0) {
                                                                     by: <?php echo $userController->get_user_username_by_id($comment_user_id); ?></cite>
 
                                                                 <div class="">
-                                                                    <a href="">    <?php echo timeAgo($reply_date); ?></a>
+                                                                    <a href="">    <?php echo time_ago($reply_date); ?></a>
                                                                 </div>
                                                             </div>
                                                             <div class="clear"></div>
@@ -226,7 +228,7 @@ if ($id == 0) {
                     <h2>All Group members</h2>
 
                     <div class="row">
-
+                        <!--  //echo $n = ($groupController->is_group_admin($membership_user_id, $group_user_id))?"Leave":" -->
                         <?php
                         $stmt = $groupController->get_group_members($group_id);
                         if ($stmt->rowCount() > 0) {
@@ -235,17 +237,26 @@ if ($id == 0) {
                                 <div class="col-md-4" style="border-right:1px solid #eee">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <img src="../res/imgs/1.jpg" class="img-responsive img-thumbnail">
-                                            <?php if ($groupController->is_group_admin($group_id, get_user_uid())) { ?>
-                                                <a href="#" class="btn btn-xs btn-danger">Remove</a>
-                                            <?php } ?>
+                                            <img src="../res/imgs/1.jpg" style="margin-bottom:5px"
+                                                 class="img-responsive img-thumbnail"/>
+
+                                            <?php if (get_user_uid() == $group_user_id): ?>
+                                                <a href="#" id="leave_group" gid="<?php echo $group_id; ?>"
+                                                   class="btn btn-xs btn-danger">
+                                                    <?php echo $n = ($groupController->is_group_admin($membership_user_id, $group_user_id)) ? "Leave" : "Remove" ?>
+                                                </a>
+                                            <?php elseif (get_user_uid() == $membership_user_id): ?>
+                                                <a id="leave_group" gid="<?php echo $group_id; ?>" href="#"
+                                                   class="btn btn-xs btn-danger">Leave</a>
+                                            <?php endif; ?>
+
                                         </div>
                                         <div class="col-md-8">
                                             <a href="#">
                                                 <h5><?php echo $userController->get_user_username_by_id($membership_user_id); ?></h5>
                                             </a>
 
-                                            <p><?php echo "am a good boy"; ?></p>
+                                            <p class="small"><?php echo getExcerpt($userController->get_user_about_by_user_id($membership_user_id), 50); ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -371,3 +382,32 @@ if ($id == 0) {
     </section>
     <!-- </section> -->
 <?php require_once '../include/footer.php';
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["submit"])) {
+    $discussion_body = filter_var($_POST['commentBox'], FILTER_SANITIZE_STRING);
+
+    if (!empty($discussion_body) && strlen($discussion_body) != 0 && !empty($_FILES['file']['name'])) {
+        print_r($_FILES);
+        if ($id = $groupController->add_group_discussions($discussion_body, get_user_uid(),  $group_id)) {
+            uploadFiles(get_user_uid(), $id);
+            unset($_POST);
+        }
+    } else if (empty($discussion_body) && !empty($_FILES['file']['name'])) {
+        if ($id = $groupController->add_group_discussions('picture only', get_user_uid(),  $group_id)) {
+            uploadFiles(get_user_uid(), $id);
+            unset($_POST);
+        }
+
+    } else if (!empty($discussion_body) && empty($_FILES['file']['name'])) {
+        echo $id = $groupController->add_group_discussions($discussion_body, get_user_uid(),  $group_id);
+        unset($_POST);
+    } else {
+        $error_text = "Please enter a discussion";
+    }
+
+}
+function uploadFiles($user_id, $inserted_id)
+{
+    echo $files = $_FILES["file"];
+    return Resources::upload_image($files, $user_id, $inserted_id, "groups");
+} ?>

@@ -6,9 +6,9 @@ if($userController->is_authenticated()){
 }else {
   require_once '../include/header.php';
 }
+$page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 ?>
 
-?>
 <section id="hostel">
     <div class="container pad-up-50">
         <div class="row">
@@ -127,25 +127,16 @@ if($userController->is_authenticated()){
                 <h2>Available Hostels For Rent</h2>
                 <div class="row">
                     <div id="lodge_content">
-                        <?php $lodgeController->display_availabe_lodges(12,$resources); ?>
+                    <?php
+                        $limit = 12; //if you want to dispaly 10 records per page then you have to change here
+                        $startpoint = ($page * $limit) - $limit;?>
+                        <?php $lodgeController->display_availabe_lodges($startpoint, $limit, $resources); ?>
                     </div>
 
                     <!--  Pagination starts here -->
                     <div class="col-lg-12 pagination text-center">
                         <ul class="pagination">
-                            <li class="active"><a>1</a></li>
-                            <li class=""><a href="#">2</a></li>
-                            <li class=""><a href="#">3</a></li>
-                            <li class=""><a href="#">4</a></li>
-                            <li class=""><a href="#">5</a></li>
-                            <li class=""><a href="#">6</a></li>
-                            <li class=""><a href="#">7</a></li>
-                            <li class=""><a href="#">8</a></li>
-                            <li class=""><a href="#">9</a></li>
-                            <li class=""><a href="#">10</a></li>
-                            <li class=""><a href="#">11</a></li>
-                            <li><a href="#">Next »</a></li>
-                            <li class="last-child"><a href="#">last »»</a></li>
+                            <?php echo $paging->pagination("lodges", $limit, $page);?>
                         </ul>
                     </div>
                 </div>

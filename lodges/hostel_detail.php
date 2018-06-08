@@ -8,17 +8,18 @@ if($userController->is_authenticated()){
 }
 
 
-$id1 = $_GET['id']; //sanitizer($_GET["id"]);
-$id = intval($id1);
+$value = explode('--', $_GET['id']);
+$slug = strval($value[0]);
+$id = intval($value[1]);
 if ($id == 0) {
   //logging goes here
-    $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
-    header("Location: hostel_detail.php");
+    $logger->LogFatal("SQLInjection Attempt: code used ==> " . $_GET['id'], get_user_uid());
+    exit(header("Location: index.php"));
 } else {
-    $row = $lodgeController->get_lodge_by_id($id);
+    $row = $lodgeController->get_lodge_by_id_and_slug($id,$slug);
     if (is_null($row) || empty($row)) {
         //logging goes here
-        header("Location: hostel_detail.php");
+        exit(header("Location: index.php"));
     } else {
         ?>
         <div class="container marg-to-50 pad-up-50">

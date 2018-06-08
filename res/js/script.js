@@ -17,29 +17,21 @@ $(document).ready(function () {
         // });
     });
 
-
-    $('#comnt').click(function () {
-        var files1 = $(this).files;
-        alert(files1);
-        for (var i = 0; i < files1.length; i++) {
-            var files = files1.files[i];
-            // uploadFile(this.files[i]); // call the function to upload the file
-
-        }
-        alert(
-                "File Name : " + files.name + "\n" +
-                "File Size : " + files.size + "\n" +
-                "File type : " + files.type + "\n" +
-                "File date : " + files.lastModified
-                );
-    });
-
-    $('body').delegate('#comnt', 'click', function () {
+    $('body').delegate('#commet', 'click', function () {
         //e.preventDefault();
         var pid = $(this).attr('pid');
         var comment_body = $('#commentBox').val();
-        var file = $('#file1').val();
-        alert(file);
+        alert(comment_body);
+        // var i = 0;
+        // var pic, pic1;
+        // $.each($('#file')[0].files, function(i, file){
+        //     pic =  file;
+        // });
+
+        // $.each($('#file')[1].files, function(i, file){
+        //     pic1 =  file;
+        // });
+         
         $.ajax({
             method: 'post',
             url: 'post_action.php',
@@ -87,7 +79,6 @@ $(document).ready(function () {
             url: "group_actions.php",
             data: {set_join_group: 1, gid: gid},
             success: function (d) {
-                alert(d);
             }
         });
     });

@@ -74,7 +74,7 @@
                                                                 <div class="media-body">
                                                                     <h5 class="media-heading"><strong><?php echo $userController->get_user_display_name_by_id($message_sender_id); ?></strong>
                                                                     </h5>
-                                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> <?php echo timeAgo($message_date_created); ?> </p>
+                                                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> <?php echo time_ago($message_date_created); ?> </p>
                                                                     <p><?php echo getExcerpt($message_body, 50); ?></p>
                                                                 </div>
                                                             </div>

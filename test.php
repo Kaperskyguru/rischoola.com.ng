@@ -16,5 +16,10 @@
 // return $qux;
 //
 // }
-echo SITEURL;
+// $new = urlencode(htmlentities( "<a href='test'>&>Test</a>"));
+    $url = rawurlencode(htmlentities('/t-app/signup.php'));
+    //echo rawurlencode($url);
+     echo $url;
+        echo '<br />';
+     echo urldecode($url);
 //$groupController->INSERT();

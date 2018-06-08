@@ -43,7 +43,7 @@
                                     <td><?php echo $post_title ?></td>
                                     <td><?php echo $newsControler->get_post_category_by_id($post_category_id); ?></td>
                                     <td><?php echo $newsControler->get_post_status_by_id($post_status_id); ?></td>
-                                    <td><?php echo timeAgo($post_date_created); ?></td>
+                                    <td><?php echo time_ago($post_date_created); ?></td>
                                     <td>
                                         <a href="#" pid = "<?php echo $post_id ?>" class="btn btn-primary">View</a>
                                          <!--added an edit button-->

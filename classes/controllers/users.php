@@ -84,6 +84,24 @@ const SESSION_TIME = 604800;
         }
     }
 
+    public function get_user_about_by_user_id($user_id)
+    {
+        try {
+            $query = "SELECT user_about FROM users WHERE user_id = :user_id";
+            $this->query($query);
+            $this->bind(':user_id', $user_id);
+            $row = $this->resultset();
+            if (!is_null($row['user_about'])) {
+                extract($row);
+                return $user_about;
+            }
+        } catch (Error $e) {
+            $_SESSION['error'] = $e->getMessage();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return 0;
+        }
+    }
+
     public function get_user_phone_number_by_id($id)
     {
         try {

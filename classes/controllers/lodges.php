@@ -330,11 +330,13 @@ class Lodges extends Logger
         }
     }
 
-    public function get_lodge_by_id($id)
+    public function get_lodge_by_id_and_slug(int $id, string $slug)
     {
         try {
-            $query = "SELECT * FROM lodges WHERE lodge_id = $id";
+            $query = "SELECT * FROM lodges WHERE lodge_id = :id AND lodge_slug = :slug";
             $this->query($query);
+            $this->bind(':id', $id);
+            $this->bind(':slug', $slug);
             $row = $this->resultset();
             return $row;
         } catch (PDOException $e) {
@@ -387,7 +389,7 @@ class Lodges extends Logger
     public function get_search_lodge($term)
     {
         try {
-            $query = "SELECT lodge_id, lodge_name, lodge_desc FROM lodges WHERE lodge_name LIKE '%$term%' OR lodge_address LIKE '%$term%' OR lodge_desc LIKE '%$term%'";
+            $query = "SELECT lodge_id, lodge_name, lodge_desc, lodge_slug FROM lodges WHERE lodge_name LIKE '%$term%' OR lodge_address LIKE '%$term%' OR lodge_desc LIKE '%$term%'";
             $this->query($query);
             $stmt = $this->executer();
             return $stmt;
@@ -412,10 +414,10 @@ class Lodges extends Logger
         }
     }
 
-    public function display_availabe_lodges($length, Resources $res)
+    public function display_availabe_lodges($startpoint, $limit, Resources $res)
     {
         try {
-            $stmt = $this->get_lodges($length);
+            $stmt = $this->get_lodges($startpoint, $limit);
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     extract($row);
@@ -428,7 +430,7 @@ class Lodges extends Logger
                             </div>
                             <!-- <div> -->
                             <h3 class="hostelname"><a
-                                    href="<?php echo SITEURL; ?>/lodges/<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
+                                    href="<?php echo SITEURL; ?>/lodges/<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
                             </h3>
                             <h5><img/><?php echo $lodge_address; ?></h5>
 
@@ -457,10 +459,10 @@ class Lodges extends Logger
         }
     }
 
-    public function get_lodges($length)
+    public function get_lodges($startpoint, $limit)
     {
         try {
-            $query = "SELECT * FROM lodges WHERE lodge_status_id != 2 ORDER BY RAND() LIMIT $length";
+            $query = "SELECT * FROM lodges WHERE lodge_status_id != 2 ORDER BY RAND() LIMIT $startpoint, $limit";
             $this->query($query);
             $stmt = $this->executer();
             return $stmt;
@@ -559,7 +561,7 @@ class Lodges extends Logger
                             </div>
                             <div>
                                 <h3 class="hostelname"><a
-                                        href="<?php echo SITEURL; ?>/lodges/<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
+                                        href="<?php echo SITEURL; ?>/lodges/<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
                                 </h3>
                                 <h5><img/><?php echo $lodge_address; ?></h5>
 
@@ -650,14 +652,14 @@ class Lodges extends Logger
 
                             <div class="product-btn">
                                 <a class="to-view" data-fancybox-type="iframe"
-                                   href="<?php echo $lodge_id; ?>"><i class="fa fa-eye"></i><span
+                                   href="<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>"><i class="fa fa-eye"></i><span
                                         class="tooltip">Quick View</span></a>
                                 <a class="to-wish" href="#"><i class="fa fa-heart"></i><span class="tooltip">Add To Wishlist</span></a>
                             </div>
                         </div>
                         <div class="product-info">
                             <h5 class="product-name"><a
-                                    href="<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
+                                    href="<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
                             </h5>
 
                             <div class="rating" itemtype="http://schema.org/Offer" itemscope>

@@ -70,9 +70,9 @@ if($userController->is_authenticated()){
 				</div>
 			</div>
 
-			<div class="col-md-3 pad-up-50">
+			<div class="col-md-3">
 						<div class="row">
-							<!-- <?php require '../include/tabs.php'; ?> -->
+							<!-- <?php //require '../include/tabs.php'; ?> -->
 									<div class="pad-bottom-20">
 											<img src="../res/imgs/8722.gif" class="img-responsive">
 									</div>

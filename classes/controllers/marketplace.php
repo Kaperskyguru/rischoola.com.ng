@@ -378,12 +378,12 @@ class Marketplace extends Logger
         }
     }
 
-    public function display_availabe_products($length, Resources $res, $category_id)
+    public function display_availabe_products($length, $limit, Resources $res, $category_id)
     {
         if ($category_id == 0) {
-            $stmt = $this->get_products($length);
+            $stmt = $this->get_products($length, $limit);
         } else {
-            $stmt = $this->get_products_by_category_id($category_id, $length);
+            $stmt = $this->get_products_by_category_id($category_id, $length, $limit);
         }
         try {
             if ($stmt->rowCount() > 0) {
@@ -395,11 +395,11 @@ class Marketplace extends Logger
                             <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                             <div class='caption'>
                                 <h4 class="hostelname"><a
-                                        href='<?php echo $product_id; ?>'><?php echo $product_name; ?></a>
+                                        href='<?php echo $product_id; ?>'><?php echo getExcerpt($product_name, 25); ?></a>
                                 </h4>
                                 <h5 class='text-danger'>N<?php echo $product_price; ?></h5>
 
-                                <p><?php echo getExcerpt($product_desc, 100); ?></p>
+                                <p><?php echo getExcerpt($product_desc, 50); ?></p>
                             </div>
                             <div class="tags">
                                 <span
@@ -421,11 +421,13 @@ class Marketplace extends Logger
         }
     }
 
-    public function get_products($length)
+    public function get_products($length, $limit)
     {
         try {
-            $query = "SELECT * FROM products WHERE product_status_id != 2 ORDER BY RAND() LIMIT $length";
+            $query = "SELECT * FROM products WHERE product_status_id != 2 ORDER BY RAND() LIMIT :length, :limit";
             $this->query($query);
+            $this->bind(':length', $length);
+            $this->bind(':limit', $limit);
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
@@ -435,12 +437,14 @@ class Marketplace extends Logger
         }
     }
 
-    public function get_products_by_category_id($id, $length)
+    public function get_products_by_category_id($id, $length, $limit)
     {
         try {
-            $query = "SELECT * FROM products WHERE product_status_id != 2 AND product_category_id = :id LIMIT $length";
+            $query = "SELECT * FROM products WHERE product_status_id != 2 AND product_category_id = :id LIMIT :length, :limit";
             $this->query($query);
             $this->bind(':id', $id);
+            $this->bind(':length', $length);
+            $this->bind(':limit', $limit);
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
@@ -495,7 +499,7 @@ class Marketplace extends Logger
                             </div>
                             <div class="col-md-7 col-sm-8">
                                 <h5 class="" style="text-align:left"><a
-                                        href="marketplace/<?php echo $product_id; ?>"><?php echo $product_name; ?></a>
+                                        href="marketplace/<?php echo $product_id; ?>"><?php echo getExcerpt($product_name, 50); ?></a>
                                 </h5>
                                 <span class="label label-default">₦ <?php echo $product_price; ?></span>
                                 <span

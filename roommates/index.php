@@ -6,9 +6,9 @@ if($userController->is_authenticated()){
 }else {
   require_once '../include/header.php';
 }
+$page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 ?>
-?>
-<section id="roomate" class="container">
+<section id="roomate" class="marg-to-60 pad-up-50">
     <div class="container pad-up-50">
         <div class="row margin-btom-20">
           <div class="col-md-9 group_layout">
@@ -51,25 +51,15 @@ if($userController->is_authenticated()){
             </div>
             <div class="pad-up-20">
             <div id="roommate_content">
-                <?php $roommateController->display_availabe_roommates(12, $resources); ?>
+            <?php $limit = 12; //if you want to dispaly 10 records per page then you have to change here
+                        $startpoint = ($page * $limit) - $limit;
+                 $roommateController->display_availabe_roommates($startpoint, $limit, $resources); ?>
             </div>
             </div>
             <!--  Pagination starts here -->
             <div class="margin-btom-20 pagination">
                 <ul class="pagination">
-                    <li class="active"><a>1</a></li>
-                    <li class=""><a href="#">2</a></li>
-                    <li class=""><a href="#">3</a></li>
-                    <li class=""><a href="#">4</a></li>
-                    <li class=""><a href="#">5</a></li>
-                    <li class=""><a href="#">6</a></li>
-                    <li class=""><a href="#">7</a></li>
-                    <li class=""><a href="#">8</a></li>
-                    <li class=""><a href="#">9</a></li>
-                    <li class=""><a href="#">10</a></li>
-                    <li class=""><a href="#">11</a></li>
-                    <li><a href="#">Next »</a></li>
-                    <li class="last-child"><a href="#">last</a></li>
+                    <?php echo $paging->pagination("roommates", $limit, $page);?>
                 </ul>
             </div>
             </div>

@@ -96,7 +96,7 @@
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     extract($row);?>
                                     <a href="#" class="list-group-item">
-                                        <span class="badge"><?php echo timeAgo($notification_date_created);?></span>
+                                        <span class="badge"><?php echo time_ago($notification_date_created);?></span>
                                          <?php echo $notification_content ?>
                                     </a>
                          <?php }
@@ -134,10 +134,10 @@
                                            extract($row);?>
                                            <tr>
                                                 <td><?php echo $count ?></td>
-                                                <td><a href="../news/read-news.php?id=<?php echo $post_id?>" target="_blank"><?php echo getExcerpt($post_title, 40); ?></a></td>
+                                                <td><a href="../posts/<?php echo $post_id?>" target="_blank"><?php echo getExcerpt($post_title, 40); ?></a></td>
                                                 <td><?php echo $count ?></td>
                                                 <td><?php echo $userController->get_user_username_by_id($post_user_id); ?></td>
-                                                <td><?php echo timeAgo($post_date_created) ?></td>
+                                                <td><?php echo time_ago($post_date_created) ?></td>
                                             </tr>
 
                                         <?php }

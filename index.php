@@ -17,7 +17,7 @@ if ($userController->is_authenticated()) {
             <h2>Latest Updates</h2>
 
             <div class="row" style="background-color:#ffffff; border-radius:10px; padding:10px">
-                <div>
+                <div class="margin-btom-20">
                     <div class="col-md-4">
                         <div>
                             <h3>Latest News</h3>
@@ -27,7 +27,7 @@ if ($userController->is_authenticated()) {
                             <?php $newsControler->display_latest_post(9); ?>
                         </div>
                         <div>
-                            <a href="news/" class="btn btn-success">See more latest news</a>
+                            <a href="news/" class="btn btn-success" style="margin-bottom: 10px;">See more latest news</a>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -35,13 +35,13 @@ if ($userController->is_authenticated()) {
                             <?php require_once 'include/listOfScholarships.php'; ?>
                         </section>
                         <div>
-                            <a href="news/" class="btn btn-success">See more latest scholarship/internship</a>
+                            <a href="news/" class="btn btn-success" style="margin-bottom: 10px;">See more latest scholarship/internship</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="row">
-                        <?php require_once 'include/tabs.php'; ?>
+                        <?php //require_once 'include/tabs.php'; ?>
                         <div class="col-sm-12">
                             <div class="pad-bottom-20">
                                 <img src="res/imgs/8722.gif" class="img-responsive">

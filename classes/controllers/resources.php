@@ -15,7 +15,7 @@ class Resources extends Logger
 
 
     const SAMPLE_IMAGE_OPTIONS = [
-        "format" => "png",
+        "format" => "jpg",
         "height" => "70",
         "width" => "100",
         "class" => "thumpnail inline"
@@ -108,7 +108,7 @@ class Resources extends Logger
                     array_push($files_data, self::upload($value, $options));
                     $image_name = $files_data[$index]['public_id'];
                     if (!is_null($image_name)) {
-                        array_push($files_id, self::dd_images_and_get_last_inserted_id($image_name, $user_id, $inserted_id, $dir));
+                        array_push($files_id, self::add_images_and_get_last_inserted_id($image_name, $user_id, $inserted_id, $dir));
                         return $files_id[0];
                     } else {
                         return 0;

@@ -44,6 +44,5 @@ if(isset($_POST['dislike']) && $_SERVER['REQUEST_METHOD'] == "POST"){
 }
 
 
-if(isset($_POST['comment']) && !empty($_POST['comment_body'])  && $_SERVER['REQUEST_METHOD'] == "POST"){
-  echo 'hi';
-}
+
+

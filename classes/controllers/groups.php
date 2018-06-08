@@ -310,10 +310,24 @@ class Groups extends Logger
         }
     }
 
-    public function get_group_discussions_by_id($discussion_id)
+    public function add_group_discussions($body, $user_id, $group_id){
+        try{
+            $query = "INSERT INTO group_discussions(discussion_body, discussion_user_id, discussion_group_id)VALUES(:discussion_body, :user_id, :group_id)";
+            $this->query($query);
+            $this->bind(':discussion_body', $body);
+            $this->bind(':user_id', $user_id);
+            $this->bind(':group_id', $group_id);
+            $this->executer();
+            return $this->lastIdinsert();
+        }catch(Error $e){
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return 0;
+        }
+    }
+    public function get_group_discussions_by_group_id($discussion_id)
     {
         try {
-            $query = "SELECT * FROM group_discussions WHERE discussion_id = :discussion_id";
+            $query = "SELECT * FROM group_discussions WHERE discussion_group_id = :discussion_id";
             $this->query($query);
             $this->bind(':discussion_id', $discussion_id);
             $stmt = $this->executer();
@@ -560,7 +574,7 @@ class Groups extends Logger
                                 class="fn"><?php echo $userControler->get_user_username_by_id($discussion_user_id); ?></cite>
 
                             <div class="">
-                                <a href="">    <?php echo timeAgo($discussion_date); ?></a>
+                                <a href="">    <?php echo time_ago($discussion_date); ?></a>
                             </div>
                         </div>
                         <div class="clear"></div>

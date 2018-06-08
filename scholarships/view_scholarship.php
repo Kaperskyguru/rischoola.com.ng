@@ -39,7 +39,7 @@ extract($row);
                         <span class="empty "><?php echo $scholarship_view_count; ?></span><span class="marg-rig-10">&nbsp; Views</span>|
                         <span class="empty "><?php echo $scholarship_comment_count; ?></span><span class="marg-rig-10">&nbsp; Comments</span>|
                         <span class="empty"></span><span class="marg-rig-10"><i class="fa fa-folder">
-                                &nbsp;</i>Posted: <?php echo timeAgo($scholarship_date_created); ?></span>|
+                                &nbsp;</i>Posted: <?php echo time_ago($scholarship_date_created); ?></span>|
                         <span class="empty"></span><span class="marg-rig-10"><i class="fa fa-folder">&nbsp;</i>Date Expired: <?php echo($scholarship_date_expired); ?></span>
                     </h6>
                     <hr/>
@@ -63,7 +63,7 @@ extract($row);
                 </h5>
 
                 <div class="pad-up-20 pad-bottom-20">
-                    Website:<a href="<?php echo $scholarship_url; ?>" target="_blank">The Scholarship
+                    Website:<a href="<?php urldecode($scholarship_url); ?>" target="_blank">The Scholarship
                         Webpage</a> For More Information <br>
                 </div>
 
@@ -130,7 +130,7 @@ extract($row);
                                                     class="fn"><?php echo $userControler->get_user_username_by_id($comment_user_id); ?></cite>
 
                                                 <div class="">
-                                                    <a href="">    <?php echo timeAgo($comment_date_inserted); ?></a>
+                                                    <a href="">    <?php echo time_ago($comment_date_inserted); ?></a>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>
@@ -172,7 +172,7 @@ extract($row);
                                                                 by: <?php echo $userController->get_user_username_by_id($comment_user_id); ?></cite>
 
                                                             <div class="">
-                                                                <a href="">    <?php echo timeAgo($reply_date); ?></a>
+                                                                <a href="">    <?php echo time_ago($reply_date); ?></a>
                                                             </div>
                                                         </div>
                                                         <div class="clear"></div>

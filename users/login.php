@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 
 				  <button class="btn  btn-primary" style="margin-left: 2px;" style="color: #fff">login</button>
 				  <div>
-				  	<h4>Don't have an Account? <small><a href="register.php">Click here to Register</a></small></h4>
+				  	<h4>Don't have an Account? <small><a href="register">Click here to Register</a></small></h4>
 				  </div>
 			</form>
 

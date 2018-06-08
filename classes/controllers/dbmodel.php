@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 abstract class dbmodel
 {
     private $db;
@@ -74,13 +74,13 @@ abstract class dbmodel
                 return $stmt;
             }
         } catch (PDOException $e) {
-            $_SESSION['erroe'] = $e->getMessage();
+            $_SESSION['error'] = $e->getMessage();
         }
     }
 
-    public function lastIdinsert()
+    public function lastIdinsert():int
     {
-        return $this->db->lastInsertId();
+        return intval($this->db->lastInsertId());
     }
 
 

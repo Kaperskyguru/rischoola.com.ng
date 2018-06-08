@@ -55,7 +55,7 @@ if($userController->is_authenticated()){
 
         <div class="col-md-3">
           <div class="row">
-            <?php require_once '../include/tabs.php'; ?>
+            <?php //require_once '../include/tabs.php'; ?>
           </div>
           <div class="col-sm-12">
               <div class="pad-bottom-20">

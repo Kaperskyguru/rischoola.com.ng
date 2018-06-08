@@ -29,7 +29,7 @@ if(isset($_POST['leave_group']) && $_SERVER['REQUEST_METHOD'] == "POST"){
     $groupController->update_member_count($_POST['gid'], FALSE);
     echo "You left the group";
   }else {
-    echo "Sorry, Could not left group";
+    echo "Sorry, Could not leave group";
   }
 }
 

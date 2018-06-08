@@ -44,7 +44,7 @@ if ($id == 0) {
                         <span class="empty badge"><?php echo $event_comment_count; ?></span><span class="marg-rig-10">&nbsp; Views</span>|
                         <span class="empty badge"><?php echo $event_comment_count; ?></span><span class="marg-rig-10">&nbsp; Comments</span>|
                         <span class="empty"></span><span class="marg-rig-10"><i class="fa fa-folder">
-                                &nbsp;</i>Posted: <?php echo timeAgo($event_date_created); ?></span>|
+                                &nbsp;</i>Posted: <?php echo time_ago($event_date_created); ?></span>|
                         <span class="empty"></span><span class="marg-rig-10"><i class="fa fa-folder">&nbsp;</i>Event Date: <?php echo($event_date); ?></span>
                     </h6>
                     <hr/>
@@ -86,28 +86,23 @@ if ($id == 0) {
                             <!-- <h3 class="section-heading">Make a Comment </h3> -->
                             <!--Third row-->
                             <div class="row">
-                                <form class="col-md-12" action="<?php echo htmlspecialchars('PHP_SELF'); ?>"
-                                      method="POST">
+                                <form class="col-md-12" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
                                     <!--Content column-->
-                                    <?php if (!$userController->is_authenticated()) { ?>
-
-                                    <?php } ?>
                                     <div class="form-group">
                                         <label for="commentBox">Comment:</label>
-                                        <textarea type="text" rows="5" id="commentBox" name="commentBox"
-                                                  class="form-control"></textarea>
+                                        <textarea type="text" rows="5" id="commentBox" name="commentBox" class="form-control"></textarea>
                                         <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" id="file1" name="file1"></input>
+                                        <input type="file" class="form" id="file" name="file"></input>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" id="file2" name="file2"></input>
+                                        <input type="file" class="form" id="file" name="file"></input>
                                     </div>
 
                                     <div class="form-group">
                                         <a href="#cc">
-                                            <button class="btn btn-primary" pid="<?php echo $id; ?>">Comment</button>
+                                            <button type="submit" class="btn btn-primary" id="comment" name="comment" pid="<?php echo $id; ?>">Comment</button>
                                         </a>
                                     </div>
                                     <!--/.Content column-->
@@ -132,10 +127,10 @@ if ($id == 0) {
                                         </div>
                                         <div class="author-comment">
                                             <cite
-                                                class="fn"><?php echo $userControler->get_user_username_by_id($comment_user_id); ?></cite>
+                                                class="fn"><?php echo $userController->get_user_username_by_id($comment_user_id); ?></cite>
 
                                             <div class="">
-                                                <a href="">    <?php echo timeAgo($comment_date_inserted); ?></a>
+                                                <a href="">    <?php echo time_ago($comment_date_inserted); ?></a>
                                             </div>
                                         </div>
                                         <div class="clear"></div>
@@ -177,7 +172,7 @@ if ($id == 0) {
                                                             by: <?php echo $userController->get_user_username_by_id($comment_user_id); ?></cite>
 
                                                         <div class="">
-                                                            <a href="">    <?php echo timeAgo($reply_date); ?></a>
+                                                            <a href="">    <?php echo time_ago($reply_date); ?></a>
                                                         </div>
                                                     </div>
                                                     <div class="clear"></div>
@@ -226,7 +221,7 @@ if ($id == 0) {
 ?>
     <div class="col-md-4">
         <div class="col-sm-12">
-            <?php require '../include/tabs.php'; ?>
+            <?php //require '../include/tabs.php'; ?>
         </div>
         <div class="col-sm-12">
             <div class="pad-bottom-20">
@@ -248,3 +243,29 @@ if ($id == 0) {
     </section>
     <!-- </section> -->
 <?php require_once '../include/footer.php';
+
+if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["comment"])){
+    $comment_body = filter_var($_POST['commentBox'], FILTER_SANITIZE_STRING);
+    if(!empty($comment_body) && strlen($comment_body) != 0 && !empty($_FILES['file']['name'])){
+        if($id= $commentController->store_comments($comment_body, get_user_uid(), "events", $event_id)){
+            uploadFiles(get_user_uid(), $id);
+            unset($_POST);
+        }
+    }else if(empty($comment_body) && !empty($_FILES['file']['name'])){
+        if($id= $commentController->store_comments('picture only', get_user_uid(), "events", $event_id)){
+            uploadFiles(get_user_uid(), $id);
+            unset($_POST);
+        }
+       
+    }else if(!empty($comment_body) && empty($_FILES['file']['name'])){
+       echo $id= $commentController->store_comments($comment_body, get_user_uid(), "events", $event_id);
+       unset($_POST);
+    }else{
+        $error_text = "Please enter a comment";
+    }
+    
+  }
+function uploadFiles($user_id, $inserted_id) {
+    echo $files = $_FILES["file"];
+    return Resources::upload_image($files, $user_id, $inserted_id, "comments");
+  }?>

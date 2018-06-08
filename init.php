@@ -2,11 +2,13 @@
 session_start();
 ob_start();
 
-require_once 'lib/cloudinary/src/Api.php';
-require_once 'lib/cloudinary/src/Cloudinary.php';
-require_once 'lib/cloudinary/src/Uploader.php';
-require_once 'lib/cloudinary/src/Error.php';
-require_once 'lib/cloudinary/src/Api/Error.php';
+// require_once 'lib/cloudinary/src/Api.php';
+// require_once 'lib/cloudinary/src/Cloudinary.php';
+// require_once 'lib/cloudinary/src/Uploader.php';
+// require_once 'lib/cloudinary/src/Error.php';
+// require_once 'lib/cloudinary/src/Api/Error.php';
+
+require_once __DIR__.'/vendor/autoload.php';
 
 require_once 'config.php';
 
@@ -48,6 +50,7 @@ $messageController = Messages::getInstance();
 $mailer = Mails::getInstance();
 $notifier = Notifications::getInstance();
 $logger = Logger::getInstance();
+$paging = Pagination::getInstance();
 
 $newsModel = NewsModel::getInstance();
 $lodgeModel = LodgeModel::getInstance();

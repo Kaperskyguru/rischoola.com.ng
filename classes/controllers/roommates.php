@@ -324,10 +324,10 @@ class Roommates extends Logger
         </form>
     <?php }
 
-    public function display_availabe_roommates($length, $res)
+    public function display_availabe_roommates($startpoint, $limit, Resources $res)
     {
         try {
-            $stmt = $this->get_roommates($length);
+            $stmt = $this->get_roommates($startpoint, $limit);
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     extract($row);
@@ -354,11 +354,13 @@ class Roommates extends Logger
         }
     }
 
-    public function get_roommates($length)
+    public function get_roommates($startpoint, $limit)
     {
         try {
-            $query = "SELECT * FROM roommates WHERE roommate_status_id != 2 AND roommate_status_id != 6 LIMIT $length";
+            $query = "SELECT * FROM roommates WHERE roommate_status_id != 2 AND roommate_status_id != 6 LIMIT :length, :limit";
             $this->query($query);
+            $this->bind(':length', $startpoint);
+            $this->bind(':limit', $limit);
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
