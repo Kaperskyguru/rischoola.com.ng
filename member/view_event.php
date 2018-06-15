@@ -35,11 +35,13 @@
                         <?php
                         $stmt = $eventController->get_events_by_user_id(get_user_uid());
                         if ($stmt->rowCount() > 0) {
+                            $count = 0;
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 extract($row);
+                                $count++;
                                 ?>
                                 <tr>
-                                    <td><?php echo $event_id ?></td>
+                                    <td><?php echo $count ?></td>
                                     <td><?php echo $event_title ?></td>
                                     <td><?php echo get_formatted_date($event_date); ?></td>
                                     <td><?php echo $eventController->get_event_status_by_id($event_status_id); ?></td>
@@ -58,14 +60,4 @@
     </div>
 </div>
 </div>
-<script src="js/jquery.js"></script>
-<script src="js/script.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="datatable/datatables.min.js"></script>
-
-<script>
-  $(document).ready(function() {
-    $('#event_table').dataTable();
-  });
-</script>
+<?php require_once('footer.php');

@@ -63,14 +63,4 @@
     </div>
 </div>
 </div>
-<script src="js/jquery.js"></script>
-<script src="js/script.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="datatable/datatables.min.js"></script>
-
-<script>
-  $(document).ready(function() {
-    $('#group_member_table').dataTable();
-  });
-</script>
+<?php require_once('footer.php');

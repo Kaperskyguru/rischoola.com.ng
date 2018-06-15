@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="desc">Description: </label>
                     <p>Take your time to describe the features of your item and why the buyer should get it.</p>
-                    <textarea rows="5" id="desc" name="desc" class="form-control"> </textarea>
+                    <textarea rows="10" id="desc" name="desc" class="form-control"> </textarea>
                 </div>
 
                 <div class="form-group row">
@@ -166,15 +166,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </div>
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
 <?php
 
 function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["product_image"];
     return Image::upload_image($files, $user_id, $inserted_id, 'products');
 }
+require_once('footer.php');

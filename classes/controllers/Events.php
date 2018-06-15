@@ -282,7 +282,7 @@ class Events extends Logger
                             <div class="col-md-7 pad-bottom-20">
                                 <a href="<?php echo SITEURL; ?>/events/<?php echo $event_id; ?>">
                                     <h5><?php echo $event_title; ?></h5></a>
-                                <h6><?php echo date('l jS \of F Y h:i:s A', strtotime($event_date)); ?></h6>
+                                <h6><?php echo date('l jS \of F Y', strtotime($event_date)); ?></h6>
                             </div>
                         </div>
                     </div>
@@ -324,7 +324,7 @@ class Events extends Logger
                             <div class="col-md-6 pad-bottom-20">
                                 <a href="<?php echo $event_id; ?>">
                                     <h5><?php echo $event_title; ?></h5></a>
-                                <h6><?php echo date('l jS \of F Y h:i:s A', strtotime($event_date)); ?></h6>
+                                <h6><?php echo date('l jS \of F Y', strtotime($event_date)); ?></h6>
                             </div>
                         </div>
                     </div>

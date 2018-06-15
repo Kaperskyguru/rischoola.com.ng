@@ -18,40 +18,24 @@ if(!$userController->is_authenticated()){
         <title>Dashboard</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo SITEURL; ?>/res/css/bootstrap.min.css" rel="stylesheet">
 
         <link href="datatable/datatables.min.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link href="css/sb-admin.css" rel="stylesheet">
-        <!-- <link href="<?php echo SITEURL; ?>/res/css/style.css" rel="stylesheet"> -->
+        <link href="<?php echo SITEURL; ?>/res/css/sb-admin.css" rel="stylesheet">
+
         <link href="<?php echo SITEURL; ?>/res/css/style.css" rel="stylesheet">
         <!-- Morris Charts CSS -->
-        <link href="css/plugins/morris.css" rel="stylesheet">
+        <link href="<?php echo SITEURL; ?>/res/css/plugins/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo SITEURL; ?>/res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
-
-        <script type="text/javascript">
-        // Javascript to enable link to tab
-
-        var url = document.location.toString();
-        //alert(url);
-        if (url.match('#')) {
-            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-        }
-
-        // Change hash for page-reload
-        $('.nav-tabs a').on('shown.bs.tab', function (e) {
-            window.location.hash = e.target.hash;
-        })
-      </script>
     </head>
 
     <body>
 
         <div id="wrapper">
-
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top top-nav" role="navigation">
                 <div class="container-fluid">
@@ -81,7 +65,6 @@ if(!$userController->is_authenticated()){
                             <li ><a href="<?php echo SITEURL; ?>/" class="active">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="<?php echo SITEURL; ?>/posts/">Latest News</a></li>
                             <li><a href="<?php echo SITEURL; ?>/lodges/">Hostel</a></li>
-                            <!-- <li><a href="<?php echo SITEURL; ?>/scholarships.php">Scholarships</a></li> -->
                             <li><a href="<?php echo SITEURL; ?>/marketplace/">Store</a></li>
                             <li><a href="<?php echo SITEURL; ?>/roommates/">Roommate Finder</a></li>
                             <li><a href="<?php echo SITEURL; ?>/groups/">Groups</a></li>

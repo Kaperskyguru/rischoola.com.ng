@@ -32,7 +32,7 @@ if ($userController->is_authenticated()) {
                     </div>
                     <div class="col-md-5">
                         <section class="index-scholarships">
-                            <?php require_once 'include/listOfScholarships.php'; ?>
+                            <?php require_once 'include/listofScholarships.php'; ?>
                         </section>
                         <div>
                             <a href="news/" class="btn btn-success" style="margin-bottom: 10px;">See more latest scholarship/internship</a>

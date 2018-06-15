@@ -247,21 +247,4 @@
 
 </div>
 <!-- /#wrapper -->
-
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-<script src="js/script.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
-
-<script type="text/javascript" src="datatable/datatables.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#roommate_table').dataTable();
-    });
-</script>
+<?php require_once('footer.pho');

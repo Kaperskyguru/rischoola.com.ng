@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="desc" > Description: </label>
-                    <textarea  id="editor" name="desc" class="form-control"> </textarea>
+                    <textarea rows ="10" id="editor" name="desc" class="form-control"> </textarea>
                     <script>
                         ClassicEditor
                             .create( document.querySelector( '#editor' ) )
@@ -101,11 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </div>
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
 
 <?php
 
@@ -113,3 +108,5 @@ function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["post_image"];
     return Resources::upload_image($files, $user_id, $inserted_id, "posts");
 }
+
+require_once('footer.php');

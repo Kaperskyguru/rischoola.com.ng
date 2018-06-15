@@ -230,15 +230,6 @@ class Lodges extends Logger
         }
     }
 
-    // public function get_lodge_category_by_id($id) { try{
-    //     $query = "SELECT post_category_name FROM post_category WHERE post_category_id = :id";
-    //     $this->query($query);
-    //     $this->bind(':id', $id);
-    //     $row = $this->resultset();
-    //     extract($row);
-    //     return $post_category_name;
-    // }
-
     public function get_user_id_by_username($name)
     {
         try {
@@ -420,9 +411,8 @@ class Lodges extends Logger
             $stmt = $this->get_lodges($startpoint, $limit);
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    extract($row);
-                    ?>
-
+                    extract($row);?>
+                    <?php if ($stmt->rowCount() != 3){?>
                     <div class="col-xs-12 col-md-4 col-sm-6 ">
                         <div class="thumbnail" style="padding:10px">
                             <div class="img-thumbnail img-responsive">
@@ -450,7 +440,9 @@ class Lodges extends Logger
                             </div>
                         </div>
                     </div>
+
                     <?php
+                  }
                 }
             }
         } catch (PDOException $e) {
@@ -721,4 +713,37 @@ class Lodges extends Logger
 
     }
 
+
+
+private function displayLodges() {
+  ?>
+  <div class="col-xs-12 col-md-4 col-sm-6 ">
+      <div class="thumbnail" style="padding:10px">
+          <div class="img-thumbnail img-responsive">
+              <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+          </div>
+          <!-- <div> -->
+          <h3 class="hostelname"><a
+                  href="<?php echo SITEURL; ?>/lodges/<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
+          </h3>
+          <h5><img/><?php echo $lodge_address; ?></h5>
+
+          <p><?php echo $this->getExcerpt($lodge_desc, 60); ?></p>
+
+          <h3 class="hostelname text-danger"># <?php echo $lodge_price; ?> / year</h3>
+          <!-- </div> -->
+          <div class="tags">
+              <span
+                  class="label label-default"><?php echo $this->get_lodge_review_count_by_id($lodge_id) ?></span>
+              <span
+                  class="label label-danger"><?php echo $this->get_lodge_model_by_id($lodge_model_id) ?></span>
+              <span
+                  class="label label-purple"><?php echo $this->get_lodge_status_by_id($lodge_status_id) ?></span>
+              <span
+                  class="label label-primary"><?php echo $this->get_lodge_school_by_id($lodge_school_id) ?></span>
+          </div>
+      </div>
+  </div>
+  <?php
+}
 }

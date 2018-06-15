@@ -31,7 +31,7 @@ $(document).ready(function () {
         // $.each($('#file')[1].files, function(i, file){
         //     pic1 =  file;
         // });
-         
+
         $.ajax({
             method: 'post',
             url: 'post_action.php',
@@ -124,18 +124,21 @@ $(document).ready(function () {
     });
 
 
-    $('#reply').click(function (e) {
-        e.prgroupDefault();
-        var pid = $(this).attr('pid');
-        alert(pid);
-        // $.ajax({
-        //   method:"group",
-        //   url:"read-news.php"
-        //   data:{pid:pid},
-        //   success: function(da) {
-        //       alert(da);
-        //   };
-        // });
+    $('body').delegate("#clickBTN", "click", function (e) {
+        e.preventDefault();
+        var url = $(this).attr('url');
+        alert(url);
+        $.ajax({
+            method: "POST",
+            url: 'group_actions.php',
+            data: {paging: 1, rowcount: $('#rowcount').val(), page: url},
+            success: function (data) {
+                $('#group_content').html(data);
+            },
+            onerror: function (e) {
+                alert(e);
+            }
+        });
     });
 
     $('#reminder').click(function (e) {
@@ -202,7 +205,12 @@ $(document).ready(function () {
         $.ajax({
             method: 'POST',
             url: 'roommate_actions.php',
-            data: {roommate_search_set: 1, roommate_school: roommate_school, roommate_gender: roommate_gender, roommate_type: roommate_type},
+            data: {
+                roommate_search_set: 1,
+                roommate_school: roommate_school,
+                roommate_gender: roommate_gender,
+                roommate_type: roommate_type
+            },
             success: function (data) {
                 $('#roommate_content').html(data)
             },
@@ -227,6 +235,7 @@ $(document).ready(function () {
             }
         });
     }
+
     $('body').delegate('#hostel_search', 'click', function () {
         var hostel_school = $('#list_of_schools').val();
         var max_price = $('#max_price').val();
@@ -236,7 +245,14 @@ $(document).ready(function () {
         $.ajax({
             method: "POST",
             url: "getLodges.php",
-            data: {hostel_search: 1, hostel_school: hostel_school, max_price: max_price, min_price: min_price, hostel_name: hostel_name, hostel_type: hostel_type},
+            data: {
+                hostel_search: 1,
+                hostel_school: hostel_school,
+                max_price: max_price,
+                min_price: min_price,
+                hostel_name: hostel_name,
+                hostel_type: hostel_type
+            },
             cache: false,
             processDefualt: false,
             success: function (data) {
@@ -365,8 +381,6 @@ $(document).ready(function () {
             $('#search_btn').removeAttr('disabled');
         }
     });
-
-
 
 
 });

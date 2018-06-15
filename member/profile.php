@@ -218,80 +218,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
         </div>
     </div>
 </body>
-
-
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-<script src="js/script.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#profile_image').change(function () {
-            $v = $(this).val();
-            if ($v == "") {
-                $('#img_submit').attr('disabled', 'disabled');
-            } else {
-                $('#img_submit').removeAttr('disabled');
-            }
-        });
-        $('body').delegate('#submit_personal_data', 'click', function () {
-            var username = $('#user_name').val();
-            var first_name = $('#first_name').val();
-            var last_name = $('#last_name').val();
-            var user_email = $('#email_address').val();
-            var user_phone_number = $('#phone_number').val();
-            var user_address = $('#address').val();
-            var user_about = $('#about_you').val();
-            var user_birthday = $('#birthday').val();
-            var user_course_of_study = $('#course_of_study').val();
-            var user_level = $('#level').val();
-            var user_gender = $('#gender').val();
-            var user_school_id = $('#school').val();
-            var user_display_name = $('#display_name').val();
-
-            $.ajax({
-                method: "POST",
-                url: "actions.php",
-                data: {UpdateProfile: 1, user_display_name: user_display_name, user_school_id: user_school_id, user_gender: user_gender, user_level: user_level, user_course_of_study: user_course_of_study, user_birthday: user_birthday, user_about: user_about, user_address: user_address, username: username, user_phone_number: user_phone_number, first_name: first_name, last_name: last_name, user_email: user_email},
-                success: function (d) {
-                }
-            });
-        });
-
-        $('#change_password').click(function () {
-            var old_password = $('#old_password').val();
-            var new_password = $('#new_password').val();
-            var confirm_password = $('#confirm_password').val();
-            var log_all_out = $('#log_all_out').is(':checked');
-            $.ajax({
-                method: "POST",
-                url: "actions.php",
-                data: {change_password: 1, log_all_out: log_all_out, old_password: old_password, new_password: new_password, confirm_password: confirm_password},
-                success: function (d) {
-                }
-            });
-        });
-
-        $('#change_bank_information').click(function () {
-            var bank_name = $('#bank_name').val();
-            var account_name = $('#account_name').val();
-            var account_number = $('#account_number').val();
-            $.ajax({
-                method: "POST",
-                url: "actions.php",
-                data: {change_bank_information: 1, bank_name: bank_name, account_name: account_name, account_number: account_number},
-                success: function (d) {
-                    $('#error').html(d);
-                }
-            });
-        });
-    });
-</script>
 <?php
 
 function uploadFiles($user_id, $inserted_id, $resources) {
     $files = $_FILES["profile_image"];
     return Image::upload_image($files, $user_id, $inserted_id, $resources, "profiles");
 }
+require_once('footer.php');

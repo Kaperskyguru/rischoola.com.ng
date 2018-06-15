@@ -15,16 +15,16 @@ abstract class dbmodel
     {
         if (!self::$dbh) {
             try {
-                self::$dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "");
+                self::$dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "Changeless11!");
                 self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                $_SESSION['error'] = $e->getMessage();
+                echo $_SESSION['error'] = $e->getMessage();
             }
         }
         return self::$dbh;
     }
 
-    public function query($query)
+    public function query(String $query)
     {
         try {
             $this->db = $this->db();

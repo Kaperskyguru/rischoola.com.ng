@@ -35,11 +35,13 @@
                         <?php
                         $stmt = $newsControler->get_post_by_user_id(get_user_uid());
                         if ($stmt->rowCount() > 0) {
+                            $count =0;
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 extract($row);
+                                $count++;
                                 ?>
                                 <tr>
-                                    <td><?php echo $post_id ?></td>
+                                    <td><?php echo $count?></td>
                                     <td><?php echo $post_title ?></td>
                                     <td><?php echo $newsControler->get_post_category_by_id($post_category_id); ?></td>
                                     <td><?php echo $newsControler->get_post_status_by_id($post_status_id); ?></td>
@@ -166,15 +168,4 @@
     </div>
   </div>
 </div>
-
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="datatable/datatables.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-
-
-<script>
-  $(document).ready(function() {
-    $('#post_table').dataTable();
-  });
-</script>
+<?php require_once('footer.php');

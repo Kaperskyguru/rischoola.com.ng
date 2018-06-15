@@ -46,10 +46,12 @@
                         <tbody>
                           <?php $stmt = $storeController->get_products_by_user_id(get_user_uid());
                             if($stmt->rowCount() >0){
+                                $count = 0;
                               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                extract($row);?>
+                                extract($row);
+                                $count++; ?>
                                 <tr>
-                                    <td><?php echo $product_id ?></td>
+                                    <td><?php echo $count ?></td>
                                     <td><?php echo $product_name ?></td>
                                     <td><?php echo $storeController->get_product_category_by_id($product_category_id); ?></td>
                                     <td>N<?php echo $product_price ?></td>
@@ -121,21 +123,4 @@
 
 </div>
 <!-- /#wrapper -->
-
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="datatable/datatables.min.js"></script>
-
-<script>
-  $(document).ready(function() {
-    $('#store_table').dataTable();
-  });
-</script>
-
-</body>
-
-</html>
+<?php require_once('footer.php');

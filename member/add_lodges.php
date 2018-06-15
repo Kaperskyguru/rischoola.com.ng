@@ -92,11 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="lodge_desc" > Description: </label>
-                    <textarea rows="5" id="lodge_desc" name="lodge_desc" class="form-control"> </textarea>
+                    <textarea rows="10" id="lodge_desc" name="lodge_desc" class="form-control"> </textarea>
                 </div>
                 <div class="form-group">
                     <label for="lodge_address" > Address: </label>
-                    <textarea id="lodge_address" name="lodge_address" class="form-control"> </textarea>
+                    <textarea rows="5" id="lodge_address" name="lodge_address" class="form-control"> </textarea>
                 </div>
 
         </div>
@@ -166,46 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["lodge_image"];
     return Resources::upload_image($files, $user_id, $inserted_id, "lodges");
-}?>
+}
 
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#lodge_rules').change(function () {
-            var val = this.value;
-            $.ajax({
-                method: "POST",
-                url: 'add_lodges.php',
-                data: {add_rule: 1, val: val},
-                success: function (data) {
-                },
-                onerror: function(err) {
-                    alert(err);
-                }
-            });
-        });
-
-        $('#lodge_facilities').change(function () {
-            var val = this.value;
-            $.ajax({
-                method: "POST",
-                url: 'add_lodges.php',
-                data: {add_facility: 1, val: val},
-                success: function (data) {
-
-                },
-                onerror: function(err) {
-                    alert(err);
-                }
-            });
-        });
-
-    });
-
-
-</script>
+require_once('footer.php');
+?>

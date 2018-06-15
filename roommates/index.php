@@ -8,8 +8,8 @@ if($userController->is_authenticated()){
 }
 $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 ?>
-<section id="roomate" class="marg-to-60 pad-up-50">
-    <div class="container pad-up-50">
+<section id="roomate" class="marg-to-50 pad-up-50">
+    <div class="container">
         <div class="row margin-btom-20">
           <div class="col-md-9 group_layout">
             <h2>Available Roommates</h2>

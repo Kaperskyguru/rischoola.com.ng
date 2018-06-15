@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>
-                     <h1>Statistics <small>Overview</small></h1>
+                     <h1>Dashboard <small>Overview</small></h1>
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">

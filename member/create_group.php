@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="desc" > Description: </label>
-                    <textarea rows="5" id="desc" name="desc" class="form-control"> </textarea>
+                    <textarea rows="10" id="desc" name="desc" class="form-control"> </textarea>
                 </div>
                 <div class="form-group">
                     <label for="type">Group Type: </label>
@@ -111,14 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </div>
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
 
 <?php
 function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["group_image"];
     return Image::upload_image($files, $user_id, $inserted_id, "groups");
 }
+require_once('footer.php');

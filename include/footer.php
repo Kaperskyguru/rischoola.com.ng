@@ -34,7 +34,7 @@
                 <li><a href="<?php echo SITEURL ?>/#!">Visit Citadelsms</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">My portfolio</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Citadel Host</a></li>
-                <li><a href="<?php echo SITEURL ?>/#!">Jamb Cbt Downloads</a></li>
+                <li><a href="<?php echo SITEURL ?>/#!">Code Like Mad</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Jamb Cbt Downloads</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Advertising With Us</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Privacy Policy</a></li>
@@ -52,10 +52,10 @@
 									<a href="<?php echo SITEURL ?>/#!"><i class="fa fa-google"></i></a>
                 </li>
                 <li><i class="fa fa-home"> </i><a href="<?php echo SITEURL ?>/#!"> Kaperskyguru.com.ng</a></li>
-                <li><i class="fa fa-map-marker"> </i><a href="<?php echo SITEURL ?>/#!"> Iwofe, Port Harcourt, Rivers State</a></li>
-                <li><i class="fa fa-envelope"> </i><a href="<?php echo SITEURL ?>/#!"> info@riverschool.com.ng</a></li>
-                <li><i class="fa fa-phone"> </i><a href="<?php echo SITEURL ?>/#!"> 08104491751</a></li>
-                <li><i class="fa fa-phone"> </i><a href="<?php echo SITEURL ?>/#!"> 09031149084</a></li>
+                <li><i class="fa fa-map-marker"> </i>Iwofe, Port Harcourt, Rivers State</li>
+                <li><i class="fa fa-envelope"> </i><a href="malto:info@rischoola.com.ng!"> info@rischoola.com.ng</a></li>
+                <li><i class="fa fa-phone"> </i> 08145655380</li>
+                <li><i class="fa fa-phone"> </i> 09031149084</li>
             </ul>
 		</div>
 	</div>

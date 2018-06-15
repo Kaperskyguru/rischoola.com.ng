@@ -40,11 +40,13 @@
                             <?php
                             $stmt = $lodgeController->get_lodge_by_user_id(get_user_uid());
                             if ($stmt->rowCount() > 0) {
+                                $count =0;
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     extract($row);
+                                    $count++;
                                     ?>
                                     <tr>
-                                        <td><?php echo $lodge_id ?></td>
+                                        <td><?php echo $count ?></td>
                                         <td><?php echo $lodge_name ?></td>
                                         <td><?php echo $lodgeController->get_lodge_school_by_id($lodge_school_id); ?></td>
                                         <td># <?php echo $lodge_price ?></td>
@@ -75,17 +77,4 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-<script type="text/javascript" src="datatable/datatables.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#lodge_table').dataTable();
-  });
-</script>
-
-</body>
-
-</html>
+<?php require_once('footer.php');
