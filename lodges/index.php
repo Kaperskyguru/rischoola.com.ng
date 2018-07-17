@@ -12,7 +12,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 <section id="hostel">
     <div class="container pad-up-50">
         <div class="row">
-            <div class="searchHostel col-md-4  margin-btom-20 pad-bottom-20">
+            <div class="searchHostel col-md-3  margin-btom-20 pad-bottom-20">
                 <div class="form-group">
                     <label for="school">Enter School</label>
                     <select class="form-control" id="list_of_schools">
@@ -123,7 +123,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
             </div>
 
 
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <h2>Available Hostels For Rent</h2>
                 <div class="row">
                     <div id="lodge_content">

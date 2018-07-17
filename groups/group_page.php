@@ -70,10 +70,10 @@ if ($id == 0) {
                                         <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" name="file"/>
+                                        <input type="file" class="form" name="file[]"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" name="file"/>
+                                        <input type="file" class="form" name="file[]"/>
                                     </div>
 
                                     <div class="form-group">
@@ -154,15 +154,15 @@ if ($id == 0) {
                                                             class="fa fa-thumbs-down"></span> Dislike <span
                                                             class="badge badge-danger">0</span></a>
                                                 </div>
-                                                <div class="reply">
+                                                <!-- <div class="reply">
                                                     <a rel="nofollow" class="comment-reply-link"
                                                        pid="<?php echo $discussion_id ?>" href="#" id="reply"
                                                        aria-label="Reply to Kap man"><span class="fa fa-reply"></span>
                                                         Reply</a>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <!-- Replies -->
-                                            <?php
+                                            <!-- <?php
                                             $stmt1 = $replyController->get_replies_by_discussion_id($discussion_id);
                                             if ($stmt1->rowCount() > 0) {
                                                 while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
@@ -210,7 +210,7 @@ if ($id == 0) {
                                                     <?php
                                                 }
                                             }
-                                            ?>
+                                            ?> -->
                                         </ul>
                                     </div>
                                     <?php
@@ -387,7 +387,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["submit"])) {
     $discussion_body = filter_var($_POST['commentBox'], FILTER_SANITIZE_STRING);
 
     if (!empty($discussion_body) && strlen($discussion_body) != 0 && !empty($_FILES['file']['name'])) {
-        print_r($_FILES);
         if ($id = $groupController->add_group_discussions($discussion_body, get_user_uid(),  $group_id)) {
             uploadFiles(get_user_uid(), $id);
             unset($_POST);
@@ -408,6 +407,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["submit"])) {
 }
 function uploadFiles($user_id, $inserted_id)
 {
-    echo $files = $_FILES["file"];
+    $files = $_FILES["file"];
     return Resources::upload_image($files, $user_id, $inserted_id, "groups");
-} ?>
+}

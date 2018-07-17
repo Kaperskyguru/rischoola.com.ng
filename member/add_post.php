@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
       $new_id = $newsControler->addNews($newsModel);
         if ($new_id != 0) {
-           if($image_id = uploadFiles($id, $new_id) != 0){
+            $image_id = uploadFiles($id, $new_id);
+           if( $image_id != 0){
                 if($newsControler->insert_post_featured_image_id($image_id, $new_id)){
                     // Lodge here
 
@@ -43,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $succes_text = "Your Post is pending verifications...";
                 }
             }else{
-                $error_text = "Your Post inserted without featured Image...";
+                $error_text = "Your Post inserted without featured Image... ";
             }
 
         } else {
-            $error_text = "We could not Post it";
+            $error_text = "We could not Post it ".$new_id;
         }
     }
 }

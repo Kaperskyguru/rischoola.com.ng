@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_text = "Image is required";
         $error = 1;
         //$groupModel->set_group_featured_image_id(0);
-    } 
-    
+    }
+
     if (empty($_POST['title'])) {
         $error_text = 'Please title is required';
         $error = 1;
@@ -48,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
         $inserted_id = $groupController->add_group($groupModel);
         if ($inserted_id !== 0) {
-            if($image_id = uploadFiles($user_id, $inserted_id)){
+            $image_id = uploadFiles($user_id, $inserted_id);
+            if($image_id != 0){
                 if($groupController->insert_group_featured_image_id($image_id, $inserted_id)){
 
                     // Notify user
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               }else {
                 $error_text = "Your Group created without featured Image...";
               }
-            
+
         } else {
             $error_text = "Sorry, We could not Create the Group";
         }

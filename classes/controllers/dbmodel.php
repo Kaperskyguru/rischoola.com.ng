@@ -60,8 +60,10 @@ abstract class dbmodel
         try {
             $this->stmt->execute();
             return $this->stmt;
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
+
             $_SESSION['error'] = $e->getMessage();
+            var_dump($_SESSION);
         }
     }
 
@@ -80,11 +82,9 @@ abstract class dbmodel
 
     public function lastIdinsert():int
     {
-        return intval($this->db->lastInsertId());
+        $id = intval($this->db->lastInsertId());
+        return $id;
     }
 
 
 }
-
-
-?>

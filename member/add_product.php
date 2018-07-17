@@ -64,7 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
       $product_id = $storeController->add_product($storeModel);
         if ($product_id != 0) {
-            if($image_id = uploadFiles($id, $product_id)){
+            $image_id = uploadFiles($id, $product_id);
+            if($image_id != 0){
                 if($storeController->insert_product_featured_image_id($image_id, $product_id)){
                     // Log here
 
@@ -106,19 +107,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group row">
                     <div class="col-xs-3">
                         <label for="product_image">Choose Featured image:</label>
-                        <input type="file"id="product_image" name="product_image[]" class="form-control" />
+                        <input type="file"id="product_image[]" name="product_image[]" class="form-control" />
                     </div>
                     <div class="col-xs-3">
                         <label for="">Product Image 2</label>
-                        <input type="file" id="product_image2" name="product_image[]" class="form-control" />
+                        <input type="file" id="product_image[]" name="product_image[]" class="form-control" />
                     </div>
                     <div class="col-xs-3">
                         <label for="product_image3">Product image 3: </label>
-                        <input type="file" id="product_image3" name="product_image[]" class="form-control" />
+                        <input type="file" id="product_image[]" name="product_image[]" class="form-control" />
                     </div>
                     <div class="col-xs-3">
                         <label for="product_image3">Product image 4: </label>
-                        <input type="file" id="product_image3" name="product_image[]" class="form-control" />
+                        <input type="file" id="product_image[]" name="product_image[]" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -170,6 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["product_image"];
-    return Image::upload_image($files, $user_id, $inserted_id, 'products');
+    
+    return Resources::upload_image($files, $user_id, $inserted_id, 'products');
 }
 require_once('footer.php');

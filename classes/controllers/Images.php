@@ -6,7 +6,7 @@
     'api_secret' => 'KqKF5csK-eW2_rxxZk5-nGAJ-kM'
 ));
 
-class Image extends Logger
+class Images extends Logger
 {
     private static $instance;
 

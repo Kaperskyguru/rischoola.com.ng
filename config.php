@@ -2,7 +2,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'rsschooldb');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'Changeless11!');
 
 // if (!defined('SITEURL')):
 	define('SITEURL', "http://localhost/rischoola");

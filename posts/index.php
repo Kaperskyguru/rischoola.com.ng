@@ -10,7 +10,18 @@ if($userController->is_authenticated()){
 
 <section id="index-news">
     <div class="container pad-up-50">
-        <h2>News Updates <span style="float: right;"><button class="btn btn-primary">post news</button></span></h2>
+        <div class="row" >
+            <div class="col-md-8">
+                <h2 style="border-bottom:0px">News Updates </h2>
+            </div>
+            <div class="col-md-4">
+                <h2 style="border-bottom:0px">
+                <a href="<?php echo $url = ($userController->is_authenticated())? SITEURL.'/member/add_post.php': SITEURL.'/users/login' ?>" class="btn btn-danger btn-group btn-group-justified btn-md">Post News</a>
+            </h2>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
         <div class="col-md-4">
           <div class="container-fluid">
           <section class="index-scholarships">
@@ -72,6 +83,7 @@ if($userController->is_authenticated()){
               </div>
           </div>
         </div>
+    </div>
     </div>
 </section>
 <?php require_once '../include/footer.php'; ?>

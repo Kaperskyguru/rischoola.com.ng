@@ -94,10 +94,10 @@ if ($id == 0) {
                                         <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" id="file" name="file"></input>
+                                        <input type="file" class="form" id="file" name="file[]"></input>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" id="file" name="file"></input>
+                                        <input type="file" class="form" id="file" name="file[]"></input>
                                     </div>
 
                                     <div class="form-group">
@@ -148,14 +148,14 @@ if ($id == 0) {
                                                aria-label="Reply to Kap man"><span class="fa fa-thumbs-down"></span>
                                                 Dislike <span class="badge badge-danger">0</span></a>
                                         </div>
-                                        <div class="reply">
+                                        <!-- <div class="reply">
                                             <a rel="nofollow" class="comment-reply-link" pid="<?php echo $comment_id ?>"
                                                href="#" id="reply" aria-label="Reply to Kap man"><span
                                                     class="fa fa-reply"></span> Reply</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <!-- Replies -->
-                                    <?php
+                                    <!-- <?php
                                     $stmt1 = $replyController->get_replies_by_comment_id($comment_id);
                                     if ($stmt1->rowCount() > 0) {
                                         while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
@@ -203,7 +203,7 @@ if ($id == 0) {
                                             <?php
                                         }
                                     }
-                                    ?>
+                                    ?> -->
                                 </ul>
                             </div>
                             <?php
@@ -256,16 +256,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["comment"])){
             uploadFiles(get_user_uid(), $id);
             unset($_POST);
         }
-       
+
     }else if(!empty($comment_body) && empty($_FILES['file']['name'])){
        echo $id= $commentController->store_comments($comment_body, get_user_uid(), "events", $event_id);
        unset($_POST);
     }else{
         $error_text = "Please enter a comment";
     }
-    
+
   }
 function uploadFiles($user_id, $inserted_id) {
     echo $files = $_FILES["file"];
-    return Resources::upload_image($files, $user_id, $inserted_id, "comments");
+    return Resources::upload_image($files, $user_id, $inserted_id, "events");
   }?>

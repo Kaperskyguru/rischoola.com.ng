@@ -52,7 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error_text)) {
       $lodge_id = $lodgeController->add_lodge($lodgeModel);
         if ($lodge_id != 0) {
-            if($image_id = uploadFiles($id, $lodge_id) != 0){
+            $image_id = uploadFiles($id, $lodge_id);
+            if($image_id != 0){
                 if($lodgeController->insert_lodge_featured_image_id($image_id, $lodge_id)){
                     // Log here
 
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'New Lodge', $message));
                     $succes_text = "Your Lodge is pending verifications...";
                 }
-                    
+
             }else {
                 $error_text = "Your Lodge inserted without featured Image...";
             }

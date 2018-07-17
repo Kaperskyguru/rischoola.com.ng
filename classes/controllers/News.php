@@ -136,7 +136,7 @@ class News extends Logger
     public function get_post_by_user_id($user_id)
     {
         try {
-            $query = "SELECT * FROM posts WHERE post_user_id = $user_id";
+            $query = "SELECT * FROM posts WHERE post_user_id = $user_id ORDER BY post_date_created DESC";
             $this->query($query);
             $stmt = $this->executer();
             return $stmt;
@@ -205,8 +205,7 @@ class News extends Logger
         $post_status_id = $postModel->get_post_status_id();
         $post_category_id = $postModel->get_post_category_id();
 
-        $query = "INSERT INTO posts(post_title,post_content,post_user_id,post_school_id, post_category_id,post_status_id)"
-            . "VALUES(:post_title, :post_content, :post_user_id, :post_school_id, :post_category_id, :post_status_id);";
+        $query = "INSERT INTO posts(post_title,post_content,post_user_id,post_school_id, post_category_id, post_status_id) VALUES (:post_title, :post_content, :post_user_id, :post_school_id, :post_category_id, :post_status_id)";
         try {
             $this->query($query);
             $this->bind(':post_title', $post_title);
@@ -216,9 +215,12 @@ class News extends Logger
             $this->bind(':post_category_id', $post_category_id);
             $this->bind(':post_status_id', $post_status_id);
             $this->executer();
+
+            echo "akjdfadnfkjadnkdjnfkjankjdnfkjakn ID ".$this->lastIdinsert();
             return $this->lastIdinsert();
-        } catch (Error $e) {
+        } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
+            print_r( $_SESSION['error']);
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return 0;
         }

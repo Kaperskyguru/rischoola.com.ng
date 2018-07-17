@@ -23,7 +23,7 @@ class Resources extends Logger
 
 
     const DETAILS_IMAGE_OPTIONS = array(
-        "format" => "png",
+        "format" => "jpg",
         "height" => "200",
         "width" => "300",
         "class" => "thumpnail inline"
@@ -31,7 +31,7 @@ class Resources extends Logger
 
 
     const SLIDE_IMAGE_OPTIONS = array(
-        "format" => "png",
+        "format" => "jpg",
         "height" => "85",
         "width" => "100",
         "class" => "thumpnail inline"
@@ -39,7 +39,7 @@ class Resources extends Logger
 
 
     const AVATAR_IMAGE_OPTIONS = array(
-        "format" => "png",
+        "format" => "jpg",
         "height" => "45",
         "width" => "45`",
         "class" => "thumpnail inline"
@@ -47,7 +47,7 @@ class Resources extends Logger
 
 
     const LATEST_IMAGE_OPTIONS = array(
-        "format" => "png",
+        "format" => "jpg",
         "height" => "200",
         "width" => "300",
         "class" => "thumpnail inline"
@@ -71,7 +71,6 @@ class Resources extends Logger
 
     public static function display($public_id, $options)
     {
-        // $id = self::get_image_url($public_id);
         echo cl_image_tag($public_id, $options);
     }
 
@@ -81,22 +80,26 @@ class Resources extends Logger
         $files = is_array($files) ? $files : array($files);
         $files_data = array();
         $files_id = array();
-
+        global $warning_text;
         try {
             foreach ($files["tmp_name"] as $index => $value) {
+                echo $value;
                 $t = basename($files["name"][$index]);
                 $image_file_type = pathinfo($t, PATHINFO_EXTENSION);
 
-                if (getimagesize($files['tmp_name'][$index]) !== FALSE) {
-                    $error_status = 1;
-                }
-
                 if ($files['size'][$index] > 10485760) {
                     $error_status = 0;
+                    $warning_text = "Image must be 10mb";
                 }
 
                 if ($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg" && $image_file_type != "gif") {
                     $error_status = 0;
+                    $warning_text = "Image must jpeg/png/gif";
+                }
+
+                if (getimagesize($files['tmp_name'][$index]) != false) {
+                    $error_status = 1;
+                    $warning_text = "Image required here only";
                 }
 
                 if ($error_status == 1) {
@@ -107,14 +110,16 @@ class Resources extends Logger
 
                     array_push($files_data, self::upload($value, $options));
                     $image_name = $files_data[$index]['public_id'];
+
+
                     if (!is_null($image_name)) {
-                        array_push($files_id, self::add_images_and_get_last_inserted_id($image_name, $user_id, $inserted_id, $dir));
-                        return $files_id[0];
+                        array_push($files_id, self::getInstance()->add_images_and_get_last_inserted_id($image_name, $user_id, $inserted_id, $dir));
                     } else {
                         return 0;
                     }
                 }
             }
+            return $files_id[0];
 
         } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
@@ -123,7 +128,7 @@ class Resources extends Logger
 
     }
 
-    public function Upload($file_name, $options)
+    public static function Upload($file_name, $options)
     {
         try {
             $result = \Cloudinary\Uploader::upload($file_name, $options);
@@ -149,7 +154,6 @@ class Resources extends Logger
 
     public function add_images_and_get_last_inserted_id($image, $user_id, $item_id, $type)
     {
-        //echo "string". $user_id;
         try {
             $query = "INSERT INTO resources(resource_url, resource_user_id, resource_item_id, resource_table_name, resource_type)
     VALUES(:image, :user_id, :item_id, :table_name,:type)";
