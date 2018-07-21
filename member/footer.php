@@ -1,11 +1,12 @@
 <script type="text/javascript" src="<?php echo SITEURL;?>/res/js/jquery-3.1.0.min.js"></script>
 <script src="<?php echo SITEURL;?>/res/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="datatable/datatables.min.js"></script>
+<script src="js/script.js"></script>
 <script>
   $(document).ready(function() {
 
     $('#lodge_table').dataTable();
-    
+
     $('#post_table').dataTable();
 
     $('#event_table').dataTable();
@@ -110,6 +111,17 @@
         });
 
 });
+
+$('body').delegate('#event_view','click', function() {
+    var id = $(this).attr('pid');
+    $.ajax({
+        method: 'POST',
+        url: 'create_event',
+        data : {id:id}
+    });
+});
+
+
 </script>
 
 </body>

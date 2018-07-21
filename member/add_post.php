@@ -57,7 +57,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row">
         <div class="col-md-10 member_layout">
             <h2>Create a new post<hr /></h2>
-            <?php display_error(); ?>
+            <?php display_error();
+
+            if (!is_null($_GET['id'])) {
+                $postId = $_GET['id'];
+                $row = $newsControler->get_post_by_id($postId);
+                extract($row); ?>
+
+                <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input class="form-control" value="<?php echo $post_title; ?>" id="title" name="title" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="desc" > Description: </label>
+                        <textarea rows ="10" id="editor" name="desc" class="form-control"><?php echo $post_content ?> </textarea>
+                        <script>
+                            ClassicEditor
+                                .create( document.querySelector( '#editor' ) )
+                                .then( editor => {
+                                    console.log( editor );
+                                } )
+                                .catch( error => {
+                                    console.error( error );
+                            } )
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <label for="post_image">Choose Featured image: </label>
+                        <input type="file" id="post_image[]" name="post_image[]" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cat">Category:</label>
+                        <select class="form-control" id="cat" name="cat">
+                            <option value="<?php echo $post_category_id ?>"><?php echo $newsControler->get_category_name_by_id($post_category_id); ?> </option>
+                            <?php $newsControler->get_post_category($post_category_id); ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="school">Select School</label>
+                        <select class="form-control" id="school" name="school">
+                            <option value="<?php echo $post_school_id ?>"><?php echo $schoolController->get_school_name_by_id($post_school_id); ?> </option>
+                            <?php $schoolController->get_schools($post_school_id); ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </div>
+                </form>
+
+
+
+
+        <?php } else { ?>
+
+
             <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title:</label>
@@ -99,6 +153,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button class="btn btn-success" type="submit">Submit</button>
                 </div>
             </form>
+
+
+        <?php }?>
+
+
+
+
         </div>
     </div>
 </div>

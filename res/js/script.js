@@ -141,25 +141,6 @@ $(document).ready(function () {
         });
     });
 
-    $('#reminder').click(function (e) {
-        e.prgroupDefault();
-        var group_id = $(this).attr('pid');
-        $.ajax({
-            method: "POST",
-            url: "set_reminder.php",
-            data: {set_reminder: 1, group_id: group_id},
-            success: function (data) {
-                if (data == 'TRUE') {
-                    $('#reminder').attr('disabled', 'disabled');
-                } else if (data == 'FALSE') {
-                    //$(this).html('Reminder Set');
-                } else {
-                    alert(data);
-                }
-            }
-        });
-    });
-
     $('#group_search').change(function () {
         var sid = $(this).val();
         $.ajax({
@@ -327,6 +308,7 @@ $(document).ready(function () {
             data: {set_reminder: 1, event_id: event_id},
             success: function (data) {
                 if (data == 'TRUE') {
+                    $('#reminder').html('Reminder Set');
                     $('#reminder').attr('disabled', 'disabled');
                 } else if (data == 'FALSE') {
                 } else {
@@ -349,6 +331,8 @@ $(document).ready(function () {
         //   };
         // });
     });
+
+
 
     //++++++++++++++ EVENT ACTIONS ENDS HERE +++++++++++++++++++++++++
 

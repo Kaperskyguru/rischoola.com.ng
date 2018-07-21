@@ -46,7 +46,9 @@
                                     <td><?php echo get_formatted_date($event_date); ?></td>
                                     <td><?php echo $eventController->get_event_status_by_id($event_status_id); ?></td>
                                     <td><?php echo time_ago($event_date_created); ?></td>
-                                    <td><a href="#" pid = "<?php echo $event_id ?>" class="btn btn-primary">View</a>
+                                    <td>
+                                        <a href="<?php echo SITEURL; ?>/events/<?php echo $event_id ?>" id="event_view" class="btn btn-success">View</a>
+                                        <a href="create_event.php?id=<?php echo $event_id ?>" id="event_edit" pid = "<?php echo $event_id ?>" class="btn btn-primary">Edit</a>
                                         <a href="#" id="event_del" pid = "<?php echo $event_id ?>" class="btn btn-danger">Delete</a></td>
                                 </tr>
                                 <?php

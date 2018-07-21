@@ -21,10 +21,15 @@ class Schools extends Logger
         return self::$instance;
     }
 
-    public function get_schools()
+    public function get_schools($id = 0)
     {
         try {
-            $query = "SELECT * FROM schools";
+            if (!$id == 0) {
+                $query = "SELECT * FROM schools WHERE school_id != $id";
+            } else {
+                $query = "SELECT * FROM schools";
+            }
+
             $this->query($query);
             $stmt = $this->executer();
             if ($stmt->rowCount() > 0) {

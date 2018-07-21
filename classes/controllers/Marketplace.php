@@ -79,6 +79,21 @@ class Marketplace extends Logger
         }
     }
 
+    public function get_related_products($school_id, $length)
+    {
+        try {
+            $query = "SELECT * FROM products WHERE product_school_id = :school_id AND product_status_id != 2 ORDER BY RAND() LIMIT $length";
+            $this->query($query);
+            $this->bind(':school_id', $school_id);
+            $stmt = $this->executer();
+            return $stmt;
+        } catch (PDOException $e) {
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return null;
+        }
+    }
+
     public function is_product_in_cart($product_id, $user_id)
     {
         try {
@@ -213,11 +228,16 @@ class Marketplace extends Logger
         }
     }
 
-    public function get_product_category()
+    public function get_product_category($id = 0)
     {
         try {
-            $query = "SELECT * FROM category";
+            if (!$id == 0) {
+                $query = "SELECT * FROM category WHERE category_id != :id";
+            } else {
+                $query = "SELECT * FROM category";
+            }
             $this->query($query);
+            $this->bind(':id', $id);
             $stmt = $this->executer();
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -251,7 +271,7 @@ class Marketplace extends Logger
     public function get_product_by_id($id)
     {
         try {
-            $query = "SELECT * FROM products WHERE product_status_id != 2 AND product_id = $id";
+            $query = "SELECT * FROM products WHERE product_id = $id";
             $this->query($query);
             $row = $this->resultset();
             return $row;
@@ -406,7 +426,7 @@ class Marketplace extends Logger
                                     class="label label-danger"><?php echo $this->get_product_school_by_id($product_school_id); ?></span>
                                 <span
                                     class="label label-purple"><?php echo $this->get_product_status_by_id($product_status_id); ?></span>
-                                <span class="label label-default"><?php echo $product_review_count; ?> reviews</span>
+                                <!-- <span class="label label-default"><?php echo $product_review_count; ?> reviews</span> -->
                             </div>
                         </div>
                     </div>
@@ -521,6 +541,52 @@ class Marketplace extends Logger
     private function __clone()
     {
 
+    }
+
+    public function display_related_products(Users $user, $school_id, $length)
+    {
+        try {
+            $stmt = $this->get_related_products($school_id, $length);
+            if ($stmt->rowCount() > 0) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    extract($row);
+                    ?>
+                    <div class="product col-lg-3 col-sm-6">
+                        <div class="product-thumb">
+                            <a href="#" class="thumb-link">
+                                <img class="hover-img" src="<?php echo SITEURL; ?>/res/imgs/product/6-hover.jpg"
+                                     alt="Product Hover">
+                                <img class="front-img" src="<?php echo SITEURL; ?>/res/imgs/product/6.jpg"
+                                     alt="Product Front">
+                            </a>
+
+                            <div class="attr-group">
+                                <span class="new"><?php echo $this->get_product_status_by_id($product_status_id); ?></span>
+                            </div>
+                            <a class="to-cart" href="#"><i class="fa fa-shopping-cart"></i>
+                                Message <?php echo $user->get_user_username_by_id($product_user_id); ?></a>
+
+                            <div class="product-btn">
+                                <a class="to-view" data-fancybox-type="iframe"
+                                   href="<?php echo $product_slug; ?>--<?php echo $product_id; ?>"><i class="fa fa-eye"></i><span
+                                        class="tooltip">Quick View</span></a>
+                                <a class="to-wish" href="#"><i class="fa fa-heart"></i><span class="tooltip">Add To Wishlist</span></a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name"><a
+                                    href="<?php echo $product_slug; ?>--<?php echo $product_id; ?>"><?php echo $product_name; ?></a>
+                            </h5>
+                            <p class="price">$<?php echo $product_price; ?></p>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+        } catch (PDOException $e) {
+            $_SESSION['error'] = $e->getMessage(). ' ==>' . __CLASS__ . '=>' . __FUNCTION__." ". get_user_uid();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+        }
     }
 
 }

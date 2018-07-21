@@ -42,9 +42,9 @@
                                     <td><?php echo $groupController->get_group_status_by_id($group_status_id); ?></td>
                                     <td><?php echo $group_date_created ?></td>
                                     <td>
+                                        <a href="../groups/<?php echo $group_id ?>" class="btn btn-success" pid = "<?php echo $group_id ?>">Goto</a>
+                                        <a href="create_group.php?id=<?php echo $group_id ?>" class="btn btn-primary" pid = "<?php echo $group_id ?>" class="">Edit</a>
                                         <a href="groups.php" id="group_del" class="btn btn-danger" gid = "<?php echo $group_id ?>">Delete</a>
-                                        <a href="../groups/group_page.php?id=<?php echo $group_id ?>" class="btn btn-success" pid = "<?php echo $group_id ?>">Goto</a>
-                                        <a href="#" class="btn btn-primary" pid = "<?php echo $group_id ?>" class="">View</a>
                                     </td>
                                 </tr>
                                 <?php

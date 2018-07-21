@@ -9,7 +9,7 @@
             </p>
             <div >
             	<h5>Join Us Today</h5>
-            	<a href="<?php echo SITEURL ?>/users/register" class="btn btn-success btn-lg">Register</a>
+            	<a href="<?php echo ($userController->is_authenticated())? '#' : SITEURL.'/users/register' ?>" <?php echo ($userController->is_authenticated())? 'disabled':"" ?> class="btn btn-success btn-lg">Register</a>
             </div>
 		</div>
 		<div class="col-sm-3 pad-bottom-50 text-center">

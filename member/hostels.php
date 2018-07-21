@@ -53,7 +53,8 @@
                                         <td><?php echo $lodgeController->get_lodge_status_by_id($lodge_status_id); ?></td>
                                         <td><?php echo time_ago($lodge_date_created); ?></td>
                                         <td>
-                                            <a href="#" pid = "<?php echo $lodge_id ?>" class="btn btn-primary">View</a>
+                                            <a href="../lodges/<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>" class="btn btn-primary">View</a>
+                                            <a href="add_lodges.php?id=<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>" class="btn btn-success">Edit</a>
                                             <a href="#" pid = "<?php echo $lodge_id ?>" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>

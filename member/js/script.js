@@ -36,13 +36,10 @@ $(document).ready(function () {
     });
 
 
-    $('#event_reminder_edit').click(function () {
-        var reminder_id = $(this).attr('pid');
-    });
-
     $('body').delegate('#event_reminder_del', 'click', function (e) {
         e.preventDefault();
         var reminder_id = $(this).attr('pid');
+        alert(reminder_id);
         $.ajax({
             method: "POST",
             url: "actions.php",
@@ -50,6 +47,9 @@ $(document).ready(function () {
             cache: false,
             success: function (d) {
 
+            },
+            onerror: function(err) {
+                alert(err);
             }
         });
     });

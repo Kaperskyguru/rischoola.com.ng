@@ -1,6 +1,11 @@
 <?php
 require_once '../init.php';
 require_once '../include/header.php';
+
+$userController->cookie_login();
+if ($userController->is_authenticated()) {
+    header('Location: ../member');
+}
 $error = 0;
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	if (isset($_POST['name']) && isset($_POST['last_name'])) {

@@ -63,7 +63,7 @@ if ($id == 0) {
                     </ul>
                     <?php
                     if ($eventController->is_reminder_set($event_id, get_user_uid())) { ?>
-                        <a id="reminder" disabled class="fa fa-clock-o btn btn-lg btn-success"> Reminder Set</a>
+                        <a id="reminder-set" disabled class="fa fa-clock-o btn btn-lg btn-success"> Reminder Set</a>
                         <?php
                     } else {
                         ?>

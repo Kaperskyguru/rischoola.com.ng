@@ -17,7 +17,7 @@ if ($id == 0) {
 $row = $newsControler->get_post_by_id($id);
 if (is_null($row) || empty($row)) {
     //Log message here
-    $logger->logWarn("Row is null or empty in ".__FILE__, get_user_uid());    
+    $logger->logWarn("Row is null or empty in ".__FILE__, get_user_uid());
     header("Location: index.php");
     exit;
 } else {
@@ -34,7 +34,7 @@ $comment_stmt = $commentController->get_comments_by_id('posts', $post_id);
                     <div>
                         <?php
                         if ($resources->get_image_url($id, 'post') != null)
-                            $resources::display($resources->get_image_url($id, 'post'), array_merge($resources::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                            $resources::display($resources->get_image_url($id, 'post'), array_merge($resources::DEFAULT_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                     </div>
                     <div class="pad-up-20">
                         <h6 style="color:#aaa; margin:8px;">
@@ -79,7 +79,7 @@ $comment_stmt = $commentController->get_comments_by_id('posts', $post_id);
                                 <!--Third row-->
                                 <div class="row">
                                 <div class="col-md-12">
-                                <form id="sub" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">                                                                        
+                                <form id="sub" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="commentBox">Enter Comment</label>
                                             <textarea type="text" rows="5" id="commentBox" name="commentBox"
@@ -110,7 +110,7 @@ $comment_stmt = $commentController->get_comments_by_id('posts', $post_id);
                         </section>
                         <h2></h2>
                         <?php
-                        
+
                         if ($comment_stmt->rowCount() > 0) {
                             while ($row = $comment_stmt->fetch(PDO::FETCH_ASSOC)) {
                                 extract($row);
@@ -150,7 +150,7 @@ $comment_stmt = $commentController->get_comments_by_id('posts', $post_id);
                                                    aria-label="Reply to Kap man"><span class="fa fa-reply"></span> Reply</a>
                                             </div> -->
                                         </div>
-                                        
+
                                     </ul>
                                 </div>
                                 <?php
@@ -203,14 +203,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["comment"])){
             uploadFiles(get_user_uid(), $id);
             unset($_POST);
         }
-       
+
     }else if(!empty($comment_body) && empty($_FILES['file']['name'])){
        echo $id= $commentController->store_comments($comment_body, get_user_uid(), "posts", $post_id);
        unset($_POST);
     }else{
         $error_text = "Please enter a comment";
     }
-    
+
   }
 function uploadFiles($user_id, $inserted_id) {
     echo $files = $_FILES["file"];

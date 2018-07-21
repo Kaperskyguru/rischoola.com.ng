@@ -63,8 +63,9 @@
                                         <li class="dropdown">
                                           <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
                                           <ul class="dropdown-menu">
+                                              <li><a href="../marketplace/<?php echo $product_id ?>" class="">View</a></li>
+                                              <li><a href="add_product.php?id=<?php echo $product_id ?>" class="">Edit</a></li>
                                             <li><a href="#" id="product_del" gid = "<?php echo $product_id ?>">Delete</a></li>
-                                            <li><a href="#"  pid = "<?php echo $product_id ?>" class="">View</a></li>
                                           </ul>
                                         </li>
                                       </ul>

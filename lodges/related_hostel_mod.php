@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="products-wrap">
-              <?php $lodgeController->display_related_lodges($userController->get_school_id_by_user_id(get_user_uid()), 4);?>
+              <?php $lodgeController->display_related_lodges($lodge_school_id, 4);?>
             </div>
         </div>
     </div>

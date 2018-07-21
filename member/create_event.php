@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = 'You created a new Event';
             $notifier->add_notification(build_notification($notifyModel, get_user_uid(), 'New Event', $message));
             $succes_text = "Your Event is pending verifications...";
-            
+
         } else {
             $error_text = "Sorry, We could not Post the Event";
         }
@@ -58,7 +58,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row">
         <div class="col-md-10">
             <h2>Create a new Event<hr /></h2>
-            <?php display_error(); ?>
+            <?php display_error();
+            
+                if (!is_null($_GET['id'])) {
+                    $eventId = $_GET['id'];
+                    $row = $eventController->get_event_by_id($eventId);
+                    extract($row);
+                    ?>
+                    <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input value="<?php echo $event_title ?>" class="form-control" id="title" name="title" type="text" />
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" > Description: </label>
+                            <textarea rows="10" id="desc" name="desc" class="form-control"> <?php echo $event_desc ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Event Date: </label>
+                            <input type="date" value="<?php echo $event_date_created ?>" id="date" name="date" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="school">Select School</label>
+                            <select class="form-control" id="school" name="school">
+                                <option value="<?php echo $event_school_id ?>">
+                                    <?php echo $schoolController->get_school_name_by_id($event_school_id)?>
+                                </option>
+                                <?php $schoolController->get_schools($event_school_id); ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Update</button>
+                        </div>
+                    </form>
+
+                <?php } else { ?>
             <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title:</label>
@@ -83,6 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </form>
+        <?php }?>
         </div>
     </div>
 </div>

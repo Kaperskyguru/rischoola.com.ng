@@ -71,7 +71,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row">
         <div class="col-md-10" style="margin-left: 10px;background-color:#fff; border-radius:10px; border:2px solid #eee">
             <h2>Create a New Group<hr /></h2>
-            <?php display_error(); ?>
+            <?php display_error();
+
+            if (!is_null($_GET['id'])) {
+                $groupId = $_GET['id'];
+                $row = $groupController->get_group_by_id($groupId);
+                extract($row); ?>
+
+                <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input value="<?php echo $group_title ?>" class="form-control" id="title" name="title" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="desc" > Description: </label>
+                        <textarea rows="10" id="desc" name="desc" class="form-control"><?php echo $group_desc ?> </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Group Type: </label>
+                        <select class="form-control" id="type" name="type">
+                            <option value="1">Open </option>
+                            <option value="2">Close </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="school">Select School</label>
+                        <select class="form-control" id="school" name="school">
+                            <option value="<?php echo $group_school_id ?>"><?php echo $schoolController->get_school_name_by_id($group_school_id); ?> </option>
+                            <?php $schoolController->get_schools($group_school_id); ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="group_image">Group Profile Image:</label>
+                        <input type="file" id="group_image[]" name="group_image[]"  />
+                    </div>
+                    <div class="checkbox">
+                        <label><input name="showEmail" <?php echo ($group_show_email == 1) ? "checked" : "" ?> type="checkbox">Show Email Address</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input name="showPhone" <?php echo ($group_show_phone == 1) ? "checked" : "" ?> type="checkbox">Show Phone Number</label>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Update</button>
+                    </div>
+                </form>
+
+            <?php } else {?>
+
             <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title:</label>
@@ -109,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </form>
+        <?php } ?>
         </div>
     </div>
 </div>

@@ -52,8 +52,9 @@ class Events extends Logger
     public function get_event_by_id($id)
     {
         try {
-            $query = "SELECT * FROM events WHERE event_id = $id";
+            $query = "SELECT * FROM events WHERE event_id = :id";
             $this->query($query);
+            $this->bind(':id', $id);
             $row = $this->resultset();
             return $row;
         } catch (PDOException $e) {
@@ -141,7 +142,7 @@ class Events extends Logger
     public function is_reminder_set($event_id, $user_id)
     {
         try {
-            $sql = "SELECT reminder_id FROM event_reminders WHERE reminder_user_id = :user_id AND  reminder_event_id = :event_id";
+            $sql = "SELECT reminder_id FROM event_reminders WHERE reminder_user_id = :user_id AND reminder_event_id != 6 AND reminder_event_id = :event_id";
             $this->query($sql);
             $this->bind(':user_id', $user_id);
             $this->bind(':event_id', $event_id);
@@ -225,11 +226,11 @@ class Events extends Logger
     public function get_event_date_by_id($id)
     {
         try {
-            $query = "SELECT event_date FROM events WHERE event_id = $id";
+            $query = "SELECT event_date FROM events WHERE event_id = :id";
             $this->query($query);
+            $this->bind(':id',$id);
             $row = $this->resultset();
-            extract($row);
-            return $event_date;
+            return $row['event_date'];
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
@@ -274,7 +275,7 @@ class Events extends Logger
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     extract($row);
                     ?>
-                    <div class="col-md-5 pad-bottom-20">
+                    <div class="col-md-4 pad-bottom-20">
                         <div class="row">
                             <div class="col-md-4">
                                 <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>

@@ -88,7 +88,89 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row">
         <div class="col-md-10" style="margin-left: 10px;background-color:#fff; border-radius:10px; border:2px solid #eee">
             <h2>Add a New Product<hr /></h2>
-            <?php display_error(); ?>
+            <?php display_error();
+
+            if (!is_null($_GET['id'])) {
+                $productId = $_GET['id'];
+                $row = $storeController->get_product_by_id($productId);
+                extract($row);?>
+            <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Product Title:</label>
+                    <input class="form-control" value="<?php echo $product_name; ?>" id="title" name="title" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="product_price">Product Price: </label>
+                    <input type="number" value="<?php echo $product_price; ?>" id="product_price" name="product_price" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description: </label>
+                    <p>Take your time to describe the features of your item and why the buyer should get it.</p>
+                    <textarea rows="10" id="desc" name="desc" class="form-control"><?php echo $product_desc; ?>" </textarea>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-xs-3">
+                        <label for="product_image">Choose Featured image:</label>
+                        <input type="file"id="product_image[]" name="product_image[]" class="form-control" />
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="">Product Image 2</label>
+                        <input type="file" id="product_image[]" name="product_image[]" class="form-control" />
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="product_image3">Product image 3: </label>
+                        <input type="file" id="product_image[]" name="product_image[]" class="form-control" />
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="product_image3">Product image 4: </label>
+                        <input type="file" id="product_image[]" name="product_image[]" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="avail_status">Availability Status: </label>
+                    <select id="avail_status" name="avail_status" class="form-control">
+                      <option value="10">In Stock</option>
+                      <option value="11">Out of Stock </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location: </label>
+                    <input type="text" value="<?php echo $product_location; ?>" id="location" name="location" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="condition">Condition: </label>
+                    <select id="condition" name="condition" class="form-control">
+                      <option value="12">Used</option>
+                      <option value="4">New </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cat">Category:</label>
+                    <select class="form-control" id="cat" name="cat">
+                        <option value="<?php echo $product_category_id ?>"><?php echo $storeController->get_product_category_by_id($product_category_id); ?> </option>
+                        <?php $storeController->get_product_category($post_category_id); ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="school">Select School</label>
+                    <select class="form-control" id="school" name="school">
+                        <option value="<?php echo $product_school_id ?>"><?php echo $schoolController->get_school_name_by_id($product_school_id); ?> </option>
+                        <?php $schoolController->get_schools($product_school_id); ?>
+                    </select>
+                </div>
+                <div class="checkbox">
+                    <label><input id="showEmail" <?php echo ($product_show_phone == 1) ? "checked" : "" ?> name="showEmail" type="checkbox" />Show Email Address</label>
+                </div>
+                <div class="checkbox">
+                    <label><input id="showPhone" <?php echo ($product_show_phone == 1) ? "checked" : "" ?> name="showPhone" type="checkbox" />Show Phone Number</label>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </div>
+            </form>
+        <?php } else { ?>
+
             <form role="form" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Product Title:</label>
@@ -164,6 +246,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </form>
+        <?php }?>
         </div>
     </div>
 </div>
@@ -171,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 function uploadFiles($user_id, $inserted_id) {
     $files = $_FILES["product_image"];
-    
+
     return Resources::upload_image($files, $user_id, $inserted_id, 'products');
 }
 require_once('footer.php');

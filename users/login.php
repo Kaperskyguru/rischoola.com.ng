@@ -2,6 +2,10 @@
 require_once '../init.php';
 require_once '../include/header.php';
 
+$userController->cookie_login();
+if ($userController->is_authenticated()) {
+    header('Location: ../member');
+}
 
 // MY VERIFICATION EMAIL LINK LOOKS LIKE THIS:
 // http://localhost/old_rsschools.ng/users/login.php?guestid=1&uniqueid=ilove222god
@@ -13,20 +17,15 @@ if(isset($_GET['guestid']) && $_GET['uniqueid']){
 	// sanitize strings
 
 	if(isset($unique_id) && isset($guest_id)){
-			if($userController->is_temporary_user_exist($guest_id, $unique_id)){
-					if($userController->move_guest_to_member($userModel, $guest_id, $unique_id)){
-						$succes_text = "Account Verify successfuly, Please Login";
-					}else{
-							$error_text = "sorry, we could not activate your account, Click on the link again";
-					}
-				}
-			// }else {
-			// 	$error_text = 'Account not found';
-			// }
+		if($userController->is_temporary_user_exist($guest_id, $unique_id)){
+			if($userController->move_guest_to_member($userModel, $guest_id, $unique_id)){
+				$succes_text = "Account Verified successfuly, Please Login";
+			}else{
+				$error_text = "sorry, we could not activate your account, Click on the link again";
+			}
+		}
 	}
 }
-
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($_POST['password'])) {
 	$userModel->set_user_user_name($_POST['username']);

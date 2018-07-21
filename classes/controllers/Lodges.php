@@ -430,8 +430,6 @@ class Lodges extends Logger
                             <!-- </div> -->
                             <div class="tags">
                                 <span
-                                    class="label label-default"><?php echo $this->get_lodge_review_count_by_id($lodge_id) ?></span>
-                                <span
                                     class="label label-danger"><?php echo $this->get_lodge_model_by_id($lodge_model_id) ?></span>
                                 <span
                                     class="label label-purple"><?php echo $this->get_lodge_status_by_id($lodge_status_id) ?></span>
@@ -563,8 +561,6 @@ class Lodges extends Logger
                             </div>
                             <div class="tags">
                                 <span
-                                    class="label label-default"><?php echo $this->get_lodge_review_count_by_id($lodge_id) ?></span>
-                                <span
                                     class="label label-danger"><?php echo $this->get_lodge_model_by_id($lodge_model_id) ?></span>
                                 <span
                                     class="label label-purple"><?php echo $this->get_lodge_status_by_id($lodge_status_id) ?></span>
@@ -653,20 +649,6 @@ class Lodges extends Logger
                             <h5 class="product-name"><a
                                     href="<?php echo $lodge_slug; ?>--<?php echo $lodge_id; ?>"><?php echo $lodge_name; ?></a>
                             </h5>
-
-                            <div class="rating" itemtype="http://schema.org/Offer" itemscope>
-                                <div class="star_rating" itemtype="http://schema.org/AggregateRating" itemscope
-                                     itemprop="aggregateRating">
-                                    <span class="star star_full"></span>
-                                    <span class="star star_full"></span>
-                                    <span class="star star_full"></span>
-                                    <span class="star star_full"></span>
-                                    <span class="star"></span>
-                                    <meta itemprop="worstRating" content="0">
-                                    <meta itemprop="ratingValue" content="4">
-                                    <meta itemprop="bestRating" content="5">
-                                </div>
-                            </div>
                             <p class="price">$<?php echo $lodge_price; ?></p>
                         </div>
                     </div>
@@ -682,8 +664,9 @@ class Lodges extends Logger
     public function get_related_lodges($school_id, $length)
     {
         try {
-            $query = "SELECT * FROM lodges WHERE lodge_school_id = $school_id AND lodge_status_id != 2 ORDER BY RAND() LIMIT $length";
+            $query = "SELECT * FROM lodges WHERE lodge_school_id = :school_id AND lodge_status_id != 2 ORDER BY RAND() LIMIT $length";
             $this->query($query);
+            $this->bind(':school_id', $school_id);
             $stmt = $this->executer();
             return $stmt;
         } catch (PDOException $e) {
@@ -733,8 +716,6 @@ private function displayLodges() {
           <h3 class="hostelname text-danger"># <?php echo $lodge_price; ?> / year</h3>
           <!-- </div> -->
           <div class="tags">
-              <span
-                  class="label label-default"><?php echo $this->get_lodge_review_count_by_id($lodge_id) ?></span>
               <span
                   class="label label-danger"><?php echo $this->get_lodge_model_by_id($lodge_model_id) ?></span>
               <span

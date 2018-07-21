@@ -47,9 +47,8 @@
                                     <td><?php echo $newsControler->get_post_status_by_id($post_status_id); ?></td>
                                     <td><?php echo time_ago($post_date_created); ?></td>
                                     <td>
-                                        <a href="#" pid = "<?php echo $post_id ?>" class="btn btn-primary">View</a>
-                                         <!--added an edit button-->
-                                         <a href="#" data-toggle="modal" data-target="#editModal" pid = "<?php echo $post_id ?>" class="btn btn-info">Edit</a>
+                                        <a href="../posts/<?php echo $post_id ?>" class="btn btn-primary">View</a>
+                                         <a href="add_post.php?id=<?php echo $post_id ?>" class="btn btn-info">Edit</a>
                                         <a href="#" pid = "<?php echo $post_id ?>" class="btn btn-danger">Delete</a></td>
                                 </tr>
                                 <?php
@@ -84,15 +83,15 @@
         </p>
           <hr>
         <div>
-            <label>Post Category : Talks</label>  
+            <label>Post Category : Talks</label>
         </div>
           <hr>
           <div>
-            <label>School : Abia Poly</label>  
+            <label>School : Abia Poly</label>
         </div>
           <hr>
           <div>
-            <label>Post Images </label>  
+            <label>Post Images </label>
             <div class="row">
                 <div class="col-md-4">
                     <img src="../res/imgs/8722.gif" class="img-responsive img-thumbnail">
@@ -105,18 +104,18 @@
                 </div>
             </div>
         </div>
-          
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        
+
       </div>
     </div>
   </div>
 </div>
 
 <!-- Modal for edit post-->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -161,11 +160,11 @@
             </form>
       </div>
       <div class="modal-footer">
-        
+
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        
+
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <?php require_once('footer.php');

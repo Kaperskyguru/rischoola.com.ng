@@ -29,7 +29,7 @@ if ($id == 0) {
                                 <div class="col-md-6">
                                     <div class="single-product-thumb">
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <?php 
+                                            <?php
                                             $image_stmt = $resources->get_multiple_image_id($id, 'product');
                                             $count = 0;
                                                 if($image_stmt->rowCount() > 0){
@@ -40,7 +40,7 @@ if ($id == 0) {
                                                                 <a href="#thumb-<?php echo $count?>" aria-controls="thumb-<?php echo $count?>" role="tab" data-toggle="tab">
                                                                     <?php $resources::display($resource_url, array_merge($resources::SLIDE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                                                                 </a>
-                                                            </li>                                                        
+                                                            </li>
                                                         <?php
                                                     }
                                                 }
@@ -52,7 +52,7 @@ if ($id == 0) {
                                                 <img src="../res/imgs/product/6.jpg" alt="...">
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="thumb-2">
-                                                <img src="../res/imgs/product/6-hover.jpg" alt="...">   
+                                                <img src="../res/imgs/product/6-hover.jpg" alt="...">
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="thumb-3">
                                                 <img src="../res/imgs/product/4.jpg" alt="...">
@@ -69,7 +69,7 @@ if ($id == 0) {
                                 <div class="col-md-6">
                                     <div class="product-info">
                                         <h5 class="product-name"><a><?php echo $product_name; ?></a></h5>
-                                        <div class="product-review-wrap">
+                                        <!-- <div class="product-review-wrap">
                                             <div class="rating to-review-item" itemtype="http://schema.org/Offer" itemscope>
                                                 <div class="star_rating" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">
                                                     <span class="star star_full"></span>
@@ -88,7 +88,7 @@ if ($id == 0) {
                                             <div class="to-review-item to-write-review">
                                                 <a href="#"><i class="fa fa-pencil-square-o"></i> Write a review</a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="product-attr-table">
                                             <div class="attr-item">
                                                 <div class="attr-cell name-cell">Category</div>
@@ -149,7 +149,7 @@ if ($id == 0) {
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#more-info" aria-controls="more-info" role="tab" data-toggle="tab">More Info</a></li>
                                         <!-- <li role="presentation"><a href="#data-sheet" aria-controls="data-sheet" role="tab" data-toggle="tab">Data Sheet</a></li> -->
-                                        <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+                                        <!-- <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li> -->
                                     </ul>
 
                                     <!-- Content panes -->
@@ -174,7 +174,7 @@ if ($id == 0) {
                                                 </tbody>
                                             </table>
                                         </div> -->
-                                        <div role="tabpanel" class="tab-pane fade" id="reviews">
+                                        <!-- <div role="tabpanel" class="tab-pane fade" id="reviews">
                                             <ul class="reviews">
                                                 <li class="review tab-pane">
                                                     <div class="review-head">
@@ -203,7 +203,7 @@ if ($id == 0) {
                                                 </li>
                                             </ul>
                                             <a href="#" class="btn-write-review"><i class="fa fa-pencil-square-o"></i> Write a review</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <?php
@@ -232,7 +232,7 @@ if ($id == 0) {
                 </div>
             </div>
 
-        <?php require_once 'related_hostel_mod.php'; ?>
+        <?php require_once 'related_product_mod.php'; ?>
         </div>
 </div>
 
@@ -242,6 +242,6 @@ if ($id == 0) {
 require_once '../include/footer.php';?>
 <script>
     $(document).ready(function() {
-        
+
     });
 </script>

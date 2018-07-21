@@ -33,7 +33,7 @@ if ($id == 0) {
                                     <div class="single-product-thumb">
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li role="presentation">
-                                                <?php 
+                                                <?php
                                                     $image_stmt = $resources->get_multiple_image_id($id, 'lodge');
                                                     $count = 0;
                                                     if($image_stmt->rowCount() > 0){
@@ -48,7 +48,7 @@ if ($id == 0) {
                                                     }
                                                 }
                                             ?>
-                                            </li> 
+                                            </li>
                                             <!-- <!-- <li role="presentation" class="active"><a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-1.jpg" alt="..."></a></li> -->
                                             <!-- <li role="presentation"><a href="#thumb-2" aria-controls="thumb-2" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-2.jpg" alt="..."></a></li> -->
                                             <li role="presentation"><a href="#thumb-3" aria-controls="thumb-3" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-3.jpg" alt="..."></a></li>
@@ -78,7 +78,7 @@ if ($id == 0) {
                                 <div class="col-md-6">
                                     <div class="product-info">
                                         <h5 class="product-name"><a><?php echo $lodge_name; ?></a></h5>
-                                        <div class="product-review-wrap">
+                                        <!-- <div class="product-review-wrap">
                                             <div class="rating to-review-item" itemtype="http://schema.org/Offer" itemscope>
                                                 <div class="star_rating" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">
                                                     <span class="star star_full"></span>
@@ -97,7 +97,7 @@ if ($id == 0) {
                                             <div class="to-review-item to-write-review">
                                                 <a href="#"><i class="fa fa-pencil-square-o"></i> Write a review</a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="product-attr-table">
                                             <div class="attr-item">
                                                 <div class="attr-cell name-cell">Model</div>
@@ -149,7 +149,7 @@ if ($id == 0) {
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#more-info" aria-controls="more-info" role="tab" data-toggle="tab">More Info</a></li>
                                         <li role="presentation"><a href="#data-sheet" aria-controls="data-sheet" role="tab" data-toggle="tab">Data Sheet</a></li>
-                                        <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+                                        <!-- <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li> -->
                                     </ul>
 
                                     <!-- Content panes -->
@@ -174,36 +174,6 @@ if ($id == 0) {
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="reviews">
-                                            <ul class="reviews">
-                                                <li class="review tab-pane">
-                                                    <div class="review-head">
-                                                        <div class="grade">
-                                                            <label>Grade </label>
-                                                            <div class="rating" itemtype="http://schema.org/Offer" itemscope>
-                                                                <div class="star_rating" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">
-                                                                    <span class="star star_full"></span>
-                                                                    <span class="star star_full"></span>
-                                                                    <span class="star star_full"></span>
-                                                                    <span class="star star_full"></span>
-                                                                    <span class="star"></span>
-                                                                    <meta itemprop="worstRating" content="0">
-                                                                    <meta itemprop="ratingValue" content="4">
-                                                                    <meta itemprop="bestRating" content="5">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="reviwer">Code chant</h5>
-                                                        <p class="review-date">3/20/2017</p>
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <h5 class="review-title">Test Review</h5>
-                                                        <p class="review-content">This is a great product according to usability.</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <a href="#" class="btn-write-review"><i class="fa fa-pencil-square-o"></i> Write a review</a>
-                                        </div>
                                     </div>
                                 </div>
                                 <?php
@@ -215,7 +185,7 @@ if ($id == 0) {
             </div>
         </div>
 </div>
-<?php require_once 'related_hostel_mod.php'; ?>
+<?php require_once 'related_hostel_mod.php';  ?>
 </section>
 </div>
 <?php

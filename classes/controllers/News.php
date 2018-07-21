@@ -121,7 +121,7 @@ class News extends Logger
     public function get_post_by_id($id)
     {
         try {
-            $query = "SELECT * FROM posts WHERE post_status_id != 2 AND post_id = :id";
+            $query = "SELECT * FROM posts WHERE post_id = :id";
             $this->query($query);
             $this->bind('id', $id);
             $stmt = $this->resultset();
@@ -162,11 +162,16 @@ class News extends Logger
         }
     }
 
-    public function get_post_category()
+    public function get_post_category($id = 0)
     {
         try {
-            $query = "SELECT * FROM post_category";
+            if (!$id == 0) {
+                $query = "SELECT * FROM post_category WHERE post_category_id != :id";
+            } else {
+                $query = "SELECT * FROM post_category";
+            }
             $this->query($query);
+            $this->bind(':id', $id);
             $stmt = $this->executer();
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -176,6 +181,21 @@ class News extends Logger
                     <?php
                 }
             }
+        } catch (Error $e) {
+            $_SESSION['error'] = $e->getMessage();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+        }
+    }
+
+    public function get_category_name_by_id($id)
+    {
+        try {
+            $query = "SELECT post_category_name FROM post_category WHERE post_category_id = :id";
+            $this->query($query);
+            $this->bind(':id',$id);
+            $row = $this->resultset();
+            extract($row);
+            return $post_category_name;
         } catch (Error $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());

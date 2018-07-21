@@ -47,7 +47,7 @@
                                             <li class="dropdown">
                                                 <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="#" id="event_reminder_view" pid = "<?php echo $reminder_id ?>" class="">View</a></li>
+                                                    <li><a href="../events/<?php echo $reminder_event_id;?>" id="event_reminder_view" pid = "<?php echo $reminder_id ?>" class="">View</a></li>
                                                     <li><a href="#" id="event_reminder_edit" pid = "<?php echo $reminder_id ?>" class="">Edit</a></li>
                                                     <li><a href="#" id="event_reminder_del" pid = "<?php echo $reminder_id ?>" class="">Delete</a></li>
                                                 </ul>

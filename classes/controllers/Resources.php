@@ -21,6 +21,10 @@ class Resources extends Logger
         "class" => "thumpnail inline"
     ];
 
+    const DEFAULT_IMAGE_OPTIONS = [
+        "format" => "jpg",
+    ];
+
 
     const DETAILS_IMAGE_OPTIONS = array(
         "format" => "jpg",
