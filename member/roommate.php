@@ -247,4 +247,4 @@
 
 </div>
 <!-- /#wrapper -->
-<?php require_once('footer.pho');
+<?php require_once('footer.php');

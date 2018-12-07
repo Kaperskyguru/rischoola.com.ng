@@ -26,10 +26,29 @@ function get_user_uid()
   }
 }
 
+function set_title($title = "Rischoola", $desc = "schooling in rivers state just got easier")
+{
+  echo '
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>'. $title .' | ' . $desc .'</title>
+    ';
+}
+
 function get_site_name()
 {
-  $site_name = 'Rischoola ';
+  $site_name = ' Rischoola ';
     return $site_name;
+}
+
+function  get_site_meta($page) {
+  return $page;
+}
+
+function set_url($url)
+{
+  return (is_null(parse_url($url, PHP_URL_SCHEME)))? 'https://'. $url : $url;
 }
 
 function generate_unique_id(){

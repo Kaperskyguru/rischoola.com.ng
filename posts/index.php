@@ -1,5 +1,5 @@
 <?php require_once '../init.php';
-
+echo set_title('Latest News Update', 'Schooling in rivers state just got easier - '.get_site_name());
 $userController->cookie_login();
 if($userController->is_authenticated()){
   require_once '../include/member_header.php';

@@ -31,6 +31,24 @@ class Messages extends Logger
         }
     }
 
+    public function updateMessage(int $int, array $data)
+    {
+        $paramsArray = [];
+        foreach($data as $key => $value) {
+            array_push($paramsArray, $key." = :".$key);
+        }
+        $params = implode(', ', $paramsArray);
+        $this->query("UPDATE messages SET {$params} WHERE message_id = :id");
+        foreach($data as $column => $value) {
+            $this->bind(":".$column, $value);
+        }
+        $this->bind(":id", $int);
+        if(!$this->executer()) {
+            return false;
+        }
+        return true;
+    }
+
     public function get_total_number_of_messages_by_user_id($id)
     {
         try {
@@ -46,14 +64,13 @@ class Messages extends Logger
         }
     }
 
-    public function get_messages_by_id($type, $id)
+    public function get_messages_by_id($id)
     {
         try {
-            $query = "SELECT * FROM messages WHERE message_type = :type AND message_id = :id";
+            $query = "SELECT * FROM messages WHERE message_id = :id";
             $this->query($query);
-            $this->bind(':type', $type);
             $this->bind(':id', $id);
-            $stmt = $this->executer();
+            $stmt = $this->resultset();
             return $stmt;
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();

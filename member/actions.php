@@ -50,6 +50,24 @@ if (isset($_POST['i_dont_have_a_room'])) {
     $roommateController->display_no_room_form($schoolController, $lodgeController);
 }
 
+if (isset($_POST['viewMessage']) && $_SERVER['REQUEST_METHOD'] == "POST") {
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    $data = [
+        'message_status_id' => 8,
+    ];
+    if ($messageController->updateMessage($_POST['id'], $data)) {
+        $message = $messageController->get_messages_by_id($_POST['id']);
+        extract($message); ?>
+        <p>
+            <?php echo $message_body?>
+        </p>
+        <div>
+            <a href="compose.php?user_user_name=<?php echo $userController->get_user_username_by_id($message_sender_id)?>"><button class='btn btn-primary'>reply</button></a>
+        </div>
+    <?php
+    }
+}
+
 
 if (isset($_POST['send_message']) && isset($_POST['body']) && isset($_POST['subject']) && isset($_POST['receiver']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     $receiver_id = $userController->get_user_id_by_username($_POST['receiver']);

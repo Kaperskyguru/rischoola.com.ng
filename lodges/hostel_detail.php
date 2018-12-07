@@ -1,5 +1,11 @@
 <?php
 require_once '../init.php';
+
+$value = explode('--', $_GET['id']);
+$slug = strval($value[0]);
+$id = intval($value[1]);
+
+echo set_title($lodgeController->get_lodge_name_by_id($id), get_site_name());
 $userController->cookie_login();
 if($userController->is_authenticated()){
   require_once '../include/member_header.php';
@@ -7,10 +13,6 @@ if($userController->is_authenticated()){
   require_once '../include/header.php';
 }
 
-
-$value = explode('--', $_GET['id']);
-$slug = strval($value[0]);
-$id = intval($value[1]);
 if ($id == 0) {
   //logging goes here
     $logger->LogFatal("SQLInjection Attempt: code used ==> " . $_GET['id'], get_user_uid());
@@ -32,49 +34,52 @@ if ($id == 0) {
                                 <div class="col-md-6">
                                     <div class="single-product-thumb">
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation">
-                                                <?php
-                                                    $image_stmt = $resources->get_multiple_image_id($id, 'lodge');
-                                                    $count = 0;
-                                                    if($image_stmt->rowCount() > 0){
-                                                        ?>
-                                                        <a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab">
-                                                            <?php while($image_row = $image_stmt->fetch(PDO::FETCH_ASSOC)){
-                                                            //$count++;
-                                                            extract($image_row);?>
-                                                            <?php $resources::display($resource_url, array_merge($resources::SLIDE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                                        <?php
+                                            $image_stmt = $resources->get_multiple_image_id($id, 'lodge');
+                                            $count = 0;
+                                            if($image_stmt->rowCount() > 0){
+                                                while($image_row = $image_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                    $count++;?>
+                                                    <li role="presentation">
+                                                        <a href="#thumb-<?php echo $count?>" aria-controls="thumb-<?php echo $count?>" role="tab" data-toggle="tab">
+                                                            <?php $resources::display($image_row['resource_url'], array_merge($resources::SLIDE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                                                         </a>
-                                                        <?php
-                                                    }
+                                                    </li>
+                                                <?php
                                                 }
                                             ?>
-                                            </li>
-                                            <!-- <!-- <li role="presentation" class="active"><a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-1.jpg" alt="..."></a></li> -->
-                                            <!-- <li role="presentation"><a href="#thumb-2" aria-controls="thumb-2" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-2.jpg" alt="..."></a></li> -->
-                                            <li role="presentation"><a href="#thumb-3" aria-controls="thumb-3" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-3.jpg" alt="..."></a></li>
-                                            <!-- <li role="presentation"><a href="#thumb-4" aria-controls="thumb-4" role="tab" data-toggle="tab"><img src="../res/imgs/product/thumb-4.jpg" alt="..."></a></li> -->
                                         </ul>
 
                                         <div class="tab-content">
+                                        <?php
+                                        $image_stmt = $resources->get_multiple_image_id($id, 'lodge');
+                                            $count = 0;
+                                            while($image_row_content = $image_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                $count++;?>
+                                                <div role="tabpanel" class="tab-pane fade <?php echo $count == 1? 'in active':''?>" id="thumb-<?php echo $count?>">
+                                                    <?php $resources::display($image_row_content['resource_url'], array_merge($resources::PRODUCT_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                                                </div>
+                                        <?php }?>
+                                        </div>
+                                    <?php } else {?>
+                                           Remove Kiss Daniel Imane and put NOT FOUND IMAGE HERE
+                                            <li role="presentation">
+                                                <a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab">
+                                                    <img src="../res/imgs/product/thumb-3.jpg" alt="..." />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="thumb-1">
-                                                <img src="../res/imgs/product/6.jpg" alt="...">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="thumb-2">
-                                                <img src="../res/imgs/product/6-hover.jpg" alt="...">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="thumb-3">
-                                                <img src="../res/imgs/product/4.jpg" alt="...">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="thumb-4">
-                                                <img src="../res/imgs/product/2-hover.jpg" alt="...">
+                                                <?php $resources::display("Rischoola/products/38lTdM0317_Kiss-Daniel-Good-Time-Hg2ArtWork-psd1-640x340_c.jpg", array_merge($resources::PRODUCT_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                                             </div>
                                         </div>
+                                    <?php }?>
                                     </div>
                                 </div>
                                 <?php
                                 extract($row);
                                 ?>
-
                                 <div class="col-md-6">
                                     <div class="product-info">
                                         <h5 class="product-name"><a><?php echo $lodge_name; ?></a></h5>

@@ -23,4 +23,5 @@
 //         echo '<br />';
 //      echo urldecode($url);
 // //$groupController->INSERT();
-phpinfo();
+
+set_url('www.google.com');

@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><?php echo get_site_name(); ?>|</title>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="shortcut icon" type="image/png" href="<https://res.cloudinary.com/kaperskydisk/image/upload/v1524654792/Rischoola/fav.png"/>
     <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/style.css">
     <link rel="stylesheet" href="<?php echo SITEURL ?>/res/css/responsive.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/font-awesome/css/font-awesome.css">
-
 </head>
 <body>
 

@@ -82,12 +82,12 @@ class Notifications extends Logger
         $stmt = self::get_notifications_by_user_id();
     }
 
-    public function get_notification($length)
+    public function get_notifications($length)
     {
         try {
             $query = "SELECT * FROM notifications WHERE notification_status_id = 5 LIMIT $length";
             $this->query($query);
-            $stmt = $this->executer();
+            $stmt = $this->resultset();
             return $stmt;
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();

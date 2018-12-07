@@ -33,6 +33,13 @@ class Resources extends Logger
         "class" => "thumpnail inline"
     );
 
+    const PRODUCT_IMAGE_OPTIONS = array(
+        "format" => "jpg",
+        "height" => "426",
+        "width" => "500",
+        "class" => "thumpnail inline"
+    );
+
 
     const SLIDE_IMAGE_OPTIONS = array(
         "format" => "jpg",
@@ -45,7 +52,7 @@ class Resources extends Logger
     const AVATAR_IMAGE_OPTIONS = array(
         "format" => "jpg",
         "height" => "45",
-        "width" => "45`",
+        "width" => "45",
         "class" => "thumpnail inline"
     );
 
@@ -140,7 +147,7 @@ class Resources extends Logger
             return $result;
         } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
-            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            Resources::logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
             return null;
         }
 
@@ -208,8 +215,6 @@ class Resources extends Logger
             $this->bind(':table_name', $table_name);
             $this->bind(':id', $id);
             $row = $this->resultset();
-
-            // extract($row);
             return $row['resource_url'];
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();

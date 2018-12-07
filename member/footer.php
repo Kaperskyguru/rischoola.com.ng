@@ -121,6 +121,19 @@ $('body').delegate('#event_view','click', function() {
     });
 });
 
+$('body').delegate('#view_message','click', function() {
+    var id = $(this).attr('mid');
+    $.ajax({
+        method: 'POST',
+        url: 'actions.php',
+        data : {viewMessage:1, id:id},
+        success:function (d) {
+            // alert(d);
+            $('#h').html(d);
+        }
+    });
+});
+
 
 </script>
 

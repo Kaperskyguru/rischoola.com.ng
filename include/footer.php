@@ -35,7 +35,7 @@
                 <li><a href="<?php echo SITEURL ?>/#!">My portfolio</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Citadel Host</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Code Like Mad</a></li>
-                <li><a href="<?php echo SITEURL ?>/#!">Jamb Cbt Downloads</a></li>
+                <li><a href="<?php echo SITEURL ?>/#!">Feedbacks</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Advertising With Us</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Privacy Policy</a></li>
                 <li><a href="<?php echo SITEURL ?>/#!">Terms of Use</a></li>

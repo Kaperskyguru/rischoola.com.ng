@@ -1,5 +1,8 @@
 <?php
 require_once '../init.php';
+$id1 = $_GET['id']; //sanitizer($_GET["id"]);
+$id = intval($id1);
+echo set_title($storeController->get_product_name_by_id($id), get_site_name());
 $userController->cookie_login();
 if($userController->is_authenticated()){
   require_once '../include/member_header.php';
@@ -7,9 +10,6 @@ if($userController->is_authenticated()){
   require_once '../include/header.php';
 }
 
-
-$id1 = $_GET['id']; //sanitizer($_GET["id"]);
-$id = intval($id1);
 if ($id == 0) {
     $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
     header("Location: index.php");
@@ -29,38 +29,47 @@ if ($id == 0) {
                                 <div class="col-md-6">
                                     <div class="single-product-thumb">
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <?php
+                                        <?php
                                             $image_stmt = $resources->get_multiple_image_id($id, 'product');
                                             $count = 0;
-                                                if($image_stmt->rowCount() > 0){
-                                                    while($image_row = $image_stmt->fetch(PDO::FETCH_ASSOC)){
-                                                        $count++;
-                                                        extract($image_row);?>
-                                                            <li role="presentation" class="active">
-                                                                <a href="#thumb-<?php echo $count?>" aria-controls="thumb-<?php echo $count?>" role="tab" data-toggle="tab">
-                                                                    <?php $resources::display($resource_url, array_merge($resources::SLIDE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
-                                                                </a>
-                                                            </li>
-                                                        <?php
-                                                    }
+                                            if($image_stmt->rowCount() > 0){
+                                                while($image_row = $image_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                    $count++;?>
+                                                    <li role="presentation">
+                                                        <a href="#thumb-<?php echo $count?>" aria-controls="thumb-<?php echo $count?>" role="tab" data-toggle="tab">
+                                                            <?php $resources::display($image_row['resource_url'], array_merge($resources::SLIDE_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                                                        </a>
+                                                    </li>
+                                                <?php
                                                 }
                                             ?>
                                         </ul>
 
                                         <div class="tab-content">
+                                        <?php
+                                        $image_stmt = $resources->get_multiple_image_id($id, 'product');
+                                            $count = 0;
+                                            while($image_row_content = $image_stmt->fetch(PDO::FETCH_ASSOC)){
+                                                $count++;?>
+                                                <div role="tabpanel" class="tab-pane fade <?php echo $count == 1? 'in active':''?>" id="thumb-<?php echo $count?>">
+                                                    <?php $resources::display($image_row_content['resource_url'], array_merge($resources::PRODUCT_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
+                                                </div>
+                                        <?php }?>
+                                        </div>
+                                    <?php } else {?>
+                                           Remove Kiss Daniel Imane and put NOT FOUND IMAGE HERE
+                                            <li role="presentation">
+                                                <a href="#thumb-1" aria-controls="thumb-1" role="tab" data-toggle="tab">
+                                                    <img src="../res/imgs/product/thumb-3.jpg" alt="..." />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="thumb-1">
-                                                <img src="../res/imgs/product/6.jpg" alt="...">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="thumb-2">
-                                                <img src="../res/imgs/product/6-hover.jpg" alt="...">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="thumb-3">
-                                                <img src="../res/imgs/product/4.jpg" alt="...">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="thumb-4">
-                                                <img src="../res/imgs/product/2-hover.jpg" alt="...">
+                                                <?php $resources::display("Rischoola/products/38lTdM0317_Kiss-Daniel-Good-Time-Hg2ArtWork-psd1-640x340_c.jpg", array_merge($resources::PRODUCT_IMAGE_OPTIONS, array( "crop" => "fill" )));?>
                                             </div>
                                         </div>
+                                    <?php }?>
                                     </div>
                                 </div>
                                 <?php

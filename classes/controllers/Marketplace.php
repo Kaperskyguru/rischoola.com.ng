@@ -116,8 +116,7 @@ class Marketplace extends Logger
             $query = "SELECT product_name FROM products WHERE product_id = $id";
             $this->query($query);
             $row = $this->resultset();
-            extract($row);
-            return $product_name;
+            return $row['product_name'];
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
@@ -412,10 +411,10 @@ class Marketplace extends Logger
                     ?>
                     <div class='col-sm-4 col-lg-4 col-md-4'>
                         <div class='thumbnail'>
-                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                            <?php $res::display($res->get_image_url($product_id, 'product'), array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                             <div class='caption'>
                                 <h4 class="hostelname"><a
-                                        href='<?php echo $product_id; ?>'><?php echo getExcerpt($product_name, 25); ?></a>
+                                        href='marketplace/<?php echo $product_id; ?>'><?php echo getExcerpt($product_name, 25); ?></a>
                                 </h4>
                                 <h5 class='text-danger'>N<?php echo $product_price; ?></h5>
 
@@ -515,7 +514,7 @@ class Marketplace extends Logger
                     <div class="col-md-4 col-xs-12 pad-bottom-20">
                         <div class="row img-responsive">
                             <div class="col-md-5 col-sm-4">
-                                <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                                <?php $res::display($res->get_image_url($product_id, 'product'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                             </div>
                             <div class="col-md-7 col-sm-8">
                                 <h5 class="" style="text-align:left"><a

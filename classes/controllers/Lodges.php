@@ -157,6 +157,20 @@ class Lodges extends Logger
         }
     }
 
+    public function get_lodge_name_by_id($id)
+    {
+        try {
+            $query = "SELECT lodge_name FROM lodges WHERE lodge_id = $id";
+            $this->query($query);
+            $row = $this->resultset();
+            return $row['lodge_name'];
+        } catch (PDOException $e) {
+            $_SESSION['error'] = $e->getMessage();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return null;
+        }
+    }
+
     public function add_lodge(LodgeModel $LodgeModel)
     {
         try {
@@ -416,7 +430,7 @@ class Lodges extends Logger
                     <div class="col-xs-12 col-md-4 col-sm-6 ">
                         <div class="thumbnail" style="padding:10px">
                             <div class="img-thumbnail img-responsive">
-                                <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                                <?php $res::display($res->get_image_url($lodge_id, 'lodge'), array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                             </div>
                             <!-- <div> -->
                             <h3 class="hostelname"><a
@@ -546,7 +560,7 @@ class Lodges extends Logger
                         <div class="thumbnail">
                             <div>
 
-                                <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                                <?php $res::display($res->get_image_url($lodge_id, 'lodge'), array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
 
                             </div>
                             <div>
@@ -703,7 +717,7 @@ private function displayLodges() {
   <div class="col-xs-12 col-md-4 col-sm-6 ">
       <div class="thumbnail" style="padding:10px">
           <div class="img-thumbnail img-responsive">
-              <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+              <?php $res::display($res->get_image_url($lodge_id, 'lodge'), array_merge($res::DETAILS_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
           </div>
           <!-- <div> -->
           <h3 class="hostelname"><a

@@ -1,5 +1,6 @@
 <?php
 require_once 'init.php';
+echo set_title();
 $userController->cookie_login();
 if ($userController->is_authenticated()) {
     require_once 'include/member_header.php';

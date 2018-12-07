@@ -1,15 +1,14 @@
 <?php
 require '../init.php';
+$id1 = $_GET['id'];
+$id = intval($id1);
+echo set_title($eventController->get_event_title_by_id($id), get_site_name());
 $userController->cookie_login();
 if ($userController->is_authenticated()) {
     require_once '../include/member_header.php';
 } else {
     require_once '../include/header.php';
 }
-
-
-$id1 = $_GET['id'];
-$id = intval($id1);
 
 if ($id == 0) {
     $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
@@ -123,7 +122,7 @@ if ($id == 0) {
                                 <ul>
                                     <div class="comment-wrap">
                                         <div class="comment-avatar">
-                                            <img alt="" src="../res/imgs/1.jpg" class="" height="45" width="45">
+                                        <?php $resources::display($resources->get_image_url($comment_user_id, 'profiles'), array_merge($resources::AVATAR_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                                         </div>
                                         <div class="author-comment">
                                             <cite

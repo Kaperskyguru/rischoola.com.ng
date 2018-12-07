@@ -39,6 +39,22 @@ class News extends Logger
         }
     }
 
+    public function get_posts()
+    {
+        try {
+            $query = "SELECT * FROM posts ORDER BY post_status_id ASC";
+            $this->query($query);
+            $stmt = $this->executer();
+            return $stmt;
+        } catch (Error $e) {
+            $_SESSION['error'] = $e->getMessage();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return null;
+        } catch (Error $e) {
+
+        }
+    }
+
     public function get_total_number_of_post_by_id($id)
     {
         try {
@@ -54,6 +70,8 @@ class News extends Logger
         }
     }
 
+
+
     public function get_user_username_by_id($id)
     {
         try {
@@ -61,8 +79,7 @@ class News extends Logger
             $this->query($query);
             $this->bind(':id', $id);
             $row = $this->resultset();
-            extract($row);
-            return $user_user_name;
+            return $row['user_user_name'];
         } catch (Error $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
@@ -101,6 +118,22 @@ class News extends Logger
             return null;
         }
     }
+
+    public function get_post_title_by_id($id)
+    {
+        try {
+            $query = "SELECT post_title FROM posts WHERE post_id = :id";
+            $this->query($query);
+            $this->bind(':id', $id);
+            $row = $this->resultset();
+            return $row['post_title'];
+        } catch (Error $e) {
+            $_SESSION['error'] = $e->getMessage();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return null;
+        }
+    }
+
 
     public function get_post_category_by_id($id)
     {
@@ -382,7 +415,7 @@ class News extends Logger
             ?>
             <div>
                 <a href="<?php echo SITEURL; ?>/posts/<?php echo $post_id ?>">
-                    <?php $res::display($res->get_image_url(68, 'post'), array_merge($res::LATEST_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                    <?php $res::display($res->get_image_url($post_id, 'post'), array_merge($res::LATEST_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                 </a>
             </div>
             <div>

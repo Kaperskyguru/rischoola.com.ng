@@ -1,5 +1,10 @@
 <?php
 require_once '../init.php';
+
+$id1 = $_GET['id'];
+$id = intval($id1);
+
+echo set_title($groupController->get_group_title_by_id($id), get_site_name());
 $userController->cookie_login();
 if ($userController->is_authenticated()) {
     require_once '../include/member_header.php';
@@ -11,8 +16,6 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST") {
     // GROUP DISCUSSION CODE HERE
 }
 
-$id1 = $_GET['id'];
-$id = intval($id1);
 
 if ($id == 0) {
     $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
@@ -127,7 +130,7 @@ if ($id == 0) {
                                         <ul>
                                             <div class="comment-wrap">
                                                 <div class="comment-avatar">
-                                                    <?php $resources::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($resources::AVATAR_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                                                    <?php $resources::display($resources->get_image_url($discussion_user_id, 'profiles'), array_merge($resources::AVATAR_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                                                 </div>
                                                 <div class="author-comment">
                                                     <cite

@@ -334,7 +334,7 @@ class Roommates extends Logger
                     ?>
                     <div class="row">
                         <div class="col-md-2">
-                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                            <?php $res::display($res->get_image_url($roommate_id, 'roommates'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                         </div>
                         <div class="col-md-10">
                             <a href="#"><h5><?php echo $roommate_name; ?></h5></a>

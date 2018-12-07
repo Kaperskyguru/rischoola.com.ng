@@ -63,7 +63,7 @@ extract($row);
                 </h5>
 
                 <div class="pad-up-20 pad-bottom-20">
-                    Website:<a href="<?php urldecode($scholarship_url); ?>" target="_blank">The Scholarship
+                    Website:<a href="<?php echo set_url(urldecode($scholarship_url)); ?>" target="_blank">The Scholarship
                         Webpage</a> For More Information <br>
                 </div>
 
@@ -123,7 +123,7 @@ extract($row);
                                     <ul>
                                         <div class="comment-wrap">
                                             <div class="comment-avatar">
-                                                <img alt="" src="../res/imgs/1.jpg" class="" height="45" width="45">
+                                            <?php $resources::display($resources->get_image_url($comment_user_id, 'profiles'), array_merge($resources::AVATAR_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                                             </div>
                                             <div class="author-comment">
                                                 <cite

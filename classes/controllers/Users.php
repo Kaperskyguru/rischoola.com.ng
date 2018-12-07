@@ -3,8 +3,8 @@
 class Users extends Logger
 {
     const COOKIE_NAME = "auth_cookie";
-const SESSION_TIME = 604800;
-        private static $instance; // 7 days
+    const SESSION_TIME = 604800;
+    private static $instance; // 7 days
     private $user_id;
     private $user_name;
     private $is_authenticated;

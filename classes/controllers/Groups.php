@@ -360,8 +360,7 @@ class Groups extends Logger
             $query = "SELECT group_title FROM groups WHERE group_id = $id";
             $this->query($query);
             $row = $this->resultset();
-            extract($row);
-            return $group_title;
+            return $row['group_title'];
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());

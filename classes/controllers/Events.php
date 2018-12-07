@@ -180,8 +180,7 @@ class Events extends Logger
             $query = "SELECT event_title FROM events WHERE event_id = $id";
             $this->query($query);
             $row = $this->resultset();
-            extract($row);
-            return $event_title;
+            return $row['event_title'];
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
