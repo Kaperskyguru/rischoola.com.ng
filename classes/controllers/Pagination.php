@@ -172,8 +172,27 @@ class Pagination extends Logger
         return $output;
     }
 
-    public function getResultset(){
+    public function pager($table, $per_page = 10, $page = 1, $url = '?'){
 
+        $query = "SELECT COUNT(*) as `num` FROM {$table}";
+        $this->query($query);
+        $row = $this->resultset($query);
+        $total = $row['num'];
+
+        $page = ($page == 0 ? 1 : $page);
+        $next = $page + 1;
+        $lastpage = ceil($total / $per_page);
+
+        if( $page > 1 && $page < $lastpage) {
+            $last = $page - 1;
+            echo "<li class='previous'><a href ='{$url}page=$last'>Last 10 Records</a> </li>";
+            echo "<li class='next'><a href ='{$url}page=$next'>Next 10 Records</a></li>";
+        }else if( $page == 1 ) {
+            echo "<li class='next'><a href='{$url}page=$next'>Next 10 Records</a></li>";
+        }else if( $page == $lastpage ) {
+            $last = $page - 1;
+            echo "<li class='previous'><a href='{$url}page=$last'>Last 10 Records</a> </li>";
+        }
     }
 
     public function rowNums(){

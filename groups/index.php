@@ -7,6 +7,7 @@ if ($userController->is_authenticated()) {
 } else {
     require_once '../include/header.php';
 }
+$page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 ?>
 
     <section id="groups">
@@ -33,43 +34,47 @@ if ($userController->is_authenticated()) {
                     <div class="row">
                         <div class="col-lg-12">
                             <h2>Latest Groups</h2>
-
                             <div id="group_content">
-                                <?php $groupController->display_availabe_groups(8, $resources); ?>
+                            <?php 
+                                $limit = 8; //if you want to dispaly 4 records per page then you have to change here
+                                $startpoint = ($page * $limit) - $limit;
+                                $groupController->display_availabe_groups($startpoint, $limit, $resources); ?>
                             </div>
 
                             <!--  Pagination starts here -->
                             <div class="margin-btom-20">
-                                <ul class="pager" id="pagination_result">
-                                    <input type="hidden" id="rowcount" name="rowcount" />
-                                    <li class="previous"><a href="#" url="page=0" id="clickBTN"> Previous </a></li>
-                                    <li class="next"><a href="#" url="page=1" id="clickBTN">Next</a></li>
+                                <ul class="pager">
+                                    <?php echo $paging->pager('groups WHERE group_status_id != 2', $limit, $page); ?> 
                                 </ul>
                             </div>
                         </div>
 
                         <div class="col-lg-12">
                             <h2>Popular Groups</h2>
-                            <?php $groupController->display_availabe_groups(4, $resources); ?>
+                            <?php 
+                                $P_limit = 4; //if you want to dispaly 4 records per page then you have to change here
+                                $startpoint = ($page * $P_limit) - $P_limit;
+                                $groupController->display_availabe_groups($startpoint, $P_limit, $resources); ?>
 
                             <!--  Pagination starts here -->
                             <div class="margin-btom-20">
                                 <ul class="pager">
-                                    <li class="previous"><a> Previous </a></li>
-                                    <li class="next"><a href="#">Next</a></li>
+                                    <?php echo $paging->pager('groups WHERE group_status_id != 2', $P_limit, $page); ?> 
                                 </ul>
                             </div>
                         </div>
 
                         <div class="col-lg-12">
                             <h2>Trending Groups</h2>
-                            <?php $groupController->display_availabe_groups(4, $resources); ?>
+                            <?php 
+                                $T_limit = 4; //if you want to dispaly 4 records per page then you have to change here
+                                $startpoint = ($page * $T_limit) - $T_limit;
+                                $groupController->display_availabe_groups($startpoint, $T_limit, $resources); ?>
 
                             <!--  Pagination starts here -->
                             <div class="margin-btom-20">
                                 <ul class="pager">
-                                    <li class="previous"><a> Previous </a></li>
-                                    <li class="next"><a href="#">Next</a></li>
+                                <?php echo $paging->pager('groups WHERE group_status_id != 2', $T_limit, $page); ?> 
                                 </ul>
                             </div>
                         </div>

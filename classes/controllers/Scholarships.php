@@ -44,6 +44,22 @@ class Scholarships extends Logger
         }
     }
 
+    
+    public function get_scholarship_title_by_id($id)
+    {
+        try {
+            $query = "SELECT scholarship_title FROM scholarships WHERE scholarship_id = :id";
+            $this->query($query);
+            $this->bind(':id', $id);
+            $row = $this->resultset();
+            return $row['scholarship_title'];
+        } catch (Error $e) {
+            $_SESSION['error'] = $e->getMessage();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return null;
+        }
+    }
+
     public function addscholarship(scholarship $scholarshipModel)
     {
         try {
@@ -120,7 +136,7 @@ class Scholarships extends Logger
                     ?>
                     <div>
                         <a href="<?php echo SITEURL; ?>/scholarships/read-scholarship.php">
-                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                            <?php $res::display($res->get_image_url($scholarship_id, 'post'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                         </a>
                     </div>
                     <div>
@@ -128,6 +144,7 @@ class Scholarships extends Logger
                             <h4><?php echo $scholarship_title; ?></h4></a>
                     </div>
                     <?php
+                    
                 }
             }
         } catch (Error $e) {
@@ -151,20 +168,17 @@ class Scholarships extends Logger
         }
     }
 
-    public function display_latest_scholarship($limit, Resources $res)
+    public function display_latest_scholarship(Resources $res, $startpoint = 1, $limit = 9)
     {
         try {
-            $stmt = $this->get_all_scholarship($limit);
+            $stmt = $this->get_all_scholarship($startpoint, $limit);
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     extract($row);
                     ?>
                     <div class="pad-bottom-20">
                         <div class="col-sm-4">
-
-                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
-
-                            <!-- $res::display($res->get_image_url($scholarship_id, 'scholarship'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array( "crop" => "fill" )));?> -->
+                            <?php $res::display($res->get_image_url($scholarship_id, 'post'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                         </div>
                         <div class="col-sm-8">
                             <div>
@@ -185,11 +199,11 @@ class Scholarships extends Logger
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
         }
     }
-
-    public function get_all_scholarship($limit)
+   // WHERE scholarship_status_id != 2
+    public function get_all_scholarship($startpoint, $limit)
     {
         try {
-            $query = "SELECT * FROM scholarships LIMIT $limit";
+            $query = "SELECT * FROM scholarships LIMIT $startpoint, $limit";
             $this->query($query);
             $stmt = $this->executer();
             return $stmt;

@@ -2,6 +2,7 @@
 <script src="<?php echo SITEURL;?>/res/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="datatable/datatables.min.js"></script>
 <script src="js/script.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
 <script>
   $(document).ready(function() {
 

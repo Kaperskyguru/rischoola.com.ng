@@ -23,10 +23,10 @@ class News extends Logger
         return self::$instance;
     }
 
-    public function get_all_post($limit)
+    public function get_all_post($startpoint, $limit)
     {
         try {
-            $query = "SELECT * FROM posts WHERE post_status_id != 2 ORDER BY post_id DESC LIMIT $limit";
+            $query = "SELECT * FROM posts WHERE post_status_id != 2 ORDER BY post_id DESC LIMIT $startpoint, $limit";
             $this->query($query);
             $stmt = $this->executer();
             return $stmt;
@@ -429,10 +429,10 @@ class News extends Logger
         }
     }
 
-    public function display_latest_post($limit)
+    public function display_latest_post($startpoint = 1, $limit = 10)
     {
         try {
-            $stmt = $this->get_all_post($limit);
+            $stmt = $this->get_all_post($startpoint, $limit);
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     extract($row);

@@ -15,8 +15,8 @@ if(!$userController->is_authenticated()){
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Dashboard</title>
-
+        <title>Dashboard | <?php echo get_site_name() ?></title>
+        <link rel="shortcut icon" type="image/png" href="<https://res.cloudinary.com/kaperskydisk/image/upload/v1524654792/Rischoola/fav.png"/>
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo SITEURL; ?>/res/css/bootstrap.min.css" rel="stylesheet">
 
@@ -25,12 +25,9 @@ if(!$userController->is_authenticated()){
         <link href="<?php echo SITEURL; ?>/res/css/sb-admin.css" rel="stylesheet">
 
         <link href="<?php echo SITEURL; ?>/res/css/style.css" rel="stylesheet">
-        <!-- Morris Charts CSS -->
-        <link href="<?php echo SITEURL; ?>/res/css/plugins/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="<?php echo SITEURL; ?>/res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
     </head>
 
     <body>

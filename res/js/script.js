@@ -45,6 +45,7 @@ $(document).ready(function () {
 
     $('body').delegate("#like_btn", "click", function () {
         var pid = $(this).attr('pid');
+        
         $.ajax({
             method: "POST",
             url: "post_action.php",

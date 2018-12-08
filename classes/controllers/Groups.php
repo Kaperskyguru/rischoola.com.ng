@@ -440,17 +440,17 @@ class Groups extends Logger
         }
     }
 
-    public function display_availabe_groups($length, $res)
+    public function display_availabe_groups($startpoint, $limit, $res)
     {
         try {
-            $stmt = $this->get_groups($length);
+            $stmt = $this->get_groups($startpoint, $limit);
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     extract($row);
                     ?>
                     <div class="col-sm-3 pad-bottom-20">
                         <div>
-                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                            <?php $res::display($res->get_image_url($group_id, 'group'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                         </div>
                         <div>
                             <h4><?php echo $group_title; ?></h4>
@@ -472,10 +472,10 @@ class Groups extends Logger
         }
     }
 
-    public function get_groups($length)
+    public function get_groups($startpoint, $limit)
     {
         try {
-            $query = "SELECT * FROM groups WHERE group_status_id = 5 AND group_status_id != 6 LIMIT $length";
+            $query = "SELECT * FROM groups WHERE group_status_id = 5 AND group_status_id != 6 LIMIT $startpoint, $limit";
             $this->query($query);
             $stmt = $this->executer();
             return $stmt;
@@ -516,7 +516,7 @@ class Groups extends Logger
                     ?>
                     <div class="col-sm-3 pad-bottom-20">
                         <div>
-                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                            <?php $res::display($res->get_image_url($group_id, 'group'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                         </div>
                         <div>
                             <h4><?php echo $group_title; ?></h4>

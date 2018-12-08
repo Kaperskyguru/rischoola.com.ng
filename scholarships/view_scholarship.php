@@ -1,14 +1,14 @@
 <?php
 require_once '../init.php';
+$id1 = $_GET['id'];
+$id = intval($id1);
+echo set_title($scholarshipController->get_scholarship_title_by_id($id), get_site_name());
 $userController->cookie_login();
 if ($userController->is_authenticated()) {
     require_once '../include/member_header.php';
 } else {
     require_once '../include/header.php';
 }
-
-$id1 = $_GET['id'];
-$id = intval($id1);
 
 if ($id == 0) {
     $logger->LogFatal("SQLInjection Attempt: code used ==> " . $id1, get_user_uid());
@@ -21,6 +21,7 @@ if (is_null($row) || empty($row)) {
     header("Location: ../posts/");
 } else {
 extract($row);
+$stmt = $commentController->get_comments_by_id('scholarships', $scholarship_id);
 ?>
 
 <section id="view-scholarship" class="pad-bottom-50">
@@ -80,41 +81,33 @@ extract($row);
                                 <!-- <h3 class="section-heading">Make a Comment </h3> -->
                                 <!--Third row-->
                                 <div class="row">
-                                    <form class="col-md-12" action="<?php echo htmlspecialchars('PHP_SELF'); ?>"
-                                          method="POST">
+                                    <form class="col-md-12" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
                                         <!--Content column-->
-                                        <?php if (!$userController->is_authenticated()) { ?>
-
-                                        <?php } ?>
                                         <div class="form-group">
                                             <label for="commentBox">Comment:</label>
                                             <textarea type="text" rows="5" id="commentBox" name="commentBox"
                                                       class="form-control"></textarea>
-                                            <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
+                                            <input type="hidden" id="d" name="d" value="<?php echo $id; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input type="file" class="form" id="file1" name="file1"></input>
+                                            <input type="file" class="form" id="file1" name="file1">
                                         </div>
                                         <div class="form-group">
-                                            <input type="file" class="form" id="file2" name="file2"></input>
+                                            <input type="file" class="form" id="file2" name="file2">
                                         </div>
-
                                         <div class="form-group">
                                             <a href="#cc">
-                                                <button class="btn btn-primary" pid="<?php echo $id; ?>">Comment
+                                                <button class="btn btn-primary" pid="<?php echo $id; ?>"  name="comment" id="comment">Comment
                                                 </button>
                                             </a>
                                         </div>
-                                        <!--/.Content column-->
                                     </form>
                                 </div>
-                                <!--/.Third row-->
                             </div>
-                            <!--/.Leave a reply form-->
                         </section>
                         <h2></h2>
                         <?php
-                        $stmt = $commentController->get_comments_by_id('scholarships', $scholarship_id);
+                        
                         if ($stmt->rowCount() > 0) {
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 extract($row);
@@ -127,83 +120,33 @@ extract($row);
                                             </div>
                                             <div class="author-comment">
                                                 <cite
-                                                    class="fn"><?php echo $userControler->get_user_username_by_id($comment_user_id); ?></cite>
+                                                    class="fn"><?php echo $userController->get_user_username_by_id($comment_user_id); ?></cite>
 
                                                 <div class="">
-                                                    <a href="">    <?php echo time_ago($comment_date_inserted); ?></a>
+                                                    <a href=""><?php echo time_ago($comment_date_inserted); ?></a>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>
                                             <div class="comment-content">
-                                                <p><?php echo $comment_body ?>;</p>
+                                                <p><?php echo $comment_body ?></p>
                                             </div>
                                             <div class="like">
-                                                <a rel="nofollow" class="comment-reply-link"
-                                                   href="http://localhost/kaperskyguru/testing-out-the-newsletter/?replytocom=5#respond"
-                                                   aria-label="Reply to Kap man"><span class="fa fa-thumbs-up"></span>
-                                                    Like <span class="badge">0</span></a>
+                                                <a class="comment-reply-link" href="#!"><span class="fa fa-thumbs-up"></span>
+                                                    Like <span class="badge">0</span>
+                                                </a>
                                             </div>
                                             <div class="dislike">
-                                                <a rel="nofollow" class="comment-reply-link" href="#"
-                                                   aria-label="Reply to Kap man"><span class="fa fa-thumbs-down"></span>
-                                                    Dislike <span class="badge badge-danger">0</span></a>
+                                                <a class="comment-reply-link" href="#"><span class="fa fa-thumbs-down"></span>
+                                                    Dislike <span class="badge badge-danger">0</span>
+                                                </a>
                                             </div>
-                                            <div class="reply">
-                                                <a rel="nofollow" class="comment-reply-link"
+                                            <!-- <div class="reply">
+                                                <a class="comment-reply-link"
                                                    pid="<?php echo $comment_id ?>" href="#" id="reply"
                                                    aria-label="Reply to Kap man"><span class="fa fa-reply"></span> Reply</a>
-                                            </div>
+                                            </div> -->
                                         </div>
-                                        <!-- Replies -->
-                                        <?php
-                                        $stmt1 = $replyController->get_replies_by_comment_id($comment_id);
-                                        if ($stmt1->rowCount() > 0) {
-                                            while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-                                                extract($row1);
-                                                ?>
-                                                <li class="replies" style="margin-left:15px">
-                                                    <div class="comment-wrap ">
-                                                        <div class="comment-avatar">
-                                                            <img alt="" src="../res/imgs/1.jpg" class="" height="45"
-                                                                 width="45">
-                                                        </div>
-                                                        <div class="author-comment">
-                                                            <cite class="fn">Posted
-                                                                by: <?php echo $userController->get_user_username_by_id($comment_user_id); ?></cite>
-
-                                                            <div class="">
-                                                                <a href="">    <?php echo time_ago($reply_date); ?></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                        <div class="comment-content">
-                                                            <p><?php echo $reply_content ?>;</p>
-                                                        </div>
-                                                        <div class="like">
-                                                            <a rel="nofollow" class="comment-reply-link"
-                                                               href="http://localhost/kaperskyguru/testing-out-the-newsletter/?replytocom=5#respond"
-                                                               aria-label="Reply to Kap man"><span
-                                                                    class="fa fa-thumbs-up"></span> Like <span
-                                                                    class="badge">0</span></a>
-                                                        </div>
-                                                        <div class="dislike">
-                                                            <a rel="nofollow" class="comment-reply-link" href="#"
-                                                               aria-label="Reply to Kap man"><span
-                                                                    class="fa fa-thumbs-down"></span> Dislike <span
-                                                                    class="badge badge-danger">0</span></a>
-                                                        </div>
-                                                        <div class="reply">
-                                                            <a rel="nofollow" class="comment-reply-link"
-                                                               pid="<?php echo $reply_id ?>" href="#" id="reply"
-                                                               aria-label="Reply to Kap man"><span
-                                                                    class="fa fa-reply"></span> Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
+                                        
                                     </ul>
                                 </div>
                                 <?php
@@ -216,11 +159,9 @@ extract($row);
                 </div>
             </div>
             <?php
-            }
+                }
             }
             ?>
-
-
             <div class="col-md-4">
                 <div class="pad-bottom-20">
                     <img src="../res/imgs/8722.gif" class="img-responsive">
@@ -268,4 +209,34 @@ extract($row);
 </section>
 <?php
 require_once '../include/footer.php';
-?>
+
+if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["comment"])){
+    if(get_user_uid() != null) {
+        $comment_body = filter_var($_POST['commentBox'], FILTER_SANITIZE_STRING);
+        if(!empty($comment_body) && strlen($comment_body) != 0 && !empty($_FILES['file']['name'])){
+            if($id= $commentController->store_comments($comment_body, get_user_uid(), "scholarships", $scholarship_id)){
+                uploadFiles(get_user_uid(), $id);
+                unset($_POST);
+            }
+        }else if(empty($comment_body) && !empty($_FILES['file']['name'])){
+            if($id= $commentController->store_comments('picture only', get_user_uid(), "scholarships", $scholarship_id)){
+                uploadFiles(get_user_uid(), $id);
+                unset($_POST);
+            }
+    
+        }else if(!empty($comment_body) && empty($_FILES['file']['name'])){
+        $id= $commentController->store_comments($comment_body, get_user_uid(), "scholarships", $scholarship_id);
+        unset($_POST);
+        }else{
+            $error_text = "Please enter a comment";
+        }
+    } else{
+      header('Location: ../users/login.php');
+    }
+}
+
+
+function uploadFiles($user_id, $inserted_id) {
+echo $files = $_FILES["file"];
+return Resources::upload_image($files, $user_id, $inserted_id, "comments");
+}

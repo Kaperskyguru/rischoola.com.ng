@@ -277,7 +277,7 @@ class Events extends Logger
                     <div class="col-md-4 pad-bottom-20">
                         <div class="row">
                             <div class="col-md-4">
-                                <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                                <?php $res::display($res->get_image_url($event_id, 'event'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                             </div>
                             <div class="col-md-7 pad-bottom-20">
                                 <a href="<?php echo SITEURL; ?>/events/<?php echo $event_id; ?>">
@@ -319,7 +319,7 @@ class Events extends Logger
                     <div class="col-md-5 pad-bottom-20">
                         <div class="row">
                             <div class="col-md-6">
-                                <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                                <?php $res::display($res->get_image_url($event_id, 'event'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
                             </div>
                             <div class="col-md-6 pad-bottom-20">
                                 <a href="<?php echo $event_id; ?>">

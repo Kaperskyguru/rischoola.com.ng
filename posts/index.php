@@ -6,6 +6,7 @@ if($userController->is_authenticated()){
 }else {
   require_once '../include/header.php';
 }
+$page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 ?>
 
 <section id="index-news">
@@ -22,27 +23,29 @@ if($userController->is_authenticated()){
         </div>
         <hr />
         <div class="row">
-        <div class="col-md-4">
-          <div class="container-fluid">
-          <section class="index-scholarships">
-            <div>
-                <h3>Latest News </h3>
+            <div class="col-md-4">
+            <div class="container-fluid">
+            <section class="index-scholarships">
+                <div>
+                    <h3>Latest News </h3>
+                </div>
+                <?php echo $newsControler->get_last_inserted_post($resources); ?>
+                <div class="col-md-12" id="displayNews">
+                    <!-- News will display here -->
+                    <?php 
+                        $limit = 10; //if you want to dispaly 10 records per page then you have to change here
+                        $startpoint = ($page * $limit) - $limit;
+                        echo $newsControler->display_latest_post($startpoint, $limit);?>
+                </div>
+            </section>
             </div>
-            <?php echo $newsControler->get_last_inserted_post($resources); ?>
-            <div class="col-md-12" id="displayNews">
-                 <!-- News will display here -->
-                 <?php echo $newsControler->display_latest_post(8);?>
-            </div>
-          </section>
-          </div>
-          <hr />
-            <!--  Pagination starts here -->
-            <div class="margin-btom-20">
-                <ul class="pager">
-                    <li class="previous"><a> Previous </a></li>
-                    <li class="next"><a href="#">Next</a></li>
-                </ul>
-            </div>
+            <hr />
+                <!--  Pagination starts here -->
+                <div class="margin-btom-20">
+                    <ul class="pager">
+                        <?php echo $paging->pager('posts WHERE post_status_id != 2', $limit, $page); ?>      
+                    </ul>
+                </div>
         </div>
 
         <div class="col-md-5">
@@ -50,16 +53,18 @@ if($userController->is_authenticated()){
             <section class="index-scholarships">
               <div class="row">
               <h3>Available Scholarships/Internships</h3>
-                <?php $scholarshipController->display_latest_scholarship(8, $resources); ?>
+              <?php 
+                    $limit = 10; //if you want to dispaly 10 records per page then you have to change here
+                    $startpoint = ($page * $limit) - $limit;
+                    $scholarshipController->display_latest_scholarship($resources, $startpoint, $limit); ?>
               </div>
             </section>
           </div>
          <hr />
-          <!--  Pagination starts here -->
+          <!--  Pagination starts here WHERE scholarship_status_id != 2-->
           <div class="margin-btom-20">
               <ul class="pager">
-                  <li class="previous"><a> Previous </a></li>
-                  <li class="next"><a href="#">Next</a></li>
+                <?php echo $paging->pager('scholarships ', $limit, $page); ?> 
               </ul>
           </div>
         </div>

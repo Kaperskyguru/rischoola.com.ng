@@ -24,16 +24,16 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
                 <div class="form-group row">
                     <div class="col-xs-6">
                         <label for="">Max Price</label>
-                        <input id="max_price" type="text" class="form-control"></input>
+                        <input id="max_price" type="text" class="form-control" />
                     </div>
                     <div class="col-xs-6">
                         <label for="">Min Price</label>
-                        <input id="min_price" type="text" class="form-control"></input>
+                        <input id="min_price" type="text" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="school">Hostel Name</label>
-                    <input type="text" id="hostel_name" class="form-control"></input>
+                    <input type="text" id="hostel_name" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label for="school">Hostel type</label>

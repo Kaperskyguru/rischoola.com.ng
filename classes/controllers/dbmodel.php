@@ -15,7 +15,7 @@ abstract class dbmodel
     {
         if (!self::$dbh) {
             try {
-                self::$dbh = new PDO("mysql:host=localhost;dbname=rsschooldb", 'root', "");
+                self::$dbh = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
                 self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 echo $_SESSION['error'] = $e->getMessage();
