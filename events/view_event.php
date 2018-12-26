@@ -56,10 +56,10 @@ if ($id == 0) {
                     </h5>
                 </div>
                 <div class="pad-bottom-50">
-                    <ul class="pager">
+                    <!-- <ul class="pager">
                         <li class="previous"><a><< Previous </a></li>
                         <li class="next"><a href="#">Next >></a></li>
-                    </ul>
+                    </ul> -->
                     <?php
                     if ($eventController->is_reminder_set($event_id, get_user_uid())) { ?>
                         <a id="reminder-set" disabled class="fa fa-clock-o btn btn-lg btn-success"> Reminder Set</a>
@@ -73,12 +73,13 @@ if ($id == 0) {
                     ?>
                 </div>
             </div>
+            <?php $stmt = $commentController->get_comments_by_id('events', $event_id);?>
             <!-- commentlist here -->
             <div class="row">
                 <div class="col-md-12 pad-bottom-20">
 
                     <section>
-                        <h2><?php echo $event_comment_count; ?> Comments</h2>
+                        <h2><?php echo $stmt->rowCount(); ?> Comments</h2>
 
                         <!--Leave a reply form-->
                         <div class="reply-form">
@@ -90,13 +91,13 @@ if ($id == 0) {
                                     <div class="form-group">
                                         <label for="commentBox">Comment:</label>
                                         <textarea type="text" rows="5" id="commentBox" name="commentBox" class="form-control"></textarea>
-                                        <input type="hidden" id="d" name="d" value="<?php echo $id; ?>"></input>
+                                        <input type="hidden" id="d" name="d" value="<?php echo $id; ?>">
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" id="file" name="file[]"></input>
+                                        <input type="file" class="form" id="file" name="file[]">
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" class="form" id="file" name="file[]"></input>
+                                        <input type="file" class="form" id="file" name="file[]">
                                     </div>
 
                                     <div class="form-group">
@@ -113,7 +114,7 @@ if ($id == 0) {
                     </section>
                     <h2></h2>
                     <?php
-                    $stmt = $commentController->get_comments_by_id('events', $event_id);
+                    
                     if ($stmt->rowCount() > 0) {
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             extract($row);
@@ -244,23 +245,27 @@ if ($id == 0) {
 <?php require_once '../include/footer.php';
 
 if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["comment"])){
-    $comment_body = filter_var($_POST['commentBox'], FILTER_SANITIZE_STRING);
-    if(!empty($comment_body) && strlen($comment_body) != 0 && !empty($_FILES['file']['name'])){
-        if($id= $commentController->store_comments($comment_body, get_user_uid(), "events", $event_id)){
-            uploadFiles(get_user_uid(), $id);
-            unset($_POST);
-        }
-    }else if(empty($comment_body) && !empty($_FILES['file']['name'])){
-        if($id= $commentController->store_comments('picture only', get_user_uid(), "events", $event_id)){
-            uploadFiles(get_user_uid(), $id);
-            unset($_POST);
-        }
+    if(get_user_uid() != null) {
+        $comment_body = filter_var($_POST['commentBox'], FILTER_SANITIZE_STRING);
+        if(!empty($comment_body) && strlen($comment_body) != 0 && !empty($_FILES['file']['name'])){
+            if($id= $commentController->store_comments($comment_body, get_user_uid(), "events", $event_id)){
+                uploadFiles(get_user_uid(), $id);
+                unset($_POST);
+            }
+        }else if(empty($comment_body) && !empty($_FILES['file']['name'])){
+            if($id= $commentController->store_comments('picture only', get_user_uid(), "events", $event_id)){
+                uploadFiles(get_user_uid(), $id);
+                unset($_POST);
+            }
 
-    }else if(!empty($comment_body) && empty($_FILES['file']['name'])){
-       echo $id= $commentController->store_comments($comment_body, get_user_uid(), "events", $event_id);
-       unset($_POST);
-    }else{
-        $error_text = "Please enter a comment";
+        }else if(!empty($comment_body) && empty($_FILES['file']['name'])){
+        echo $id= $commentController->store_comments($comment_body, get_user_uid(), "events", $event_id);
+        unset($_POST);
+        }else{
+            $error_text = "Please enter a comment";
+        }
+    } else{
+        header('Location: ../users/login.php');
     }
 
   }

@@ -12,7 +12,7 @@ if ($userController->is_authenticated()) {
 <section id="top-input">
     <?php require_once 'include/searchBar.php'; ?>
 </section>
-<div class="wrapper">
+<section id="main" role="main">
     <section id="index-news">
         <div class="container">
             <h2>Latest Updates</h2>
@@ -40,7 +40,8 @@ if ($userController->is_authenticated()) {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <!-- ADVERT HERE -->
+                <!-- <div class="col-md-3">
                     <div class="row">
                         <?php //require_once 'include/tabs.php'; ?>
                         <div class="col-sm-12">
@@ -58,7 +59,7 @@ if ($userController->is_authenticated()) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -84,6 +85,6 @@ if ($userController->is_authenticated()) {
     <section id="index-event">
         <?php require_once 'include/listOfEvents.php'; ?>
     </section>
-</div>
+</section>
 
 <?php require_once 'include/footer.php'; ?>

@@ -69,7 +69,9 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
           </div>
         </div>
 
-        <div class="col-md-3">
+        <!-- ADVERT -->
+
+        <!-- <div class="col-md-3">
           <div class="row">
             <?php //require_once '../include/tabs.php'; ?>
           </div>
@@ -87,7 +89,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
                   <img src="<?php echo SITEURL; ?>/res/imgs/m.png" class="img-responsive">
               </div>
           </div>
-        </div>
+        </div> -->
     </div>
     </div>
 </section>

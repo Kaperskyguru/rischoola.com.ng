@@ -16,7 +16,7 @@ if(!$userController->is_authenticated()){
         <meta name="author" content="">
 
         <title>Dashboard | <?php echo get_site_name() ?></title>
-        <link rel="shortcut icon" type="image/png" href="<https://res.cloudinary.com/kaperskydisk/image/upload/v1524654792/Rischoola/fav.png"/>
+        <link rel="shortcut icon" type="image/png" href="https://res.cloudinary.com/kaperskydisk/image/upload/v1524654792/Rischoola/fav.png"/>
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo SITEURL; ?>/res/css/bootstrap.min.css" rel="stylesheet">
 
