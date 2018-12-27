@@ -3,7 +3,11 @@
 /* Padding below the footer and lighter body text */
 
 body {
+<<<<<<< HEAD
   padding-bottom: 0px;
+=======
+  padding-bottom: 40px;
+>>>>>>> e100d64716b8ceb69450ae0ae84f01cf01e12533
   color: #5a5a5a;
 }
 

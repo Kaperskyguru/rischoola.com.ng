@@ -17,7 +17,11 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <div id="myCarouselOverlay"></div>
+=======
+<div id="overlay"></div>
+>>>>>>> e100d64716b8ceb69450ae0ae84f01cf01e12533
 <div class="container">
     <div class="carousel-caption">
         <div class="text-center">
