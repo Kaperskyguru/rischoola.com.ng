@@ -13,7 +13,8 @@
                 <a href="<?php echo $url = (get_user_uid() != null)? "member/roommate.php":"users/login"; ?>" class="btn btn-success" style="margin-bottom: 10px;">Post To Get A Roommate</a>
             </div>
         </div>
-        <div class="col-md-3">
+        <!-- ADVERT -->
+        <!-- <div class="col-md-3">
             <div class="row">
                 <div class="pad-bottom-20">
                     <img src="res/imgs/p.gif" class="img-responsive">
@@ -25,6 +26,6 @@
                     <img src="res/imgs/s.png" class="img-responsive">
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

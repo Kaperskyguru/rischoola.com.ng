@@ -24,23 +24,23 @@ if($userController->is_authenticated()){
                                 <?php $schoolController->get_schools(); ?>
                             </select>
                         </div>
-                        <div class="col-sm-2 form-group">
+                        <!-- <div class="col-sm-2 form-group">
                             <button class="btn btn-default form-control" >Go to Page</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="row">
-                <h2>Upcoming Events</h2>
-                    <div class="col-lg-12" id="event_contnt">
-                        <div class="col-lg-12" id="event_content">
-                            <?php $eventController->display_availabe_events(6, $resources); ?>
-                        </div>
-                        <div class="col-lg-12">
-                            <ul class="pager">
-                                <li class="previous"><a> Previous </a></li>
-                                <li class="next"><a href="#"> Next </a></li>
-                            </ul>
-                        </div>
+                <div class="col-lg-12" id="event_contnt">
+                    <h2>Upcoming Events</h2>
+                    <div class="col-lg-12" id="event_content">
+                        <?php $eventController->display_availabe_events(6, $resources); ?>
+                    </div>
+                    <div class="col-lg-12">
+                        <ul class="pager">
+                            <li class="previous"><a> Previous </a></li>
+                            <li class="next"><a href="#"> Next </a></li>
+                        </ul>
+                    </div>
                     </div>
                     <div class="col-lg-12">
                         <h2>Past Events</h2>
@@ -55,11 +55,11 @@ if($userController->is_authenticated()){
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 pad-up-50">
-                <!-- <div class="col-md-3"> -->
+            <!-- <div class="col-md-3 pad-up-50">
+                 <div class="col-md-3"> 
                 <div class="row">
-                    <!-- <?php //require '../include/tabs.php'; ?> -->
-                    <!-- <div class="col-sm-12"> -->
+                 <?php //require '../include/tabs.php'; ?> 
+                    <div class="col-sm-12">
                     <div class="pad-bottom-20">
                         <img src="../res/imgs/8722.gif" class="img-responsive">
                     </div>
@@ -72,10 +72,10 @@ if($userController->is_authenticated()){
                     <div class="pad-bottom-20">
                         <img src="../res/imgs/s.png" class="img-responsive">
                     </div>
-                    <!-- </div> -->
+                    </div>
                 </div>
-                <!-- </div> -->
-            </div>
+                </div>
+            </div> -->
         </div>
 </section>
 </section>

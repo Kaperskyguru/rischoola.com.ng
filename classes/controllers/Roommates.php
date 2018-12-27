@@ -51,12 +51,12 @@ class Roommates extends Logger
             $this->bind(":roommate_user_id", $roommate_user_id);
             $this->executer();
             if ($this->lastIdinsert()) {
-                return TRUE;
+                return true;
             }
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
-            return FALSE;
+            return false;
         }
     }
 
@@ -126,12 +126,12 @@ class Roommates extends Logger
             $this->bind(':roommate_id', $roommate_id);
             $this->executer();
             if ($this->lastIdinsert()) {
-                return TRUE;
+                return true;
             }
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
-            return FALSE;
+            return false;
         }
     }
 
@@ -182,10 +182,10 @@ class Roommates extends Logger
     public function display_if_room($schoolController, $lodgeController)
     {
         global $data;
-        $error_text_name = $data['error_text_name']; ?>
+        $error_text_name = $data['error_text_name'];?>
 
         <div class="form-horizontal" role="form">
-            <div class="form-group <?php (isset($error_text_name)) ? ' has-error has-feedback' : '' ?> ">
+            <div class="form-group <?php (isset($error_text_name)) ? ' has-error has-feedback' : ''?> ">
                 <label class="control-label col-sm-2" for="name">Name: <sup>*</sup></label>
 
                 <div class="col-sm-8">
@@ -214,7 +214,7 @@ class Roommates extends Logger
 
                 <div class="col-sm-8">
                     <select class="form-control" id="school" name="school" placeholder="Select School">
-                        <?php $schoolController->get_schools(); ?>
+                        <?php $schoolController->get_schools();?>
                     </select>
                 </div>
             </div>
@@ -223,7 +223,7 @@ class Roommates extends Logger
 
                 <div class="col-sm-8">
                     <select class="form-control" id="hostel_type" name="hostel_type">
-                        <?php $lodgeController->get_lodge_models(); ?>
+                        <?php $lodgeController->get_lodge_models();?>
                     </select>
                 </div>
             </div>
@@ -276,7 +276,7 @@ class Roommates extends Logger
 
                 <div class="col-sm-8">
                     <select class="form-control" id="school" name="school" placeholder="Select School">
-                        <?php $schoolController->get_schools(); ?>
+                        <?php $schoolController->get_schools();?>
                     </select>
                 </div>
             </div>
@@ -285,7 +285,7 @@ class Roommates extends Logger
 
                 <div class="col-sm-8">
                     <select class="form-control" id="hostel_type">
-                        <?php $lodgeController->get_lodge_models(); ?>
+                        <?php $lodgeController->get_lodge_models();?>
                     </select>
                 </div>
             </div>
@@ -333,15 +333,19 @@ class Roommates extends Logger
                     extract($row);
                     ?>
                     <div class="row">
-                        <div class="col-md-2">
-                            <?php $res::display($res->get_image_url($roommate_id, 'roommates'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                        <div class="col-md-3">
+                            <?php $res::display($res->get_image_url($roommate_id, 'roommates'), array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill")));?>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <a href="#"><h5><?php echo $roommate_name; ?></h5></a>
 
                             <p><?php echo getExcerpt($roommate_desc, 100); ?></p>
-                        </div>
 
+                            <div class="tags">
+                                <span class="label label-danger"><?php echo ($type_of_roommate == 2)?"I don't have a room": "I Have A Room" ?></span>
+                                <span class="label label-purple"><?php echo $this->get_product_school_by_id($roommate_school_id); ?></span>
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     <?php
@@ -384,14 +388,18 @@ class Roommates extends Logger
                     ?>
                     <div class="row">
                         <div class="col-md-3">
-                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill"))); ?>
+                            <?php $res::display("Rischoola/profiles/tn8YZk4247_C360_2015-03-30-16-37-19-188.jpg", array_merge($res::SAMPLE_IMAGE_OPTIONS, array("crop" => "fill")));?>
                         </div>
-                        <div class="col-md-9 pad-bottom-20">
+                        <div class="col-md-6 pad-bottom-20">
                             <a href="#"><h5><?php echo $roommate_name; ?></h5></a>
 
                             <p><?php echo getExcerpt($roommate_desc, 100); ?></p>
-                        </div>
 
+                            <div class="tags">
+                                <span class="label label-danger"><?php echo ($type_of_roommate == 2)?"I don't have a room": "I Have A Room" ?></span>
+                                <span class="label label-purple"><?php echo $this->get_product_school_by_id($roommate_school_id); ?></span>
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     <?php
@@ -426,6 +434,21 @@ class Roommates extends Logger
             $this->query($query);
             $stmt = $this->executer();
             return $stmt;
+        } catch (PDOException $e) {
+            $_SESSION['error'] = $e->getMessage();
+            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
+            return null;
+        }
+    }
+
+    public function get_product_school_by_id($id)
+    {
+        try {
+            $query = "SELECT school_abbr FROM schools WHERE school_id = $id";
+            $this->query($query);
+            $row = $this->resultset();
+            extract($row);
+            return $school_abbr;
         } catch (PDOException $e) {
             $_SESSION['error'] = $e->getMessage();
             $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());

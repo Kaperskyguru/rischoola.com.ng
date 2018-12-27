@@ -9,10 +9,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITEURL ?>/res/css/style.css">
     <link rel="stylesheet" href="<?php echo SITEURL ?>/res/css/responsive.css">
-
-
-    <!-- Morris Charts CSS -->
-    <link href="<?php echo SITEURL ?>/res/css/plugins/morris.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo SITEURL ?>/res/css/carousel.css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo SITEURL ?>/res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -54,7 +51,7 @@
                 <li><a href="<?php echo SITEURL ?>/lodges">Hostel</a></li>
                 <!-- <li><a href="<?php echo SITEURL ?>/scholarships.php">Scholarships</a></li> -->
                 <li><a href="<?php echo SITEURL ?>/marketplace">Store</a></li>
-                <li><a href="<?php echo SITEURL ?>/roommates">Roommate Finder</a></li>
+                <li><a href="<?php echo SITEURL ?>/roommates">Roommates</a></li>
                 <li><a href="<?php echo SITEURL ?>/groups">Groups</a></li>
                 <li><a href="<?php echo SITEURL ?>/events">Events</a></li>
             </ul>

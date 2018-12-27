@@ -65,7 +65,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
                     </div>
                 </div>
 
-                <div class="col-md-3 pad-up-20">
+                <!-- <div class="col-md-3 pad-up-20">
                     <div class="container-fluid">
                     <div class="row">
                         <div class="pad-bottom-20">
@@ -82,7 +82,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
                         </div>
                     </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

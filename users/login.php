@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 	$userModel->set_user_password($_POST['password']);
 	$userController->login($userModel);
 	if($userController->is_authenticated()){
-		header("Location: ../member/index.php");
+		header("Location: ../member/");
 		exit;
 	}else{
 		//log message here
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($
 				    </div>
 				  </div>
 
-				  <button class="btn  btn-primary" style="margin-left: 2px;" style="color: #fff">login</button>
+				  <button class="btn  btn-primary" style="margin-left: 2px;" style="color: #fff">Login</button>
 				  <div>
 				  	<h4>Don't have an Account? <small><a href="register">Click here to Register</a></small></h4>
 				  </div>

@@ -26,9 +26,9 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
                                     <?php $schoolController->get_schools(); ?>
                                 </select>
                             </div>
-                            <div class="col-sm-2 form-group">
-                                <button class="btn btn-default form-control">Go to Page</button>
-                            </div>
+                                <!-- <div class="col-sm-2 form-group">
+                                    <button class="btn btn-default form-control">Go to Page</button>
+                                </div> -->
                         </div>
                     </div>
                     <div class="row">
@@ -81,9 +81,10 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
                     </div>
                 </div>
 
-                <div class="col-md-3 pad-up-50">
+                <!-- ADVERT -->
+                <!-- <div class="col-md-3 pad-up-50">
                     <div class="row">
-                        <!-- <?php //require '../include/tabs.php'; ?> -->
+                       <?php //require '../include/tabs.php'; ?> 
                         <div class="pad-bottom-20">
                             <img src="../res/imgs/8722.gif" class="img-responsive">
                         </div>
@@ -97,7 +98,7 @@ $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
                             <img src="../res/imgs/s.png" class="img-responsive">
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
