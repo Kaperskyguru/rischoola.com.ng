@@ -28,6 +28,7 @@ if(!$userController->is_authenticated()){
 
         <!-- Custom Fonts -->
         <link href="<?php echo SITEURL; ?>/res/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     </head>
 
     <body>

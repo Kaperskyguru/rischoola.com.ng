@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                         <div class="form-group">
                             <label for="lodge_desc" > Description: </label>
-                            <textarea rows="10" id="lodge_desc" name="lodge_desc" class="form-control"> <?php echo $lodge_desc ?> </textarea>
+                            <textarea rows="10" id="desc" name="lodge_desc" class="form-control"> <?php echo $lodge_desc ?> </textarea>
                         </div>
                         <div class="form-group">
                             <label for="lodge_address" > Address: </label>

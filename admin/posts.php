@@ -92,7 +92,7 @@ require_once 'sidebar.php'; ?>
                                                                         </div>
                                                                         <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                                                                         <div class="table-responsive">
-                                                                            <table id="postTable" class="table table-bordered table-striped table-hover">
+                                                                            <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
                                                                                 <thead>
                                                                                     <tr class="info">
                                                                                         <th>S/N</th>
@@ -134,7 +134,7 @@ require_once 'sidebar.php'; ?>
                                                                                                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#approvePost"><i class="fa fa-check"></i> </button>
+                                                                                                    <button type="button" class="btn btn-success btn-lg" data-id="<?php echo $post_id ?>" data-toggle="modal" id="approvePostBox" data-target="#approveModal"><i class="fa fa-check"></i> </button>
                                                                                                 </td>
                                                                                             </tr>
                                                                                       <?php }
@@ -264,7 +264,7 @@ require_once 'sidebar.php'; ?>
                                                         <!-- /.modal -->
 
 
-                                                        <div class="modal fade" id="approvePost" tabindex="-1" role="dialog" aria-hidden="true">
+                                                        <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header modal-header-primary">
@@ -276,12 +276,8 @@ require_once 'sidebar.php'; ?>
                                                                             <div class="col-md-12">
                                                                                 <form class="form-horizontal">
                                                                                     <fieldset>
-                                                                                        <div class="col-md-12 form-group user-form-group">
-                                                                                            <label class="control-label">Approve post</label>
-                                                                                            <div class="pull-right">
-                                                                                                <button type="button" class="btn btn-danger btn-sm">NO</button>
-                                                                                                <button type="submit" class="btn btn-add btn-sm">YES</button>
-                                                                                            </div>
+                                                                                        <div id="approvalBox" class="col-md-12 form-group user-form-group">
+                                                                                           
                                                                                         </div>
                                                                                     </fieldset>
                                                                                 </form>

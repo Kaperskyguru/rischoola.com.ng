@@ -2,7 +2,8 @@
 <script src="<?php echo SITEURL;?>/res/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="datatable/datatables.min.js"></script>
 <script src="js/script.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>    
+ 
 <script>
   $(document).ready(function() {
 
@@ -21,6 +22,27 @@
     $('#group_table').dataTable();
 
     $('#roommate_table').dataTable();
+
+    $('#lodge_address').summernote({
+        height: 200, // set editor height
+        minHeight: null, // set minimum height of editor
+        maxHeight: null, // set maximum height of editor
+        focus: true // set focus to editable area after initializing summernote
+    });
+
+    $('#desc').summernote({
+        height: 200, // set editor height
+        minHeight: null, // set minimum height of editor
+        maxHeight: null, // set maximum height of editor
+        focus: true // set focus to editable area after initializing summernote
+    });
+
+    $('#message').summernote({
+        height: 200, // set editor height
+        minHeight: null, // set minimum height of editor
+        maxHeight: null, // set maximum height of editor
+        focus: true // set focus to editable area after initializing summernote
+    });
 
     $('#lodge_rules').change(function () {
         var val = this.value;

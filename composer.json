@@ -2,7 +2,8 @@
 	"phpmailer/phpmailer": "6.*",
 	"require": {
 		"phpmailer/phpmailer": "^6.0",
-		"cloudinary/cloudinary_php": "^1.10"
+		"cloudinary/cloudinary_php": "^1.10",
+		"swiftmailer/swiftmailer": "^6.1"
 	}
 	
 }

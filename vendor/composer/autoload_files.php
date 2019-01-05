@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'c15243c55ab4c20eff78d1e24be20dac' => $vendorDir . '/cloudinary/cloudinary_php/src/Helpers.php',
+    '2c102faa651ef8ea5874edb585946bce' => $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
 );

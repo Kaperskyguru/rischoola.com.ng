@@ -41,8 +41,11 @@
 <script src="assets/dist/js/dashboard.js" type="text/javascript"></script>
 <!-- End Theme label Script
 =====================================================================-->
+
+<script src="assets/plugins/datatables/dataTables.min.js" type="text/javascript"></script>
 <script>
-$('#postTable').dataTable();
+$('#dataTableExample1').dataTable();
+
 function dash() {
     // single bar chart
     var ctx = document.getElementById("singelBarChart");
@@ -117,6 +120,67 @@ function dash() {
 }
 dash();
 </script>
+
+<script>
+    $(document).ready(function(){
+
+        $('body').delegate('#approvePostBox', 'click', function(){
+        var post_id = $(this).data('id');
+        $.ajax({
+            url:'actions.php',
+            type:'POST',
+            data: {approveBox:1, id: post_id},
+            success: function(data) {
+                // alert(data);
+                $('#approvalBox').html(data);
+            },
+            onerror: function(err){
+                alert(err);
+            }
+        });
+        });
+
+        $('body').delegate('#approvePost', 'click', function(){
+        var id = $(this).data('id');
+        $.ajax({
+            url:'actions.php',
+            type:'PUT',
+            data:{approvePost:1, 'id':id, '_method': 'PUT'},
+            success: function(data) {
+                alert('Post approved Successfully')
+            }
+        });
+        });
+
+        $('body').delegate('#updateNotice', 'click', function(){
+        var id = $(this).data('id');
+        var token = $(this).data("token");
+        $.ajax({
+            url:'/admin/notices/update',
+            type:'get',
+            data:{'id':id, '_token': token, '_method': 'get'},
+            success: function(data) {
+                $('#notice_update_info').html(data);
+            }
+        });
+        });
+
+        // $('body').delegate('#update', 'click', function(){
+        //     var id = $(this).data('id');
+        //     var token = $(this).data("token");
+        //     $.ajax({
+        //         url:'/admin/notices/update',
+        //         type:'PUT',
+        //         data:{'id':id, '_token': token, '_method': 'PUT'},
+        //         success: function(data) {
+
+        //         }
+        //     });
+        // });
+    });
+    </script>
+
+
 </body>
 
 

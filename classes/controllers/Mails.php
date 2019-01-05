@@ -61,29 +61,51 @@ class Mails extends Logger
         }
     }
 
-    private function pretty_mail($to, $title, $msg, $typeof)
-    {
-        try {
-            //header parameters
-            $headers = "MIME-VERSION:1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= "From:" . "Rischoola.com.ng" . "\r\n";
-            $headers .= "Cc: rischoola@gmail.com";
+    function pretty_mail($to, $title, $msg)
+        {
+                // Create the Transport
+            $transport = (new Swift_SmtpTransport('localhost', 25))
+            ->setUsername('rischoo1')
+            ->setPassword('@&KAP@&ERS@&KY11');
 
-            //Regular variables
-            $txt = "";
-            if (isset($to) and isset($msg)) {
-                $txt .= $msg . '<br />';
-            }
+            // Create the Mailer using your created Transport
+            $mailer = new Swift_Mailer($transport);
 
-            //send the Goddamn mail bitch!
-            return mail($to, $title, $txt, $headers);
-        } catch (Exception $e) {
-            $_SESSION['error'] = $e->getMessage();
-            $this->logError($e->getMessage() . ' ==>' . __CLASS__ . '=>' . __FUNCTION__, get_user_uid());
-            return FALSE;
+            // Create a message
+            $message = (new Swift_Message($title))
+            ->setFrom(['info@haypko.com' => 'Info'])
+            ->setTo([$to, 'info@haypko.com'])
+            ->setBody($msg, 'text/html');
+
+            // Send the message
+            return $mailer->send($message);
         }
-    }
+
+    function contact_mail($to, $title, $msg, $from, $name)
+        {
+            $mailbody = "The contact form has been filled out.\n\n"
+                . "Name: " . $name . "\n"
+                . "Email: " . $from. "\n"
+                . "Message:\n" . $msg;
+                
+                // Create the Transport
+                $transport = (new Swift_SmtpTransport('localhost', 25))
+                ->setUsername('rischoo1')
+                ->setPassword('@&KAP@&ERS@&KY11');
+
+            // Create the Mailer using your created Transport
+            $mailer = new Swift_Mailer($transport);
+            
+            // Create a message
+            $message = (new Swift_Message($title))
+            ->setFrom(['info@haypko.com' => 'Info'])
+            ->setTo('solomoneseme@gmail.com')
+            ->setReplyTo(array($from => $name))
+            ->setBody($mailbody, 'text/html');
+
+            // Send the message
+            return $mailer->send($message);
+        }
 
     private function __clone()
     {

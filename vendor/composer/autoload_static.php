@@ -8,6 +8,7 @@ class ComposerStaticInit5d92b837d8033d7c1032e193b843ddf4
 {
     public static $files = array (
         'c15243c55ab4c20eff78d1e24be20dac' => __DIR__ . '/..' . '/cloudinary/cloudinary_php/src/Helpers.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -15,12 +16,30 @@ class ComposerStaticInit5d92b837d8033d7c1032e193b843ddf4
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'E' => 
+        array (
+            'Egulias\\EmailValidator\\' => 23,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Egulias\\EmailValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'D' => 
+        array (
+            'Doctrine\\Common\\Lexer\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
+            ),
         ),
     );
 
@@ -49,6 +68,7 @@ class ComposerStaticInit5d92b837d8033d7c1032e193b843ddf4
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit5d92b837d8033d7c1032e193b843ddf4::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit5d92b837d8033d7c1032e193b843ddf4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit5d92b837d8033d7c1032e193b843ddf4::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit5d92b837d8033d7c1032e193b843ddf4::$classMap;
 
         }, null, ClassLoader::class);

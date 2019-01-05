@@ -49,4 +49,5 @@
     <!--<link href="assets/dist/css/stylecrm-rtl.css" rel="stylesheet" type="text/css"/>-->
     <!-- End Theme Layout Style
     =====================================================================-->
+    <link src="assets/plugins/datatables/dataTables.min.css" rel="stylesheet" type="text/css">
 </head>

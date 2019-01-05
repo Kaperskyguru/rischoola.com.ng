@@ -238,7 +238,7 @@ class Roommates extends Logger
                 <label class="control-label col-sm-2" for="hostel_desc">Hostel Description: </label>
 
                 <div class="col-sm-8">
-                    <textarea rows="2" name="hostel_desc" id="hostel_desc" class="form-control"
+                    <textarea rows="2" name="hostel_desc" id="desc" class="form-control"
                               placeholder="Enter hostel description"></textarea>
                 </div>
             </div>

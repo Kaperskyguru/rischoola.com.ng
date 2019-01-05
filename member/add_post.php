@@ -71,17 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="form-group">
                         <label for="desc" > Description: </label>
-                        <textarea rows ="10" id="editor" name="desc" class="form-control"><?php echo $post_content ?> </textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#editor' ) )
-                                .then( editor => {
-                                    console.log( editor );
-                                } )
-                                .catch( error => {
-                                    console.error( error );
-                            } )
-                        </script>
+                        <textarea rows ="10" id="desc" name="desc" class="form-control"><?php echo $post_content ?> </textarea>
+                        
                     </div>
                     <div class="form-group">
                         <label for="post_image">Choose Featured image: </label>
@@ -119,17 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="desc" > Description: </label>
-                    <textarea rows ="10" id="editor" name="desc" class="form-control"> </textarea>
-                    <script>
-                        ClassicEditor
-                            .create( document.querySelector( '#editor' ) )
-                            .then( editor => {
-                                console.log( editor );
-                            } )
-                            .catch( error => {
-                                console.error( error );
-                        } )
-                    </script>
+                    <textarea rows ="10" id="post_desc" name="desc" class="form-control"> </textarea>
+                    
                 </div>
                 <div class="form-group">
                     <label for="post_image">Choose Featured image: </label>

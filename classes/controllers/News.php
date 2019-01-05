@@ -454,4 +454,18 @@ class News extends Logger
         }
     }
 
+
+    public function view_delete_confirmation($id)
+    {
+        $post = $this->get_post_by_id($id);
+        
+        ?>
+        <label class="control-label">Delete <?php echo $post['post_title'] ?> ?</label>
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">NO</button>
+                <button type="submit" id="approvePost" data-id="<?php echo $post['id'] ?> " class="btn btn-add btn-sm">YES</button>
+            </div>
+    <?php
+    }
+
 }
